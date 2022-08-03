@@ -52,13 +52,6 @@ footer {
 .mr-2{
 	margin-left:10px!important;
 }
-.first-ul a{
-	color:white;
-}
-.first-ul li{
-	margin-bottom:20px!important;
-}
-
 </style>
 <body id="default_theme" class="it_service hole-font">
 <!-- loader -->
