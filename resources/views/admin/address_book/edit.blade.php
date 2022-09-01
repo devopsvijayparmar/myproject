@@ -10,8 +10,8 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="<?php echo url('/admin/home');?>">Home</a></li>
-              <li class="breadcrumb-item"><a href="<?php echo url('/admin/our-team');?>">Address Book</a></li>
+              <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Home</a></li>
+              <li class="breadcrumb-item"><a href="{{ url('/admin/our-team') }}">Address Book</a></li>
               <li class="breadcrumb-item active">Edit Address </li>
             </ol>
           </div>
@@ -33,7 +33,7 @@
 			 
               <!-- /.card-header -->
               <!-- form start -->
-			   <form id="main_id" method="POST" action="<?php echo URL::to('/')?>/admin/address-book/{{App\Helpers\CryptHelper::encryptstring($data->id)}}" enctype="multipart/form-data">
+			   <form id="main_id" method="POST" action="{{url('/admin/address-book')}}/{{App\Helpers\CryptHelper::encryptstring($data->id)}}" enctype="multipart/form-data">
 				@method('PUT')
 				@csrf
                 <div class="card-body">

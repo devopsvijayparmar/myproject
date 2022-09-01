@@ -332,7 +332,7 @@
 			
 			@endif
 			<!----Business Plan--->
-			<li class="nav-item">
+		  <li class="nav-item">
 				<a href="<?php echo url('/admin/purchase-plan');?>" class="nav-link" id="purchase-plan-tab">
 				<i class="nav-icon fas fa-tags"></i>
 				<p>

@@ -35,5 +35,9 @@ class AddressBook extends Authenticatable
 		$query = AddressBook::whereIn('id',$ids)->get();
 	    return $query;
 	} 
+	public static function addressbookListCount(){
+			$query = AddressBook::orderBy('id','desc')->where('created_by',Auth::user()->id)->count();
+		   return $query;
+	} 
 	
 }

@@ -8,7 +8,7 @@ use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Session;
 use DB;
 use Validator;
-use App\Models\front\AboutUs;
+use App\Models\front\CMS;
 use Auth;
 use Hash;
 
@@ -29,7 +29,7 @@ class AboutUsController extends Controller
 	public function index(Request $request)
     {    
 	   
-        $this->data['data'] = AboutUs::find(1);	
+        $this->data['data'] = CMS::where('type','about-us')->first();	
 		return view('super_admin.front.about_us.index',$this->data);
     }
 
@@ -51,7 +51,7 @@ class AboutUsController extends Controller
 			$input['updated_at'] = date('Y-m-d H:i:s');
 			$input['created_by'] = $auth->id;
 
-			$aboutus = AboutUs::find(1);
+			$aboutus = CMS::where('type','about-us')->first();
 			$aboutus->update($input);
 			
 			if($aboutus) {

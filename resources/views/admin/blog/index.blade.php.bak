@@ -60,7 +60,8 @@
 						  <a title="Delete" href="#"  onclick="functiondelete('{{App\Helpers\CryptHelper::encryptstring($retrieved_data->id)}}','{{$i}}')"><i class="fas fa-trash-alt text-info font-16"></i></a>
 						  </td>
 						</tr>
-						@endforeach
+						<?php }
+						?>
 					</tfoot>
 				  </table>
                 </div>

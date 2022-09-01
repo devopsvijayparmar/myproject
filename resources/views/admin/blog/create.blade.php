@@ -10,8 +10,8 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="<?php echo url('/admin/home');?>">Home</a></li>
-              <li class="breadcrumb-item"><a href="<?php echo url('/admin/blog');?>">Blog</a></li>
+              <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Home</a></li>
+              <li class="breadcrumb-item"><a href="{{ url('/admin/blog') }}">Blog</a></li>
               <li class="breadcrumb-item active">Add Blog</li>
             </ol>
           </div>
@@ -33,17 +33,15 @@
 			 
               <!-- /.card-header -->
               <!-- form start -->
-			   <form id="main_id" method="POST" action="<?php echo URL::to('/')?>/admin/blog" enctype="multipart/form-data">
+			   <form id="main_id" method="POST" action="{{url('/admin/blog')}}" enctype="multipart/form-data">
 				@method('POST')
 				@csrf
                 <div class="card-body">
-					
 					<div class="form-group">
 						 <label for="exampleInputEmail1">Title <span class="error">*</span></label>
 						  <input type="text" class="form-control" id="title" placeholder="Enter title" name="title" maxlength="255" value="{{ old('title') }}">
 						  <span class="error" id='title_error'>{{$errors->Blog->first('title')}}</span>
 					</div>
-					
 					<div class="form-group">
 						<label for="exampleInputEmail1">Description<span class="error">*</span></label>
 						<textarea type="text" class="form-control" id="description" name="description" placeholder="Enter Description">	{{ old('description') }}</textarea>

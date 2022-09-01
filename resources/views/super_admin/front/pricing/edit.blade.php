@@ -11,10 +11,10 @@
             <h5 class="m-0 text-dark"> Web Templates </h5>
           </div><!-- /.col -->
           <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="{{ url('/super-admin/home') }}">Home</a></li>
-            <li class="breadcrumb-item"><a href="{{ url('/super-admin/web-templates') }}">Web Templates</a></li>
-            <li class="breadcrumb-item">Web Templates Edit</li>
+           <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="{{ url('/super-admin/home') }}">Home</a></li>
+              <li class="breadcrumb-item"><a href="{{ url('/super-admin/web-templates') }}">Pricing</a></li>
+              <li class="breadcrumb-item">Pricing Add</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -31,29 +31,66 @@
 				@csrf
 				 <div class="card-body">
 					<div class="row">
-						<div class="form-group  col-md-6">
+						<div class="form-group  col-md-3">
 							 <label for="exampleInputEmail1">Plan Name <span class="error">*</span></label>
 							  <input type="text" class="form-control" id="plan_name" placeholder="Enter Plan Name" name="plan_name" maxlength="255" value="{{ $data->plan_name }}">
 							  <span class="error" id='plan_name_error'>{{$errors->Pricing->first('plan_name')}}</span>
 						</div>
 						
 						
-						<div class="form-group col-md-6">
+						<div class="form-group col-md-2">
 							 <label for="exampleInputEmail1">Price <span class="error">*</span></label>
 							  <input type="text" class="form-control" id="price" placeholder="Enter Price" name="price" maxlength="255" value="{{ $data->price }}">
 							  <span class="error" id='price_error'>{{$errors->Pricing->first('price')}}</span>
 						</div>
 						
-						<div class="form-group col-md-6">
-							 <label for="exampleInputEmail1">Duration <span class="error">*</span></label>
-							  <input type="text" class="form-control" id="duration" placeholder="Enter duration" name="duration" maxlength="255" value="{{ $data->duration }}">
-							  <span class="error" id='duration_error'>{{$errors->Pricing->first('duration')}}</span>
+						<div class="form-group col-md-3">
+							 <label for="exampleInputEmail1">Price In Text<span class="error">*</span></label>
+							  <input type="text" class="form-control" id="price_text" placeholder="Enter Text Price" name="price_text" maxlength="255" value="{{ $data->price_text }}">
+							  <span class="error" id='price_error'>{{$errors->Pricing->first('price_text')}}</span>
 						</div>
 						
-						<div class="form-group col-md-6">
+						<div class="form-group col-md-2">
+							 <label for="exampleInputEmail1">No. of Landing Page <span class="error">*</span></label>
+							  <input type="text" class="form-control" id="no_of_landing_page" placeholder="Enter No. of landing page" name="no_of_landing_page" maxlength="255" value="{{ $data->no_of_landing_page }}">
+							  <span class="error" id='price_error'>{{$errors->Pricing->first('no_of_landing_page')}}</span>
+						</div>
+						
+					
+						<div class="form-group col-md-3">
+							 <label for="exampleInputEmail1"> <input type="checkbox" @if($data->page_builder == 'Yes') checked @endif value="Yes" name="page_builder"> Page Builder? No. of Page Builder</label>
+							  <input type="text" class="form-control" id="no_of_page_builder" placeholder="Enter No. of Page Builder" name="no_of_page_builder" maxlength="255" value="{{ $data->no_of_page_builder }}">
+							  <span class="error" id='price_error'>{{$errors->Pricing->first('no_of_page_builder')}}</span>
+						</div>
+						
+                        <div class="form-group col-md-2">
+							 <label for="exampleInputEmail1">No. of Address Book <span class="error">*</span></label>
+							  <input type="text" class="form-control" id="no_of_address_book" placeholder="Enter no of address book" name="no_of_address_book" maxlength="255" value="{{ $data->no_of_address_book }}">
+							  <span class="error" id='price_error'>{{$errors->Pricing->first('no_of_address_book')}}</span>
+						</div>
+						
+						<div class="form-group col-md-2">
+							 <label for="exampleInputEmail1">Emails <span class="error">*</span></label>
+							  <input type="text" class="form-control" id="emails" placeholder="Enter Emails" name="emails" maxlength="255" value="{{ $data->emails }}">
+							  <span class="error" id='price_error'>{{$errors->Pricing->first('emails')}}</span>
+						</div>
+						
+						<div class="form-group col-md-2">
+							 <label for="exampleInputEmail1">Duration <span class="error">*</span></label>
+							  <input type="text" class="form-control" id="duration" placeholder="Enter duration" name="duration" maxlength="255" value="{{ $data->duration }}">
+							  <span class="error" id='price_error'>{{$errors->Pricing->first('duration')}}</span>
+						</div>
+						
+						<div class="form-group col-md-2">
+							 <label for="exampleInputEmail1">Duration In Days<span class="error">*</span></label>
+							  <input type="text" class="form-control" id="duration_in_days" placeholder="Enter Duration In Days" name="duration_in_days" maxlength="255" value="{{ $data->duration_in_days }}">
+							  <span class="error" id='price_error'>{{$errors->Pricing->first('duration_in_days')}}</span>
+						</div>
+						
+						<div class="form-group col-md-3">
 							 <label for="exampleInputEmail1">Button Name <span class="error">*</span></label>
 							  <input type="text" class="form-control" id="button_name" placeholder="Enter button name" name="button_name" maxlength="255" value="{{ $data->button_name }}">
-							  <span class="error" id='button_name_error'>{{$errors->Pricing->first('button_name')}}</span>
+							  <span class="error" id='price_error'>{{$errors->Pricing->first('button_name')}}</span>
 						</div>
 						
 						

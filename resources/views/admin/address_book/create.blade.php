@@ -10,8 +10,8 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="<?php echo url('/admin/home');?>">Home</a></li>
-              <li class="breadcrumb-item"><a href="<?php echo url('/admin/address-book');?>">Address Book</a></li>
+              <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Home</a></li>
+              <li class="breadcrumb-item"><a href="{{url('/admin/address-book')}}">Address Book</a></li>
               <li class="breadcrumb-item active">Add Address </li>
             </ol>
           </div>
@@ -32,7 +32,7 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-			   <form id="main_id" method="POST" action="<?php echo URL::to('/')?>/admin/address-book" enctype="multipart/form-data">
+			   <form id="main_id" method="POST" action="{{url('/admin/address-book')}}" enctype="multipart/form-data">
 				@method('POST')
 				@csrf
                 <div class="card-body">

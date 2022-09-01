@@ -27,13 +27,17 @@ class AddressBook extends Authenticatable
 	} 
 	
 	public static function addressbookListArray(){
-			$query = AddressBook::orderBy('id','desc')->where('created_by',Auth::user()->id)->pluck('id')->toArray();
+			$query = AddressBook::where('created_by',Auth::user()->id)->pluck('id')->toArray();
 		   return $query;
 	} 
 	
 	public static function getRecordForLandingPage($ids){
 		$query = AddressBook::whereIn('id',$ids)->get();
 	    return $query;
+	} 
+	public static function addressbookList(){
+			$query = AddressBook::orderBy('id','desc')->where('created_by',Auth::user()->id)->count();
+		   return $query;
 	} 
 	
 }

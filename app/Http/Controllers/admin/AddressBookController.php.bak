@@ -266,7 +266,7 @@ class AddressBookController extends Controller
 					if (!empty($insertData)) {
 						
 						$addressbookcount = AddressBook::addressbookListCount(); 
-						if($addressbookcount + count($insertData) >= $this->userPurchasePlan()->no_of_address_book){
+						if($addressbookcount >= $this->userPurchasePlan()->no_of_address_book){
 							Session::flash('error', "your limit is reached of address book");
 							return redirect('admin/address-book');
 						}

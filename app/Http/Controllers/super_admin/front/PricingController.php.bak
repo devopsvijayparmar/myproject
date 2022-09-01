@@ -96,6 +96,7 @@ class PricingController extends Controller
 			'description' => 'required',
 			'price_text' => 'required',
 			'no_of_landing_page' => 'required',
+			
 			'no_of_address_book' => 'required',
 			'emails' => 'required',
 			'duration' => 'required',

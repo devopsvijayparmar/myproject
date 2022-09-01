@@ -133,7 +133,7 @@
 			  <p>{{$pricingdata->duration}}</p>
 				  {!! $pricingdata->description !!}
               <div class="table_btn">
-                <a href="{{url('/purchase-plan/'.App\Helpers\CryptHelper::encryptstring($pricingdata->id))}}" class="btn"><i class="fa fa-shopping-cart"></i> {{$pricingdata->button_name}}</a>
+                <a href="{{url('/purchase-plan/'.App\Helpers\CryptHelper::encryptstring($pricingdata->$id))}}" class="btn"><i class="fa fa-shopping-cart"></i> {{$pricingdata->button_name}}</a>
               </div>
             </div>
           </div>

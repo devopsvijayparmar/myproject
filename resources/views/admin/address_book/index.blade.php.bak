@@ -59,7 +59,7 @@
 						@php $i=0; @endphp
 						@foreach($address_book as $retrieved_data)
 						@php $i++; @endphp
-						<tr id="{{$i}}">
+						<tr id="{{i}}">
 						  <td>{{$i}}</td>
 						  <td>{{$retrieved_data->name}}</td>
 						  <td>{{$retrieved_data->email}}</td>

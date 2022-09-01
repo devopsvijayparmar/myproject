@@ -48,6 +48,7 @@ Route::get('/pricing', 'front\HomeController@pricing');
 Route::get('/page/{type}', 'front\HomeController@Cms');
 Route::get('/contact-us', 'front\HomeController@contactUs');
 Route::post('/front-contact-us', 'front\HomeController@contact_us_store');
+Route::get('/purchase-plan/{id}', 'front\PurchasePlanController@index');
 
 
 /*supar admin front*/
@@ -66,7 +67,6 @@ Route::resource('admin/products', 'admin\ProductsController');
 Route::resource('admin/plan', 'admin\PlanController');
 Route::resource('admin/books', 'admin\BooksController');
 Route::resource('admin/about-us', 'admin\AboutUsController');
-Route::resource('admin/promotion', 'admin\PromotionController');
 Route::resource('admin/service', 'admin\ServiceController');
 Route::resource('admin/contact-us', 'admin\ContactUsController');
 Route::resource('admin/philosophy', 'admin\PhilosophyController');
@@ -86,22 +86,35 @@ Route::post('admin/change-password', 'admin\SettingsController@update');
 Route::resource('admin/mobile', 'admin\MobileController');
 Route::resource('admin/blog', 'admin\BlogController');
 Route::resource('admin/photo-shoots', 'admin\PhotoShootsController');
-Route::resource('admin/landing-page', 'admin\LandingPageController');
+
 Route::get('/admin/landing_page_editor', 'admin\LandingPageController@editor');
 Route::get('/admin/landing_page_edit_editor/{id}', 'admin\LandingPageController@editEditor');
 Route::post('/admin/exit-title', 'admin\LandingPageController@exitTitle');
 Route::post('/admin/exit-title-edit', 'admin\LandingPageController@exitTitleEdit');
-Route::get('/{title}/landing-page/{url_name}', 'admin\CommanController@preview');
 Route::resource('admin/orders', 'admin\OrdersController');
 Route::get('/admin/mobile-orders', 'admin\OrdersController@mobile');
 Route::get('/admin/mobile-orders/{id}', 'admin\OrdersController@mobiles_show');
-Route::resource('admin/address-book', 'admin\AddressBookController');
 Route::post('/admin/import-address', 'admin\AddressBookController@import');
-Route::resource('admin/group', 'admin\GroupController');
 Route::post('/admin/send-landing-page', 'admin\LandingPageController@sendLandingPage');
-Route::resource('admin/email-marketing', 'admin\EmailMarketingController');
 Route::post('/admin/send-email', 'admin\EmailMarketingController@sendEmail');
 Route::resource('admin/event', 'admin\EventController');
+Route::get('/admin/purchase-plan', 'admin\PurchasePlanController@index');
+
+
+/*Business Routes*/
+Route::group(['middleware' => ['purchaseplan']], function() {
+Route::resource('admin/promotion', 'admin\PromotionController');
+Route::resource('admin/address-book', 'admin\AddressBookController');
+Route::resource('admin/group', 'admin\GroupController');
+Route::resource('admin/landing-page', 'admin\LandingPageController');
+Route::resource('admin/email-marketing', 'admin\EmailMarketingController');
+
+Route::get('/admin/upgrade-plan/{type}', 'admin\PurchasePlanController@upgradePlan');
+
+});
+/*Business Routes*/
+Route::get('/{title}/landing-page/{url_name}', 'admin\CommanController@preview');
+
 
 });
 
