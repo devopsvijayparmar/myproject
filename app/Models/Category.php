@@ -20,13 +20,23 @@ class Category extends Authenticatable
 			$query = Category::where('id',$id)->orderBy('id','desc')->where('created_by',Auth::user()->id)->first();
 		   return $query;
 	} 
-	public static function categoryList(){
+	/* public static function categoryList(){
 			$query = Category::orderBy('id','desc')->where('created_by',Auth::user()->id)->get();
 		   return $query;
-	} 
+	}  */
 	public static function categorylistbyid($id){
 			$query = Category::orderBy('name','desc')->where('created_by',$id)->get();
 		   return $query;
+	} 
+	
+	/*New */
+	public static function categoryList(){
+		$query = Category::orderBy('name','asc')->where('created_by',Auth::user()->id)->get();
+		return $query;
+	} 
+	public static function getCategoryList(){
+		$query = Category::where('created_by',Auth::user()->id);
+		return $query;
 	} 
 	
 }

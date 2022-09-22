@@ -119,7 +119,7 @@ class GroupController extends Controller
 	
 	public function update(Request $request,$id)
     {
-		 $this->data['address_book'] = AddressBook::addressbookList();	
+		 $this->data['address_book'] = AddressBook::addressbookListArray();	
 		 $request_id = $id;
 		 $id = Crypt::decrypt($id);
     	 $validator = Validator::make($request->all(), [

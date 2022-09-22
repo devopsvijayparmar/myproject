@@ -21,23 +21,45 @@ class AddressBook extends Authenticatable
 		return $query;
 	} 
 	
-	public static function addressbookList(){
+	/* public static function addressbookList(){
 			$query = AddressBook::orderBy('id','desc')->where('created_by',Auth::user()->id)->get();
 		   return $query;
-	} 
+	}  */
 	
 	public static function addressbookListArray(){
 			$query = AddressBook::where('created_by',Auth::user()->id)->pluck('id')->toArray();
 		   return $query;
 	} 
 	
-	public static function getRecordForLandingPage($ids){
+	/* public static function getRecordForLandingPage($ids){
 		$query = AddressBook::whereIn('id',$ids)->get();
 	    return $query;
-	} 
+	}  */
 	public static function addressbookListCount(){
 			$query = AddressBook::orderBy('id','desc')->where('created_by',Auth::user()->id)->count();
 		   return $query;
+	} 
+	
+	
+	/*New Functions*/
+	public static function getAddressBookList(){
+		$query = AddressBook::where('created_by',Auth::user()->id);
+		return $query;
+	} 
+	
+	public static function getAddressBookCount(){
+		$query = AddressBook::where('created_by',Auth::user()->id)->count();
+		return $query;
+	} 
+	
+	public static function addressBookList(){
+			$query = AddressBook::orderBy('name','asc')->where('created_by',Auth::user()->id)->get();
+		   return $query;
+	} 
+	
+	public static function getRecordForLandingPage($ids){
+		$query = AddressBook::whereIn('id',$ids)->get();
+	    return $query;
 	} 
 	
 }

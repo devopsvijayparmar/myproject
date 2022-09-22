@@ -16,13 +16,19 @@ class EmailMarketing extends Authenticatable
     protected $fillable = ['subject','email','image','created_by','created_at','updated_by','updated_at','deleted_by','deleted_at'];
 	
 	
-	public static function getemails(){
+/* 	public static function getemails(){
 		$query = EmailMarketing::where('created_by',Auth::user()->id)->get();
 	    return $query;
-	}
+	} */
 	
 	public static function getRecordById($id){
 		$query = EmailMarketing::where('id',$id)->first();
+	    return $query;
+	}
+	
+	/*New*/
+	public static function getEmailsByUser(){
+		$query = EmailMarketing::where('created_by',Auth::user()->id)->get();
 	    return $query;
 	}
 	

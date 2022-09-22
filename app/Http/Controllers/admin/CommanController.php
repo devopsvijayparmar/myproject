@@ -29,9 +29,9 @@ class CommanController extends Controller
 		
     }
 	
-	public function gettypebycategory(Request $request)
+	public function getTypeByCategory(Request $request)
     {    
-		 $data = Type::getRecordByCategoryFk($request->id);
+		 $data = Type::getRecordByCategoryId($request->id);
 		 $type_array = '';
 		 if(isset($data) && $data !=''){
 			 ?><option value="">select type</option><?php
@@ -46,21 +46,6 @@ class CommanController extends Controller
 		 echo $type_array;
     }
 	
-	public function checkoldpassword(Request $request)
-    {    
-		$password = Auth::user()->password;
-		
-		if(Hash::check($request->password, $password))
-		{
-			echo 1;
-		}
-		else
-		{
-			echo 0;
-		}
-		
-    }
-    
 	public function preview($title,$url_name){
 		$user = User::getRecordByTitle($title);
 		$this->data['landing_page'] = LandingPage::getRecordByUser($user->id,$url_name);

@@ -22,17 +22,20 @@ Route::get("/testpage", function(){
 
 /*supar admin*/
 
-Route::get('/super-admin/home', 'super_admin\HomeController@index');
-Route::resource('super-admin/web-templates', 'super_admin\front\WebTemplatesController');
-Route::resource('super-admin/pricing', 'super_admin\front\PricingController');
-Route::resource('super-admin/about-us', 'super_admin\front\AboutUsController');
-Route::resource('super-admin/contact-us', 'super_admin\front\ContactUsController');
-Route::resource('super-admin/system', 'super_admin\front\SystemController');
-Route::resource('super-admin/amazing-features', 'super_admin\front\AmazingFeaturesController');
-Route::resource('super-admin/settings', 'super_admin\front\SettingsController');
-Route::resource('super-admin/admin-slider', 'super_admin\front\SliderController');
-Route::resource('super-admin/roles', super_admin\RoleController::class);
+Route::group(['prefix' => 'super-admin', 'namespace' => 'super_admin'], function () {
+	Route::get('/super-admin/home', 'HomeController@index');
+	Route::resource('web-templates', 'front\WebTemplatesController');
+	Route::resource('pricing', 'PricingController');
+	Route::resource('about-us', 'front\AboutUsController');
+	Route::resource('contact-us', 'front\ContactUsController');
+	Route::resource('system', 'front\SystemController');
+	Route::resource('amazing-features', 'front\AmazingFeaturesController');
+	Route::resource('settings', 'front\SettingsController');
+	Route::resource('admin-slider', 'front\SliderController');
+	Route::resource('roles', RoleController::class);
+});
 /*supar admin*/
+
 
 /*supar admin front*/
 Route::get('/signup', 'front\RegisterController@index');
@@ -40,7 +43,6 @@ Route::post('/signup', 'front\RegisterController@register');
 Route::post('/check-site-name', 'front\RegisterController@checkSiteName');
 Route::post('/check-email', 'front\RegisterController@checkEmail');
 Route::get('verify-account/{token}', 'front\RegisterController@verifyAccount');
-
 Route::get('/', 'front\HomeController@index');
 Route::get('/web-templates', 'front\HomeController@webTemplate');
 Route::get('/web-templates/{id}', 'front\HomeController@singleWebTemplate');
@@ -49,79 +51,90 @@ Route::get('/page/{type}', 'front\HomeController@Cms');
 Route::get('/contact-us', 'front\HomeController@contactUs');
 Route::post('/front-contact-us', 'front\HomeController@contact_us_store');
 Route::get('/purchase-plan/{id}', 'front\PurchasePlanController@index');
-
-
 /*supar admin front*/
+
+
 
 /*admin Routes*/
 Auth::routes();
 Route::get('logout', 'Auth\LoginController@logout');
 
+Route::group(['prefix' => 'admin', 'namespace' => 'admin'], function () {
 
-Route::group(['middleware' => ['auth']], function() {
+	Route::group(['middleware' => ['auth']], function() {
+		
+		Route::get('dashboard', 'HomeController@index')->name('home');
+		Route::resource('about-us', 'AboutUsController');
+		Route::post('import-address', 'AddressBookController@import')->name('import-addressbook');
+		Route::resource('blog', 'BlogController');
+		Route::resource('category', 'CategoryController');
+		Route::get('settings', 'SettingsController@index')->name('settings');
+		Route::resource('site-settings', 'SitesettingsController');
+		Route::get('change-password', 'SettingsController@change_password')->name('change-password');
+		Route::post('change-password', 'SettingsController@update')->name('change-password.update');
+		Route::resource('contact-us', 'ContactUsController');
+		Route::post('get-type-by-category', 'CommanController@getTypeByCategory')->name('type-by-category');
+		Route::resource('electric', 'ElectricController');
+		Route::post('send-email', 'EmailMarketingController@sendEmail')->name('send-email');
+		Route::post('upload-gallary', 'GalleryController@update')->name('upload-gallary');
+		Route::resource('gallery', 'GalleryController');
+		Route::post('remove-image', 'GalleryController@removeImage')->name('remove-image');
+		
+		Route::resource('projects', 'ProjectsController');
+		Route::resource('products', 'ProductsController');
+		Route::resource('plan', 'PlanController');
+		Route::resource('books', 'BooksController');
 	
-Route::get('/admin/home', [App\Http\Controllers\admin\HomeController::class, 'index'])->name('home');	
-Route::resource('admin/category', 'admin\CategoryController');
-Route::resource('admin/projects', 'admin\ProjectsController');
-Route::resource('admin/products', 'admin\ProductsController');
-Route::resource('admin/plan', 'admin\PlanController');
-Route::resource('admin/books', 'admin\BooksController');
-Route::resource('admin/about-us', 'admin\AboutUsController');
-Route::resource('admin/service', 'admin\ServiceController');
-Route::resource('admin/contact-us', 'admin\ContactUsController');
-Route::resource('admin/philosophy', 'admin\PhilosophyController');
-Route::resource('admin/brand', 'admin\BrandController');
-Route::resource('admin/type', 'admin\TypeController');
-Route::resource('admin/project_type', 'admin\ProjectTypeController');
-Route::resource('admin/our-team', 'admin\OurTeamController');
-Route::resource('admin/gallery', 'admin\GalleryController');
-Route::post('/admin/upload-gallary', 'admin\GalleryController@update');
-Route::post('/admin/remove-image', 'admin\GalleryController@removeImage');
-Route::resource('admin/electric', 'admin\ElectricController');
-Route::get('admin/settings', 'admin\SettingsController@index');
-Route::resource('admin/slider', 'admin\SliderController');
-Route::resource('admin/site-settings', 'admin\SitesettingsController');
-Route::get('admin/change-password', 'admin\SettingsController@change_password');
-Route::post('admin/change-password', 'admin\SettingsController@update');
-Route::resource('admin/mobile', 'admin\MobileController');
-Route::resource('admin/blog', 'admin\BlogController');
-Route::resource('admin/photo-shoots', 'admin\PhotoShootsController');
+		Route::resource('service', 'ServiceController');
+		
+		Route::resource('philosophy', 'PhilosophyController');
+		Route::resource('brand', 'BrandController');
+		Route::resource('type', 'TypeController');
+		Route::resource('project_type', 'ProjectTypeController');
+		Route::resource('our-team', 'OurTeamController');
+		
+		
+		
+		Route::resource('slider', 'SliderController');
+		
+		
+		
+		Route::resource('mobile', 'MobileController');
+		
+		Route::resource('photo-shoots', 'PhotoShootsController');
 
-Route::get('/admin/landing_page_editor', 'admin\LandingPageController@editor');
-Route::get('/admin/landing_page_edit_editor/{id}', 'admin\LandingPageController@editEditor');
-Route::post('/admin/exit-title', 'admin\LandingPageController@exitTitle');
-Route::post('/admin/exit-title-edit', 'admin\LandingPageController@exitTitleEdit');
-Route::resource('admin/orders', 'admin\OrdersController');
-Route::get('/admin/mobile-orders', 'admin\OrdersController@mobile');
-Route::get('/admin/mobile-orders/{id}', 'admin\OrdersController@mobiles_show');
-Route::post('/admin/import-address', 'admin\AddressBookController@import');
-Route::post('/admin/send-landing-page', 'admin\LandingPageController@sendLandingPage');
-Route::post('/admin/send-email', 'admin\EmailMarketingController@sendEmail');
-Route::resource('admin/event', 'admin\EventController');
-Route::get('/admin/purchase-plan', 'admin\PurchasePlanController@index');
+		Route::get('landing_page_editor', 'LandingPageController@editor');
+		Route::get('landing_page_edit_editor/{id}', 'LandingPageController@editEditor');
+		Route::post('exit-title', 'LandingPageController@exitTitle');
+		Route::post('exit-title-edit', 'LandingPageController@exitTitleEdit');
+		Route::resource('orders', 'OrdersController');
+		Route::get('mobile-orders', 'OrdersController@mobile');
+		Route::get('mobile-orders/{id}', 'OrdersController@mobiles_show');
+		Route::post('send-landing-page', 'LandingPageController@sendLandingPage');
+		
+		Route::resource('event', 'EventController');
+		Route::get('purchase-plan', 'PurchasePlanController@index');
 
-
-/*Business Routes*/
-Route::group(['middleware' => ['purchaseplan']], function() {
-Route::resource('admin/promotion', 'admin\PromotionController');
-Route::resource('admin/address-book', 'admin\AddressBookController');
-Route::resource('admin/group', 'admin\GroupController');
-Route::resource('admin/landing-page', 'admin\LandingPageController');
-Route::resource('admin/email-marketing', 'admin\EmailMarketingController');
-
-Route::get('/admin/upgrade-plan/{type}', 'admin\PurchasePlanController@upgradePlan');
-
+		/*Business Routes*/
+		Route::group(['middleware' => ['purchaseplan']], function() {
+			Route::resource('promotion', 'PromotionController');
+			Route::resource('address-book', 'AddressBookController');
+			Route::resource('group', 'GroupController');
+			Route::resource('landing-page', 'LandingPageController');
+			Route::resource('email-marketing', 'EmailMarketingController');
+			Route::get('upgrade-plan/{type}', 'PurchasePlanController@upgradePlan');
+		});
+	});
+	
+	Route::post('checkoldpassword', 'CommanController@checkoldpassword')->name('checkoldpassword');
 });
-/*Business Routes*/
+
 Route::get('/{title}/landing-page/{url_name}', 'admin\CommanController@preview');
-
-
-});
-
-Route::post('admin/get-type-by-category', 'admin\CommanController@gettypebycategory');
-Route::post('admin/checkoldpassword', 'admin\CommanController@checkoldpassword');
-
 /*admin Routes End*/
+
+
+
+
 
 /*Front*/
 Route::get('{title}', 'websites\HomeController@index');
@@ -149,8 +162,6 @@ Route::post('{title}/order', 'websites\HomeController@order');
 Route::post('{title}/mobile-orders', 'websites\HomeController@mobileorder');
 Route::get('{title}/plan', 'websites\HomeController@plan');
 Route::get('{title}/{id}/single-plan', 'websites\HomeController@single_plan');
-
-
 /*Front end*/
 
 

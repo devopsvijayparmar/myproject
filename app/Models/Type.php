@@ -20,11 +20,11 @@ class Type extends Authenticatable
 			$query = Type::where('id',$id)->orderBy('id','desc')->where('created_by',Auth::user()->id)->first();
 		   return $query;
 	} 
-	public static function getRecordByCategoryFk($id){
+	/* public static function getRecordByCategoryFk($id){
 			$query = Type::where('category_fk',$id)->orderBy('id','desc')->where('created_by',Auth::user()->id)->get();
 		   return $query;
 	} 
-	
+	 */
 	public static function categoryList(){
 	
 		$query = Type::select('type.*','category.name as category_name')
@@ -36,5 +36,12 @@ class Type extends Authenticatable
 	    return $query;
 
 	} 
+	
+	
+	/*New Routes*/
+	public static function getRecordByCategoryId($id){
+		$query = Type::where('category_fk',$id)->orderBy('name','asc')->where('created_by',Auth::user()->id)->get();
+		return $query;
+	}
 	
 }

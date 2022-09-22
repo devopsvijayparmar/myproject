@@ -25,4 +25,9 @@ class ContactUs extends Authenticatable
 		return $query;
 	}
 	
+	/*New*/
+	public static function getRecordByUserId(){
+		$query = ContactUs::where('created_by',Auth::user()->id)->first();
+		return $query;
+	}
 }

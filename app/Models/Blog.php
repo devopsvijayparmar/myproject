@@ -15,10 +15,7 @@ class Blog extends Authenticatable
     protected $table = 'blog';
     protected $fillable = ['title','description','image','created_by','created_at','updated_by','updated_at','deleted_by','deleted_at'];
 	
-	public static function getBlogList(){
-		$query = Blog::where('created_by',Auth::user()->id)->get();
-	    return $query;
-	}
+	
 	
 	public static function getRecordById($id){
 		$query = Blog::where('id',$id)->first();
@@ -36,6 +33,16 @@ class Blog extends Authenticatable
 	public static function getRecordForIndexLast3($id){
 		$query = Blog::where('created_by',$id)->orderBy('id','desc')->take(3)->get();
 	    return $query;
+	}
+	
+	/*New Routes*/
+	public static function getBlogList(){
+		$query = Blog::where('created_by',Auth::user()->id);
+	    return $query;
+	}
+	
+	function getImageAttribute($image){
+		return $image == null ? url('/images/image_not_found.jpg') : asset('/uploads/blog/'.$image);
 	}
 
 }

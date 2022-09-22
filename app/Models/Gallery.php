@@ -24,10 +24,10 @@ class Gallery extends Authenticatable
 		$query = Gallery::where('created_by',Auth::user()->id)->orderBy('id','desc')->get();
 		return $query;
 	}
-	public static function getRecordByIdArray(){
+	/* public static function getRecordByIdArray(){
 		$query = Gallery::where('created_by',Auth::user()->id)->pluck('image')->toArray();
 		return $query;
-	}
+	} */
 	public static function getRecordByIdForIndex($id){
 		$query = Gallery::where('created_by',$id)->orderBy('id','desc')->paginate(16);
 		return $query;
@@ -36,6 +36,27 @@ class Gallery extends Authenticatable
 	public static function getRecordByIdForIndex6($id){
 		$query = Gallery::where('created_by',$id)->orderBy('id','desc')->take(6)->get();
 		return $query;
+	}
+	
+	/*New*/
+	
+	public static function getGalleryList(){
+		$query = Gallery::where('created_by',Auth::user()->id)->get();
+		return $query;
+	}
+	
+	public static function getGalleryCount(){
+		$query = Gallery::where('created_by',Auth::user()->id)->count();
+		return $query;
+	}
+	
+	public static function getGalleryImageArray(){
+		$query = Gallery::where('created_by',Auth::user()->id)->pluck('image')->toArray();
+		return $query;
+	}
+	
+	function getImagePathAttribute(){
+		return $this->image == null ? url('/images/image_not_found.jpg') : asset('/uploads/gallery/'.$this->image);
 	}
 	
 }

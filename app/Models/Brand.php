@@ -25,4 +25,10 @@ class Brand extends Authenticatable
 		   return $query;
 	} 
 	
+	/*New*/
+	public static function brandList(){
+		$query = Brand::where('created_by',Auth::user()->id);
+		return $query;
+	} 
+	
 }

@@ -7,13 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Category;
+use App\Models\Type;
 
 class Electric extends Authenticatable
 {
     use Notifiable;
 	use SoftDeletes;
     protected $table = 'electric';
-    protected $fillable = ['category_fk','type_fk','name','description','image_1','image_2','image_3','created_by','created_at','updated_by','updated_at','deleted_by','deleted_at','price'];
+    protected $fillable = ['category_id','type_id','name','description','image_1','image_2','image_3','created_by','created_at','updated_by','updated_at','deleted_by','deleted_at','price'];
 	
 	
 	public static function getProductsList(){
@@ -30,7 +32,7 @@ class Electric extends Authenticatable
 	    return $query;
 
 	} 
-	public static function getRecordById($id){
+	/* public static function getRecordById($id){
 		
 		$query = Electric::select('electric.*','category.name as category_name','type.name as type_name')
 		->leftjoin('category', function($join) {
@@ -43,7 +45,7 @@ class Electric extends Authenticatable
 		->first();
 	    return $query;
 
-	} 
+	}  */
 	
 	public static function getRecordForIndex($user_id){
 		
@@ -99,5 +101,37 @@ class Electric extends Authenticatable
 	    return $query;
 
 	} 
+	
+	
+	/*New*/
+	
+	public function category(){
+		return $this->belongsTo(Category::class, 'category_id', 'id');
+	}
+	
+	public function type(){
+		return $this->belongsTo(Type::class, 'type_id', 'id');
+	}
+	
+	public static function getElectricList(){
+		$query = Electric::where('created_by',Auth::user()->id)->with('category','type');
+	    return $query;
+	}
+	
+	public static function getRecordById($id){
+		$query = Electric::where('id',$id)->with('category','type')->first();
+	    return $query;
+	}
+	
+	function getImage1Attribute($image){
+		return $image == null ? url('/images/image_not_found.jpg') : asset('/uploads/electric/'.$image);
+	}
+	function getImage2Attribute($image){
+		return $image == null ? url('/images/image_not_found.jpg') : asset('/uploads/electric/'.$image);
+	}
+	function getImage3Attribute($image){
+		return $image == null ? url('/images/image_not_found.jpg') : asset('/uploads/electric/'.$image);
+	}
+	
 	
 }

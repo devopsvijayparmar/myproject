@@ -6,13 +6,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Session;
-use DB;
+use JsValidator;
+use Illuminate\Support\Facades\Lang;
 use Validator;
 use App\Models\Category;
 use App\Models\ContactUs;
 use Auth;
-use Hash;
-
+use DataTables;
 
 class ContactUsController extends Controller
 {
@@ -21,61 +21,47 @@ class ContactUsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+	protected $validationRules = [
+		'email' => 'required|email|max:255',
+		'address' => 'required|max:500',
+		'contact_1' => 'min:10|numeric',
+		'contact_2' => 'min:10|numeric',
+    ];   
 	 
 	function __construct()
     {
-		$this->data['title'] = 'Contact Us';
 		$this->middleware('permission:contact_us', ['only' => ['index','update']]);
     }
 	
 	public function index(Request $request)
     {    
-	   
-        $this->data['data'] = ContactUs::editRecordById();	
-		return view('admin.contact_us.index',$this->data);
+        $data['data'] = ContactUs::getRecordByUserId();	
+		$data['validator'] = JsValidator::make($this->validationRules);
+		return view('admin.pages.contact_us.index',$data);
     }
 
 	public function update(Request $request,$id)
     {
+		$auth = Auth::user();
+		$input = $request->all();
 		
-    	 $validator = Validator::make($request->all(), [
-			'email' => 'required|email|max:255',
-			'address' => 'required|max:500',
-			'contact_1' => 'min:10|numeric',
-			'contact_2' => 'min:10|numeric',
-        ]);
+		$validator = Validator::make($input, $this->validationRules);
+        if($validator->fails()) {
+			return redirect()->back()->withErrors($validator)->withInput();
+        } 
+		
+		$input['updated_at'] = date('Y-m-d H:i:s');
+		$input['created_by'] = $auth->id;
 
-
-        if ($validator->fails()) {
-            return redirect()->back()
-                            ->withErrors($validator, 'ContactUS')
-                            ->withInput();
-        } else {
-			
-			   $auth = Auth::user();
-				$input = $request->all();
-				$input['updated_at'] = date('Y-m-d H:i:s');
-				$input['created_by'] = $auth->id;
-
-				$contactus = ContactUs::editRecordById(Auth::user()->id);
-				
-				if($contactus){
-					$contactus->update($input);
-				}
-				else {
-					$contactus = ContactUs::create($input);
-				}
-				
-				if($contactus){
-					$request->session()->flash('success', 'Successfully Updated');
-				}
-				else{
-					$request->session()->flash('error', "we're sorry,but something went wrong.Please try again");
-				}
-				return redirect('/admin/contact-us');
+		$contact_us = ContactUs::getRecordByUserId();
+		$contact_us->update($input);
+		
+		if($contact_us){
+			return redirect()->route('contact-us.index')->with('success', Lang::get('messages.updated'));
+		}
+		else{
+			return redirect()->back()->with('error', Lang::get('messages.error'));
 		}
     }
-	
-	
 	
 }

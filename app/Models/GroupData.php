@@ -13,10 +13,10 @@ class GroupData extends Authenticatable
     protected $table = 'group_data';
     protected $fillable = ['group_fk','address_book_fk','created_by','created_at','updated_by','updated_at','deleted_by','deleted_at'];
 	
-	public static function getRecordByGroupId($id){
+	/* public static function getRecordByGroupId($id){
 		$query = GroupData::where('group_fk',$id)->pluck('address_book_fk')->toArray();
 		return $query;
-	}
+	} */
 	
 	public static function getgroupdatalist($id){
 	
@@ -29,5 +29,11 @@ class GroupData extends Authenticatable
 	    return $query;
 
 	} 
+	
+	/*New*/
+	public static function getRecordByGroupId($id){
+		$query = GroupData::where('group_fk',$id)->pluck('address_book_fk')->toArray();
+		return $query;
+	}
 	
 }

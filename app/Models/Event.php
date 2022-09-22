@@ -15,10 +15,10 @@ class Event extends Authenticatable
     protected $table = 'event';
     protected $fillable = ['title','description','location','start_date','end_date','image','created_by','created_at','updated_by','updated_at','deleted_by','deleted_at'];
 	
-	public static function getEventList(){
+	/* public static function getEventList(){
 		$query = Event::where('created_by',Auth::user()->id)->get();
 	    return $query;
-	}
+	} */
 	
 	public static function getEventListForIndex($id){
 		
@@ -37,6 +37,16 @@ class Event extends Authenticatable
 	public static function getRecordById($id){
 		$query = Event::where('id',$id)->first();
 	    return $query;
+	}
+	
+	/*new*/
+	public static function getEventList(){
+		$query = Event::where('created_by',Auth::user()->id);
+	    return $query;
+	}
+	
+	function getImageAttribute($image){
+		return $image == null ? url('/images/image_not_found.jpg') : asset('/uploads/event/'.$image);
 	}
 	
 	

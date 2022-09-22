@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Lang;
+use App\Traits\ImageUpload;
+use JsValidator;
+use DataTables;
 use DB;
 use Validator;
 use App\Models\Blog;
@@ -14,8 +18,22 @@ use Hash;
 use Crypt;
 
 
+
 class BlogController extends Controller
 {
+	use ImageUpload;
+	
+	protected $validationRules = [
+		'title' => 'required|string|max:255',
+		'description' => 'required|max:5000',
+		'image'=>'required|mimes:jpeg,jpg,png|max:20480'
+    ]; 
+	
+	protected $validationRulesEdit = [
+		'title' => 'required|string|max:255',
+		'description' => 'required|max:5000',
+		'image'=>'mimes:jpeg,jpg,png|max:20480'
+    ]; 
     /**
      * Display a listing of the resource.
      *
@@ -25,121 +43,134 @@ class BlogController extends Controller
 	function __construct()
     {
 		$this->middleware('permission:blog', ['only' => ['index','create','store','edit','update','destroy','show']]);
-		$this->data['title'] = 'Blog';
     }
 	
 	public function index(Request $request)
     {    
-	   
-        $this->data['blog'] = Blog::getBlogList();	
-		return view('admin.blog.index',$this->data);
+	    if ($request->ajax()) {
+		  
+			$data = Blog::getBlogList();
+			return DataTables::of($data)
+			->addIndexColumn()
+			
+			->editColumn('image', function ($row)
+			{
+			   return '<img class="rp-img" src="'.$row['image'].'">';
+			})
+			->editColumn('action', function ($row)
+			{
+			   $btn = '<a title="Edit" class="mr-2" href="' . route('blog.edit', Crypt::encrypt($row['id'])) . '" class="mr-2"><i class="fas fa-edit text-info font-16"></i></a>';
+			  
+			   $delete_link = route('blog.destroy', Crypt::encrypt($row['id']));
+			   $delete_link = "'" . $delete_link . "'";
+			   $btn .= '<a class="mr-2" title="Delete" href="javascript:void(0);" onclick="deleteRecord('.$delete_link.');" data-popup="tooltip"><i class="fas fa-trash-alt text-info font-16"></i></a>';
+			   
+			   $btn .= '<a title="Details" href="' . route('blog.show', Crypt::encrypt($row['id'])) . '" data-popup="tooltip"><i class="fas fa-eye text-info font-16"></i></a>';
+			   
+			   return $btn;
+			})
+			->rawColumns(['image','action'])
+			->make(true);
+
+		} else {
+		
+		    
+			$columns = [
+				['data' => 'DT_RowIndex', 'name' => 'id', 'title' => "Id"],
+				['data' => 'image','name' => 'image', 'title' => __("Image"),'searchable'=>false,'orderable' => false],
+				['data' => 'title','name' => 'title', 'title' => __("Title"),'searchable'=>true,'orderable' => true],
+				['data' => 'action', 'name' => 'action', 'title' => "Action", 'searchable' => false, 'orderable' => false]];
+		  
+			$data['dateTableFields'] = $columns;
+			$data['dateTableUrl'] = route('blog.index');
+			$data['dateTableTitle'] = "Blog";
+			$data['dataTableId'] = time();
+			$data['createUrl'] = route('blog.create');
+			return view('admin.pages.blog.index',$data);
+		
+		}
+	
     }
 
 	public function create(Request $request)
     { 	
-		return view('admin.blog.create',$this->data);
+	    $data['validator'] = JsValidator::make($this->validationRules);
+		return view('admin.pages.blog.create',$data);
     }
 	
 	public function store(Request $request)
     {
-    	 $validator = Validator::make($request->all(), [
-			'title' => 'required|max:255',
-			'description' => 'required|max:5000',
-			'image'=>'required|mimes:jpeg,jpg,png'
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()->back()
-                            ->withErrors($validator, 'Blog')
-                            ->withInput();
-        } else {
-			
-		$auth = Auth::user();
-        $input = $request->all();
-		
+		$auth = Auth::user(); 
+		$input = $request->all();
+    	$validator = Validator::make($input, $this->validationRules);
+  
+        if($validator->fails()) {
+			return redirect()->back()->withErrors($validator)->withInput();
+        } 
+ 
 		$input['created_at'] = date('Y-m-d H:i:s');
 		$input['created_by'] = $auth->id;
 		
+		/*Image Upload Trait*/
 		if ($request->hasfile('image')) {
-			$file = $request->file('image');
-			$name_1 = $file->getClientOriginalName();
-			$name_1 = str_replace(" ", "", date("Ymdhis")+1 . $name_1);
-			$file->move(public_path() . '/uploads/blog/', $name_1);
-			$input['image'] = $name_1;
+			$image_name = $this->imageUpload($request->file('image'),'blog');
+			$input['image'] = $image_name;
 		}
 		
 		$blog = Blog::create($input);
 		
 		if($blog){
-			Session::flash('success', 'Successfully Inserted');
-			return redirect('admin/blog');
+			return redirect()->route('blog.index')->with('success', Lang::get('messages.created'));
 		}else{
-			Session::flash('error', "we're sorry,but something went wrong.Please try again");
-			return redirect()->back();
+			return redirect()->back()->with('error', Lang::get('messages.error'));
 		}
 
-		}
     }
 	
 	public function edit($id)
     { 		
 	     $id = Crypt::decrypt($id);
-		 $this->data['data'] = Blog::getRecordById($id);
-		 return view('admin.blog.edit',$this->data);
+		 $data['data'] = Blog::find($id);
+		 $data['validator'] = JsValidator::make($this->validationRulesEdit);
+		 return view('admin.pages.blog.edit',$data);
     }
 	
 	public function update(Request $request,$id)
     {
-		 $request_id = $id;
-		 $id = Crypt::decrypt($id);
-    	 $validator = Validator::make($request->all(), [
-			'title' => 'required|max:255',
-			'description' => 'required|max:5000',
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()->back()
-                            ->withErrors($validator, 'Blog')
-                            ->withInput();
-        } else {
-			
+		 
+		$id = Crypt::decrypt($id);
 		$auth = Auth::user();
-		$input = $request->all();
+    	$input = $request->all();
+    	$validator = Validator::make($input, $this->validationRulesEdit);
+  
+        if($validator->fails()) {
+			return redirect()->back()->withErrors($validator)->withInput();
+        }  
+			
 		$input['updated_at'] = date('Y-m-d H:i:s');
 		$input['updated_by'] = $auth->id;
 		
 		if ($request->hasfile('image')) {
-			$file = $request->file('image');
-			$name_1 = $file->getClientOriginalName();
-			$name_1 = str_replace(" ", "", date("Ymdhis")+1 . $name_1);
-			$file->move(public_path() . '/uploads/blog/', $name_1);
-			$input['image'] = $name_1;
+			$image_name = $this->imageUpload($request->file('image'),'blog');
+			$input['image'] = $image_name;
 		}
         
-		$blog = Blog::where('created_by', Auth::user()->id)->where('id',$id)->first();
-		if($blog){
-			$blog->update($input);
-		}
-		else{
-			abort(401);
-		}
+		$blog = Blog::where('created_by', $auth->id)->where('id',$id)->first();
+		$blog->update($input);
 		
 		if($blog){
-			Session::flash('success', 'Successfully Updated');
-			return redirect('admin/blog');
+			return redirect()->route('blog.index')->with('success', Lang::get('messages.updated'));
 		}else{
-			
-			 Session::flash('error', "we're sorry,but something went wrong.Please try again");
-			 return redirect()->back();
+			return redirect()->back()->with('error', Lang::get('messages.error'));
 		}
-		}
+		
     }
 	
 	public function show($id)
     {    
 	    $id = Crypt::decrypt($id);
-	    $this->data['data'] = Blog::getRecordById($id);
-        return view('admin.blog.show',$this->data);
+	    $data['data'] = Blog::find($id);
+        return view('admin.pages.blog.show',$data);
     }
 
     /**
@@ -151,10 +182,8 @@ class BlogController extends Controller
 	public function destroy(Request $request,$id)
     {
 		$id = Crypt::decrypt($id);
-		/*Record Delete*/
 		$auth = Auth::user(); 	
-	    $delete = Blog::where('id', $id)->where('created_by', Auth::user()->id)->update(['deleted_by' => $auth->id,'deleted_at'=>date('Y-m-d H:i:s')]);
-		
+	    $delete = Blog::where('created_by', $auth->id)->where('id', $id)->delete();
 		return $delete;
     }
 	

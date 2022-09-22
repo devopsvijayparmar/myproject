@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Session;
-use DB;
+use Illuminate\Support\Facades\Lang;
+use JsValidator;
 use Validator;
 use App\Models\EmailMarketing;
 use App\Models\EmailsBroadCast;
@@ -25,112 +26,105 @@ class EmailMarketingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+	protected $validationRules = [
+		'for' => 'required',
+		'group' => 'required',
+		'users' => 'required',
+    ]; 
+
+	protected $validationRulesSendEmail = [
+		'for' => 'required'
+    ]; 	
+	
+	protected $validationRulesForm = [
+		'subject' => 'required|string|max:255',
+		'email' => 'required|max:10000',
+    ];
+	 
 	 
 	function __construct()
     {
 		$this->middleware('permission:email_marketing', ['only' => ['index','create','store','edit','update','show','destroy','sendEmail']]);
-		$this->data['title'] = 'Email Marketing';
     }
 	
 	public function index(Request $request)
     {    
-	   
-        $this->data['email'] = EmailMarketing::getemails();	
-		$this->data['group'] = Group::groupList();	
-		$this->data['address_book'] = AddressBook::addressbookList();	
-		return view('admin.email_marketing.index',$this->data);
+        $data['email'] = EmailMarketing::getEmailsByUser();	
+		$data['group'] = Group::groupList();	
+		$data['address_book'] = AddressBook::addressBookList();	
+		$data['validator'] = JsValidator::make($this->validationRules);
+		return view('admin.pages.email_marketing.index',$data);
     }
 
 	public function create(Request $request)
     { 	
-		return view('admin.email_marketing.create',$this->data);
+	    $data['validator'] = JsValidator::make($this->validationRulesForm);
+		return view('admin.pages.email_marketing.create',$data);
     }
 	
 	public function store(Request $request)
     {
-    	 $validator = Validator::make($request->all(), [
-			'subject' => 'required|max:255',
-			'email' => 'required|max:10000',
-        ]);
-
-        if ($validator->fails()) {
-             return redirect()->back()
-                            ->withErrors($validator, 'Email')
-                            ->withInput();
-        } else {
-			
 		$auth = Auth::user();
         $input = $request->all();
-		
+    	$validator = Validator::make($input, $this->validationRulesForm);
+  
+        if($validator->fails()) {
+			return redirect()->back()->withErrors($validator)->withInput();
+        } 
+			
 		$input['created_at'] = date('Y-m-d H:i:s');
 		$input['created_by'] = $auth->id;
 		
 		$email = EmailMarketing::create($input);
 		
 		if($email){
-			Session::flash('success', 'Successfully Inserted');
-			return redirect('admin/email-marketing');
+			return redirect()->route('email-marketing.index')->with('success', Lang::get('messages.created'));
 		}else{
-			 Session::flash('error', "we're sorry,but something went wrong.Please try again");
-			 return redirect()->back();
+			return redirect()->back()->with('error', Lang::get('messages.error'));
 		}
 
-		}
     }
 	
 	public function edit($id)
     { 		
 	     $id = Crypt::decrypt($id);
-		 $this->data['data'] = EmailMarketing::getRecordById($id);
-		 return view('admin.email_marketing.edit',$this->data);
+		 $data['validator'] = JsValidator::make($this->validationRulesForm);
+		 $data['data'] = EmailMarketing::find($id);
+		 return view('admin.pages.email_marketing.edit',$data);
         
     }
 	
 	public function update(Request $request,$id)
     {
-		 $request_id = $id;
-		 $id = Crypt::decrypt($id);
-    	 $validator = Validator::make($request->all(), [
-			'subject' => 'required|max:255',
-			'email' => 'required|max:10000',
-        ]);
-
-
-        if ($validator->fails()) {
-             return redirect()->back()
-                            ->withErrors($validator, 'Email')
-                            ->withInput();
-        } else {
-			
+		
+		$id = Crypt::decrypt($id);
 		$auth = Auth::user();
 		$input = $request->all();
+    	$validator = Validator::make($input, $this->validationRulesForm);
+  
+        if($validator->fails()) {
+			return redirect()->back()->withErrors($validator)->withInput();
+        } 
+			
 		$input['updated_at'] = date('Y-m-d H:i:s');
 		$input['updated_by'] = $auth->id;
 		
 		$email = EmailMarketing::where('created_by', Auth::user()->id)->where('id',$id)->first();
-		if($email){
-			$email->update($input);
-		}
-		else{
-			abort(401);
-		}
+		$email->update($input);
 		
 		if($email){
-			Session::flash('success', 'Successfully Updated');
-			return redirect('admin/email-marketing');
+			return redirect()->route('email-marketing.index')->with('success', Lang::get('messages.updated'));
 		}else{
-			
-			 Session::flash('error', "we're sorry,but something went wrong.Please try again");
-			 return redirect()->back();
+			return redirect()->back()->with('error', Lang::get('messages.error'));
 		}
-		}
+		
     }
 	
 	public function show($id)
     {    
 	    $id = Crypt::decrypt($id);
-	    $this->data['data'] = EmailMarketing::getRecordById($id);
-        return view('admin.email_marketing.show',$this->data);
+	    $data['data'] = EmailMarketing::find($id);
+        return view('admin.pages.email_marketing.show',$data);
     }
 
     /**
@@ -142,43 +136,41 @@ class EmailMarketingController extends Controller
 	public function destroy(Request $request,$id)
     {
 		$id = Crypt::decrypt($id);
-		/*Record Delete*/
 		$auth = Auth::user(); 	
-	    $delete = EmailMarketing::where('id', $id)->where('created_by', Auth::user()->id)->update(['deleted_by' => $auth->id,'deleted_at'=>date('Y-m-d H:i:s')]);
-		
+		$delete = EmailMarketing::where('created_by', $auth->id)->where('id', $id)->delete();
 		return $delete;
     }
 	
 	public function sendEmail(Request $request)
     {
-    	 $validator = Validator::make($request->all(), [
-			'for' => 'required',
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()->back()
-                            ->withErrors($validator, 'Email')
-                            ->withInput();
-        } else {
-			
 		$auth = Auth::user();
         $input = $request->all();
+		$validator = Validator::make($input, $this->validationRulesSendEmail);
+  
+        if($validator->fails()) {
+			return redirect()->back()->withErrors($validator)->withInput();
+        } 
+			
+		
 		$id = Crypt::decrypt($request->email_id);
-		$email = EmailMarketing::getRecordById($id);
+		$email = EmailMarketing::find($id);
 		
 		$input['created_at'] = date('Y-m-d H:i:s');
 		$input['created_by'] = $auth->id;
 	
+	   
+	
 	    if($request->for == 1)
 		{
-			$groupdata = GroupData::getRecordByGroupId($request->group);
-			$addressdata = AddressBook::getRecordForLandingPage($groupdata);
+			$group_data = GroupData::getRecordByGroupId($request->group);
+			$address_data = AddressBook::getRecordForLandingPage($group_data);
 		}
 		else{
-			$addressdata = AddressBook::getRecordForLandingPage($request->users);
+			$address_data = AddressBook::getRecordForLandingPage($request->users);
 		}
 		
-		foreach($addressdata as $retrieved_data)
+		
+		foreach($address_data as $retrieved_data)
 		{
 			$html = $email->email;
 			$subject = $email->subject;
@@ -210,7 +202,7 @@ class EmailMarketingController extends Controller
 			Session::flash('error', 'Something went wrong data not Imported');
 			 return redirect()->back();
 		}
-		}
+		
     }
 	
 }

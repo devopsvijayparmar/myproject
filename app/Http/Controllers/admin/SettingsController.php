@@ -6,12 +6,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Lang;
 use DB;
 use App\Models\Slider;
 use App\Models\User;
 use Validator;
 use Auth;
 use Hash;
+use JsValidator;
 
 
 class SettingsController extends Controller
@@ -21,62 +23,57 @@ class SettingsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+	protected $validationRules = [
+        'current_password' => 'required|min:8',
+        'new_password' => 'required|min:8',
+        'confirm_new_password' => 'required|same:new_password|min:8',
+    ];  
 	 
 	function __construct()
     {
 		$this->middleware('permission:site_settings', ['only' => ['index','change_password','update']]);
-		$this->data['title'] = 'Settings';
     }
 	
 	public function index(Request $request)
     {    
-		$this->data['slider'] = Slider::sliderList();	
-		return view('admin.slider.index',$this->data);
+		$data['slider'] = Slider::sliderList();	
+		return view('admin.pages.slider.index',$this->data);
     }
 	
 	public function change_password(Request $request)
     {    
-	    $this->data['title'] = 'Change Password';
-		return view('admin.change_password.index',$this->data);
+		$data['validator'] = JsValidator::make($this->validationRules);
+		return view('admin.pages.change_password.index',$data);
     }
 	
     public function update(Request $request)
     {
-		if(Hash::check($request->old_password, Auth::user()->password))
-		{
-			$validator = Validator::make($request->all(), [
-						'new_password' => 'required|min:8',
-						'confirm_password' => 'required_with:new_password|same:new_password|min:8'
-			]);
-			if ($validator->fails()) {
-				return redirect()->back()
-								->withErrors($validator, 'Changepassword')
-								->withInput();
-			}
-			else
-			{
-				$data_array = array(
-					'password' => Hash::make($request->new_password),
-					'updated_at' => date('Y-m-d H:i:s')
-				   
-				);
-				$update = User::where('id', Auth::user()->id)->update($data_array);
-				if($update)
-				{
-					$request->session()->flash('success', 'Successfully Updated');
-				}
-				else
-				{
-					$request->session()->flash('error', "we're sorry,but something went wrong.Please try again");
-				}
-				return redirect()->back();
-			}
-		}
-		else
-		{
-			$request->session()->flash('notmatchpassword', "Old password does not Match");
-			return redirect()->back();
-		}
+		$auth = Auth::user();
+        $input = $request->all();
+		$validator = Validator::make($input, $this->validationRules);
+  
+		if($validator->fails()) {
+			return redirect()->back()->withErrors($validator)->withInput();
+		} 
+
+        if (Hash::check($request->current_password, Auth::user()->password)) {
+
+            if (!Hash::check($request->new_password, Auth::user()->password)) {
+
+                $user['password'] = Hash::make($request->new_password);
+                User::whereId($auth->id)->update($user);
+
+                return redirect()->back()
+                    ->with('success', Lang::get('messages.password_updated'));
+            } else {
+                return redirect()->back()
+                    ->with('error', Lang::get('messages.confirm_new_password'));
+            }
+
+        } else {
+            return redirect()->back()
+                ->with('error', Lang::get('messages.current_password_incorrect'));
+        }
     }
 
 }

@@ -6,15 +6,20 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Session;
-use DB;
+use Illuminate\Support\Facades\Lang;
 use Validator;
 use App\Models\AboutUs;
+use JsValidator;
 use Auth;
 use Hash;
 
 
 class AboutUsController extends Controller
 {
+	
+	protected $validationRules = [
+        'description' => 'required|max:10000',
+    ]; 
     /**
      * Display a listing of the resource.
      *
@@ -24,50 +29,41 @@ class AboutUsController extends Controller
 	function __construct()
     {
 		$this->middleware('permission:about_us', ['only' => ['index','update']]);
-		$this->data['title'] = 'About Us';
     }
 	
 	public function index(Request $request)
     {    
 	   
-        $this->data['data'] = AboutUs::editRecordById();	
-		return view('admin.about_us.index',$this->data);
+	    $data['validator'] = JsValidator::make($this->validationRules);
+        $data['data'] = AboutUs::editRecordByUserId();	
+		return view('admin.pages.about_us.index',$data);
     }
 
 	public function update(Request $request,$id)
     {
 		
-    	 $validator = Validator::make($request->all(), [
-			'description' => 'required|max:10000',
-        ]);
+		$auth = Auth::user();
+    	$input = $request->all();
+        $validator = Validator::make($input, $this->validationRules);
 
+        if($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        } 
 
-        if ($validator->fails()) {
-            return redirect()->back()
-                            ->withErrors($validator, 'AboutUS')
-                            ->withInput();
-        } else {
-			$auth = Auth::user();
-			$input = $request->all();
-			$input['updated_at'] = date('Y-m-d H:i:s');
-			$input['created_by'] = $auth->id;
+		$input['updated_at'] = date('Y-m-d H:i:s');
+		$input['created_by'] = $auth->id;
 
-			$aboutus = AboutUs::editRecordById(Auth::user()->id);
-			
-			if($aboutus){
-				$aboutus->update($input);
-			}
-			else {
-				$aboutus = AboutUs::create($input);
-			}
-			
-			if($aboutus) {
-				$request->session()->flash('success', 'Successfully Updated');
-			}
-			else {
-				$request->session()->flash('error', "we're sorry,but something went wrong.Please try again");
-			}
-			return redirect()->back();
+		$aboutus = AboutUs::editRecordByUserId();
+		
+		if($aboutus){
+			$aboutus->update($input);
+			Session::flash('success', Lang::get('messages.updated'));
 		}
+		else {
+			$aboutus = AboutUs::create($input);
+			Session::flash('success', Lang::get('messages.created'));
+		}
+		return redirect()->back();
+		
     }
 }
