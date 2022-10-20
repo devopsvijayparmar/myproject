@@ -19,12 +19,13 @@
 				<div class="col-md-3 col-sm-6">
 					<div class="product-grid" style="padding:0!important">
 						<div class="product-image">
-							<a class="preview" href="{{url('/uploads/photo_shoots')}}/{{$photoshootsdata->image}}" rel="prettyPhoto">
-								<img class="pic-1" src="{{url('/uploads/photo_shoots')}}/{{$photoshootsdata->image}}">
+							<a class="preview" href="{{$photoshootsdata->image}}" rel="prettyPhoto">
+								<img class="pic-1" src="{{$photoshootsdata->image}}">
 							</a>
 						</div>
 						<div class="p-2">
 							<div class="font-clr">{{ mb_strimwidth($photoshootsdata->name, 0, 40, "...")}}</div>
+							<div class="font-clr">{{ mb_strimwidth($photoshootsdata->category_name, 0, 40, "...")}}</div>
 						</div>
 					</div>
 				</div>

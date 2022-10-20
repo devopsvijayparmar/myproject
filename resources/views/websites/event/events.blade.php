@@ -19,41 +19,31 @@
             </div>
 			
 			<div class="row">
-				 <?php
-				 if(count($events) > 0)
-				 {
-				 foreach($events as $eventsdata)
-				 {
-				 ?>
+				 @if(count($events) > 0)
+				 @foreach($events as $eventsdata)
 				 <div class="col-sm-4">
                     <div class="blog-post blog-large wow fadeInLeft animated" data-wow-duration="300ms" data-wow-delay="0ms" style="visibility: visible; animation-duration: 300ms; animation-delay: 0ms; animation-name: fadeInLeft;">
                         <article>
                             <header class="entry-header">
                                 <div class="entry-thumbnail">
-                                    <a href="<?php echo url('/'.$title);?>/{{App\Helpers\CryptHelper::encryptstring($eventsdata->id)}}/single-event"><img class="img-responsive card_img" src="<?php echo url('/uploads/event/'.$eventsdata->image);?>" alt=""></a>
-                                    <a class="preview" href="<?php echo url('/uploads/event/'.$eventsdata->image);?>" rel="prettyPhoto"><span class="post-format post-format-video"><i class="fa fa-film"></i></span></a>
+                                    <a href="{{$eventsdata->getDetailPageLink($title)}}"><img class="img-responsive card_img" src="{{$eventsdata->image}}" alt=""></a>
+                                    <a class="preview" href="{{$eventsdata->image}}" rel="prettyPhoto"><span class="post-format post-format-video"><i class="fa fa-film"></i></span></a>
                                 </div>
                                 <div class="entry-date">Start Date: {{$eventsdata->start_date}}</div>
                                 <div class="entry-date">End Date: {{$eventsdata->end_date}}</div>
-                                <h2 class="entry-title"><a href="<?php echo url('/'.$title);?>/{{App\Helpers\CryptHelper::encryptstring($eventsdata->id)}}/single-event">{{$eventsdata->title}}</a></h2>
+                                <h2 class="entry-title"><a href="{{$eventsdata->getDetailPageLink($title)}}">{{$eventsdata->title}}</a></h2>
                             </header>
 
                             <div class="entry-content">
-                                <?php echo mb_strimwidth($eventsdata->description, 0, 100, "..."); ?>
-                               
+							{!!mb_strimwidth($eventsdata->description, 0, 100, "...")!!}
                             </div>
-
-                           
                         </article>
                     </div>
                 </div>
-			   <?php } 
-				}
-				else{ ?>
+				@endforeach
+				@else
 					<h4 style="margin: 40px;" class="text-center">No Record Available</h4> 
-				<?php
-				}
-				?>
+				@endif
 			</div>
 		
 			   <div class="center">

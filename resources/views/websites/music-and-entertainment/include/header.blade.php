@@ -5,36 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title><?php if(isset($site_setting->title)) { echo $site_setting->title;} else { echo $admin_site_setting->title;}?></title>
-	<?php
-	$fav_icon = "";if(isset($site_setting->fav_icon)) { $fav_icon = $site_setting->fav_icon;} else { $fav_icon = $admin_site_setting->fav_icon;}
-	$site_logo = "";if(isset($site_setting->site_logo)) { $site_logo = $site_setting->site_logo;} else { $site_logo = $admin_site_setting->site_logo;}
-	?>
+    <title>@if(isset($site_setting->title)) {{$site_setting->title}} @else {{$admin_site_setting->title}} @endif</title>
+	@php $fav_icon = "";@endphp @if(isset($site_setting->fav_icon)) @php $fav_icon = $site_setting->fav_icon @endphp @else @php $fav_icon = $admin_site_setting->fav_icon @endphp @endif
+	@php $site_logo = "";@endphp @if(isset($site_setting->site_logo)) @php $site_logo = $site_setting->site_logo @endphp @else @php $site_logo = $admin_site_setting->site_logo @endphp @endif
 	<!-- core CSS -->
-    <link href="{{ url('/websites/music-and-entertainment/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ url('/websites/music-and-entertainment/css/font-awesome.min.css') }}" rel="stylesheet">
-    <link href="{{ url('/websites/music-and-entertainment/css/animate.min.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url('/owl/owl.carousel-2.3.4.min.css') }}">
+    <link href="{{ asset('/websites/music-and-entertainment/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('/websites/music-and-entertainment/css/font-awesome.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('/websites/music-and-entertainment/css/animate.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('/owl/owl.carousel-2.3.4.min.css') }}">
 	<!-- Owl Carousel Theme CSS -->
-	<link rel="stylesheet" href="{{ url('/owl/owl.theme.default-2.3.4.min.css') }}">
-    <link href="{{ url('/websites/music-and-entertainment/css/prettyPhoto.css') }}" rel="stylesheet">
-    <link href="{{ url('/websites/music-and-entertainment/css/main.css') }}" rel="stylesheet">
-    <link href="{{ url('/websites/music-and-entertainment/css/responsive.css') }}" rel="stylesheet">
-    <link href="{{ url('/websites/music-and-entertainment/css/custom.css') }}" rel="stylesheet">
-	<link rel="stylesheet" href="{{ url('/admin/plugins/toastr/toastr.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('/owl/owl.theme.default-2.3.4.min.css') }}">
+    <link href="{{ asset('/websites/music-and-entertainment/css/prettyPhoto.css') }}" rel="stylesheet">
+    <link href="{{ asset('/websites/music-and-entertainment/css/main.css') }}" rel="stylesheet">
+    <link href="{{ asset('/websites/music-and-entertainment/css/responsive.css') }}" rel="stylesheet">
+    <link href="{{ asset('/websites/music-and-entertainment/css/custom.css') }}" rel="stylesheet">
+	<link rel="stylesheet" href="{{ asset('/admin/plugins/toastr/toastr.min.css') }}">
     <!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
     <![endif]-->       
-    <link rel="shortcut icon" href="<?php echo url('/uploads/site_settings/'.$fav_icon);?>">
+    <link rel="shortcut icon" href="{{$fav_icon}}">
 </head><!--/head-->
 <style>
-@media all and (min-width: 992px) {
-	.navbar .nav-item .dropdown-menu{ display: none; }
-	.navbar .nav-item:hover .nav-link{   }
-	.navbar .nav-item:hover .dropdown-menu{ display: block; }
-	.navbar .nav-item .dropdown-menu{ margin-top:0; }
-}
+
 </style>
 <body id="home" class="homepage">
 
@@ -48,19 +41,17 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="<?php echo url('/'.$title);?>"><img src="<?php echo url('/uploads/site_settings/'.$site_logo);?>" alt="logo"></a>
+                    <a class="navbar-brand" href="{{url('/')}}/{{$title}}"><img src="{{$site_logo}}" alt="logo"></a>
                 </div>
 				
                 <div class="collapse navbar-collapse navbar-right">
                     <ul class="nav navbar-nav">
-                        <li id="hometab" class="scroll"><a href="<?php echo url('/'.$title);?>">Home</a></li>
-                        <li id="eventtab" class="scroll"><a href="<?php echo url('/'.$title.'/events');?>">Events</a></li>
-                        <li id="servicetab" class="scroll"><a href="<?php echo url('/'.$title.'/service');?>">Service</a></li>
-                        <li id="blogtab" class="scroll"><a href="<?php echo url('/'.$title.'/blog');?>">Blog</a></li>
-						  <li id="promotiontab" class="scroll"><a href="<?php echo url('/'.$title.'/promotion');?>">Promotion</a></li>
-                        <li id="gallerytab" class="scroll"><a href="<?php echo url('/'.$title.'/gallery');?>">Gallery</a></li>
-                        <li id="about_us_tab" class="scroll"><a href="<?php echo url('/'.$title.'/about-us');?>">About Us</a></li>
-                        <li id="contact-us-tab" class="scroll"><a href="<?php echo url('/'.$title.'/contact-us');?>">Contact Us</a></li>                        
+                        <li id="hometab" class="scroll"><a href="{{url('/')}}/{{$title}}">Home</a></li>
+						<li id="eventtab" class="scroll"><a href="{{url('/'.$title.'/events')}}">Events</a></li>
+                        <li id="servicetab" class="scroll"><a href="{{url('/')}}/{{$title}}/service">Service</a></li>
+						<li id="gallerytab" class="scroll"><a href="{{url('/')}}/{{$title}}/gallery">Gallery</a></li>
+                        <li id="promotiontab" class="scroll"><a href="{{url('/')}}/{{$title}}/promotion">Promotion</a></li>
+                        <li id="about_us_tab" class="scroll"><a href="{{url('/')}}/{{$title}}/about-us">About Us</a></li>  		
                     </ul>
                 </div>
             </div><!--/.container-->

@@ -54,23 +54,23 @@ class HomeController extends Controller
     {    
 	    $user = User::getRecordByTitle($title);
 	    $this->data['title'] = $title;
-	    $this->data['slider'] = Slider::sliderListById($user->id);
-	    $this->data['site_setting'] = Sitesettings::editRecordByuserId($user->id);
-	    $this->data['contact_us'] = ContactUs::editRecordByuserId($user->id);
-	    $this->data['service'] = Service::getServiceListByIdFirst4($user->id,4);
-	    $this->data['service6'] = Service::getServiceListByIdFirst4($user->id,6);
-	    $this->data['product'] = Products::getRecordForIndex($user->id);
-	    $this->data['projects'] = Projects::getRecordForIndex($user->id);
-	    $this->data['mobile'] = Mobile::getRecordForIndex($user->id);
-	    $this->data['electric'] = Electric::getRecordForIndex($user->id);
-	    $this->data['blog'] = Blog::getRecordForIndex($user->id);
-	    $this->data['photoshoots'] = PhotoShoots::getPhotoShootsListForIndex($user->id);
-	    $this->data['category'] = Category::categorylistbyid($user->id);
-	    $this->data['projecttype'] = ProjectType::getListById($user->id);
-	    $this->data['ourteam'] = OurTeam::ourteamlistforindex20($user->id);
-		$this->data['gallery'] = Gallery::getRecordByIdForIndex6($user->id);
-		$this->data['event'] = Event::getEventListForIndex($user->id);
-		$this->data['plan'] = Plan::getRecordForIndexLast6($user->id);
+	    $this->data['slider'] = Slider::getSlidersByUserId($user->id);
+	    $this->data['site_setting'] = Sitesettings::getRecordByUserIdForWebsite($user->id);
+	    $this->data['contact_us'] = ContactUs::getContactUsForWebsite($user->id);
+	    $this->data['service'] = Service::takeRecordForWebsite($user->id,4);
+	    $this->data['service6'] = Service::takeRecordForWebsite($user->id,6);
+	    $this->data['product'] = Products::takeRecordForWebsite($user->id,6);
+	    $this->data['projects'] = Projects::takeRecordForWebsite($user->id,6);
+	    $this->data['mobile'] = Mobile::takeRecordForWebsite($user->id,12);
+	    $this->data['electric'] = Electric::takeRecordForWebsite($user->id,12);
+	    $this->data['blog'] = Blog::takeRecordForWebsite($user->id,6);
+	    $this->data['photoshoots'] = PhotoShoots::takeRecordForWebsite($user->id,12);
+	    $this->data['category'] = Category::getCategoryForWebsite($user->id);
+	    $this->data['projecttype'] = ProjectType::getProjectTypeForWebsite($user->id);
+	    $this->data['ourteam'] = OurTeam::takeRecordForWebsite($user->id,8);
+		$this->data['gallery'] = Gallery::takeRecordForWebsite($user->id,6);
+		$this->data['event'] = Event::takeRecordForWebsite($user->id,6);
+		$this->data['plan'] = Plan::takeRecordForWebsite($user->id,6);
 		return view('websites.'.$user->site_name.'.index',$this->data);
 		
     }
@@ -79,27 +79,30 @@ class HomeController extends Controller
     {    
 	    $user = User::getRecordByTitle($title);
 	    $this->data['title'] = $title;
-	    $this->data['site_setting'] = Sitesettings::editRecordByuserId($user->id);
-	    $this->data['contact_us'] = ContactUs::editRecordByuserId($user->id);
-	    $this->data['about_us'] = AboutUs::editRecordByIdforindex($user->id);
+	    $this->data['site_setting'] = Sitesettings::getRecordByUserIdForWebsite($user->id);
+	    $this->data['contact_us'] = ContactUs::getContactUsForWebsite($user->id);
+	    $this->data['about_us'] = AboutUs::getRecordForWebsite($user->id);
 		return view('websites.'.$user->site_name.'.about_us',$this->data);
+		
     }
+	
 	public function service(Request $request, $title)
     {    
 	    $user = User::getRecordByTitle($title);
 	    $this->data['title'] = $title;
-	    $this->data['site_setting'] = Sitesettings::editRecordByuserId($user->id);
-	    $this->data['contact_us'] = ContactUs::editRecordByuserId($user->id);
-	    $this->data['service'] = Service::getServiceListByIdPaginate($user->id);
+	    $this->data['site_setting'] = Sitesettings::getRecordByUserIdForWebsite($user->id);
+	    $this->data['contact_us'] = ContactUs::getContactUsForWebsite($user->id);
+	    $this->data['service'] = Service::getRecordForWebsite($user->id,8);
 		return view('websites.'.$user->site_name.'.service',$this->data);
     }
+	
 	public function gallery(Request $request, $title)
     {    
 	    $user = User::getRecordByTitle($title);
 	    $this->data['title'] = $title;
-	    $this->data['site_setting'] = Sitesettings::editRecordByuserId($user->id);
-	    $this->data['contact_us'] = ContactUs::editRecordByuserId($user->id);
-	    $this->data['gallery'] = Gallery::getRecordByIdForIndex($user->id);
+	    $this->data['site_setting'] = Sitesettings::getRecordByUserIdForWebsite($user->id);
+	    $this->data['contact_us'] = ContactUs::getContactUsForWebsite($user->id);
+	    $this->data['gallery'] = Gallery::getRecordForWebsite($user->id,16);
 		return view('websites.'.$user->site_name.'.gallery',$this->data);
     }
 	
@@ -107,34 +110,36 @@ class HomeController extends Controller
     {     
 	    $user = User::getRecordByTitle($title);
 	    $this->data['title'] = $title;
-	    $this->data['site_setting'] = Sitesettings::editRecordByuserId($user->id);
-	    $this->data['contact_us'] = ContactUs::editRecordByuserId($user->id);
-	    $this->data['blog'] = Blog::getRecordForIndexList($user->id);
+	    $this->data['site_setting'] = Sitesettings::getRecordByUserIdForWebsite($user->id);
+	    $this->data['contact_us'] = ContactUs::getContactUsForWebsite($user->id);
+	    $this->data['blog'] = Blog::getRecordForWebsite($user->id,12);
 		return view('websites.'.$user->site_name.'.blog',$this->data);
     }
+	
 	public function single_blog(Request $request, $title,$id)
     {     
 	    $id = Crypt::decrypt($id);
 	    $user = User::getRecordByTitle($title);
 	    $this->data['title'] = $title;
-	    $this->data['site_setting'] = Sitesettings::editRecordByuserId($user->id);
-	    $this->data['contact_us'] = ContactUs::editRecordByuserId($user->id);
-	    $this->data['blog'] = Blog::getRecordById($id);
-		$this->data['bloglast3'] = Blog::getRecordForIndexLast3($user->id);
+	    $this->data['site_setting'] = Sitesettings::getRecordByUserIdForWebsite($user->id);
+	    $this->data['contact_us'] = ContactUs::getContactUsForWebsite($user->id);
+	    $this->data['blog'] = Blog::find($id);
+		$this->data['bloglast3'] = Blog::takeRecordForWebsite($user->id,3);
 		return view('websites.'.$user->site_name.'.single_blog',$this->data);
     }
+	
 	public function products(Request $request, $title,$cat)
     {   
      	$user = User::getRecordByTitle($title);
 	    $this->data['search'] = $request->search;
 	    $this->data['title'] = $title;
 	    $this->data['cat'] = $cat;
-	    $this->data['site_setting'] = Sitesettings::editRecordByuserId($user->id);
-	    $this->data['contact_us'] = ContactUs::editRecordByuserId($user->id);
-		$this->data['products'] = Products::getRecordForIndex20($user->id,$cat,$request->search);
-		$this->data['mobile'] = Mobile::getRecordForIndex20($user->id,$cat,$request->search);
-		$this->data['electric'] = Electric::getRecordForIndex20($user->id,$cat,$request->search);
-		$this->data['category'] = Category::categorylistbyid($user->id);
+	    $this->data['site_setting'] = Sitesettings::getRecordByUserIdForWebsite($user->id);
+	    $this->data['contact_us'] = ContactUs::getContactUsForWebsite($user->id);
+		$this->data['products'] = Products::getRecordForWebsite($user->id,$cat,$request->search,12);
+		$this->data['mobile'] = Mobile::getRecordForWebsite($user->id,$cat,$request->search,20);
+		$this->data['electric'] = Electric::getRecordForWebsite($user->id,$cat,$request->search,20);
+		$this->data['category'] = Category::getCategoryByUserId($user->id);
 		return view('websites.'.$user->site_name.'.products',$this->data);
     }
 	
@@ -143,25 +148,24 @@ class HomeController extends Controller
      	$user = User::getRecordByTitle($title);
 	    $this->data['title'] = $title;
 	    $this->data['cat'] = $cat;
-	    $this->data['site_setting'] = Sitesettings::editRecordByuserId($user->id);
-	    $this->data['contact_us'] = ContactUs::editRecordByuserId($user->id);
-		$this->data['projects'] = Projects::getRecordForIndex20($user->id,$cat);
-		$this->data['projecttype'] = ProjectType::getListById($user->id);
+	    $this->data['site_setting'] = Sitesettings::getRecordByUserIdForWebsite($user->id);
+	    $this->data['contact_us'] = ContactUs::getContactUsForWebsite($user->id);
+		$this->data['projects'] = Projects::getRecordForWebsite($user->id,$cat,20);
+		$this->data['projecttype'] = ProjectType::getProjectTypeForWebsite($user->id);
 		return view('websites.'.$user->site_name.'.projects',$this->data);
     }
 	
 
-	
 	public function single_product(Request $request, $title,$id)
     {     
 	    $id = Crypt::decrypt($id);
 	    $user = User::getRecordByTitle($title);
 	    $this->data['title'] = $title;
-	    $this->data['site_setting'] = Sitesettings::editRecordByuserId($user->id);
-	    $this->data['contact_us'] = ContactUs::editRecordByuserId($user->id);
+	    $this->data['site_setting'] = Sitesettings::getRecordByUserIdForWebsite($user->id);
+	    $this->data['contact_us'] = ContactUs::getContactUsForWebsite($user->id);
 		$this->data['product'] = Products::getRecordById($id);
-		$this->data['products'] = Products::getRecordForIndexByCategory($user->id,$this->data['product']->category_name,$id);
-		$this->data['category'] = Category::categorylistbyid($user->id);
+		$this->data['products'] = Products::getRecordForWebsiteByCategory($user->id,$this->data['product']->category_name,$id,12);
+		$this->data['category'] = Category::getCategoryByUserId($user->id);
 		return view('websites.'.$user->site_name.'.single_product',$this->data);
     }
 	
@@ -170,8 +174,8 @@ class HomeController extends Controller
 	    $id = Crypt::decrypt($id);
 	    $user = User::getRecordByTitle($title);
 	    $this->data['title'] = $title;
-	    $this->data['site_setting'] = Sitesettings::editRecordByuserId($user->id);
-	    $this->data['contact_us'] = ContactUs::editRecordByuserId($user->id);
+	    $this->data['site_setting'] = Sitesettings::getRecordByUserIdForWebsite($user->id);
+	    $this->data['contact_us'] = ContactUs::getContactUsForWebsite($user->id);
 		$this->data['project'] = Projects::getRecordById($id);
 		return view('websites.'.$user->site_name.'.single_project',$this->data);
     }
@@ -181,11 +185,11 @@ class HomeController extends Controller
 	    $id = Crypt::decrypt($id);
 	    $user = User::getRecordByTitle($title);
 	    $this->data['title'] = $title;
-	    $this->data['site_setting'] = Sitesettings::editRecordByuserId($user->id);
-	    $this->data['contact_us'] = ContactUs::editRecordByuserId($user->id);
+	    $this->data['site_setting'] = Sitesettings::getRecordByUserIdForWebsite($user->id);
+	    $this->data['contact_us'] = ContactUs::getContactUsForWebsite($user->id);
 		$this->data['electric'] = Electric::getRecordById($id);
-		$this->data['electrics'] = Electric::getRecordForIndexByCategory($user->id,$this->data['electric']->category_name);
-		$this->data['category'] = Category::categorylistbyid($user->id);
+		$this->data['electrics'] = Electric::getRecordForWebsiteByCategory($user->id,$this->data['electric']->category_name,12);
+		$this->data['category'] = Category::getCategoryByUserId($user->id);
 		return view('websites.'.$user->site_name.'.single_product',$this->data);
     }
 	
@@ -194,11 +198,11 @@ class HomeController extends Controller
 	    $id = Crypt::decrypt($id);
 	    $user = User::getRecordByTitle($title);
 	    $this->data['title'] = $title;
-	    $this->data['site_setting'] = Sitesettings::editRecordByuserId($user->id);
-	    $this->data['contact_us'] = ContactUs::editRecordByuserId($user->id);
+	    $this->data['site_setting'] = Sitesettings::getRecordByUserIdForWebsite($user->id);
+	    $this->data['contact_us'] = ContactUs::getContactUsForWebsite($user->id);
 		$this->data['mobile'] = Mobile::getRecordById($id);
-		$this->data['mobiles'] = Mobile::getRecordForIndexByCategory($user->id,$this->data['mobile']->category_name);
-		$this->data['category'] = Category::categorylistbyid($user->id);
+		$this->data['mobiles'] = Mobile::getRecordForWebsiteByCategory($user->id,$this->data['mobile']->category_name,12);
+		$this->data['category'] = Category::getCategoryByUserId($user->id);
 		return view('websites.'.$user->site_name.'.single_product',$this->data);
     }
 	
@@ -206,48 +210,41 @@ class HomeController extends Controller
     {  
 	    $user = User::getRecordByTitle($title);
 	    $this->data['title'] = $title;
-	    $this->data['site_setting'] = Sitesettings::editRecordByuserId($user->id);
-	    $this->data['contact_us'] = ContactUs::editRecordByuserId($user->id);
+	    $this->data['site_setting'] = Sitesettings::getRecordByUserIdForWebsite($user->id);
+	    $this->data['contact_us'] = ContactUs::getContactUsForWebsite($user->id);
 		return view('websites.'.$user->site_name.'.contact_us',$this->data);
     }
 	
 	public function contact_us_store(Request $request,$title)
     {
-    	 $validator = Validator::make($request->all(), [
-			'name' => 'required',
-			'email' => 'required',
+    	$validator = Validator::make($request->all(), [
+			'name' => 'required|string|regex:/^[A-Za-z0-9\-\s]+$/|min:2|max:255',
+			'email' => 'required|unique:users|email|regex:/(.+)@(.+)\.(.+)/i|string|max:255',
 			'mobile' => 'required',
-			'message' => 'required',
+			'message' => 'required|max:5000',
         ]);
 
         if ($validator->fails()) {
             return redirect($title."/contact-us")
                             ->withErrors($validator, 'contact_us_error')
                             ->withInput();
-        } else {
+        } 
 			
-		
         $input = $request->all();
-		
 		$user = User::getRecordByTitle($title);
 		
 		$input['created_at'] = date('Y-m-d H:i:s');
 		$input['created_by'] = $user->id;
 		
-		$inser_id = new FrontContactUs($input);
-		$inser_id->save();
-		$inser_id = $inser_id->id;
-		
+		$inser_id = FrontContactUs::create($input);
 		
 		if($inser_id){
-			Session::flash('success', 'Our Customer Service Representative will be in touch shortly');
-			 return redirect()->back();
+			return redirect()->back()->with('success', 'Our Customer Service Representative will be in touch shortly');
 		}else{
-			 Session::flash('error', "we're sorry,but something went wrong.Please try again");
+			 Session::flash('error', "we`re sorry,but something went wrong.Please try again");
 			 return redirect()->back();
 		}
 
-		}
     }
 	
 	public function photo_shoots(Request $request, $title,$cat)
@@ -255,19 +252,20 @@ class HomeController extends Controller
      	$user = User::getRecordByTitle($title);
 	    $this->data['title'] = $title;
 	    $this->data['cat'] = $cat;
-	    $this->data['site_setting'] = Sitesettings::editRecordByuserId($user->id);
-	    $this->data['contact_us'] = ContactUs::editRecordByuserId($user->id);
-		$this->data['photoshoots'] = PhotoShoots::getRecordForIndex20($user->id,$cat);
-		$this->data['category'] = Category::categorylistbyid($user->id);
+	    $this->data['site_setting'] = Sitesettings::getRecordByUserIdForWebsite($user->id);
+	    $this->data['contact_us'] = ContactUs::getContactUsForWebsite($user->id);
+		$this->data['photoshoots'] = PhotoShoots::getRecordForWebsiteByCategory($user->id,$cat,20);
+		$this->data['category'] = Category::getCategoryByUserId($user->id);
 		return view('websites.'.$user->site_name.'.photo_shoots',$this->data);
     }
-		public function ourteam(Request $request, $title)
+	
+	public function ourteam(Request $request, $title)
     {   
      	$user = User::getRecordByTitle($title);
 	    $this->data['title'] = $title;
-	    $this->data['site_setting'] = Sitesettings::editRecordByuserId($user->id);
-	    $this->data['contact_us'] = ContactUs::editRecordByuserId($user->id);
-		$this->data['ourteam'] = OurTeam::ourteamlistforindex($user->id);
+	    $this->data['site_setting'] = Sitesettings::getRecordByUserIdForWebsite($user->id);
+	    $this->data['contact_us'] = ContactUs::getContactUsForWebsite($user->id);
+		$this->data['ourteam'] = OurTeam::getOurTeamListForIndex($user->id,20);
 		return view('websites.'.$user->site_name.'.our_teams',$this->data);
     }
 
@@ -275,20 +273,21 @@ class HomeController extends Controller
     {    
 	    $user = User::getRecordByTitle($title);
 	    $this->data['title'] = $title;
-	    $this->data['site_setting'] = Sitesettings::editRecordByuserId($user->id);
-	    $this->data['contact_us'] = ContactUs::editRecordByuserId($user->id);
-	    $this->data['philosophy'] = Philosophy::philosophyByUser($user->id);
+	    $this->data['site_setting'] = Sitesettings::getRecordByUserIdForWebsite($user->id);
+	    $this->data['contact_us'] = ContactUs::getContactUsForWebsite($user->id);
+	    $this->data['philosophy'] = Philosophy::getRecordByUserId($user->id);
 		return view('websites.'.$user->site_name.'.philosophy',$this->data);
     }
 	
-	 public function promotion(Request $request, $title)
+	public function promotion(Request $request, $title)
     {    
 	    $user = User::getRecordByTitle($title);
 	    $this->data['title'] = $title;
-	    $this->data['site_setting'] = Sitesettings::editRecordByuserId($user->id);
-	    $this->data['contact_us'] = ContactUs::editRecordByuserId($user->id);
-	    $this->data['promotion'] = Promotion::getRecordById($user->id);
+	    $this->data['site_setting'] = Sitesettings::getRecordByUserIdForWebsite($user->id);
+	    $this->data['contact_us'] = ContactUs::getContactUsForWebsite($user->id);
+	    $this->data['promotion'] = Promotion::getRecordByUserId($user->id);
 		return view('websites.'.$user->site_name.'.promotion',$this->data);
+		
     }
 	
 	public function addresses(Request $request, $title)
@@ -296,72 +295,68 @@ class HomeController extends Controller
 	    $user = User::getRecordByTitle($title);
 	    $this->data['title'] = $title;
 	    $this->data['quantity'] = $request->quantity;
-	    $this->data['product_fk'] = $request->product_fk;
-	    $this->data['site_setting'] = Sitesettings::editRecordByuserId($user->id);
-	    $this->data['contact_us'] = ContactUs::editRecordByuserId($user->id);
+	    $this->data['product_id'] = $request->product_id;
+	    $this->data['site_setting'] = Sitesettings::getRecordByUserIdForWebsite($user->id);
+	    $this->data['contact_us'] = ContactUs::getContactUsForWebsite($user->id);
 		return view('websites.'.$user->site_name.'.addresses',$this->data);
     }
 	
 	public function order(Request $request,$title)
     {
-		
-    	 $validator = Validator::make($request->all(), [
-			'name' => 'required|min:3|max:255',
+    	$validator = Validator::make($request->all(), [
+			'name' => 'required|string|regex:/^[A-Za-z0-9\-\s]+$/|min:2|max:255',
 			'mobile' => 'min:10|numeric',	
-			'email' => 'required|email',
-			'pincode' => 'required',
-			'company' => 'required',
-			'area' => 'required|min:5',
-			'landmark' => 'required|min:5',
-			'city' => 'required|min:5',
-			'state' => 'required'
+			'email' => 'required|unique:users|email|regex:/(.+)@(.+)\.(.+)/i|string|max:255',
+			'pincode' => 'required|max:255',
+			'company' => 'required|max:255',
+			'area' => 'required|min:5|max:255',
+			'landmark' => 'required|min:5|max:255',
+			'city' => 'required|min:5|max:255',
+			'state' => 'required|max:255'
         ]);
 
         if ($validator->fails()) {
-            return redirect($title.'/'.$request->product_fk.'/'.$request->url)
-                            ->withErrors($validator, 'Blog')
+            return redirect($title.'/'.$request->product_id.'/'.$request->url)
+                            ->withErrors($validator, 'addresses')
                             ->withInput();
-        } else {
+        } 
 			
 		$user = User::getRecordByTitle($title);
         $input = $request->all();
-		$product_fk = Crypt::decrypt($request->product_fk);
+		$product_id = Crypt::decrypt($request->product_id);
 		$input['created_at'] = date('Y-m-d H:i:s');
-		$input['product_fk'] = $product_fk;
+		$input['product_id'] = $product_id;
 		$input['user_id'] = $user->id;
 		
 		$order = Orders::create($input);
 		
 		if($order){
-			Session::flash('success', 'Our customer service representative will be in touch shortly');
-			return redirect($title.'/'.$request->product_fk.'/'.$request->url);
+			return redirect($title.'/'.$request->product_id.'/'.$request->url)->with('success', 'Our customer service representative will be in touch shortly');
 		}else{
-			 Session::flash('error', "we're sorry,but something went wrong.Please try again");
-			 return redirect()->back();
+			return redirect()->back()->with('error', "we`re sorry,but something went wrong.Please try again");
 		}
 
-		}
     }
 	
 	public function plan(Request $request, $title)
     {     
-	   
 	    $user = User::getRecordByTitle($title);
 	    $this->data['title'] = $title;
-	    $this->data['site_setting'] = Sitesettings::editRecordByuserId($user->id);
-	    $this->data['contact_us'] = ContactUs::editRecordByuserId($user->id);
-	    $this->data['plan'] = Plan::getRecordForIndexList($user->id);
+	    $this->data['site_setting'] = Sitesettings::getRecordByUserIdForWebsite($user->id);
+	    $this->data['contact_us'] = ContactUs::getContactUsForWebsite($user->id);
+	    $this->data['plan'] = Plan::getRecordForWebsite($user->id,12);
 		return view('websites.'.$user->site_name.'.plan',$this->data);
     }
+	
 	public function single_plan(Request $request, $title,$id)
     {     
 	    $id = Crypt::decrypt($id);
 	    $user = User::getRecordByTitle($title);
 	    $this->data['title'] = $title;
-	    $this->data['site_setting'] = Sitesettings::editRecordByuserId($user->id);
-	    $this->data['contact_us'] = ContactUs::editRecordByuserId($user->id);
-	    $this->data['plan'] = Plan::getRecordById($id);
-		$this->data['planlast3'] = Plan::getRecordForIndexLast3($user->id);
+	    $this->data['site_setting'] = Sitesettings::getRecordByUserIdForWebsite($user->id);
+	    $this->data['contact_us'] = ContactUs::getContactUsForWebsite($user->id);
+	    $this->data['plan'] = Plan::find($id);
+		$this->data['planlast3'] = Plan::takeRecordForWebsite($user->id,3);
 		return view('websites.'.$user->site_name.'.single_plan',$this->data);
     }
 	
@@ -369,9 +364,9 @@ class HomeController extends Controller
     {     
 	    $user = User::getRecordByTitle($title);
 	    $this->data['title'] = $title;
-	    $this->data['site_setting'] = Sitesettings::editRecordByuserId($user->id);
-	    $this->data['contact_us'] = ContactUs::editRecordByuserId($user->id);
-	    $this->data['events'] = Event::getEventList12($user->id);
+	    $this->data['site_setting'] = Sitesettings::getRecordByUserIdForWebsite($user->id);
+	    $this->data['contact_us'] = ContactUs::getContactUsForWebsite($user->id);
+	    $this->data['events'] = Event::getRecordForWebsite($user->id,12);
 		return view('websites.'.$user->site_name.'.events',$this->data);
     }
 	
@@ -380,9 +375,9 @@ class HomeController extends Controller
 	    $id = Crypt::decrypt($id);
 	    $user = User::getRecordByTitle($title);
 	    $this->data['title'] = $title;
-	    $this->data['site_setting'] = Sitesettings::editRecordByuserId($user->id);
-	    $this->data['contact_us'] = ContactUs::editRecordByuserId($user->id);
-	    $this->data['event'] = Event::getRecordById($id);
+	    $this->data['site_setting'] = Sitesettings::getRecordByUserIdForWebsite($user->id);
+	    $this->data['contact_us'] = ContactUs::getContactUsForWebsite($user->id);
+	    $this->data['event'] = Event::find($id);
 		return view('websites.'.$user->site_name.'.single_event',$this->data);
     }
 } 

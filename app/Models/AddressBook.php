@@ -62,4 +62,9 @@ class AddressBook extends Authenticatable
 	    return $query;
 	} 
 	
+	public static function addressBookIdArray(){
+			$query = AddressBook::where('created_by',Auth::user()->id)->pluck('id')->toArray();
+		   return $query;
+	} 
+	
 }

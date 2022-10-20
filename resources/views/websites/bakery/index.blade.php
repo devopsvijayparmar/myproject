@@ -8,7 +8,7 @@
 			<div class="owl-carousel owl-theme home-carousel">
 				@foreach($slider as $retrieved_data)
 				<div class="item">
-					<img class="home-img" src="{{url('/uploads/slider')}}/{{$retrieved_data->image}}">
+					<img class="home-img" src="{{$retrieved_data->image}}">
 				</div>
 				@endforeach
 			</div>
@@ -43,7 +43,7 @@
 			  <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 				<div class="full text_align_center margin_bottom_30">
 				  <div class="center">
-					<div class="icon"> <img src="{{ url('/websites/bakery/images/it_service/i3.png') }}" alt="#" /> </div>
+					<div class="icon"> <img src="{{ asset('/websites/bakery/images/it_service/i3.png') }}" alt="#" /> </div>
 				  </div>
 					<h4 class="theme_color">{{$servicedata->name}}</h4>
 				  <p>{!! $servicedata->description !!}</p>
@@ -53,7 +53,7 @@
 				<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 					<div class="full text_align_center margin_bottom_30">
 						<div class="center">
-							<div class="icon"> <img src="{{ url('/websites/bakery/images/it_service/i2.png') }}" alt="#" /> </div>
+							<div class="icon"> <img src="{{ asset('/websites/bakery/images/it_service/i2.png') }}" alt="#" /> </div>
 						</div>
 						<h4 class="theme_color">{{$servicedata->name}}</h4>
 						<p>{!! $servicedata->description !!}</p>
@@ -67,7 +67,6 @@
     </div>
   </div>
 </div>
-
 
 <!-- section -->
 <div class="section padding_layout_1 padding_btm-0">
@@ -86,24 +85,20 @@
 	 @foreach($product as $productdata)
       <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 margin_bottom_30_all">
         <div class="product_list">
-          <div class="product_img"> <a href="{{url('/')}}/{{$title}}/{{App\Helpers\CryptHelper::encryptstring($productdata->id)}}/single-product"><img class="img-responsive card_img" src="{{url('/uploads/products')}}/{{$productdata->image_1}}" alt=""></a> </div>
+          <div class="product_img"> <a href="{{$productdata->getDetailPageLink($title)}}"><img class="img-responsive card_img" src="{{$productdata->image_1}}" alt=""></a> </div>
           <div class="product_detail_btm">
             <div class="center">
-              <h4><a href="it_shop_detail.html">{{ mb_strimwidth($productdata->name, 0, 40, "...")}}</a></h4>
+				<h4><a href="#">{{ mb_strimwidth($productdata->name, 0, 40, "...")}}</a></h4>
             </div>
-			 <div class="product_price">
-			  <p><span class="">{{ mb_strimwidth($productdata->category_name, 0, 100, "...")}}</span></p>
-            <?php
+			<div class="product_price">
+			<p><span class="">{{ mb_strimwidth($productdata->category->name, 0, 100, "...")}}</span></p>
+			@php
 		    $currency_symbol = "";
-		    if(isset($site_setting->currency_symbol)) { $currency_symbol = $site_setting->currency_symbol;};
-			if($productdata->price)
-			{
-			   
-			?>
+			@endphp
+		    @if(isset($site_setting->currency_symbol)) @php $currency_symbol = $site_setting->currency_symbol @endphp @endif
+			@if($productdata->price)
             <p><span class="new_price">{{$currency_symbol.$productdata->price}}</span></p>
-			<?php
-			}
-			?>
+			@endif
 			 </div>
           </div>
         </div>
@@ -115,7 +110,7 @@
     </div>
 	@if(count($product) >0)
 	 <div class="text_align_center">
-		<a class="btn main_bt" href="{{url('/products/category')}}/{{$title}}">See More...</a>
+		<a class="btn main_bt" href="{{$product[0]->getProjectCategoryLink($title)}}">See More...</a>
 	 </div>
 	@endif
   </div>
@@ -138,7 +133,7 @@
       <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
         <div class="full">
           <div class="blog_section">
-            <div class="blog_feature_img"> <a class="preview" href="{{url('/uploads/gallery')}}/{{$retrieved_data->image}}" rel="prettyPhoto"><img class="img-responsive card_img" src="{{url('/uploads/gallery')}}/{{$retrieved_data->image}}" ></a> </div>
+            <div class="blog_feature_img"> <a class="preview" href="{{$retrieved_data->image_path}}" rel="prettyPhoto"><img class="img-responsive card_img" src="{{$retrieved_data->image_path}}" ></a> </div>
             <div class="blog_feature_cantant">
             </div>
           </div>
@@ -170,7 +165,7 @@
 	@foreach($blog as $blogdata)
       <div class="col-md-4 blog-border">
         <div class="full blog_colum">
-          <a href="{{url('/')}}/{{$title}}/{{App\Helpers\CryptHelper::encryptstring($blogdata->id)}}/single-blog"> <div class="blog_feature_img"> <img class="card_img" src="{{url('/uploads/blog')}}/{{$blogdata->image}}" alt="#" /> </div></a>
+          <a href="{{$blogdata->getDetailPageLink($title)}}"> <div class="blog_feature_img"> <img class="card_img" src="{{$blogdata->image}}" alt="#" /> </div></a>
 		  <div class="p-3">
 			  <div class="post_time">
 				<p><i class="fa fa-clock-o"></i>{{$blogdata->created_at}}</p>
@@ -191,7 +186,7 @@
     </div>
 	@if(count($blog) > 0)
 	<div class="text_align_center">
-	<a class="btn main_bt" href="{{url('/')}}/{{$title}}/blog">See More...</a>
+	<a class="btn main_bt" href="{{$blog[0]->getBlogPageLink($title)}}">See More...</a>
 	</div>
 	@endif
   </div>

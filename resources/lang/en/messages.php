@@ -22,6 +22,9 @@ return [
     'password_updated' => 'Password has been updated successfully',
     'confirm_new_password' => 'Current password and New password must be different',
     'current_password_incorrect' => 'Your current password is incorrect',
+    'name_already_been_taken' => 'This name is already been taken',
+    'url_name_already_been_taken' => 'This url name is already been taken',
+	'email_limit' => 'Opps.. Reached your emails limits!',
    
 
 ];

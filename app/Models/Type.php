@@ -8,13 +8,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Category;
 
 class Type extends Authenticatable
 {
     use Notifiable;
 	use SoftDeletes;
     protected $table = 'type';
-    protected $fillable = ['category_fk','name','created_by','created_at','updated_by','updated_at','deleted_by','deleted_at'];
+    protected $fillable = ['category_id','name','created_by','created_at','updated_by','updated_at','deleted_by','deleted_at'];
 	
 	public static function getRecordById($id){
 			$query = Type::where('id',$id)->orderBy('id','desc')->where('created_by',Auth::user()->id)->first();
@@ -43,5 +44,14 @@ class Type extends Authenticatable
 		$query = Type::where('category_fk',$id)->orderBy('name','asc')->where('created_by',Auth::user()->id)->get();
 		return $query;
 	}
+	
+		public function category(){
+		return $this->belongsTo(Category::class, 'category_id', 'id');
+	}
+	
+	public static function getTypeList(){
+		$query = Type::where('created_by',Auth::user()->id)->with('category');
+		return $query;
+	} 
 	
 }

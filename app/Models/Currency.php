@@ -16,9 +16,4 @@ class Currency extends Authenticatable
     protected $fillable = ['name','symbol','code','created_at','updated_at','deleted_at'];
 	
 	
-	public static function getcurrencylist(){
-		$query = Currency::get();
-		return $query;
-	}
-	
 }

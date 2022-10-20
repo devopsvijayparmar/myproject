@@ -6,12 +6,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Session;
-use DB;
+use Illuminate\Support\Facades\Lang;
+use App\Traits\ImageUpload;
+use JsValidator;
+use DataTables;
 use Validator;
-use App\Models\Category;
 use App\Models\OurTeam;
 use Auth;
-use Hash;
 use Crypt;
 
 
@@ -23,127 +24,152 @@ class OurTeamController extends Controller
      * @return \Illuminate\Http\Response
      */
 	 
+	use ImageUpload;
+	
+	protected $validationRules = [
+		'name' => 'required|string|max:255',
+		'email' => 'required|max:255|email',
+		'mobile' => 'required|digits:10',
+		'image'=>'required|mimes:jpeg,jpg,png|max:20480'
+    ];  
+	
+	protected $validationRulesEdit = [
+		'name' => 'required|string|max:255',
+		'email' => 'required|max:255|email',
+		'mobile' => 'required|digits:10',
+		'image'=>'mimes:jpeg,jpg,png|max:20480'
+    ]; 
+	 
 	function __construct()
     {
 		$this->middleware('permission:our_team', ['only' => ['index','create','store','edit','update','show','destroy']]);
-		$this->data['title'] = 'Our Team';
     }
 	
 	public function index(Request $request)
     {    
-        $this->data['our_team'] = OurTeam::ourteamlist();	
-		return view('admin.our_team.index',$this->data);
+        if ($request->ajax()) {
+		  
+			$data = OurTeam::getTeamList();
+			return DataTables::of($data)
+			->addIndexColumn()
+			
+			->editColumn('image', function ($row)
+			{
+			   return '<img class="rp-img" src="'.$row['image'].'">';
+			})
+			->editColumn('action', function ($row)
+			{
+			   $btn = '<a title="Edit" class="mr-2" href="' . route('our-team.edit', Crypt::encrypt($row['id'])) . '" class="mr-2"><i class="fas fa-edit text-info font-16"></i></a>';
+			  
+			   $delete_link = route('our-team.destroy', Crypt::encrypt($row['id']));
+			   $delete_link = "'" . $delete_link . "'";
+			   $btn .= '<a class="mr-2" title="Delete" href="javascript:void(0);" onclick="deleteRecord('.$delete_link.');" data-popup="tooltip"><i class="fas fa-trash-alt text-info font-16"></i></a>';
+			   
+			   return $btn;
+			})
+			->rawColumns(['image','action'])
+			->make(true);
+
+		} else {
+		
+		    
+			$columns = [
+				['data' => 'DT_RowIndex', 'name' => 'id', 'title' => "Id"],
+				['data' => 'image','name' => 'image', 'title' => __("Image"),'searchable'=>false,'orderable' => false],
+				['data' => 'name','name' => 'name', 'title' => __("Name"),'searchable'=>true,'orderable' => true],
+				['data' => 'email','name' => 'email', 'title' => __("Email"),'searchable'=>true,'orderable' => true],
+				['data' => 'mobile','name' => 'mobile', 'title' => __("Mobile"),'searchable'=>true,'orderable' => true],
+				['data' => 'address','name' => 'address', 'title' => __("Address"),'searchable'=>true,'orderable' => true],
+				['data' => 'action', 'name' => 'action', 'title' => "Action", 'searchable' => false, 'orderable' => false]];
+		  
+			$data['dateTableFields'] = $columns;
+			$data['dateTableUrl'] = route('our-team.index');
+			$data['dateTableTitle'] = "Our Teams";
+			$data['dataTableId'] = time();
+			$data['createUrl'] = route('our-team.create');
+			return view('admin.pages.our_team.index',$data);
+		
+		}
     }
 
 	public function create(Request $request)
     { 	
-		return view('admin.our_team.create',$this->data);
+	    $data['validator'] = JsValidator::make($this->validationRules);
+		return view('admin.pages.our_team.create',$data);
     }
 	
 	public function store(Request $request)
     {
-    	 $validator = Validator::make($request->all(), [
-			'name' => 'required|max:255',
-			'email' => 'required|max:255|email',
-			'mobile' => 'required|digits:10',
-			'image'=>'required|mimes:jpeg,jpg,png'
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()->back()
-                            ->withErrors($validator, 'Our_Team')
-                            ->withInput();
-        } else {
-			
-		$auth = Auth::user();
-        $input = $request->all();
+    	$auth = Auth::user(); 
+		$input = $request->all();
+    	$validator = Validator::make($input, $this->validationRules);
+  
+        if($validator->fails()) {
+			return redirect()->back()->withErrors($validator)->withInput();
+        } 
 		
 		$input['created_at'] = date('Y-m-d H:i:s');
 		$input['created_by'] = $auth->id;
-		
+		/*Image Upload Trait*/
 		if ($request->hasfile('image')) {
-			$file = $request->file('image');
-			$name_1 = $file->getClientOriginalName();
-			$name_1 = str_replace(" ", "", date("Ymdhis")+1 . $name_1);
-			$file->move(public_path() . '/uploads/our_team/', $name_1);
-			$input['image'] = $name_1;
+			$image_name = $this->imageUpload($request->file('image'),'our_team');
+			$input['image'] = $image_name;
 		}
 		
 		$ourteam = OurTeam::create($input);
-		
 		if($ourteam){
-			Session::flash('success', 'Successfully Inserted');
-			return redirect('admin/our-team');
+			return redirect()->route('our-team.index')->with('success', Lang::get('messages.created'));
 		}else{
-			 Session::flash('error', "we're sorry,but something went wrong.Please try again");
-			 return redirect()->back();
+			return redirect()->back()->with('error', Lang::get('messages.error'));
 		}
-
-		}
+		
     }
 	
 	public function edit($id)
     { 		
-	     $id = Crypt::decrypt($id);
-		 $this->data['data'] = OurTeam::getRecordById($id);
-		 return view('admin.our_team.edit',$this->data);
+	    $id = Crypt::decrypt($id);
+		$data['data'] = OurTeam::find($id);
+		$data['validator'] = JsValidator::make($this->validationRulesEdit);
+		return view('admin.pages.our_team.edit',$data);
         
     }
 	
 	public function update(Request $request,$id)
     {
-		 $request_id = $id;
-		 $id = Crypt::decrypt($id);
-    	 $validator = Validator::make($request->all(), [
-			'name' => 'required|max:255',
-			'email' => 'required|email|max:255',
-			'mobile' => 'required|digits:10',
-        ]);
-
-
-        if ($validator->fails()) {
-           return redirect()->back()
-                            ->withErrors($validator, 'Our_Team')
-                            ->withInput();
-        } else {
-			
+	
+		$id = Crypt::decrypt($id);
 		$auth = Auth::user();
-		$input = $request->all();
+    	$input = $request->all();
+    	$validator = Validator::make($input, $this->validationRulesEdit);
+  
+        if($validator->fails()) {
+			return redirect()->back()->withErrors($validator)->withInput();
+        }  
+		
 		$input['updated_at'] = date('Y-m-d H:i:s');
 		$input['updated_by'] = $auth->id;
      				
 		if ($request->hasfile('image')) {
-			$file = $request->file('image');
-			$name_1 = $file->getClientOriginalName();
-			$name_1 = str_replace(" ", "", date("Ymdhis")+1 . $name_1);
-			$file->move(public_path() . '/uploads/our_team/', $name_1);
-			$input['image'] = $name_1;
+			$image_name = $this->imageUpload($request->file('image'),'our_team');
+			$input['image'] = $image_name;
 		}
 
 		$ourteam = OurTeam::where('created_by', Auth::user()->id)->where('id',$id)->first();
-		if($ourteam){
-			$ourteam->update($input);
-		}
-		else{
-			abort(401);
-		}
+		$ourteam->update($input);
 		
 		if($ourteam){
-			Session::flash('success', 'Successfully Updated');
-			return redirect('admin/our-team');
+			return redirect()->route('our-team.index')->with('success', Lang::get('messages.updated'));
 		}else{
-			
-			 Session::flash('error', "we're sorry,but something went wrong.Please try again");
-			 return redirect()->back();
+			return redirect()->back()->with('error', Lang::get('messages.error'));
 		}
-		}
+		
     }
 	
 	public function show($id)
     {    
 	    $id = Crypt::decrypt($id);
-	    $this->data['data'] = OurTeam::getRecordById($id);
-        return view('admin.our_team.show',$this->data);
+	    $data['data'] = OurTeam::find($id);
+        return view('admin.pages.our_team.show',$data);
     }
 
     /**
@@ -152,14 +178,13 @@ class OurTeamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+	 
 	public function destroy(Request $request,$id)
     {
 		$id = Crypt::decrypt($id);
-		/*Record Delete*/
 		$auth = Auth::user(); 	
-	    $delete = OurTeam::where('id', $id)->where('created_by', Auth::user()->id)->update(['deleted_by' => $auth->id,'deleted_at'=>date('Y-m-d H:i:s')]);
-		
+	    $delete = OurTeam::where('created_by', $auth->id)->where('id', $id)->delete();
 		return $delete;
-    }
-	
+    } 
+	 
 }

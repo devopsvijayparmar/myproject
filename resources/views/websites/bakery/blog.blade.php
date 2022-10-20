@@ -37,7 +37,7 @@
 	@foreach($blog as $blogdata)
     <div class="col-md-4 blog-border">
         <div class="full blog_colum">
-         <a href="{{url('/')}}/{{$title}}/{{App\Helpers\CryptHelper::encryptstring($blogdata->id)}}/single-blog"> <div class="blog_feature_img"> <img class="card_img" src="{{url('/uploads/blog')}}/{{$blogdata->image}}" alt="#" /> </div></a>
+         <a href="{{$blogdata->getDetailPageLink($title)}}"> <div class="blog_feature_img"> <img class="card_img" src="{{$blogdata->image}}" alt="#" /> </div></a>
 		 <div class="p-3">
           <div class="post_time">
             <p><i class="fa fa-clock-o"></i>{{$blogdata->created_at}}</p>

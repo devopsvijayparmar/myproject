@@ -26,10 +26,10 @@ class Group extends Authenticatable
 		return $query;
 	} */
 	
-	public static function getrecordbynme($name){
+	/* public static function getrecordbynme($name){
 			$query = Group::where('name',$name)->where('created_by',Auth::user()->id)->first();
 		   return $query;
-	} 
+	}  */
 	
 	public static function getRecordById($id){
 		$query = Group::where('id',$id)->where('created_by',Auth::user()->id)->first();
@@ -38,7 +38,17 @@ class Group extends Authenticatable
 	
 	/*New */
 	public static function groupList(){
-		$query = Group::where('created_by',Auth::user()->id)->orderBy('id','desc')->get();
+		$query = Group::where('created_by',Auth::user()->id);
+		return $query;
+	}
+	
+	public static function getRecordByName($name){
+		$query = Group::where('name',$name)->where('created_by',Auth::user()->id)->first();
+		return $query;
+	} 
+	
+	public static function groupListData(){
+		$query = Group::where('created_by',Auth::user()->id)->get();
 		return $query;
 	}
 	

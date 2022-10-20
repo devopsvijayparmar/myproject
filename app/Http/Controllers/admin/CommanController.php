@@ -49,7 +49,7 @@ class CommanController extends Controller
 	public function preview($title,$url_name){
 		$user = User::getRecordByTitle($title);
 		$this->data['landing_page'] = LandingPage::getRecordByUser($user->id,$url_name);
-		return view('admin.landing_page.preview',$this->data);
+		return view('admin.pages.landing_page.preview',$this->data);
 	}
 	
 }

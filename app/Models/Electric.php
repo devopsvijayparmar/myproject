@@ -87,7 +87,7 @@ class Electric extends Authenticatable
 
 	} 
 	
-	public static function getRecordForIndexByCategory($user_id,$category){
+	/* public static function getRecordForIndexByCategory($user_id,$category){
 		
 		$query = Electric::select('electric.*','category.name as category_name','type.name as type_name')
 		->leftjoin('category', function($join) {
@@ -100,7 +100,7 @@ class Electric extends Authenticatable
 		->paginate(12);
 	    return $query;
 
-	} 
+	}  */
 	
 	
 	/*New*/
@@ -132,6 +132,57 @@ class Electric extends Authenticatable
 	function getImage3Attribute($image){
 		return $image == null ? url('/images/image_not_found.jpg') : asset('/uploads/electric/'.$image);
 	}
+	
+	public static function takeRecordForWebsite($id,$node){
+		$query = Electric::where('created_by',$id)->with('category','type')->take($node)->get();
+	    return $query;
+	}
+	function getDetailPageLink($title){
+		return url('/'.$title.'/'.Crypt::encrypt($this->id).'/single-electric');
+	}
+	function getProjectCategoryLink($title){
+		return url('/'.$title.'/products/category');
+	}
+	public static function getRecordForWebsite($user_id,$cat,$search,$node){
+		
+		$TEMP = "electric.created_by = '$user_id'";
+		IF($cat != "category"){
+			$TEMP .= " AND category.name like '%$cat%' ";
+		}
+		
+		if($search)
+		{
+			$TEMP .=" AND  (category.name LIKE '%".$search."%' OR electric.name LIKE '%".$search."%' OR electric.description LIKE '%".$search."%' OR electric.price LIKE '%".$search."%' )";
+		}
+		
+		$query = Electric::select('electric.*','category.name as category_name','type.name as type_name')
+		->leftjoin('category', function($join) {
+			$join->on('electric.category_id', '=', 'category.id');
+		})
+		->leftjoin('type', function($join) {
+			$join->on('electric.type_id', '=', 'type.id');
+		})
+		->whereRaw($TEMP)->where('electric.created_by',$user_id)->orderBy("electric.id", 'desc')
+		->paginate($node);
+	    return $query;
+
+	} 
+	
+	public static function getRecordForWebsiteByCategory($user_id,$category,$node){
+		
+		$query = Electric::select('electric.*','category.name as category_name','type.name as type_name')
+		->leftjoin('category', function($join) {
+			$join->on('electric.category_id', '=', 'category.id');
+		})
+		->leftjoin('type', function($join) {
+			$join->on('electric.type_id', '=', 'type.id');
+		})
+		->where('electric.created_by',$user_id)->where('category.name',$category)->orderBy("electric.id", 'desc')
+		->paginate($node);
+	    return $query;
+
+	} 
+	
 	
 	
 }

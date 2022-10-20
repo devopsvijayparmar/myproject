@@ -1,22 +1,27 @@
 @extends('admin.layouts.master')
 @section('content')
- <style>
- .select2-container {
-    box-sizing: border-box;
-    display: inline-block;
-    margin: 0;
-    position: relative;
-    vertical-align: middle;
-    width: 100%!important;
-	font-size: 1rem!important;
-    font-weight: 400!important;
-}
-.select2-container--default.select2-container--focus .select2-selection--multiple {
-    outline: 0;
-    border: 1px solid #ced4da!important;
-}
+@section('css')
 
+<style src="{{asset('vendor/multiselect/dist/js/bootstrap-multiselect.css')}}"></style>
+ <style>
+ .btn-group, .btn-group-vertical {
+    position: relative;
+    display: inline-flex;
+    vertical-align: middle;
+    width: 100%;
+}
+.custom-select{
+	text-align: left!important;
+}
+.dropdown-menu.show {
+    max-height: 300px;
+    overflow: auto;
+    top: 100% !important;
+	min-width: 100%!important;
+}
  </style>
+@endsection
+
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -93,7 +98,7 @@
   </div>
   
    <div class="modal fade bd-example-modal-lg" id="modal-default">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
               <h4 class="modal-title">Share Emails with People</h4>
@@ -127,7 +132,7 @@
 				
 				<div class="form-group" id="hideusers" style="display:none">
 					<label for="exampleInputEmail1">Contacts <span class="error">*</span></label></br>
-					<select class="select2 form-control form-control-sm" name="users[]" id="users" multiple="multiple" data-placeholder="select contacts">
+					<select class="form-control form-control-sm" name="users[]" id="users" multiple="multiple" data-placeholder="select contacts"style="display:none">
 					@foreach($address_book as $address_book_data)
 						<option value="{{$address_book_data->id}}">{{$address_book_data->email}} ({{$address_book_data->name}}) ({{$address_book_data->mobile}})</option>
 					@endforeach
@@ -149,11 +154,19 @@
 	
 @endsection
 @section('script')
+<script src="{{asset('vendor/multiselect/dist/js/bootstrap-multiselect.js')}}"></script>
 <script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
 {!! $validator->selector('#main_id') !!}
 <script>
 $('#emailtab').addClass('active');
 CKEDITOR.replace( 'description' );
+
+
+$('#users').multiselect({
+	enableFiltering: true,
+	includeSelectAllOption: true
+});
+
 
 function changeUser(val){
 	if(val == 1)
@@ -175,5 +188,6 @@ function sendLandingPage(id)
 	});
 	$('#modal-default').modal('show');
 }
+
 </script>
 @endsection  

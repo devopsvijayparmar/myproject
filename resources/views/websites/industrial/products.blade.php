@@ -19,17 +19,17 @@
 				<div class="col-md-3 col-sm-6">
 					<div class="product-grid">
 						<div class="product-image">
-							<a href="{{url('/')}}/{{$title}}/{{App\Helpers\CryptHelper::encryptstring($productdata->id)}}/single-product">
-								<img class="pic-1" src="{{url('/uploads/products')}}/{{$productdata->image_1}}">
+							<a href="{{$productdata->getDetailPageLink($title)}}">
+								<img class="pic-1" src="{{$productdata->image_1}}">
 							</a>
 							<ul class="social">
-								<li><a href="{{url('/')}}/{{$title}}/{{App\Helpers\CryptHelper::encryptstring($productdata->id)}}/single-product" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
+								<li><a href="{{$productdata->getDetailPageLink($title)}}" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
 							</ul>
 							<!--<span class="product-new-label">Sale</span>
 							<span class="product-discount-label">20%</span>-->
 						</div>
 						<div class="product-content">
-							<h3 class="title"><a href="{{url('/')}}/{{$title}}/{{App\Helpers\CryptHelper::encryptstring($productdata->id)}}/single-product">{{ mb_strimwidth($productdata->name, 0, 40, "...")}}</a></h3>
+							<h3 class="title"><a href="{{$productdata->getDetailPageLink($title)}}">{{ mb_strimwidth($productdata->name, 0, 40, "...")}}</a></h3>
 							@php
 							$currency_symbol = "";
 							@endphp

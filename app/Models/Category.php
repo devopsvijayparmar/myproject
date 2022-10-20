@@ -39,4 +39,13 @@ class Category extends Authenticatable
 		return $query;
 	} 
 	
+	public static function getCategoryForWebsite($id){
+		$query = Category::orderBy('name','asc')->where('created_by',$id)->get();
+		return $query;
+	} 
+	public static function getCategoryByUserId($id){
+			$query = Category::orderBy('name','desc')->where('created_by',$id)->get();
+		   return $query;
+	}
+	
 }

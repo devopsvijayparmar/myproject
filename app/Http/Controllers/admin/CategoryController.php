@@ -122,6 +122,7 @@ class CategoryController extends Controller
 		$input['updated_by'] = $auth->id;
         
 		$category = Category::where('created_by',$auth->id)->where('id',$id)->first();
+		$category->update($input);
 		
 		if($category){
 			return redirect()->route('category.index')->with('success', Lang::get('messages.updated'));

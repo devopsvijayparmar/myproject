@@ -22,9 +22,9 @@
 				@if(count($gallery) > 0)
 				@foreach($gallery as $retrieved_data)
                 <div class="col-md-3 pd-10">
-					<a class="preview" href="{{url('/uploads/gallery')}}/{{$retrieved_data->image}}" rel="prettyPhoto">
+					<a class="preview" href="{{$retrieved_data->image_path}}" rel="prettyPhoto">
 						<div class="portfolio-item-inner vp-hover">
-							<img class="img-responsive shoot_img" src="{{url('/uploads/gallery')}}/{{$retrieved_data->image}}" alt="">
+							<img class="img-responsive shoot_img" src="{{$retrieved_data->image_path}}" alt="">
 						</div>
 					</a>
                 </div><!--/.portfolio-item-->

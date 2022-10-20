@@ -12,7 +12,8 @@ use App\Models\Blog;
 use App\Models\Orders;
 use App\Models\Products;
 use App\Models\Mobile;
-use App\Models\MobileOrders;
+use App\Models\Sitesettings;
+use DataTables;
 use Auth;
 use Hash;
 use Crypt;
@@ -29,44 +30,86 @@ class OrdersController extends Controller
 	function __construct()
     {
 		$this->middleware('permission:orders', ['only' => ['index','show']]);
-		$this->middleware('permission:mobile_orders', ['only' => ['mobile','mobiles_show']]);
-		$this->data['title'] = 'Orders';
     }
 	
 	public function index(Request $request)
-    {    
-        $this->data['orders'] = Orders::orderslist();	
-		return view('admin.orders.index',$this->data);
+    {   
+	   
+	
+	   if ($request->ajax()) {
+		  
+			$data = Orders::getOrderslist();
+			return DataTables::of($data)
+			->addIndexColumn()
+			
+			->editColumn('image', function ($row)
+			{
+				if($row->product_type == 'product'){
+					return '<img class="rp-img" src="'.$row->product_image.'">';
+				}else{
+					return '<img class="rp-img" src="'.$row->mobile_image.'">';
+				}
+			})
+			
+			->editColumn('status', function ($row)
+			{
+			   return '<span class="badge badge-'.$row->class_badge.'">'.$row->status_badge.'</span>';
+			})
+			
+			->editColumn('action', function ($row)
+			{
+			   $btn = '<a title="Edit" class="mr-2" href="'.route('orders.edit', Crypt::encrypt($row['id'])).'" class="mr-2"><i class="fas fa-edit text-info font-16"></i></a>';
+			   
+			   $btn .= '<a title="Details" class="mr-2" href="'.route('orders.show', Crypt::encrypt($row['id'])).'" data-popup="tooltip"><i class="fas fa-eye text-info font-16"></i></a>';
+			   
+			   $btn .= $row->change_status;
+			   
+			   $delete_link = route('orders.destroy', Crypt::encrypt($row['id']));
+			   $delete_link = "'" . $delete_link . "'";
+			   $btn .= '<a class="mr-2" title="Delete" href="javascript:void(0);" onclick="deleteRecord('.$delete_link.');" data-popup="tooltip"><i class="fas fa-trash-alt text-info font-16"></i></a>';
+			  
+			   return $btn;
+			})
+			->rawColumns(['status','image','action'])
+			->make(true);
+
+		} else {
+		
+		    
+			$columns = [
+				['data' => 'DT_RowIndex', 'name' => 'id', 'title' => "Id"],
+				['data' => 'image','name' => 'image', 'title' => __("Image"),'searchable'=>false,'orderable' => false],
+				['data' => 'product_name','name' => 'product_name', 'title' => __("Product Name"),'searchable'=>true,'orderable' => true],
+				['data' => 'quantity','name' => 'quantity', 'title' => __("Quantity"),'searchable'=>true,'orderable' => true],
+				['data' => 'name','name' => 'name', 'title' => __("Customer Name"),'searchable'=>true,'orderable' => true],
+				['data' => 'mobile','name' => 'mobile', 'title' => __("Customer Mobile"),'searchable'=>true,'orderable' => true],
+				['data' => 'email','name' => 'email', 'title' => __("Customer Email"),'searchable'=>true,'orderable' => true],
+				['data' => 'status','name' => 'status', 'title' => __("Status"),'searchable'=>true,'orderable' => true],
+				['data' => 'action', 'name' => 'action', 'title' => "Action", 'searchable' => false, 'orderable' => false]];
+		  
+			$data['dateTableFields'] = $columns;
+			$data['dateTableUrl'] = route('orders.index');
+			$data['dateTableTitle'] = "Orders";
+			$data['dataTableId'] = time();
+			return view('admin.pages.orders.index',$data);
+		
+		}
+	
     }
 	public function show(Request $request,$id)
     {    
 	    $id = Crypt::decrypt($id);
-        $this->data['order'] = Orders::getRecordById($id);	
-        $this->data['product'] = Products::getRecordById($this->data['order']->product_fk);	
-		return view('admin.orders.show',$this->data);
+        $data['order'] = Orders::getRecordById($id);
+        $data['site_setting'] = Sitesettings::getRecordByUserId();
+		return view('admin.pages.orders.show',$data);
     }
 	
-	public function mobile(Request $request)
-    {    
-        $this->data['orders'] = Orders::orderslistformobile();	
-		return view('admin.mobile_orders.index',$this->data);
-    }
-	public function mobiles_show(Request $request,$id)
-    {    
-	    $id = Crypt::decrypt($id);
-        $this->data['order'] = Orders::getRecordById($id);	
-        $this->data['product'] = Mobile::getRecordById($this->data['order']->product_fk);	
-		return view('admin.mobile_orders.show',$this->data);
-    }
 	
 	public function destroy(Request $request,$id)
     {
 		$id = Crypt::decrypt($id);
-		/*Record Delete*/
 		$auth = Auth::user(); 	
-		$delete = Orders::where('id', $id)->where('user_id', Auth::user()->id)->update(['status' => $request->status]);
-		
-		Session::flash('success', 'Successfully '.$request->smg);
+	    $delete = Orders::where('created_by', $auth->id)->where('id', $id)->delete();
 		return $delete;
     }
 

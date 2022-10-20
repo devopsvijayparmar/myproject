@@ -14,46 +14,44 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-
 Route::get("/testpage", function(){
    return view("emailpage");
 });
 
-
 /*supar admin*/
-
 Route::group(['prefix' => 'super-admin', 'namespace' => 'super_admin'], function () {
 	Route::get('/super-admin/home', 'HomeController@index');
-	Route::resource('web-templates', 'front\WebTemplatesController');
+	Route::resource('web-templates', 'WebTemplatesController');
 	Route::resource('pricing', 'PricingController');
-	Route::resource('about-us', 'front\AboutUsController');
-	Route::resource('contact-us', 'front\ContactUsController');
-	Route::resource('system', 'front\SystemController');
-	Route::resource('amazing-features', 'front\AmazingFeaturesController');
-	Route::resource('settings', 'front\SettingsController');
-	Route::resource('admin-slider', 'front\SliderController');
+	Route::resource('about-us', 'AboutUsController');
+	Route::resource('contact-us', 'ContactUsController');
+	Route::resource('system', 'SystemController');
+	Route::resource('amazing-features', 'AmazingFeaturesController');
+	Route::resource('settings', 'SettingsController');
+	Route::resource('admin-slider', 'SliderController');
 	Route::resource('roles', RoleController::class);
 });
 /*supar admin*/
 
-
 /*supar admin front*/
-Route::get('/signup', 'front\RegisterController@index');
-Route::post('/signup', 'front\RegisterController@register');
-Route::post('/check-site-name', 'front\RegisterController@checkSiteName');
-Route::post('/check-email', 'front\RegisterController@checkEmail');
-Route::get('verify-account/{token}', 'front\RegisterController@verifyAccount');
-Route::get('/', 'front\HomeController@index');
-Route::get('/web-templates', 'front\HomeController@webTemplate');
-Route::get('/web-templates/{id}', 'front\HomeController@singleWebTemplate');
-Route::get('/pricing', 'front\HomeController@pricing');
-Route::get('/page/{type}', 'front\HomeController@Cms');
-Route::get('/contact-us', 'front\HomeController@contactUs');
-Route::post('/front-contact-us', 'front\HomeController@contact_us_store');
-Route::get('/purchase-plan/{id}', 'front\PurchasePlanController@index');
+Route::group(['namespace' => 'front'], function () {
+	
+	Route::get('/signup', 'RegisterController@index');
+	Route::post('/signup', 'RegisterController@register');
+	Route::post('/check-site-name', 'RegisterController@checkSiteName');
+	Route::post('/check-email', 'RegisterController@checkEmail');
+	Route::get('verify-account/{token}', 'RegisterController@verifyAccount');
+	Route::get('/', 'HomeController@index');
+	Route::get('/web-templates', 'HomeController@webTemplate');
+	Route::get('/web-templates/{id}', 'HomeController@singleWebTemplate');
+	Route::get('/pricing', 'HomeController@pricing');
+	Route::get('/page/{type}', 'HomeController@Cms');
+	Route::get('/contact-us', 'HomeController@contactUs');
+	Route::post('/front-contact-us', 'HomeController@contact_us_store');
+	Route::get('/purchase-plan/{id}', 'PurchasePlanController@index');
+
+});
 /*supar admin front*/
-
-
 
 /*admin Routes*/
 Auth::routes();
@@ -68,7 +66,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'admin'], function () {
 		Route::post('import-address', 'AddressBookController@import')->name('import-addressbook');
 		Route::resource('blog', 'BlogController');
 		Route::resource('category', 'CategoryController');
-		Route::get('settings', 'SettingsController@index')->name('settings');
+		Route::get('settings', 'SettingsController@index')->name('user-settings');
 		Route::resource('site-settings', 'SitesettingsController');
 		Route::get('change-password', 'SettingsController@change_password')->name('change-password');
 		Route::post('change-password', 'SettingsController@update')->name('change-password.update');
@@ -79,42 +77,28 @@ Route::group(['prefix' => 'admin', 'namespace' => 'admin'], function () {
 		Route::post('upload-gallary', 'GalleryController@update')->name('upload-gallary');
 		Route::resource('gallery', 'GalleryController');
 		Route::post('remove-image', 'GalleryController@removeImage')->name('remove-image');
-		
-		Route::resource('projects', 'ProjectsController');
-		Route::resource('products', 'ProductsController');
-		Route::resource('plan', 'PlanController');
-		Route::resource('books', 'BooksController');
-	
-		Route::resource('service', 'ServiceController');
-		
-		Route::resource('philosophy', 'PhilosophyController');
-		Route::resource('brand', 'BrandController');
-		Route::resource('type', 'TypeController');
-		Route::resource('project_type', 'ProjectTypeController');
-		Route::resource('our-team', 'OurTeamController');
-		
-		
-		
-		Route::resource('slider', 'SliderController');
-		
-		
-		
-		Route::resource('mobile', 'MobileController');
-		
-		Route::resource('photo-shoots', 'PhotoShootsController');
-
-		Route::get('landing_page_editor', 'LandingPageController@editor');
-		Route::get('landing_page_edit_editor/{id}', 'LandingPageController@editEditor');
-		Route::post('exit-title', 'LandingPageController@exitTitle');
-		Route::post('exit-title-edit', 'LandingPageController@exitTitleEdit');
-		Route::resource('orders', 'OrdersController');
-		Route::get('mobile-orders', 'OrdersController@mobile');
-		Route::get('mobile-orders/{id}', 'OrdersController@mobiles_show');
-		Route::post('send-landing-page', 'LandingPageController@sendLandingPage');
-		
 		Route::resource('event', 'EventController');
-		Route::get('purchase-plan', 'PurchasePlanController@index');
-
+		Route::post('landing-page/check-exit-title', 'LandingPageController@exitTitle')->name('landing-page-check-exit-title');
+		Route::get('landing-page/landing-page-editor', 'LandingPageController@editor')->name('landing-page-editor');
+		Route::get('landing-page/landing-page-edit-editor/{id}', 'LandingPageController@editEditor')->name('landing-page-edit-editor');
+		Route::post('landing-page/exit-title-edit', 'LandingPageController@exitTitleEdit')->name('landing-page-exit-title-edit');
+		Route::post('send-landing-page', 'LandingPageController@sendLandingPage')->name('send-landing-page');
+		Route::resource('mobile', 'MobileController');
+		Route::resource('books', 'BooksController');
+		Route::resource('brand', 'BrandController');
+		Route::resource('our-team', 'OurTeamController');
+		Route::resource('photo-shoots', 'PhotoShootsController');
+		Route::resource('plan', 'PlanController');
+		Route::resource('project-type', 'ProjectTypeController');
+		Route::resource('products', 'ProductsController');
+		Route::resource('projects', 'ProjectsController');
+		Route::resource('service', 'ServiceController');
+		Route::resource('philosophy', 'PhilosophyController');
+		Route::get('purchase-plan', 'PurchasePlanController@index')->name('purchase-plan');
+		Route::resource('slider', 'SliderController');
+		Route::resource('orders', 'OrdersController');
+		Route::resource('type', 'TypeController');
+		
 		/*Business Routes*/
 		Route::group(['middleware' => ['purchaseplan']], function() {
 			Route::resource('promotion', 'PromotionController');
@@ -122,7 +106,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'admin'], function () {
 			Route::resource('group', 'GroupController');
 			Route::resource('landing-page', 'LandingPageController');
 			Route::resource('email-marketing', 'EmailMarketingController');
-			Route::get('upgrade-plan/{type}', 'PurchasePlanController@upgradePlan');
+			Route::get('upgrade-plan/{type}', 'PurchasePlanController@upgradePlan')->name('upgrade-plan');
 		});
 	});
 	
@@ -131,9 +115,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'admin'], function () {
 
 Route::get('/{title}/landing-page/{url_name}', 'admin\CommanController@preview');
 /*admin Routes End*/
-
-
-
 
 
 /*Front*/

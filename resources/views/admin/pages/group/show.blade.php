@@ -1,4 +1,5 @@
- @include('admin.include.header')
+@extends('admin.layouts.master')
+@section('content')
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -10,9 +11,9 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="<?php echo url('/admin/home');?>">Home</a></li>
-              <li class="breadcrumb-item"><a href="<?php echo url('/admin/group');?>">Group</a></li>
-              <li class="breadcrumb-item active">Show</li>
+			  <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
+              <li class="breadcrumb-item"><a href="{{route('group.index')}}">Group</a></li>
+              <li class="breadcrumb-item active">Users</li>
             </ol>
           </div>
         </div>
@@ -34,32 +35,7 @@
               <!-- /.card-header -->
               <!-- form start -->
                 <div class="card-body table-responsive">
-                  <table id="example1" class="table table-bordered table-striped">
-					<thead>
-					<tr>
-					  <th>No.</th>
-					  <th>Name</th>
-					  <th>Email</th>
-					  <th>Mobile</th>
-					</tr>
-					</thead>
-					<tbody>
-						<?php
-						$i=0;
-						foreach($groupdata as $retrieved_data)
-						{ 
-						$i++;
-						?>
-						<tr id="{{$i}}">
-						  <td>{{$i}}</td>
-						  <td>{{$retrieved_data->name}}</td>
-						  <td>{{$retrieved_data->email}}</td>
-						  <td>{{$retrieved_data->mobile}}</td>
-						</tr>
-						<?php }
-						?>
-					</tfoot>
-				  </table>
+                  @include('admin.include.table')
                 </div>
             </div>
             <!-- /.card -->
@@ -72,13 +48,10 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  @include('admin.include.footer')
+@endsection
+@section('script')
+@include('admin.include.table_script')
 <script>
 $('#grouptab').addClass('active');
-
-$(function () {
-	$("#example1").DataTable({
-      'ordering'    : false,
-    });
-});
 </script>
+@endsection

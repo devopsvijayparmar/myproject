@@ -29,7 +29,7 @@
 				<div class="card-body p-0">
 				  <ul class="nav nav-pills flex-column vp-tab">
 					<li class="nav-item">
-					  <a href="{{route('settings')}}" class="nav-link">
+					  <a href="{{route('user-settings')}}" class="nav-link">
 						<i class="fas fa-sliders-h"></i> Home Slider
 					  </a>
 					</li>

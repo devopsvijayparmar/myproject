@@ -92,7 +92,7 @@ class GalleryController extends Controller
 			
 			->editColumn('image', function ($row)
 			{
-			   return '<img class="rp-img" src="'.$row->image_path.'">';
+			   return '<a target="_blank" class="preview" href="'.$row->image_path.'" rel="prettyPhoto"><img class="rp-img" src="'.$row->image_path.'"></a>';
 			})
 			->editColumn('action', function ($row)
 			{

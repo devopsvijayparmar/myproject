@@ -1,4 +1,5 @@
- @include('admin.include.header')
+@extends('admin.layouts.master')
+@section('content')
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -6,13 +7,13 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Order</h1>
+            <h1>Orders</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="<?php echo url('/admin/home');?>">Home</a></li>
-              <li class="breadcrumb-item"><a href="<?php echo url('/admin/orders');?>">Order</a></li>
-              <li class="breadcrumb-item active">Show Order</li>
+              <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
+              <li class="breadcrumb-item"><a href="{{route('orders.index')}}">Orders</a></li>
+              <li class="breadcrumb-item active">Order Details</li>
             </ol>
           </div>
         </div>
@@ -28,11 +29,8 @@
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Show Order</h3>
+                <h3 class="card-title">Order Details</h3>
               </div>
-              <!-- /.card-header -->
-              <!-- form start -->
-			
                 <div class="card-body">
 				<p class="lead">Customer Details</p>
 				<div class="col-md-10">
@@ -41,7 +39,7 @@
 					  
 					  <tr>
                         <th style="width:50%">Image:</th>
-                        <td><img class="rp-img" src="<?php echo url('/uploads/mobile/'.$product->image_1);?>"></td>
+                        <td><img class="rp-img" src="{{$product->image_1}}"></td>
                       </tr>
 					   <tr>
                         <th>Category:</th>
@@ -51,18 +49,22 @@
                         <th>Name:</th>
                         <td>{{$product->name}}</td>
                       </tr>
-					   <?php
-						$currency_symbol = "";
-						if(isset($site_setting->currency_symbol)) { $currency_symbol = $site_setting->currency_symbol;};
-						if($product->price)
-						{
-						   
-						?>
-					   <tr>
-                        <th>Price:</th>
-                        <td>{{$currency_symbol.$product->price}}</td>
-                      </tr>
-						<?php } ?>
+					    @php
+							$currency_symbol = "";
+						@endphp
+						
+						@if(isset($site_setting->currency_symbol))
+							@php
+							$currency_symbol = $site_setting->currency_symbol;
+							@endphp
+						@endif
+						
+						@if($product->price)
+						<tr>
+							<th>Price:</th>
+							<td>{{$currency_symbol.$product->price}}</td>
+						</tr>
+						@endif
 					   <tr>
                         <th>Quantity:</th>
                         <td>{{$order->quantity}}</td>
@@ -116,8 +118,9 @@
     </section>
     <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
-  @include('admin.include.footer')
+@endsection
+@section('script')
 <script>
 $('#mobileorderstab').addClass('active');
 </script>
+@endsection 

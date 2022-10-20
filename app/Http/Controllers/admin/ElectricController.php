@@ -58,7 +58,7 @@ class ElectricController extends Controller
 	public function index(Request $request)
     {    
 	    
-         if ($request->ajax()) {
+        if ($request->ajax()) {
 		  
 			$data = Electric::getElectricList();
 			return DataTables::of($data)
@@ -108,8 +108,8 @@ class ElectricController extends Controller
 			$data['dataTableId'] = time();
 			$data['createUrl'] = route('electric.create');
 			return view('admin.pages.electric.index',$data);
-		
 		}
+		
     }
 
 	public function create(Request $request)

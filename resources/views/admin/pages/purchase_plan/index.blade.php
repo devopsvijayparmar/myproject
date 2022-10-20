@@ -1,4 +1,6 @@
- @include('admin.include.header')
+@extends('admin.layouts.master')
+@section('content')
+@section('css')
  <style>
  .navbar-badge {
     font-size: 16px!important;
@@ -9,10 +11,11 @@
     font-weight: 700!important;
 }
  </style>
+@endsection  
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <section class="content-header">
+	<section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
@@ -20,7 +23,7 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="<?php echo url('/admin/home');?>">Home</a></li>
+               <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
               <li class="breadcrumb-item active">Purchase Plan</li>
             </ol>
           </div>
@@ -48,8 +51,6 @@
 				<span class="info-box-number">Expiry Date : {{ App\Helpers\CommonHelper::dateFormate($purchaseplan->expiry_date) }}</span></br>
 				</div>
 			</div>
-			
-			
 		    <div class="row">
 				<div class="col-md-6 col-sm-12 col-12">
 					<div class="info-box">
@@ -65,7 +66,7 @@
 					<div class="info-box">
 						<span class="info-box-icon bg-info"><i class="nav-icon fas fa-pager"></i></span>
 						<div class="info-box-content">
-						<a href="{{url('/admin/upgrade-plan/landingpage')}}" class="badge badge-danger navbar-badge">${{$topup->no_of_landing_page_price}} Upgrade</a>
+						<a href="{{route('upgrade-plan','landingpage')}}" class="badge badge-danger navbar-badge">${{$topup->no_of_landing_page_price}} Upgrade</a>
 						<span class="info-box-text">Landingpage</span>
 						 <span class="info-box-number">{{$topup->no_of_landing_page}}</span>
 						</div>
@@ -75,7 +76,7 @@
 					<div class="info-box">
 						<span class="info-box-icon bg-info"><i class="nav-icon fas fa-pager"></i></span>
 						<div class="info-box-content">
-						<a href="{{url('/admin/upgrade-plan/pagebuilder')}}" class="badge badge-danger navbar-badge">${{$topup->no_of_page_builder_price}} Upgrade</a>
+						<a href="{{route('upgrade-plan','pagebuilder')}}" class="badge badge-danger navbar-badge">${{$topup->no_of_page_builder_price}} Upgrade</a>
 						<span class="info-box-text">Page builder</span>
 						 <span class="info-box-number">{{$topup->no_of_page_builder}}</span>
 						</div>
@@ -85,7 +86,7 @@
 					<div class="info-box">
 						<span class="info-box-icon bg-info"><i class="nav-icon  fas fa-address-book"></i></span>
 						<div class="info-box-content">
-						<a href="{{url('/admin/upgrade-plan/addressbook')}}" class="badge badge-danger navbar-badge">${{$topup->no_of_address_book_price}} Upgrade</a>
+						<a href="{{route('upgrade-plan','addressbook')}}" class="badge badge-danger navbar-badge">${{$topup->no_of_address_book_price}} Upgrade</a>
 						<span class="info-box-text">Addressbook</span>
 						 <span class="info-box-number">{{$topup->no_of_address_book}}</span>
 						 
@@ -93,7 +94,6 @@
 					</div>
 				</div>
 			</div>
-			
 		</div>
 	  
 	    
@@ -168,38 +168,7 @@
 			  
 					
 				<div class="card-body table-responsive">
-				<table id="example1" class="table table-striped table-valign-middle">
-					<thead>
-					<tr>
-					<th>Plan Name</th>
-					<th>Type</th>
-					<th>Price</th>
-					<th>Emails</th>
-					<th>Page Builder</th>
-					<th>Landing Page</th>
-					<th>Addressbook</th>
-					<th>Start Date</th>
-					<th>Expiry Date</th>
-					<th>Duration</th>
-					</tr>
-					</thead>
-				<tbody>
-					@foreach($purchaseplanhistory as $purchaseplanhistorydata)
-					<tr>
-						<td>{{$purchaseplanhistorydata->plan_name}}</td>
-						<td>@if($purchaseplanhistorydata->plan_type) {{$purchaseplanhistorydata->plan_type}} @else - @endif</td>
-						<td>@if($purchaseplanhistorydata->price_text) {{$purchaseplanhistorydata->price_text}} @elseif($purchaseplanhistorydata->price) ${{$purchaseplanhistorydata->price}} @else - @endif</td>
-						<td>@if($purchaseplanhistorydata->no_of_emails) {{$purchaseplanhistorydata->no_of_emails}} @else - @endif</td>
-						<td>@if($purchaseplanhistorydata->page_builder) {{$purchaseplanhistorydata->page_builder}} - {{$purchaseplanhistorydata->no_of_page_builder}} @elseif($purchaseplanhistorydata->no_of_page_builder) {{$purchaseplanhistorydata->no_of_page_builder}} @else - @endif</td>
-						<td>@if($purchaseplanhistorydata->no_of_landing_page) {{$purchaseplanhistorydata->no_of_landing_page}} @else - @endif</td>
-						<td>@if($purchaseplanhistorydata->no_of_address_book) {{$purchaseplanhistorydata->no_of_address_book}} @else - @endif</td>
-						<td>@if($purchaseplanhistorydata->start_date) {{$purchaseplanhistorydata->start_date}} @else - @endif </td>
-						<td>@if($purchaseplanhistorydata->expiry_date) {{$purchaseplanhistorydata->expiry_date}} @else - @endif</td>
-						<td>@if($purchaseplanhistorydata->duration) {{$purchaseplanhistorydata->duration}} @else - @endif</td>
-					</tr>
-					@endforeach
-				</tbody>
-				</table>
+				@include('admin.include.table')
 				</div>
 				
               <!-- /.card-header -->
@@ -216,14 +185,10 @@
     </section>
     <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
-  @include('admin.include.footer')
+@endsection
+@section('script')
+@include('admin.include.table_script')
 <script>
 $('#purchase-plan-tab').addClass('active');
-
-$(function () {
-	$("#example1").DataTable({
-      'ordering'    : false,
-    });
-});
 </script>
+@endsection 

@@ -24,6 +24,9 @@ class EventServiceProvider extends ServiceProvider
 		'App\Events\WelcomeEmail' => [
             'App\Listeners\WelcomeEmailNotificationListener',
         ],
+		'App\Events\EmailNotifications' => [
+            'App\Listeners\EmailNotificationsListener',
+        ],
     ];
 
     /**

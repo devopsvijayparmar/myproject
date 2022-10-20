@@ -122,6 +122,7 @@ class BrandController extends Controller
 		$input['updated_by'] = $auth->id;
         
 		$brand = Brand::where('created_by',$auth->id)->where('id',$id)->first();
+		$brand->update($input);
 		
 		if($brand){
 			return redirect()->route('brand.index')->with('success', Lang::get('messages.updated'));

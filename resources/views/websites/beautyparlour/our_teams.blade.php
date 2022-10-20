@@ -21,9 +21,9 @@
 				@if(count($ourteam) > 0)
 				@foreach($ourteam as $ourteamdata)
                 <div class="col-md-3 pd-10">
-					<a class="preview" href="{{url('/uploads/our_team')}}/{{$ourteamdata->image}}" rel="prettyPhoto">
+					<a class="preview" href="{{$ourteamdata->image}}" rel="prettyPhoto">
 						<div class="portfolio-item-inner vp-hover">
-							<img class="img-responsive shoot_img" src="{{url('/uploads/our_team')}}/{{$ourteamdata->image}}" alt="">
+							<img class="img-responsive shoot_img" src="{{$ourteamdata->image}}" alt="">
 						</div>
 						<span class="onhovershow ps-title">{{$ourteamdata->name}}</span>
 					</a>

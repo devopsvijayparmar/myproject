@@ -140,6 +140,9 @@ return [
 		'type_id' => [
            'required' => 'Please select Type',
         ],
+		'brand_id' => [
+           'required' => 'Please select Brand',
+        ],
     ],
 
     /*

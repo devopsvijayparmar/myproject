@@ -17,6 +17,7 @@ use App\Models\GroupData;
 use Auth;
 use Hash;
 use Crypt;
+use App\Jobs\SendEmailJob;
 
 
 class EmailMarketingController extends Controller
@@ -50,7 +51,7 @@ class EmailMarketingController extends Controller
 	public function index(Request $request)
     {    
         $data['email'] = EmailMarketing::getEmailsByUser();	
-		$data['group'] = Group::groupList();	
+		$data['group'] = Group::groupListData();	
 		$data['address_book'] = AddressBook::addressBookList();	
 		$data['validator'] = JsValidator::make($this->validationRules);
 		return view('admin.pages.email_marketing.index',$data);
@@ -166,8 +167,16 @@ class EmailMarketingController extends Controller
 			$address_data = AddressBook::getRecordForLandingPage($group_data);
 		}
 		else{
-			$address_data = AddressBook::getRecordForLandingPage($request->users);
+			
+			if(isset($request->users)){
+				$address_data = AddressBook::getRecordForLandingPage($request->users);
+			}else{
+				return redirect()->back()->with('error', Lang::get('messages.error'));
+			}
 		}
+		
+		$array = array('users'=>$address_data);
+		SendMail::dispatch($array);
 		
 		
 		foreach($address_data as $retrieved_data)
@@ -175,6 +184,9 @@ class EmailMarketingController extends Controller
 			$html = $email->email;
 			$subject = $email->subject;
 			$html = str_replace('{{USER_NAME}}',$retrieved_data->name , $html);
+			
+			
+			
 		
 			$insertData[] = array(
 				'to' => $retrieved_data->email,
@@ -200,7 +212,7 @@ class EmailMarketingController extends Controller
 			}
 		} else {
 			Session::flash('error', 'Something went wrong data not Imported');
-			 return redirect()->back();
+			return redirect()->back();
 		}
 		
     }

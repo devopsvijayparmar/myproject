@@ -22,14 +22,13 @@
                         <article>
                             <header class="entry-header">
                                 <div class="entry-thumbnail">
-                                    <img class="img-responsive blog_card_img" src="{{url('/uploads/event')}}/{{$event->image}}" alt="">
-                                     <a class="preview" href="{{url('/uploads/event')}}/{{$event->image}}" rel="prettyPhoto"><span class="post-format post-format-video"><i class="fa fa-film"></i></span></a>
+                                    <img class="img-responsive blog_card_img" src="{{$event->image}}" alt="">
+                                     <a class="preview" href="{{$event->image}}" rel="prettyPhoto"><span class="post-format post-format-video"><i class="fa fa-film"></i></span></a>
                                 </div>
                                  <div class="entry-date">Start Date: {{$event->start_date}}</div>
                                 <div class="entry-date">End Date: {{$event->end_date}}</div>
 								<h2 class="entry-title"><a href="#">{{$event->title}}</a></h2>
                             </header>
-
                             <div class="entry-content">
 							{!! $event->description !!}
                             </div>

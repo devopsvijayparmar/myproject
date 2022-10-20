@@ -49,6 +49,24 @@ class Event extends Authenticatable
 		return $image == null ? url('/images/image_not_found.jpg') : asset('/uploads/event/'.$image);
 	}
 	
+	public static function takeRecordForWebsite($id,$node){
+		$query = Event::where('created_by',$id)->where('end_date','>=',date('Y-m-d'))->orderBy('start_date','asc')->take($node)->get();
+	    return $query;
+	}
+	
+	function getDetailPageLink($title){
+		return url('/'.$title.'/'.Crypt::encrypt($this->id).'/single-event');
+	}
+	
+	function getEventPageLink($title){
+		return url('/'.$title.'/events');
+	}
+	
+	public static function getRecordForWebsite($id,$node){
+		$query = Event::where('created_by',$id)->where('end_date','>=',date('Y-m-d'))->paginate($node);
+	    return $query;
+	}
+	
 	
 
 }

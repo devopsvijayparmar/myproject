@@ -29,4 +29,20 @@ class Slider extends Authenticatable
 		   return $query;
 	}
 	
+	
+	/*New*/
+	public static function getSliderList(){
+		$query = Slider::where('created_by',Auth::user()->id)->get();
+		return $query;
+	} 
+	function getImageAttribute($image){
+		return $image == null ? url('/images/image_not_found.jpg') : asset('/uploads/slider/'.$image);
+	}
+	
+	public static function getSlidersByUserId($id){
+		$query = Slider::orderBy('id','desc')->where('created_by',$id)->get();
+		return $query;
+	}
+	
+	
 }

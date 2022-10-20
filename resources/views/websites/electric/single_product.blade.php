@@ -30,33 +30,38 @@
         <div class="row">
           <div class="col-xl-6 col-lg-12 col-md-12">
             <div class="product_detail_feature_img hizoom hi2">
-              <div class='hizoom hi2'> <img src="{{url('/uploads/electric')}}/{{$electric->image_1}}" alt="#" /> </div>
+              <div class='hizoom hi2'> <img src="{{$electric->image_1}}" alt="#" /> </div>
             </div>
 			<ul class="preview-thumbnail nav nav-tabs">
 				@if($electric->image_2)
-			   <li> <a class="preview" href="{{url('/uploads/electric')}}/{{$electric->image_2}}" rel="prettyPhoto"><img src="{{url('/uploads/electric')}}/{{$electric->image_2}}" /></a></li>
+			   <li> <a class="preview" href="{{$electric->image_2}}" rel="prettyPhoto"><img src="{{$electric->image_2}}" /></a></li>
 				@endif
 			   @if($electric->image_3)
-			   <li> <a class="preview" href="{{url('/uploads/electric')}}/{{$electric->image_3}}" rel="prettyPhoto"><img src="{{url('/uploads/electric')}}/{{$electric->image_3}}" /></a></li>
+			   <li> <a class="preview" href="{{$electric->image_3}}" rel="prettyPhoto"><img src="{{$electric->image_3}}" /></a></li>
 				@endif
 			</ul>
           </div>
           <div class="col-xl-6 col-lg-12 col-md-12 product_detail_side detail_style1">
             <div class="product-heading">
                <h2>{{$electric->name}}</h2>
-               <p>{{$electric->category_name}}</p>
+               <p>{{$electric->category->name}}</p>
+               <p>{{$electric->type->name}}</p>
             </div>
             <div class="product-detail-side"> 
-				<span class="new-price"><?php
-					$currency_symbol = "";
-					if(isset($site_setting->currency_symbol)) { $currency_symbol = $site_setting->currency_symbol;};
-					if($electric->price) { echo $currency_symbol.$electric->price; } ?>
+				<span class="new-price">
+				@php
+				$currency_symbol = "";
+				@endphp
+				@if(isset($site_setting->currency_symbol)) @php $currency_symbol = $site_setting->currency_symbol @endphp @endif
+				@if($product->price)
+				{{$currency_symbol.$product->price}}
+				@endif
 				</span> 
 			</div>
              <div class="detail-contant">
              {!! mb_strimwidth($electric->description, 0, 500, "...") !!}
                <form class="cart" method="post" action="{{url('/')}}/{{$title}}/addresses">
-			   <input type="hidden" name="product_fk" value="{{App\Helpers\CryptHelper::encryptstring($electric->id)}}">
+			   <input type="hidden" name="product_id" value="{{Crypt::encrypt($electric->id)}}">
 			     @csrf
 				<div class="quantity">
 				  <input step="1" min="1" max="5" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" type="number">
@@ -100,26 +105,23 @@
 		 @foreach($electrics as $productdata)
           <div class="col-md-4 col-sm-6 col-xs-12 margin_bottom_30_all">
             <div class="product_list">
-              <div class="product_img">  <a href="{{url('/')}}/{{$title}}/{{App\Helpers\CryptHelper::encryptstring($productdata->id)}}/single-electric"><img class="img-responsive card_img" src="{{url('/uploads/electric')}}/{{$productdata->image_1}}" alt=""></a> </div>
+              <div class="product_img">  <a href="{{$productdata->getDetailPageLink($title)}}"><img class="img-responsive card_img" src="{{$productdata->image_1}}" alt=""></a> </div>
 					
               <div class="product_detail_btm">
                 <div class="center">
-                  <h4><a href="it_shop_detail.html">{{ mb_strimwidth($productdata->name, 0, 40, "...")}}</a></h4>
+                  <h4><a href="{{$productdata->getDetailPageLink($title)}}">{{ mb_strimwidth($productdata->name, 0, 40, "...")}}</a></h4>
                 </div>
 				<div class="product_price">
 				 <p><span class="">{{$productdata->type_name}}</span></p>
-				<?php
+				@php
 				$currency_symbol = "";
-				if(isset($site_setting->currency_symbol)) { $currency_symbol = $site_setting->currency_symbol;};
-				if($productdata->price)
-				{
-				?>
+				@endphp
+				@if(isset($site_setting->currency_symbol)) @php $currency_symbol = $site_setting->currency_symbol @endphp @endif
+				@if($productdata->price)
 				<div class="product_price">
 				  <p><span class="new_price">{{$currency_symbol.$productdata->price}}</span></p>
 				</div>
-				<?php
-				}
-				?>
+				@endif
 				</div>
               </div>
             </div>

@@ -23,11 +23,11 @@
 			<div class="col-md-4 col-sm-6">
 				<div class="product-grid" style="padding:0!important">
 					<div class="product-image">
-						<a href="{{url('/')}}/{{$title}}/{{App\Helpers\CryptHelper::encryptstring($projectsdata->id)}}/single-project">
-							<img class="pic-1" src="{{url('uploads/projects')}}/{{$projectsdata->image_1}}">
+						<a href="{{$projectsdata->getDetailPageLink($title)}}">
+							<img class="pic-1" src="{{$projectsdata->image_1}}">
 						</a>
 						<ul class="social">
-							<li><a href="{{url('/')}}/{{$title}}/{{App\Helpers\CryptHelper::encryptstring($projectsdata->id)}}/single-project" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
+							<li><a href="{{$projectsdata->getDetailPageLink($title)}}" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
 						</ul>
 						<!--<span class="product-new-label">Sale</span>
 						<span class="product-discount-label">20%</span>-->

@@ -1,4 +1,5 @@
- @include('admin.include.header')
+@extends('admin.layouts.master')
+@section('content')
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -10,9 +11,9 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="<?php echo url('/admin/home');?>">Home</a></li>
-              <li class="breadcrumb-item"><a href="<?php echo url('/admin/mobile');?>">Mobile</a></li>
-              <li class="breadcrumb-item active">Show Mobile</li>
+				<li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
+				<li class="breadcrumb-item"><a href="{{route('mobile.index')}}">Products</a></li>
+				<li class="breadcrumb-item active">Mobile Detail</li>
             </ol>
           </div>
         </div>
@@ -28,43 +29,34 @@
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Show Mobile</h3>
+                <h3 class="card-title">Mobile Detail</h3>
               </div>
-			 
-              <!-- /.card-header -->
-              <!-- form start -->
-			  
                 <div class="card-body">
 					<div class="row">
-						<div class="col-12 col-sm-6">
-						  
-						  <div class="col-12">
-							<img src="<?php echo url('/uploads/mobile/'.$data->image_1);?>" class="product-image" alt="Product Image">
-						  </div>
-						  <div class="col-12 product-image-thumbs">
-							<div class="product-image-thumb active"><img src="<?php echo url('/uploads/mobile/'.$data->image_1);?>" alt="Product Image"></div>
-							<?php 
-							if($data->image_2)
-							{
-							?>
-							<div class="product-image-thumb" ><img src="<?php echo url('/uploads/mobile/'.$data->image_2);?>" alt="Product Image"></div>
-							<?php } 
-							if($data->image_3) {
-							?>
-							<div class="product-image-thumb" ><img src="<?php echo url('/uploads/mobile/'.$data->image_3);?>" alt="Product Image"></div>
-							<?php } ?>
-						  </div>
+					<div class="col-12 col-sm-6">
+						<div class="col-12">
+							<img src="{{$data->image_1}}" class="product-image" alt="Mobile Image">
 						</div>
-						<div class="col-12 col-sm-6">
-						  <h3 class="my-3">{{$data->name}}</h3>
-						  <h3 class="my-3">{{$data->price}}</h3>
-						  <span class="description">Category - {{$data->category_name}}</span></br></br>
-						  <span class="description">Brand - {{$data->brand_name}}</span></br></br>
-						  <p><?php echo $data->description;?></p>
-						  <hr>
+						<div class="col-12 product-image-thumbs">
+							<div class="product-image-thumb active"><img src="{{$data->image_1}}" alt="Mobile Image"></div>
+							@if($data->image_2)
+							<div class="product-image-thumb" ><img src="{{$data->image_2}}" alt="Mobile Image"></div>
+							@endif
 						
+							@if($data->image_3)
+							<div class="product-image-thumb" ><img src="{{$data->image_3}}" alt="Mobile Image"></div>
+							@endif
 						</div>
-					  </div>
+					</div>
+					<div class="col-12 col-sm-6">
+					  <h3 class="my-3">{{$data->price}}</h3>
+					  <h3 class="my-3">{{$data->name}}</h3>
+					  <span class="description">Category - {{$data->category->name}}</span></br></br>
+					  <span class="description">Brand - {{$data->brand->name}}</span></br></br>
+					  <p>{!! $data->description !!}</p>
+					  <hr>
+					</div>
+					</div>
             </div>
             <!-- /.card -->
           </div>
@@ -75,8 +67,9 @@
     </section>
     <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
-  @include('admin.include.footer')
+@endsection
+@section('script')
 <script>
 $('#mobiletab').addClass('active');
 </script>
+@endsection

@@ -33,4 +33,31 @@ class OurTeam extends Authenticatable
 		   return $query;
 	}
 	
+	
+	/*New Routes*/
+	public static function getTeamList(){
+		$query = OurTeam::where('created_by',Auth::user()->id);
+	    return $query;
+	}
+	
+	function getImageAttribute($image){
+		return $image == null ? url('/images/image_not_found.jpg') : asset('/uploads/our_team/'.$image);
+	}
+	
+	public static function takeRecordForWebsite($id,$node){
+		$query = OurTeam::where('created_by',$id)->orderBy('id','desc')->take($node)->get();
+		return $query;
+	}
+	
+	function getOurTeamPageLink($title){
+		return url('/'.$title.'/ourteam');
+	}
+	
+	public static function getOurTeamListForIndex($id,$node){
+		$query = OurTeam::where('created_by',$id)->orderBy('id','desc')->paginate($node);
+		return $query;
+	}
+	
+	
+	
 }

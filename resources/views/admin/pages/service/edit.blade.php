@@ -1,4 +1,5 @@
- @include('admin.include.header')
+@extends('admin.layouts.master')
+@section('content')
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -6,12 +7,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Products</h1>
+            <h1>Service</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="<?php echo url('/admin/home');?>">Home</a></li>
-              <li class="breadcrumb-item"><a href="<?php echo url('/admin/service');?>">Service</a></li>
+			  <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
+              <li class="breadcrumb-item"><a href="{{route('service.index')}}">Service</a></li>
               <li class="breadcrumb-item active">Edit Service</li>
             </ol>
           </div>
@@ -30,24 +31,21 @@
               <div class="card-header">
                 <h3 class="card-title">Edit Service</h3>
               </div>
-			 
-              <!-- /.card-header -->
-              <!-- form start -->
-			   <form id="main_id" method="POST" action="<?php echo URL::to('/')?>/admin/service/{{App\Helpers\CryptHelper::encryptstring($data->id)}}" enctype="multipart/form-data">
+				<!-- /.card-header -->
+			    <form id="main_id" method="POST" action="{{route('service.update',Crypt::encrypt($data->id))}}" enctype="multipart/form-data">
 				@method('PUT')
 				@csrf
                 <div class="card-body">
 					<div class="form-group">
-						 <label for="exampleInputEmail1">Name <span class="error">*</span></label>
-						  <input type="text" class="form-control" id="name" placeholder="Enter name" name="name" maxlength="255" value="{{ $data->name }}">
-						  <span class="error" id='name_error'>{{$errors->Service->first('name')}}</span>
+						<label for="exampleInputEmail1">Name <span class="error">*</span></label>
+						<input type="text" class="form-control" id="name" placeholder="Enter name" name="name" maxlength="255" value="{{$data->name}}">
+						<span class="error">{{$errors->first('name')}}</span>
 					</div>
 					<div class="form-group">
 						<label for="exampleInputEmail1">Description<span class="error">*</span></label>
-						<textarea type="text" class="form-control" id="description" name="description" placeholder="Enter Description"><?php echo $data->description;?></textarea>
-						<span class="error" id='description_error'>{{$errors->Service->first('description')}}</span>
+						<textarea type="text" class="form-control" id="description" name="description" placeholder="Enter Description">{!!$data->description!!}</textarea>
+						 <span class="error">{{$errors->first('description')}}</span>
 					</div>
-					
                 </div>
 				<div class="card-footer">
                   <button type="submit" class="btn btn-primary">Update</button>
@@ -64,50 +62,12 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  @include('admin.include.footer')
+@endsection
+@section('script')
+<script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
+{!! $validator->selector('#main_id') !!}
 <script>
 $('#servicetab').addClass('active');
-
-   $('#main_id').submit(function (e) {
-	   
-	$(':input[type="submit"]').prop('disabled', true);
-	var name = $('#name').val();
-	var description = $('#description').val();
-	
-	var cnt = 0;
-	var f = 0;
-	
-	$('#name_error').html("");
-	$('#description_error').html("");
-	
-
-   
-	if (name.trim() == '') {
-		$('#name_error').html("Please enter Name");
-		cnt = 1;
-		f++;
-		if(f == 1)
-		{
-			$('#name').focus();
-		}
-	}
-	if (description.trim() == '') {
-		$('#description_error').html("Please enter Description");
-		cnt = 1;
-		f++;
-		if(f == 1)
-		{
-			$("#description").addClass("autofocous");
-		}
-	}
-	
-	
-	
-	if (cnt == 1) {
-		$(':input[type="submit"]').prop('disabled', false);
-		return false;
-	} else {
-		return true;
-	}
-});
+CKEDITOR.replace('description');
 </script>
+@endsection

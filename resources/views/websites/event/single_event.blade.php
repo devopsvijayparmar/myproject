@@ -21,17 +21,15 @@
                         <article>
                             <header class="entry-header">
                                 <div class="entry-thumbnail">
-                                    <img class="img-responsive blog_card_img" src="<?php echo url('/uploads/event/'.$event->image);?>" alt="">
-                                     <a class="preview" href="<?php echo url('/uploads/event/'.$event->image);?>" rel="prettyPhoto"><span class="post-format post-format-video"><i class="fa fa-film"></i></span></a>
+                                    <img class="img-responsive blog_card_img" src="{{$event->image}}" alt="">
+                                     <a class="preview" href="{{$event->image}}" rel="prettyPhoto"><span class="post-format post-format-video"><i class="fa fa-film"></i></span></a>
                                 </div>
                                 <div class="entry-date">Start Date: {{$event->start_date}}</div>
                                 <div class="entry-date">End Date: {{$event->end_date}}</div>
-                                <h2 class="entry-title"><a href="#">While now the fated Pequod had been so long afloat this</a></h2>
+                               <h2 class="entry-title"><a href="#">{{$event->title}}</a></h2>
                             </header>
-
                             <div class="entry-content">
-                                <?php echo $event->description; ?>
-                               
+                               {!! $event->description !!}
                             </div>
                         </article>
                     </div>
@@ -41,7 +39,6 @@
 
         </div>
     </section>
-    
   @include('websites.event.include.footer')
   <script>
 	$('#eventtab').addClass('active');

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Session;
 use DB;
+use Illuminate\Support\Facades\Lang;
 use Validator;
 use App\Models\PurchasePlan;
 use App\Models\PurchasePlanHistory;
@@ -14,6 +15,7 @@ use App\Models\front\TopUp;
 use Auth;
 use Hash;
 use Crypt;
+use DataTables;
 
 
 class PurchasePlanController extends Controller
@@ -26,17 +28,67 @@ class PurchasePlanController extends Controller
 	 
 	function __construct()
     {
-	
-		$this->data['title'] = 'Purchase Plan';
+	     $this->middleware('permission:purchase_plan', ['only' => ['index','upgradePlan']]);
     }
 	
 	public function index(Request $request)
     {    
 	    $user = Auth::user();
-	    $this->data['purchaseplan'] = PurchasePlan::userPurchasePlan($user->id);
-	    $this->data['purchaseplanhistory'] = PurchasePlanHistory::userPurchasePlan($user->id);
-	    $this->data['topup'] = TopUp::find(1);
-		return view('admin.purchase_plan.index',$this->data);
+	    
+		if ($request->ajax()) {
+		  
+		    $data = PurchasePlanHistory::userPurchasePlan($user->id);
+			return DataTables::of($data)
+			->addIndexColumn()
+			
+			->editColumn('price', function ($row)
+			{
+				if($row->price_text) { $price = $row->price_text; } elseif($row->price) { $price = $row->price; } else $price = '-';
+			  
+			   return $price;
+			})
+			->editColumn('created_at', function ($row)
+			{
+			   return date('d-m-Y',strtotime($row->created_at));
+			})
+			
+			->editColumn('page_builder', function ($row)
+			{
+				if($row->page_builder) { $pagebuilder = $row->page_builder.' - '.$row->no_of_page_builder; } elseif($row->no_of_page_builder) { $pagebuilder = $row->no_of_page_builder; } else $pagebuilder= '-';
+			  
+			   return $pagebuilder;
+			})
+			
+			
+			->rawColumns(['created_at'])
+			->make(true);
+
+		} else {
+		
+			$columns = [
+				['data' => 'DT_RowIndex', 'name' => 'id', 'title' => "Id"],
+				['data' => 'plan_name','name' => 'plan_name', 'title' => __("Plan Name"),'searchable'=>true,'orderable' => true],
+				['data' => 'price','name' => 'price', 'title' => __("Price(USD)"),'searchable'=>true,'orderable' => true],
+				['data' => 'no_of_emails','name' => 'no_of_emails', 'title' => __("Emails"),'searchable'=>true,'orderable' => true],
+				['data' => 'page_builder','name' => 'page_builder', 'title' => __("Page Builder"),'searchable'=>true,'orderable' => true],
+				['data' => 'no_of_landing_page','name' => 'no_of_landing_page', 'title' => __("Landing Page"),'searchable'=>true,'orderable' => true],
+				['data' => 'no_of_address_book','name' => 'no_of_address_book', 'title' => __("Address Book"),'searchable'=>true,'orderable' => true],
+				['data' => 'start_date','name' => 'start_date', 'title' => __("Start Date"),'searchable'=>true,'orderable' => true],
+				['data' => 'expiry_date','name' => 'expiry_date', 'title' => __("Expiry Date"),'searchable'=>true,'orderable' => true],
+				['data' => 'duration','name' => 'duration', 'title' => __("Duration"),'searchable'=>true,'orderable' => true],
+				['data' => 'created_at','name' => 'created_at', 'title' => __("Date"),'searchable'=>true,'orderable' => true]];
+		  
+			$data['dateTableFields'] = $columns;
+			$data['dateTableUrl'] = route('purchase-plan');
+			$data['dateTableTitle'] = "Purchase Plan";
+			$data['dataTableId'] = time();
+			$data['purchaseplan'] = PurchasePlan::userPurchasePlan($user->id);
+			$data['topup'] = TopUp::find(1);
+			return view('admin.pages.purchase_plan.index',$data);
+		
+		}
+		
+		return view('admin.pages.purchase_plan.index',$data);
     }
 	
 	
@@ -92,13 +144,11 @@ class PurchasePlanController extends Controller
 			$purchase_plan = PurchasePlanHistory::create($input);
 			/*Purchase Order History*/ 
 			
-			Session::flash('success', "Successfully Inserted");
-			return redirect()->back();
+			return redirect()->back()->with('success', Lang::get('messages.created'));
 			
 			
 		}else{
-			Session::flash('error', "we're sorry,but something went wrong.Please try again");
-			return redirect()->back();
+			return redirect()->back()->with('error', Lang::get('messages.error'));
 		}
 	   
     }

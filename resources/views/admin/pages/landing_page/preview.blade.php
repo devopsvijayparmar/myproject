@@ -1,1 +1,1 @@
-<?php echo $landing_page->description;?>
+{!!$landing_page->description!!}

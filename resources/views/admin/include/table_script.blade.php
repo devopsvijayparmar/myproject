@@ -15,7 +15,6 @@ $(function() {
         serverSide: true,
         ajax: "{{$dateTableUrl}}",
         columns: dataTableFields,
-        order: [[0, 'desc']],
     });
 
     $('#filter-form').on('submit', function(e) {

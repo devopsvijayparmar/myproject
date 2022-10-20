@@ -63,11 +63,11 @@
 								<form  method="POST" action="{{url('/')}}/{{$title}}/contact-us" enctype="multipart/form-data" id="main_id" class="form_contant">
 								@csrf
 								<div class="form-group">
-									<input type="text" name="name" id="name" class="form-control" placeholder="Name">
+									<input type="text" name="name" id="name" class="form-control" placeholder="Name" maxlength="255">
 									<span id="name_error" style="color:red;"></span>
 								</div>
 								<div class="form-group">
-									<input type="text" name="email" id="email" class="form-control" placeholder="Email">
+									<input type="text" name="email" id="email" class="form-control" placeholder="Email" maxlength="255">
 									<span id="email_error" style="color:red;"></span>
 								</div>
 								<div class="form-group">

@@ -59,4 +59,14 @@ class Gallery extends Authenticatable
 		return $this->image == null ? url('/images/image_not_found.jpg') : asset('/uploads/gallery/'.$this->image);
 	}
 	
+	public static function takeRecordForWebsite($id,$node){
+		$query = Gallery::where('created_by',$id)->orderBy('id','desc')->take($node)->get();
+		return $query;
+	}
+	
+	public static function getRecordForWebsite($id,$paginate){
+		$query = Gallery::where('created_by',$id)->orderBy('id','desc')->paginate($paginate);
+		return $query;
+	}
+	
 }

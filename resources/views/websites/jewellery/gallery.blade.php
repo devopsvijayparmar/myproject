@@ -38,7 +38,7 @@
       <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
         <div class="full">
           <div class="blog_section">
-            <div class="blog_feature_img"> <a class="preview" href="{{url('/uploads/gallery')}}/{{$retrieved_data->image}}" rel="prettyPhoto"><img class="img-responsive card_img" src="{{url('/uploads/gallery')}}/{{$retrieved_data->image}}" ></a> </div>
+            <div class="blog_feature_img"> <a class="preview" href="{{$retrieved_data->image_path}}" rel="prettyPhoto"><img class="img-responsive card_img" src="{{$retrieved_data->image_path}}" ></a> </div>
             <div class="blog_feature_cantant">
             </div>
           </div>

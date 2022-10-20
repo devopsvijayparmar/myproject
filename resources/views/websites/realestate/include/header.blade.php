@@ -6,10 +6,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>@if(isset($site_setting->title)) {{$site_setting->title}} @else {{$admin_site_setting->title}} @endif</title>
-	<?php
-	$fav_icon = "";if(isset($site_setting->fav_icon)) { $fav_icon = $site_setting->fav_icon;} else { $fav_icon = $admin_site_setting->fav_icon;}
-	$site_logo = "";if(isset($site_setting->site_logo)) { $site_logo = $site_setting->site_logo;} else { $site_logo = $admin_site_setting->site_logo;}
-	?>
+	@php $fav_icon = "";@endphp @if(isset($site_setting->fav_icon)) @php $fav_icon = $site_setting->fav_icon @endphp @else @php $fav_icon = $admin_site_setting->fav_icon @endphp @endif
+	@php $site_logo = "";@endphp @if(isset($site_setting->site_logo)) @php $site_logo = $site_setting->site_logo @endphp @else @php $site_logo = $admin_site_setting->site_logo @endphp @endif
 	<!-- core CSS -->
     <link href="{{ asset('/websites/realestate/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('/websites/realestate/css/font-awesome.min.css') }}" rel="stylesheet">
@@ -26,7 +24,7 @@
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
     <![endif]-->       
-    <link rel="shortcut icon" href="{{asset('/uploads/site_settings/')}}/{{$fav_icon}}">
+    <link rel="shortcut icon" href="{{$fav_icon}}">
 </head><!--/head-->
 <style>
 
@@ -43,7 +41,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="{{url('/')}}/{{$title}}"><img src="{{url('/')}}/uploads/site_settings/{{$site_logo}}" alt="logo"></a>
+                    <a class="navbar-brand" href="{{url('/')}}/{{$title}}"><img src="{{$site_logo}}" alt="logo"></a>
                 </div>
 				
                 <div class="collapse navbar-collapse navbar-right">

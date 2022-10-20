@@ -22,8 +22,8 @@
                         <article>
                             <header class="entry-header">
                                 <div class="entry-thumbnail">
-                                    <img class="img-responsive blog_card_img" src="{{url('/uploads/blog')}}/{{$blog->image}}" alt="">
-                                     <a class="preview" href="{{url('/uploads/blog')}}/{{$blog->image}}" rel="prettyPhoto"><span class="post-format post-format-video"><i class="fa fa-film"></i></span></a>
+                                    <img class="img-responsive blog_card_img" src="{{$blog->image}}" alt="">
+                                     <a class="preview" href="{{$blog->image}}" rel="prettyPhoto"><span class="post-format post-format-video"><i class="fa fa-film"></i></span></a>
                                 </div>
                                 <div class="entry-date">{{$blog->created_at}}</div>
                             </header>

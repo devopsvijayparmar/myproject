@@ -20,14 +20,18 @@ class Brand extends Authenticatable
 			$query = Brand::where('id',$id)->orderBy('id','desc')->where('created_by',Auth::user()->id)->first();
 		   return $query;
 	} 
-	public static function categoryList(){
+	/* public static function categoryList(){
 			$query = Brand::orderBy('id','desc')->where('created_by',Auth::user()->id)->get();
 		   return $query;
-	} 
+	}  */
 	
 	/*New*/
 	public static function brandList(){
 		$query = Brand::where('created_by',Auth::user()->id);
+		return $query;
+	} 
+	public static function getBrandListForDropdown(){
+		$query = Brand::orderBy('name','asc')->where('created_by',Auth::user()->id)->get();
 		return $query;
 	} 
 	

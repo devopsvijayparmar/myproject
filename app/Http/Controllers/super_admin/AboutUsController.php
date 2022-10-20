@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\super_admin\front;
+namespace App\Http\Controllers\super_admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -51,7 +51,7 @@ class AboutUsController extends Controller
 			$input['updated_at'] = date('Y-m-d H:i:s');
 			$input['created_by'] = $auth->id;
 
-			$aboutus = CMS::where('type','about-us');
+			$aboutus = CMS::where('type','about-us')->first();
 			$aboutus->update($input);
 			
 			if($aboutus) {

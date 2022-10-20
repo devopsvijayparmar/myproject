@@ -30,24 +30,21 @@
 		   @foreach($mobile as $productdata)
           <div class="col-md-4 col-sm-6 col-xs-12 margin_bottom_30_all">
             <div class="product_list">
-              <div class="product_img">  <a href="{{url('/')}}/{{$title}}/{{App\Helpers\CryptHelper::encryptstring($productdata->id)}}/single-mobile"><img class="img-responsive card_img" src="{{url('/uploads/mobile')}}/{{$productdata->image_1}}" alt=""></a> </div>
+              <div class="product_img">  <a href="{{$productdata->getDetailPageLink($title)}}"><img class="img-responsive card_img" src="{{$productdata->image_1}}" alt=""></a> </div>
               <div class="product_detail_btm">
                 <div class="center">
-                  <h4><a href="it_shop_detail.html">{{ mb_strimwidth($productdata->name, 0, 40, "...")}}</a></h4>
+                  <h4><a href="{{$productdata->getDetailPageLink($title)}}">{{ mb_strimwidth($productdata->name, 0, 40, "...")}}</a></h4>
                 </div>
               
 				<div class="product_price">
-				 <p><span class="">{{$productdata->brand_name}}</span></p>
-				  <?php
+				<p><span class="">{{$productdata->brand_name}}</span></p>
+				@php
 				$currency_symbol = "";
-		        if(isset($site_setting->currency_symbol)) { $currency_symbol = $site_setting->currency_symbol;};
-				if($productdata->price)
-				{
-				?>
-				  <p><span class="new_price">{{$currency_symbol.$productdata->price}}</span></p>
-				  <?php
-				}
-				?>
+				@endphp
+				@if(isset($site_setting->currency_symbol)) @php $currency_symbol = $site_setting->currency_symbol @endphp @endif
+				@if($productdata->price)
+				 <p><span class="new_price">{{$currency_symbol.$productdata->price}}</span></p>
+				@endif
 				</div>
               </div>
             </div>

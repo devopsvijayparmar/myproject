@@ -27,7 +27,7 @@
       <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 pull-right blog-border">
         <div class="full">
           <div class="blog_section margin_bottom_0">
-            <div class="blog_feature_img"> <img class="img-responsive" src="{{url('/uploads/blog')}}/{{$blog->image}}" alt="#"> </div>
+            <div class="blog_feature_img"> <img class="img-responsive" src="{{$blog->image}}" alt="#"> </div>
             <div class="blog_feature_cantant">
               <p class="blog_head">{{$blog->title}}</p>
               <div class="post_info">
@@ -50,7 +50,7 @@
 			  
 			    @foreach($bloglast3 as $retrieved_data)
                 <li>
-				<p class="post_head"><a href="{{url('/')}}/{{$title}}/{{App\Helpers\CryptHelper::encryptstring($retrieved_data->id)}}/single-blog">{{$retrieved_data->title}}</a></p>
+				<p class="post_head"><a href="{{$retrieved_data->getDetailPageLink($title)}}">{{$retrieved_data->title}}</a></p>
                   <p class="post_date"><i class="fa fa-calendar" aria-hidden="true"></i> {{$retrieved_data->created_at}}</p>
                 </li>
                 @endforeach

@@ -9,10 +9,14 @@ use Illuminate\Support\Facades\Session;
 use DB;
 use Validator;
 use App\Models\LandingPage;
+use Illuminate\Support\Facades\Lang;
+use JsValidator;
+use DataTables;
 use App\Models\Group;
 use App\Models\GroupData;
 use App\Models\AddressBook;
 use App\Models\LandingPageEmails;
+use App\Traits\PurchasePlan;
 use Auth;
 use Hash;
 use Crypt;
@@ -26,53 +30,135 @@ class LandingPageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+	use PurchasePlan; 
+	 
+	 
+	protected $validationRules = [
+		'title' => 'required|string|max:255',
+		'url_name' => 'required|string|max:255',
+    ];  
+	
+	protected $validationRulesSend = [
+		'for' => 'required',
+		'description' => 'required',
+		'subject' => 'required|string|max:255',
+    ]; 
+	 
 	 
 	function __construct()
     {
 		$this->middleware('permission:landing_page', ['only' => ['index','create','store','edit','update','show','destroy','editor','editEditor','exitTitle','exitTitleEdit','sendLandingPage']]);
-		$this->data['title'] = 'Landing Page';
 		
     }
 	
 	public function index(Request $request)
     {    
-	    $this->data['auth'] = Auth::user();
-	    $this->data['landing_page'] = LandingPage::all();
-		$this->data['group'] = Group::groupList();	
-		$this->data['address_book'] = AddressBook::addressbookList();	
-		return view('admin.landing_page.index',$this->data);
+	 
+	    $auth = Auth::user(); 
+		if ($request->ajax()) {
+		  
+			$data = LandingPage::getLangingPageList();
+			return DataTables::of($data)
+			->addIndexColumn()
+			
+		     ->addColumn('url', function ($row) {
+				return '<a href="'.$row['url'].'" target="_blank">'.$row->url.'</a>';
+			})
+			 ->addColumn('status', function ($row) {
+				 
+				if($row['status'] == 0)
+				{
+					$class = 'warning';
+					$status = 'pending';
+					$sendname = 'send';
+				}
+				else
+				{
+					$class = 'success';
+					$status = 'sent';
+					$sendname = 'send again';
+				}
+				return '<span class="badge badge-'.$class.'">'.$status.'</span>';
+			})
+			->editColumn('action', function ($row)
+			{
+				
+				if($row['status'] == 0)
+				{
+					$sendname = 'send';
+				}
+				else
+				{
+					$sendname = 'send again';
+				}
+				
+				$send_link = Crypt::encrypt($row['id']);
+			    $send_link = "'" . $send_link . "'";
+				
+				$btn = '<a href="javascript:void(0)" onclick="sendLandingPage('.$send_link.')"><span class="badge badge-info mr-2">'.$sendname.'</span></a>';
+				
+			   $btn .= '<a title="Edit" class="mr-2" href="' . route('landing-page.edit', Crypt::encrypt($row['id'])) . '" class="mr-2"><i class="fas fa-edit text-info font-16"></i></a>';
+			  
+			   $delete_link = route('landing-page.destroy', Crypt::encrypt($row['id']));
+			   $delete_link = "'" . $delete_link . "'";
+			   $btn .= '<a class="mr-2" title="Delete" href="javascript:void(0);" onclick="deleteRecord('.$delete_link.');" data-popup="tooltip"><i class="fas fa-trash-alt text-info font-16"></i></a>';
+			   
+			   $btn .= '<a title="Details" target="_blank" href="' .$row->url. '" data-popup="tooltip"><i class="fas fa-eye text-info font-16"></i></a>';
+			   
+			   return $btn;
+			})
+			->rawColumns(['url','status','action'])
+			->make(true);
+
+		} else {
+		
+		    
+			$columns = [
+				
+				['data' => 'DT_RowIndex', 'name' => 'id', 'title' => "Id"],
+				['data' => 'title','name' => 'title', 'title' => __("Title"),'searchable'=>false,'orderable' => false],
+				['data' => 'url','name' => 'url', 'title' => __("Url"),'searchable'=>true,'orderable' => true],
+				['data' => 'status','name' => 'status.name', 'title' => __("Status"),'searchable'=>true,'orderable' => true],
+				['data' => 'action', 'name' => 'action', 'title' => "Action", 'searchable' => false, 'orderable' => false]];
+		  
+			$data['dateTableFields'] = $columns;
+			$data['dateTableUrl'] = route('landing-page.index');
+			$data['dateTableTitle'] = "Landing Page";
+			$data['dataTableId'] = time();
+			$data['createUrl'] = route('landing-page.create');
+			$data['auth'] = Auth::user();
+			$data['group'] = Group::groupListData();	
+			$data['address_book'] = AddressBook::addressBookList();	
+			return view('admin.pages.landing_page.index',$data);
+		
+		}
+		
+		
     }
 
 	public function create(Request $request)
     { 	
-	    $this->data['auth'] = Auth::user();
-		return view('admin.landing_page.create',$this->data);
+	    $data['auth'] = Auth::user();
+		return view('admin.pages.landing_page.create',$data);
     }
 	
 	public function store(Request $request)
     {
-    	 $validator = Validator::make($request->all(), [
-			'title' => 'required|max:255',
-			'url_name' => 'required|max:50',
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()->back()
-                            ->withErrors($validator, 'LandingPage')
-                            ->withInput();
-        } else {
+    	$auth = Auth::user(); 
+		$input = $request->all();
+    	$validator = Validator::make($input, $this->validationRules);
+  
+        if($validator->fails()) {
+			return redirect()->back()->withErrors($validator)->withInput();
+        }
 			
-		$exitdata = LandingPage::checkexittitle($request->url_name);
+		$exitdata = LandingPage::checkExitTitle($request->url_name);
 		
         if($exitdata)	
 		{
-			 Session::flash('error', "This url name is already been taken");
-			 return redirect()->back();
+			 return redirect()->back()->with('error', __('messages.url_name_already_been_taken'));
 		}
 
-		$auth = Auth::user();
-        $input = $request->all();
-		
 		$input['created_at'] = date('Y-m-d H:i:s');
 		$input['created_by'] = $auth->id;
 		$input['url'] = url("/").'/'.$auth->title.'/landing-page/'.$request->url_name;
@@ -81,79 +167,61 @@ class LandingPageController extends Controller
 		$landingpage = LandingPage::create($input);
 		
 		if($landingpage){
-			Session::flash('success', 'Successfully Inserted');
-			return redirect('admin/landing-page');
+			return redirect()->route('landing-page.index')->with('success', Lang::get('messages.created'));
 		}else{
-			 Session::flash('error', "we're sorry,but something went wrong.Please try again");
-			 return redirect()->back();
+			return redirect()->back()->with('error', Lang::get('messages.error'));
 		}
 
-		}
     }
 	
 	public function edit($id)
     { 		
-	     $this->data['auth'] = Auth::user();
+	     $data['auth'] = Auth::user();
 	     $id = Crypt::decrypt($id);
-		 $this->data['data'] = LandingPage::getRecordById($id);
-		 return view('admin.landing_page.edit',$this->data);
+		 $data['data'] = LandingPage::find($id);
+		 return view('admin.pages.landing_page.edit',$data);
         
     }
 	
 	public function update(Request $request,$id)
     {
-		 $request_id = $id;
-		 $id = Crypt::decrypt($id);
-    	 $validator = Validator::make($request->all(), [
-			'title' => 'required|max:255',
-			'url_name' => 'required|max:50',
-        ]);
-
-
-        if ($validator->fails()) {
-             return redirect()->back()
-                            ->withErrors($validator, 'LandingPage')
-                            ->withInput();
-        } else {
+		
+		$id = Crypt::decrypt($id);
+    	$auth = Auth::user(); 
+		$input = $request->all();
+    	$validator = Validator::make($input, $this->validationRules);
+  
+        if($validator->fails()) {
+			return redirect()->back()->withErrors($validator)->withInput();
+        }
 			
-		$exitdata = LandingPage::checkexittitleEdit($request->url_name,$id);
+		$exitdata = LandingPage::checkExitTitleWithId($request->url_name,$id);
 		
         if($exitdata)	
 		{
-			 Session::flash('error', "This url name is already been taken");
-			 return redirect()->back();
+			return redirect()->back()->with('error', __('messages.url_name_already_been_taken'));
 		}	
 			
-		$auth = Auth::user();
-		$input = $request->all();
 		$input['updated_at'] = date('Y-m-d H:i:s');
 		$input['updated_by'] = $auth->id;
 		$input['url'] = url("/").'/'.$auth->title.'/landing-page/'.$request->url_name;
 		
 		$landingpage = LandingPage::where('created_by', Auth::user()->id)->where('id',$id)->first();
-		if($landingpage){
-			$landingpage->update($input);
-		}
-		else{
-			abort(401);
-		}
+		$landingpage->update($input);
 		
 		if($landingpage){
-			Session::flash('success', 'Successfully Updated');
-			return redirect('admin/landing-page');
+			return redirect()->route('landing-page.index')->with('success', Lang::get('messages.updated'));
 		}else{
-			
-			 Session::flash('error', "we're sorry,but something went wrong.Please try again");
-			 return redirect()->back();
+			return redirect()->back()->with('error', Lang::get('messages.error'));
 		}
-		}
+		
     }
 	
 	public function show($id)
     {    
 	    $id = Crypt::decrypt($id);
-	    $this->data['data'] = LandingPage::getRecordById($id);
-        return view('admin.landing_page.show',$this->data);
+	    $data['data'] = LandingPage::find($id);
+        return view('admin.pages.landing_page.show',$data);
     }
 
     /**
@@ -165,26 +233,24 @@ class LandingPageController extends Controller
 	public function destroy(Request $request,$id)
     {
 		$id = Crypt::decrypt($id);
-		/*Record Delete*/
 		$auth = Auth::user(); 	
-	    $delete = LandingPage::where('id', $id)->where('created_by', Auth::user()->id)->update(['deleted_by' => $auth->id,'deleted_at'=>date('Y-m-d H:i:s')]);
-		
+	    $delete = LandingPage::where('created_by', $auth->id)->where('id', $id)->delete();
 		return $delete;
     }
 	
 	public function editor(){
 		
-		return view('admin.landing_page.editor');
+		return view('admin.pages.landing_page.editor');
 	}
 	
 	public function editEditor($id){
-	    $this->data['data'] = LandingPage::getRecordById($id);
-		return view('admin.landing_page.edit_editor',$this->data);
+	    $data['data'] = LandingPage::find($id);
+		return view('admin.pages.landing_page.edit_editor',$data);
 	}
 	
 	public function exitTitle(Request $request)
     {
-		$exitdata = LandingPage::checkexittitle($request->url_name);
+		$exitdata = LandingPage::checkExitTitle($request->url_name);
 		if($exitdata)
 		{
 			echo 1;
@@ -197,7 +263,7 @@ class LandingPageController extends Controller
 	
 	public function exitTitleEdit(Request $request)
     {
-		$exitdata = LandingPage::checkexittitleEdit($request->url_name,$request->id);
+		$exitdata = LandingPage::checkExitTitleWithId($request->url_name,$request->id);
 		if($exitdata)
 		{
 			echo 1;
@@ -210,22 +276,18 @@ class LandingPageController extends Controller
 	
 	public function sendLandingPage(Request $request)
     {
-    	 $validator = Validator::make($request->all(), [
-			'for' => 'required',
-			'description' => 'required',
-			'subject' => 'required|max:255',
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()->back()
-                            ->withErrors($validator, 'LandingPage')
-                            ->withInput();
-        } else {
-			
+		
 		$auth = Auth::user();
         $input = $request->all();
+    	$validator = Validator::make($input, $this->validationRulesSend);
+  
+        if($validator->fails()) {
+			return redirect()->back()->withErrors($validator)->withInput();
+        }
+			
+		
 		$id = Crypt::decrypt($request->landing_page_id);
-		$landingpage = LandingPage::getRecordById($id);
+		$landingpage = LandingPage::find($id);
 		
 		$input['created_at'] = date('Y-m-d H:i:s');
 		$input['created_by'] = $auth->id;
@@ -236,8 +298,18 @@ class LandingPageController extends Controller
 			$addressdata = AddressBook::getRecordForLandingPage($groupdata);
 		}
 		else{
-			$addressdata = AddressBook::getRecordForLandingPage($request->users);
+			if(isset($request->users)){
+				$addressdata = AddressBook::getRecordForLandingPage($request->users);
+			}else{
+				return redirect()->back()->with('error', Lang::get('messages.error'));
+			}
 		}
+		
+		
+		if(count($addressdata) > $this->userPurchasePlan()->no_of_emails){
+			return redirect()->route('landing-page.index')->with('error', Lang::get('messages.email_limit'));
+		}
+		
 		
 		foreach($addressdata as $retrieved_data)
 		{
@@ -274,7 +346,7 @@ class LandingPageController extends Controller
 			Session::flash('error', 'Something went wrong data not Imported');
 			 return redirect()->back();
 		}
-		}
+		
     }
 	
 	

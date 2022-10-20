@@ -1,8 +1,8 @@
 <footer id="footer">
         <div class="row">
                 <div class="col-sm-6">
-                @if(isset($contact_us->address))<span class="topbar-label"><i class="fa fa-home"></i></span> <span class="topbar-hightlight mr-10">{{$contact_us->address}}</span>@endif
-				@if(isset($contact_us->email))<span class="topbar-label"><i class="fa fa-envelope-o"></i></span> <span class="topbar-hightlight mr-10"><a href="mailto: {{$contact_us->email}}">{{$contact_us->email}}</a></span>@endif
+                @if(isset($contact_us->address))<span class="topbar-label"><i class="fa fa-home"></i></span> <span class="topbar-hightlight mr-10">{{$contact_us->address}}</span>@endif</br>
+				@if(isset($contact_us->email))<span class="topbar-label"><i class="fa fa-envelope-o"></i></span> <span class="topbar-hightlight mr-10"><a href="mailto: {{$contact_us->email}}">{{$contact_us->email}}</a></span>@endif</br>
 				@if(isset($contact_us->contact_1))<span class="topbar-label"><i class="fa fa-phone"></i></span> <span class="topbar-hightlight mr-10"><a href="tel: {{$contact_us->contact_1}}">{{ $contact_us->contact_1}}</a></span>@endif
                 </div>
 				<div class="col-sm-3">

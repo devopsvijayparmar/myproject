@@ -41,7 +41,7 @@
                   <fieldset>
                   <div class="row">
                     <input type="hidden" name="quantity" value="{{$quantity}}">
-                    <input type="hidden" name="product_fk" value="{{$product_fk}}">
+                    <input type="hidden" name="product_id" value="{{$product_id}}">
                     <input type="hidden" name="url" value="single-product">
                     <div class="field col-lg-12 col-md-4 col-sm-8 col-xs-8 mb-2">
                       <input class="field_custom  mb-0" placeholder="Full name" type="text" name="name" id="name" maxlength="255">

@@ -6,7 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Session;
-use DB;
+use Illuminate\Support\Facades\Lang;
+use App\Traits\ImageUpload;
+use JsValidator;
+use DataTables;
 use Validator;
 use App\Models\Category;
 use App\Models\Projects;
@@ -23,164 +26,184 @@ class ProjectsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+	use ImageUpload;
+	
+	protected $validationRules = [
+		'project_type_id' => 'required|max:11',
+		'name' => 'required|string|max:255',
+		'description' => 'required|max:500',
+		'image_1'=>'required|mimes:jpeg,jpg,png|max:20480',
+		'image_2'=>'mimes:jpeg,jpg,png|max:20480',
+		'image_3'=>'mimes:jpeg,jpg,png|max:20480',
+    ]; 
+	
+	protected $validationRulesEdit = [
+		'project_type_id' => 'required|max:11',
+		'name' => 'required|string|max:255',
+		'description' => 'required|max:500',
+		'image_1'=>'mimes:jpeg,jpg,png|max:20480',
+		'image_2'=>'mimes:jpeg,jpg,png|max:20480',
+		'image_3'=>'mimes:jpeg,jpg,png|max:20480',
+    ];    
+	 
 	 
 	function __construct()
     {
 		$this->middleware('permission:projects', ['only' => ['index','create','store','edit','update','show','destroy']]);
-		$this->data['title'] = 'Projects';
+		
     }
 	
 	public function index(Request $request)
     {    
 	   
-        $this->data['projects'] = Projects::getProductsList();	
-		return view('admin.projects.index',$this->data);
+        if ($request->ajax()) {
+		  
+			$data = Projects::getProjectList();
+			return DataTables::of($data)
+			->addIndexColumn()
+			
+			->editColumn('image', function ($row)
+			{
+			   return '<img class="rp-img" src="'.$row['image_1'].'">';
+			})
+		     ->addColumn('project_type', function ($row) {
+				return $row->project_type->name;
+			})
+			
+			->editColumn('action', function ($row)
+			{
+			   $btn = '<a title="Edit" class="mr-2" href="' . route('projects.edit', Crypt::encrypt($row['id'])) . '" class="mr-2"><i class="fas fa-edit text-info font-16"></i></a>';
+			  
+			   $delete_link = route('projects.destroy', Crypt::encrypt($row['id']));
+			   $delete_link = "'" . $delete_link . "'";
+			   $btn .= '<a class="mr-2" title="Delete" href="javascript:void(0);" onclick="deleteRecord('.$delete_link.');" data-popup="tooltip"><i class="fas fa-trash-alt text-info font-16"></i></a>';
+			   
+			   $btn .= '<a title="Details" href="' . route('projects.show', Crypt::encrypt($row['id'])) . '" data-popup="tooltip"><i class="fas fa-eye text-info font-16"></i></a>';
+			   
+			   return $btn;
+			})
+			->rawColumns(['image','project_type','action'])
+			->make(true);
+
+		} else {
+		
+		    
+			$columns = [
+				
+				['data' => 'DT_RowIndex', 'name' => 'id', 'title' => "Id"],
+				['data' => 'image','name' => 'image', 'title' => __("Image"),'searchable'=>false,'orderable' => false],
+				['data' => 'name','name' => 'name', 'title' => __("Name"),'searchable'=>true,'orderable' => true],
+				['data' => 'project_type','name' => 'project_type.name', 'title' => __("Project Type"),'searchable'=>true,'orderable' => true],
+				['data' => 'action', 'name' => 'action', 'title' => "Action", 'searchable' => false, 'orderable' => false]];
+		  
+			$data['dateTableFields'] = $columns;
+			$data['dateTableUrl'] = route('projects.index');
+			$data['dateTableTitle'] = "Projects";
+			$data['dataTableId'] = time();
+			$data['createUrl'] = route('projects.create');
+			return view('admin.pages.projects.index',$data);
+		}
     }
 
 	public function create(Request $request)
     { 	
-	    $this->data['project_types'] = ProjectType::projectTypeList();
-		return view('admin.projects.create',$this->data);
+	    $data['project_types'] = ProjectType::projectTypeList();
+		$data['validator'] = JsValidator::make($this->validationRules);
+		return view('admin.pages.projects.create',$data);
     }
 	
 	public function store(Request $request)
     {
-    	 $validator = Validator::make($request->all(), [
-			'project_type_fk' => 'required|max:11',
-			'name' => 'required|max:255',
-			'description' => 'required|max:5000',
-			'image_1'=>'required|mimes:jpeg,jpg,png',
-			'image_2'=>'mimes:jpeg,jpg,png',
-			'image_3'=>'mimes:jpeg,jpg,png',
-        ]);
-
-        if ($validator->fails()) {
-             return redirect()->back()
-                            ->withErrors($validator, 'projects')
-                            ->withInput();
-        } else {
+    	$auth = Auth::user(); 
+		$input = $request->all();
+    	$validator = Validator::make($input, $this->validationRules);
+  
+        if($validator->fails()) {
+			return redirect()->back()->withErrors($validator)->withInput();
+        }
 			
-		$auth = Auth::user();
-        $input = $request->all();
 		$input['created_at'] = date('Y-m-d H:i:s');
 		$input['created_by'] = $auth->id;
 		
 		if ($request->hasfile('image_1')) {
-			$file = $request->file('image_1');
-			$name_1 = $file->getClientOriginalName();
-			$name_1 = str_replace(" ", "", date("Ymdhis")+1 . $name_1);
-			$file->move(public_path() . '/uploads/projects/', $name_1);
-			$input['image_1'] = $name_1;
+			$image_name_1 = $this->imageUpload($request->file('image_1'),'projects');
+			$input['image_1'] = $image_name_1;
 		}
 		
 		if ($request->hasfile('image_2')) {
-			$file = $request->file('image_2');
-			$name_2 = $file->getClientOriginalName();
-			$name_2 = str_replace(" ", "", date("Ymdhis")+1 . $name_2);
-			$file->move(public_path() . '/uploads/projects/', $name_2);
-			$input['image_2'] = $name_2;
+			$image_name_2 = $this->imageUpload($request->file('image_2'),'projects');
+			$input['image_2'] = $image_name_2;
 		}
 		if ($request->hasfile('image_3')) {
-			$file = $request->file('image_3');
-			$name_3 = $file->getClientOriginalName();
-			$name_3 = str_replace(" ", "", date("Ymdhis")+1 . $name_3);
-			$file->move(public_path() . '/uploads/projects/', $name_3);
-			$input['image_3'] = $name_3;
+			$image_name_3 = $this->imageUpload($request->file('image_3'),'projects');
+			$input['image_3'] = $image_name_3;
 		}
 		
 		$projects = Projects::create($input);
 	
 		if($projects){
-			Session::flash('success', 'Successfully Inserted');
-			return redirect('admin/projects');
+			return redirect()->route('projects.index')->with('success', Lang::get('messages.created'));
 		}else{
-			 Session::flash('error', "we're sorry,but something went wrong.Please try again");
-			 return redirect()->back();
+			return redirect()->back()->with('error', Lang::get('messages.error'));
 		}
-		}
+		
     }
 	
 	
 	public function edit($id)
     { 		
 	     $id = Crypt::decrypt($id);
-		 $this->data['project_types'] = ProjectType::projectTypeList();
-		 $this->data['data'] = Projects::getRecordById($id);
-		 return view('admin.projects.edit',$this->data);
+		 $data['project_types'] = ProjectType::projectTypeList();
+		 $data['data'] = Projects::find($id);
+		 $data['validator'] = JsValidator::make($this->validationRulesEdit);
+		 return view('admin.pages.projects.edit',$data);
         
     }
 	
 	public function update(Request $request,$id)
     {
-		 $request_id = $id;
-		 $id = Crypt::decrypt($id);
-    	 $validator = Validator::make($request->all(), [
-			'project_type_fk' => 'required|max:11',
-			'name' => 'required|max:255',
-			'description' => 'required|max:5000',
-			'image_1'=>'mimes:jpeg,jpg,png',
-			'image_2'=>'mimes:jpeg,jpg,png',
-			'image_3'=>'mimes:jpeg,jpg,png',
-        ]);
-
-
-        if ($validator->fails()) {
-            return redirect()->back()
-                            ->withErrors($validator, 'Projects')
-                            ->withInput();
-        } else {
+		$id = Crypt::decrypt($id);
 		$auth = Auth::user();
-		$input = $request->all();
+    	$input = $request->all();
+    	$validator = Validator::make($input, $this->validationRulesEdit);
+  
+        if($validator->fails()) {
+			return redirect()->back()->withErrors($validator)->withInput();
+        } 
+		
 		$input['updated_at'] = date('Y-m-d H:i:s');
 		$input['updated_by'] = $auth->id;
         				
 		if ($request->hasfile('image_1')) {
-			$file = $request->file('image_1');
-			$name_1 = $file->getClientOriginalName();
-			$name_1 = str_replace(" ", "", date("Ymdhis")+1 . $name_1);
-			$file->move(public_path() . '/uploads/projects/', $name_1);
-			$input['image_1'] = $name_1;
+			$image_name_1 = $this->imageUpload($request->file('image_1'),'projects');
+			$input['image_1'] = $image_name_1;
 		}
 		
 		if ($request->hasfile('image_2')) {
-			$file = $request->file('image_2');
-			$name_2 = $file->getClientOriginalName();
-			$name_2 = str_replace(" ", "", date("Ymdhis")+1 . $name_2);
-			$file->move(public_path() . '/uploads/projects/', $name_2);
-			$input['image_2'] = $name_2;
+			$image_name_2 = $this->imageUpload($request->file('image_2'),'projects');
+			$input['image_2'] = $image_name_2;
 		}
 		if ($request->hasfile('image_3')) {
-			$file = $request->file('image_3');
-			$name_3 = $file->getClientOriginalName();
-			$name_3 = str_replace(" ", "", date("Ymdhis")+1 . $name_3);
-			$file->move(public_path() . '/uploads/projects/', $name_3);
-			$input['image_3'] = $name_3;
+			$image_name_3 = $this->imageUpload($request->file('image_3'),'projects');
+			$input['image_3'] = $image_name_3;
 		}
 		
 		$projects = Projects::where('created_by', Auth::user()->id)->where('id',$id)->first();
+		$projects->update($input);
+		
 		if($projects){
-			$projects->update($input);
-		}
-		else{
-			abort(401);
-		}
-	  
-		if($projects){
-			Session::flash('success', 'Successfully Updated');
-			return redirect('admin/projects');
+			return redirect()->route('projects.index')->with('success', Lang::get('messages.updated'));
 		}else{
-			
-			 Session::flash('error', "we're sorry,but something went wrong.Please try again");
-			 return redirect()->back();
+			return redirect()->back()->with('error', Lang::get('messages.error'));
 		}
-		}
+		
     }
 	
 	public function show($id)
     {    
 	    $id = Crypt::decrypt($id);
-	    $this->data['data'] = Projects::getRecordById($id);
-        return view('admin.projects.show',$this->data);
+	    $data['data'] = Projects::find($id);
+        return view('admin.pages.projects.show',$data);
     }
 
 
@@ -193,9 +216,8 @@ class ProjectsController extends Controller
 	public function destroy(Request $request,$id)
     {
 		$id = Crypt::decrypt($id);
-		/*Record Delete*/
 		$auth = Auth::user(); 	
-	    $delete = Projects::where('id', $id)->where('created_by', Auth::user()->id)->update(['deleted_by' => $auth->id,'deleted_at'=>date('Y-m-d H:i:s')]);
+	    $delete = Projects::where('created_by', $auth->id)->where('id', $id)->delete();
 		return $delete;
     }
 	
