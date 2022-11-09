@@ -15,24 +15,6 @@ class GroupData extends Authenticatable
     protected $table = 'group_data';
     protected $fillable = ['group_id','address_book_id','created_by','created_at','updated_by','updated_at','deleted_by','deleted_at'];
 	
-	/* public static function getRecordByGroupId($id){
-		$query = GroupData::where('group_id',$id)->pluck('address_book_id')->toArray();
-		return $query;
-	} */
-	
-	/* public static function getgroupdatalist($id){
-	
-		$query = GroupData::select('group_data.*','address_book.name','address_book.email','address_book.mobile')
-		->leftjoin('address_book', function($join) {
-			$join->on('group_data.address_book_id', '=', 'address_book.id');
-		})
-		->where('group_data.group_id',$id)
-		->get();
-	    return $query;
-
-	}  */
-	
-	/*New*/
 	public static function getRecordByGroupId($id){
 		$query = GroupData::where('group_id',$id)->pluck('address_book_id')->toArray();
 		return $query;

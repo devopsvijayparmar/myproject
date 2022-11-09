@@ -6,9 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Session;
+use App\Traits\ImageUpload;
 use DB;
 use Validator;
-use App\Models\front\Settings;
+use App\Models\AdminSitesettings;
 use Auth;
 use Hash;
 
@@ -20,6 +21,7 @@ class SettingsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+	use ImageUpload; 
 	 
 	function __construct()
     {
@@ -29,7 +31,7 @@ class SettingsController extends Controller
 	public function index(Request $request)
     {    
 	   
-        $this->data['data'] = Settings::find(1);	
+        $this->data['data'] = AdminSitesettings::find(1);	
 		return view('super_admin.front.settings.index',$this->data);
     }
 
@@ -38,6 +40,8 @@ class SettingsController extends Controller
 		
     	 $validator = Validator::make($request->all(), [
 			'title' => 'required',
+			'fav_icon'=>'mimes:jpeg,jpg,png|max:20480',
+			'site_logo'=>'mimes:jpeg,jpg,png|max:20480'
         ]);
 
 
@@ -45,32 +49,27 @@ class SettingsController extends Controller
            return redirect()->back()
                             ->withErrors($validator, 'Settings')
                             ->withInput();
-        } else {
-			$auth = Auth::user();
-			$input = $request->all();
-			$input['updated_at'] = date('Y-m-d H:i:s');
-			$input['created_by'] = $auth->id;
-            
-			
-			if($request->hasfile('logo')) {
-			$file = $request->file('logo');
-			$name_1 = $file->getClientOriginalName();
-			$name_1 = str_replace(" ", "", date("Ymdhis")+1 . $name_1);
-			$file->move(public_path() . '/uploads/front/settings/', $name_1);
-			$input['logo'] = $name_1;
 		}
+       
+		$auth = Auth::user();
+		$input = $request->all();
+		$input['updated_at'] = date('Y-m-d H:i:s');
+		$input['created_by'] = $auth->id;
+         
+		if ($request->hasfile('fav_icon')) {
+			$image_name = $this->imageUpload($request->file('fav_icon'),'front/settings');
+			$input['fav_icon'] = $image_name;
+		} 
 		
-            
-			$settings = Settings::find(1);
-			$settings->update($input);
-			
-			if($settings) {
-				$request->session()->flash('success', 'Successfully Updated');
-			}
-			else {
-				$request->session()->flash('error', "we're sorry,but something went wrong.Please try again");
-			}
-			return redirect()->back();
+		if ($request->hasfile('site_logo')) {
+			$image_name = $this->imageUpload($request->file('site_logo'),'front/settings');
+			$input['site_logo'] = $image_name;
 		}
-    }
+		 
+		$settings = AdminSitesettings::find(1);
+		$settings->update($input);
+	
+		return redirect()->back()->with('success', 'Successfully Updated');
+		
+	}
 }

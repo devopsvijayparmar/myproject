@@ -10,7 +10,7 @@ use Crypt;
 use Config;
 use DB;
 
-class UserRegistrationNotificationListener implements ShouldQueue
+class UserRegistrationNotificationListener
 
 
 {
@@ -21,6 +21,7 @@ class UserRegistrationNotificationListener implements ShouldQueue
      */
     public function __construct()
     {
+		
     }
 
     /**
@@ -33,9 +34,9 @@ class UserRegistrationNotificationListener implements ShouldQueue
     {
         $user = $event;
 		
+		
 	    $userid = Crypt::encrypt($user->user['id']);
 	    $link = url('verify-account/'.$userid);
-		
 		
         $data = array( 'email' => $user->user['email'], 'name' => $user->user['name'], 'link'=>$link);
        

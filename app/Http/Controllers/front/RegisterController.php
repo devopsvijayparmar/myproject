@@ -43,6 +43,7 @@ class RegisterController extends Controller
 	
 	public function register(Request $request)
     {
+		
 		$exitsitename = User::getRecordByTitle(strtolower($request->title));
 		if(empty($exitsitename))
 		{
@@ -68,7 +69,7 @@ class RegisterController extends Controller
 			
 				$register = User::create($input);
 				$register->assignRole(array($request->site_name));
-				
+			
 				event(new UserRegistered($register));
 				
 				if($register){

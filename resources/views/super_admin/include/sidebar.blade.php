@@ -21,6 +21,7 @@
               <li><a href="#" class="dropdown-item">Contact inquiry</a></li>
 			    <li><a href="{{ url('/super-admin/admin-slider') }}" class="dropdown-item">Slider</a></li>
 			  <li><a href="{{ url('/super-admin/settings') }}" class="dropdown-item">Settings</a></li>
+			 
             </ul>
           </li>
 		 

@@ -15,4 +15,14 @@ class Settings extends Authenticatable
     protected $table = 'front_settings';
     protected $fillable = ['title','logo','created_by','created_at','updated_by','updated_at','deleted_by','deleted_at'];
 	
+	
+	function getSiteLogoAttribute($image){
+		return $image == null ? url('/images/image_not_found.jpg') : asset('/uploads/site_settings/'.$image);
+	}
+	
+	function getFavIconAttribute($image){
+		return $image == null ? url('/images/image_not_found.jpg') : asset('/uploads/site_settings/'.$image);
+	}
+	
+	
 }

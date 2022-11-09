@@ -10,7 +10,7 @@ use Crypt;
 use Config;
 use DB;
 
-class WelcomeEmailNotificationListener implements ShouldQueue
+class WelcomeEmailNotificationListener
 
 
 {
@@ -33,15 +33,14 @@ class WelcomeEmailNotificationListener implements ShouldQueue
     {
         $user = $event;
 		
-	    $adminlink = url('/admin/home');
+	    $adminlink = url('/admin/dashboard');
 	    $websitelink = url('/'.$user->user['title']);
-		
 		
         $data = array( 'email' => $user->user['email'], 'name' => $user->user['name'], 'adminlink'=>$adminlink,'websitelink'=>$websitelink);
        
 		Mail::send('emails.users.welcome_email', $data, function($message) use ($data)
         {
-            $message->to($data['email'], 'Webcom')->subject('Welcome to Webcom! ');
+            $message->to($data['email'], 'Websphare')->subject('Welcome to Websphare! ');
         });
 
     }

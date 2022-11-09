@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,10 +13,14 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/clear', function() {
+    Artisan::call('cache:clear'); Artisan::call('config:clear');
+    Artisan::call('config:cache'); Artisan::call('view:clear');
+    Artisan::call('route:clear');return "Cleared!";
+});
 
 Route::get("/testpage", function(){
-   return view("emailpage");
+   return view("verify");
 });
 
 /*supar admin*/
@@ -30,6 +35,7 @@ Route::group(['prefix' => 'super-admin', 'namespace' => 'super_admin'], function
 	Route::resource('settings', 'SettingsController');
 	Route::resource('admin-slider', 'SliderController');
 	Route::resource('roles', RoleController::class);
+	Route::resource('email-templates', 'EmailTemplateController');
 });
 /*supar admin*/
 

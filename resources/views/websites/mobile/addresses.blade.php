@@ -42,45 +42,46 @@
                   <div class="row">
                     <input type="hidden" name="quantity" value="{{$quantity}}">
                     <input type="hidden" name="product_id" value="{{$product_id}}">
+                    <input type="hidden" name="product_type" value="mobile">
                     <input type="hidden" name="url" value="single-mobile">
                     <div class="field col-lg-12 col-md-4 col-sm-8 col-xs-8 mb-2">
                       <input class="field_custom  mb-0" placeholder="Full name" type="text" name="name" id="name" maxlength="255">
-					  <span id="name_error" style="color:red;"></span>
+					  <span id="name_error" style="color:red;">{{$errors->first('name')}}</span>
                     </div>
 					
 					<div class="field col-lg-12 col-md-4 col-sm-8 col-xs-8 mb-2">
                       <input class="field_custom mb-0" placeholder="Mobile number" onkeypress="return isNumberKey(event)" type="text" name="mobile" id="mobile" maxlength="10">
-					  <span id="mobile_error" style="color:red;"></span>
+					  <span id="mobile_error" style="color:red;">{{$errors->first('mobile')}}</span>
                     </div>
 					
 					 <div class="field col-lg-12 col-md-4 col-sm-8 col-xs-8 mb-2">
                       <input class="field_custom  mb-0" placeholder="Email Address" type="text" name="email" id="email" maxlength="255">
-					  <span id="email_error" style="color:red;"></span>
+					  <span id="email_error" style="color:red;">{{$errors->first('email')}}</span>
                     </div>
 					 <div class="field col-lg-12 col-md-4 col-sm-8 col-xs-8 mb-2">
                       <input class="field_custom mb-0" placeholder="Pincode" type="text" name="pincode" id="pincode" maxlength="255">
-					  <span id="pincode_error" style="color:red;"></span>
+					  <span id="pincode_error" style="color:red;">{{$errors->first('pincode')}}</span>
                     </div>
 					 <div class="field col-lg-12 col-md-4 col-sm-8 col-xs-8 mb-2">
                       <input class="field_custom mb-0" placeholder="Flat, House no., Building, Company, Apartment" type="text" name="company" id="company" maxlength="255">
-					  <span id="company_error" style="color:red;"></span>
+					  <span id="company_error" style="color:red;">{{$errors->first('company')}}</span>
                     </div>
 					 <div class="field col-lg-12 col-md-4 col-sm-8 col-xs-8 mb-2">
                       <input class="field_custom mb-0" placeholder="Area, Street, Sector, Village" type="text" name="area" id="area" maxlength="255">
-					  <span id="area_error" style="color:red;"></span>
+					  <span id="area_error" style="color:red;">{{$errors->first('area')}}</span>
                     </div>
 					 <div class="field col-lg-12 col-md-4 col-sm-8 col-xs-8 mb-2">
                       <input class="field_custom mb-0" placeholder="Landmark" type="text" name="landmark" id="landmark" maxlength="255">
-					  <span id="landmark_error" style="color:red;"></span>
+					  <span id="landmark_error" style="color:red;">{{$errors->first('landmark')}}</span>
                     </div>
 					
 					 <div class="field col-lg-12 col-md-4 col-sm-8 col-xs-8 mb-2">
                       <input class="field_custom mb-0" placeholder="Town/City" type="text" name="city" id="city" maxlength="255">
-					  <span id="city_error" style="color:red;"></span>
+					  <span id="city_error" style="color:red;">{{$errors->first('city')}}</span>
                     </div>
 					 <div class="field col-lg-12 col-md-4 col-sm-8 col-xs-8 mb-2">
                       <input class="field_custom mb-0" placeholder="State" type="text" name="state" id="state" maxlength="255">
-					  <span id="state_error" style="color:red;"></span>
+					  <span id="state_error" style="color:red;">{{$errors->first('state')}}</span>
                     </div>
                     <div class="center"><button type="submit" class="btn main_bt">ORDER NOW</button></div>
                   </div>

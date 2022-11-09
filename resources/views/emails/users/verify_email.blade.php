@@ -1,163 +1,70 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
-<style>
-/***
-User Profile Sidebar by @keenthemes
-A component of Metronic Theme - #1 Selling Bootstrap 3 Admin Theme in Themeforest: http://j.mp/metronictheme
-Licensed under MIT
-***/
-
-body {
-    padding: 0;
-    margin: 0;
-}
-
-html { -webkit-text-size-adjust:none; -ms-text-size-adjust: none;}
-@media only screen and (max-device-width: 680px), only screen and (max-width: 680px) { 
-    *[class="table_width_100"] {
-		width: 96% !important;
-	}
-	*[class="border-right_mob"] {
-		border-right: 1px solid #dddddd;
-	}
-	*[class="mob_100"] {
-		width: 100% !important;
-	}
-	*[class="mob_center"] {
-		text-align: center !important;
-	}
-	*[class="mob_center_bl"] {
-		float: none !important;
-		display: block !important;
-		margin: 0px auto;
-	}	
-	.iage_footer a {
-		text-decoration: none;
-		color: #929ca8;
-	}
-	img.mob_display_none {
-		width: 0px !important;
-		height: 0px !important;
-		display: none !important;
-	}
-	img.mob_width_50 {
-		width: 40% !important;
-		height: auto !important;
-	}
-}
-.table_width_100 {
-	width: 680px;
-}
-.btn-danger {
-    color: #fff;
-    background-color: #0f66dc!important;
-    border-color: #0f66dc!important;
-}
-</style>
-
-<!--
-Responsive Email Template by @keenthemes
-A component of Metronic Theme - #1 Selling Bootstrap 3 Admin Theme in Themeforest: http://j.mp/metronictheme
-Licensed under MIT
--->
-
-<div id="mailsub" class="notification" align="center">
-    <!--<div align="center">
-       <img src="http://talmanagency.com/wp-content/uploads/2014/12/cropped-logo-new.png" width="250" alt="Metronic" border="0"  /> 
-    </div> -->
-<table width="100%" border="0" cellspacing="0" cellpadding="0" style="min-width: 320px;"><tr><td align="center" bgcolor="#eff3f8">
-
-
-<!--[if gte mso 10]>
-<table width="680" border="0" cellspacing="0" cellpadding="0">
-<tr><td>
-<![endif]-->
-
-<table border="0" cellspacing="0" cellpadding="0" class="table_width_100" width="100%" style="max-width: 680px; min-width: 300px;">
-    <tr><td>
-	<!-- padding -->
-	</td></tr>
-	<!--header -->
-	<tr><td align="center" bgcolor="#ffffff">
-		<!-- padding -->
+<table width="100%" border="0" cellspacing="0" cellpadding="0" style="min-width: 320px;"><tr><td align="center" bgcolor="#f6f6f6" >
+<table border="0" cellspacing="0" cellpadding="0" class="table_width_100" width="100%" style="max-width: 680px; min-width: 300px;margin-top: 30px;
+    margin-bottom: 100px;">
+	<tr>
+		<td align="center" bgcolor="#ffffff">
 		<table width="90%" border="0" cellspacing="0" cellpadding="0">
-			<tr><td align="center">
-			    		<a href="#" target="_blank" style="color: #596167; font-family: Arial, Helvetica, sans-serif; float:left; width:100%; padding:20px;text-align:center; font-size: 13px;">
-									<font face="Arial, Helvetica, sans-seri; font-size: 13px;" size="3" color="#596167">
-									<img src="{{asset('/uploads/front/settings/site_logo.jpg')}}" width="250" alt="Metronic" border="0"  /></font></a>
-					</td>
-					<td align="right">
-				<!--[endif]--><!-- 
-
+			<tr>
+				<td align="center">
+					<a href="#" target="_blank" style="color: #596167; float:left; width:100%; padding:20px;text-align:center; font-size: 13px;">
+					<font size="3" color="#596167">
+					<img src="http://talmanagency.com/wp-content/uploads/2014/12/cropped-logo-new.png" width="250" alt="Metronic" border="0"  /></font></a>
+				</td>
+			</tr>
+			<tr>
+			<td align="center" bgcolor="#fbfcfd">
+				<font size="4" style="font-size: 15px;">
+					<table width="90%" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td>
+								<strong>Dear {{$name}},</strong><br/><br/>
+								<strong>Thanks for getting started with websphare!</strong><br/><br/>
+								We just need to verify your email address before you can access websphare.<br/><br/>
+								This link will verify your email address, and then you’ll officially be a part of the websphare community.<br/><br/>
+								See you there!<br/><br/>
+							</td>
+						</tr>
+						<tr>
+							<td align="center">
+								<div style="line-height: 24px;">
+									<a class="button" href="{{$link}}" target="_blank" style=" background-color: #1d3d72!important;border: none;color: white;padding: 8px 34px;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;margin: 4px 2px;cursor: pointer;">
+										Verify your email address
+									</a>
+									
+								</div>
+								<div style="line-height: 24px;">
+									<span style="font-size: 13px; color: #96a5b5;">This verification link will expire in 24 hours.</span>
+								</div>
+								<br/>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Thanks! – The Websphare Team<br/>
+								<a href="#">www.websphare.com</a>
+								<div style="height: 60px; line-height: 60px; font-size: 10px;"></div>
+							</td>
+						</tr>
+					</table>
+				</font>
 			</td>
 			</tr>
+			<tr>
+				<td class="iage_footer" align="center" bgcolor="#ffffff">
+					<table width="100%" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+						<td align="center" style="padding:20px;flaot:left;width:100%; text-align:center;">
+							<font size="3" color="#96a5b5" style="font-size: 13px;">
+								<span style="font-size: 13px; color: #96a5b5;">{{date('Y')}} © Websphare. ALL Rights Reserved.</span>
+							</font>				
+						</td>
+						</tr>			
+					</table>
+				</td>
+			</tr>
 		</table>
-		<!-- padding -->
-	</td></tr>
-	<!--header END-->
-
-	<!--content 1 -->
-	<tr><td align="center" bgcolor="#fbfcfd">
-	    <font face="Arial, Helvetica, sans-serif" size="4" color="#57697e" style="font-size: 15px;">
-		<table width="90%" border="0" cellspacing="0" cellpadding="0">
-			<tr><td>
-			    <strong>Dear Candidate,</strong><br/><br/>
-			    <strong>Thanks for getting started with webcom!</strong><br/>
-			    We just need to verify your email address before you can access webcom.<br/><br/>
-				This link will verify your email address, and then you’ll officially be a part of the webcom community.<br/><br/>
-				See you there!<br/><br/>
-
-			   
-			</td></tr>
-			<tr><td align="center">
-				<div style="line-height: 24px;">
-					<a href="{{$link}}" target="_blank" class="btn btn-danger block-center">
-					    Verify your email address
-					</a></br>
-					<font face="Arial, Helvetica, sans-serif" size="3" color="#96a5b5" style="font-size: 13px;">
-				<span style="font-family: Arial, Helvetica, sans-serif; font-size: 13px; color: #96a5b5;">This verification link will expire in 24 hours.</span></font>
-				</div>
-				<br/>
-			</td></tr>
-			<tr><td>
-				Thanks! – The Webcom team<br/>
-				<a href="#">www.webcom.com</a>
-				
-			<!-- padding --><div style="height: 60px; line-height: 60px; font-size: 10px;"></div>
-			   
-			</td></tr>
-
-		</table>
-		</font>
-	</td></tr>
-	<!--content 1 END-->
-
-
-	<!--footer -->
-	<tr><td class="iage_footer" align="center" bgcolor="#ffffff">
-
-		
-		<table width="100%" border="0" cellspacing="0" cellpadding="0">
-			<tr><td align="center" style="padding:20px;flaot:left;width:100%; text-align:center;">
-				<font face="Arial, Helvetica, sans-serif" size="3" color="#96a5b5" style="font-size: 13px;">
-				<span style="font-family: Arial, Helvetica, sans-serif; font-size: 13px; color: #96a5b5;">
-				{{date('Y')}} © Webcom. ALL Rights Reserved.
-				</span></font>				
-			</td></tr>			
-		</table>
-	</td></tr>
-	<!--footer END-->
-	<tr><td>
-
-	</td></tr>
-</table>
-<!--[if gte mso 10]>
-</td></tr>
-</table>
-<![endif]-->
- 
-</td></tr>
+		</td>
+	</tr>
 </table>
 			

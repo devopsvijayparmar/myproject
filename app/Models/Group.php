@@ -15,28 +15,6 @@ class Group extends Authenticatable
     protected $table = 'group';
     protected $fillable = ['name','created_by','for','created_at','updated_by','updated_at','deleted_by','deleted_at'];
 	
-	
-	public static function editRecordById(){
-		$query = Group::where('created_by',Auth::user()->id)->first();
-		return $query;
-	}
-	
-	/* public static function groupList(){
-		$query = Group::where('created_by',Auth::user()->id)->orderBy('id','desc')->get();
-		return $query;
-	} */
-	
-	/* public static function getrecordbynme($name){
-			$query = Group::where('name',$name)->where('created_by',Auth::user()->id)->first();
-		   return $query;
-	}  */
-	
-	public static function getRecordById($id){
-		$query = Group::where('id',$id)->where('created_by',Auth::user()->id)->first();
-		return $query;
-	} 
-	
-	/*New */
 	public static function groupList(){
 		$query = Group::where('created_by',Auth::user()->id);
 		return $query;

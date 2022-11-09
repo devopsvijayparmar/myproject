@@ -15,34 +15,7 @@ class Orders extends Authenticatable
     use Notifiable;
 	use SoftDeletes;
     protected $table = 'orders';
-    protected $fillable = ['user_id','product_id','quantity','name','mobile','email','pincode','company','area','landmark','city','state','created_by','created_at','updated_by','updated_at','deleted_by','deleted_at','type','product_name','product_image','price','currency_symbol','currency_code','product_description','product_category','product_brand','product_type','mobile_image'];
-	
-	
-	public static function orderslist(){
-		
-		$query = Orders::select('orders.*','products.name as product_name','products.image_1')
-		->leftjoin('products', function($join) {
-			$join->on('orders.product_fk', '=', 'products.id');
-		})
-		->where('user_id',Auth::user()->id)->orderBy("orders.id", 'desc')
-		->get();
-	    return $query;
-
-	} 
-	public static function orderslistformobile(){
-		
-		$query = Orders::select('orders.*','mobile.name as product_name','mobile.image_1')
-		->leftjoin('mobile', function($join) {
-			$join->on('orders.product_fk', '=', 'mobile.id');
-		})
-		->where('user_id',Auth::user()->id)->orderBy("orders.id", 'desc')
-		->get();
-	    return $query;
-
-	} 
-	
-	/*New*/	
-	
+    protected $fillable = ['user_id','product_id','quantity','name','mobile','email','pincode','company','area','landmark','city','state','created_by','created_at','updated_by','updated_at','deleted_by','deleted_at','product_name','product_image','price','currency_symbol','currency_code','product_description','product_category','product_brand','product_type','mobile_image'];
 	
 	public static function getOrderslist(){
 		$query = Orders::where('user_id',Auth::user()->id);

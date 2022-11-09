@@ -16,24 +16,6 @@ class LandingPage extends Authenticatable
     protected $fillable = ['title','description','created_by','created_at','updated_by','updated_at','deleted_by','deleted_at','url','url_name','status'];
 	
 	
-	/* public static function checkexittitle($url_name){
-		$query = LandingPage::where('created_by',Auth::user()->id)->where('url_name',$url_name)->first();
-		return $query;
-	} */
-	
-	/* public static function checkexittitleEdit($url_name,$id){
-		$query = LandingPage::where('created_by',Auth::user()->id)->where('url_name',$url_name)->where('id','!=',$id)->first();
-		return $query;
-	} */
-	
-	
-	
-	public static function getRecordById($id){
-		$query = LandingPage::where('id',$id)->first();
-		return $query;
-	}
-	
-	/*new*/
 	public static function getLangingPageList(){
 		$query = LandingPage::where('created_by',Auth::user()->id);
 		return $query;

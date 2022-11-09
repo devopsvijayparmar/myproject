@@ -51,13 +51,14 @@
 				 <span class="validation-error" id="confirm_password_error">{{$errors->register->first('confirm_password')}}</span>
               </div>
               
-              <div class="text-center"><button type="submit" style="width: 100%;">Register</button></div>
+              <div class="text-center"><button class="btn" type="submit" style="width: 100%;">Register</button></div>
             </form>
           </div>
         </div>
       </div>
     </div>
   </section><!-- #contact -->
+  
   <!--==========================
     Footer
   ============================-->

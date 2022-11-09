@@ -322,11 +322,38 @@ class HomeController extends Controller
         } 
 			
 		$user = User::getRecordByTitle($title);
+		$site_setting = Sitesettings::getRecordByUserIdForWebsite($user->id);
+		$currency_symbol="";$currency_code="";
+		if($site_setting){
+			$currency_symbol = $site_setting->currency_symbol;
+			$currency_code = $site_setting->currency_code;
+		}
         $input = $request->all();
 		$product_id = Crypt::decrypt($request->product_id);
 		$input['created_at'] = date('Y-m-d H:i:s');
 		$input['product_id'] = $product_id;
 		$input['user_id'] = $user->id;
+		$input['currency_symbol'] = $currency_symbol;
+		$input['currency_code'] = $currency_code;
+		
+		
+		if($request->product_type == 'product')
+		{
+			$products = Products::getRecordById($product_id);
+			$input['product_image'] = $products->image_1;
+			$input['product_description'] = $products->description;
+			$input['product_category'] = $products->category->name;
+			$input['price'] = $products->price;
+			
+		}else{
+			$products = Mobile::getRecordById($product_id);
+			$input['mobile_image'] = $products->image_1;
+			$input['product_description'] = $products->description;
+			$input['product_category'] = $products->category->name;
+			$input['product_brand'] = $products->brand->name;
+			$input['price'] = $products->price;
+		}
+		
 		
 		$order = Orders::create($input);
 		

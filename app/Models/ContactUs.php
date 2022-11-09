@@ -15,17 +15,6 @@ class ContactUs extends Authenticatable
     protected $table = 'contact_us';
     protected $fillable = ['email','address','contact_1','contact_2','created_by','created_at','updated_by','updated_at','deleted_by','deleted_at','facebook','twitter','instagram','linkedin'];
 	
-	
-	public static function editRecordById(){
-		$query = ContactUs::where('created_by',Auth::user()->id)->first();
-		return $query;
-	}
-	public static function editRecordByuserId($id){
-		$query = ContactUs::where('created_by',$id)->first();
-		return $query;
-	}
-	
-	/*New*/
 	public static function getRecordByUserId(){
 		$query = ContactUs::where('created_by',Auth::user()->id)->first();
 		return $query;

@@ -36,11 +36,11 @@
 					{{ __('Remember Me') }}
 			</div>
 			
-            <div class="text-center"><button type="submit" style="width: 100%;">Sign In</button></div>
+            <div class="text-center"><button type="submit" class="btn" style="width: 100%;">Sign In</button></div>
             </form>
 		
 			<div class="d-flex justify-content-center links mt-3">
-				Don't have an account? <a href="{{url('/signup')}}" class="ml-2">Sign Up</a>
+				Don't have an account? <a href="{{url('/signup')}}"  class="ml-2">Sign Up</a>
 			</div>
 			
 			@if (Route::has('password.request'))

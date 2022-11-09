@@ -16,33 +16,6 @@ class Books extends Authenticatable
     protected $table = 'books';
     protected $fillable = ['category_id','name','author','date_released','description','image_1','image_2','image_3','created_by','created_at','updated_by','updated_at','deleted_by','deleted_at'];
 	
-	
-	/* public static function getbookslist(){
-	
-		$query = Books::select('books.*','category.name as category_name')
-		->leftjoin('category', function($join) {
-			$join->on('books.category_fk', '=', 'category.id');
-		})
-		->where('books.created_by',Auth::user()->id)->orderBy("books.id", 'desc')
-		->get();
-	    return $query;
-
-	}  */
-	/* public static function getRecordById($id){
-		
-		$query = Books::select('books.*','category.name as category_name')
-		->leftjoin('category', function($join) {
-			$join->on('books.category_fk', '=', 'category.id');
-		})
-		->where('books.id',$id)->orderBy("books.id", 'desc')
-		->first();
-	    return $query;
-
-	}  */
-	
-	
-	/*New functions*/
-	
 	public function category(){
 		return $this->belongsTo(Category::class, 'category_id', 'id');
 	}

@@ -15,22 +15,7 @@ class ProjectType extends Authenticatable
 	use SoftDeletes;
     protected $table = 'project_type';
     protected $fillable = ['name','created_by','created_at','updated_by','updated_at','deleted_by','deleted_at','slug'];
-	
-	/* public static function projectTypeList(){
-			$query = ProjectType::where('created_by',Auth::user()->id)->get();
-		   return $query;
-	} 
-	public static function getListById($id){
-			$query = ProjectType::where('created_by',$id)->get();
-		   return $query;
-	} 
-	public static function getRecordById($id){
-			$query = ProjectType::where('id',$id)->first();
-		   return $query;
-	}  */
-	
-	
-	/*New */
+
 	public static function projectTypeList(){
 		$query = ProjectType::orderBy('name','asc')->where('created_by',Auth::user()->id)->get();
 		return $query;

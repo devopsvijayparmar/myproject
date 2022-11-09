@@ -15,17 +15,7 @@ class Brand extends Authenticatable
 	use SoftDeletes;
     protected $table = 'brand';
     protected $fillable = ['name','created_by','created_at','updated_by','updated_at','deleted_by','deleted_at'];
-	
-	public static function getRecordById($id){
-			$query = Brand::where('id',$id)->orderBy('id','desc')->where('created_by',Auth::user()->id)->first();
-		   return $query;
-	} 
-	/* public static function categoryList(){
-			$query = Brand::orderBy('id','desc')->where('created_by',Auth::user()->id)->get();
-		   return $query;
-	}  */
-	
-	/*New*/
+
 	public static function brandList(){
 		$query = Brand::where('created_by',Auth::user()->id);
 		return $query;

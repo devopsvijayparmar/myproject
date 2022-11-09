@@ -7,6 +7,7 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="csrf-token" content="{{ csrf_token() }}" />
+  <link rel="shortcut icon" href="@if(isset($user_site_setting->fav_icon)) {{$user_site_setting->fav_icon}} @else {{$admin_site_setting->fav_icon}} @endif">
   <!-- Font Awesome -->
   @include('admin.layouts.head')
   

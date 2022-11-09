@@ -18,13 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'site',
-        'title',
-        'site_name',
-        'email_verified',
+        'name','email','password','site','title','site_name','email_verified','profile',
     ];
 
     /**
@@ -57,4 +51,7 @@ class User extends Authenticatable
 	    return $query;
 	} 
 	
+	function getProfileAttribute($image){
+		return $image == null ? url('/images/boxed-bg.jpg') : asset('/uploads/profile/'.$image);
+	}
 }
