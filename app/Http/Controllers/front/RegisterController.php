@@ -54,6 +54,7 @@ class RegisterController extends Controller
 				'email' => 'required|email|unique:users|max:255',
 				'password' => 'required|min:8',
 				'confirm_password' => 'required|min:8|same:password',
+				'terms_of_use_privacy_policy_error' => 'required',
 			]);
 
 			if ($validator->fails()) {

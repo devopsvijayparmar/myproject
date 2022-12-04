@@ -11,7 +11,7 @@
 
     <div class="container">
       <div class="row justify-content-center">
-        <div class="col-lg-5 col-md-8">
+        <div class="col-lg-7 col-md-8">
           <div class="form">
             <div id="sendmessage">Your message has been sent. Thank you!</div>
             <div id="errormessage"></div>
@@ -20,7 +20,7 @@
 			@csrf
 			 <div class="form-group">
                 <select name="site_name" class="form-control" id="site_name"/>
-				    <option value="">Select Your Website</option>
+				    <option value="">Select Website</option>
 					@foreach($sites as $site)
 					<option @if(old('site_name') == $site->site_name) selected @endif @if($user_site == $site->site_name) selected @endif value="{{$site->site_name}}">{{$site->name}}</option>
 					@endforeach
@@ -29,27 +29,31 @@
               </div>
 			  
 			  <div class="form-group">
-                <input type="text" onkeypress="return onlyAlphabets(event, this);"  maxlength="255" name="title" class="form-control" id="title" value="{{ old('title') }}" style='text-transform:lowercase'  placeholder="Your Site Name" data-toggle="tooltip" data-placement="top" title="Only Alphabets and Numbers are allowed"/>
+                <input type="text" onkeypress="return onlyAlphabets(event, this);"  maxlength="255" name="title" class="form-control" id="title" value="{{ old('title') }}" style='text-transform:lowercase'  placeholder="Enter Site Name / Domain" data-toggle="tooltip" data-placement="top" title="Only Alphabets and Numbers are allowed"/>
 				<span class="validation-error" id="title_error">{{$errors->register->first('title')}}</span>
               </div>
+			  
               <div class="form-group">
-                <input type="text" name="name" class="form-control"  maxlength="255" id="name" value="{{ old('name') }}"  placeholder="Your Name"/>
+                <input type="text" name="name" class="form-control"  maxlength="255" id="name" value="{{ old('name') }}"  placeholder="Company Name"/>
 				 <span class="validation-error" id="name_error">{{$errors->register->first('name')}}</span>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" name="email"  maxlength="255" id="email" value="{{ old('email') }}"  placeholder="Your Email"/>
+                <input type="text" class="form-control" name="email"  maxlength="255" id="email" value="{{ old('email') }}"  placeholder="Company Email"/>
 				 <span class="validation-error" id="email_error">{{$errors->register->first('email')}}</span>
               </div>
 			  
 			   <div class="form-group">
                 <input type="password" name="password" maxlength="255" autocomplete="new-password" value="{{ old('password') }}"  class="form-control" id="password" placeholder="Password" data-toggle="tooltip" data-placement="top" title="Your password must contain min. 8 characters" />
+				<input type="checkbox" onclick="myFunction()"> <small>Show Password<small></br>
 				 <span class="validation-error" id="password_error">{{$errors->register->first('password')}}</span>
               </div>
 			  
 			   <div class="form-group">
                 <input type="password" name="confirm_password"  maxlength="255" autocomplete="new-password" value="{{ old('confirm_password') }}"  class="form-control" id="confirm_password" placeholder="Confirm Password" />
 				 <span class="validation-error" id="confirm_password_error">{{$errors->register->first('confirm_password')}}</span>
-              </div>
+               </div>
+			   <p class="form__checkboxText"><input id="terms_of_use_privacy_policy" name="terms_of_use_privacy_policy" type="checkbox" value="yes"> <strong>I agree to websphare's <a class="form__checkboxLink" href="{{url('/page/terms-of-use')}}" target="_blank" rel="noopener noreferrer">Terms &amp; Conditions</a> and <a class="form__checkboxLink" href="{{url('/page/privacy-policy')}}" target="_blank" rel="noopener noreferrer">Privacy Policy</a></strong> <span class="validation-error" id="terms_of_use_privacy_policy_error">{{$errors->register->first('terms_of_use_privacy_policy_error')}}</span></p>
+			   
               
               <div class="text-center"><button class="btn" type="submit" style="width: 100%;">Register</button></div>
             </form>
@@ -92,6 +96,11 @@ $('#title').keypress(function (e) {
 	var password = $('#password').val();
 	var confirm_password = $('#confirm_password').val();
 	
+	var terms_of_use_privacy_policy = 0;
+	if ($('#terms_of_use_privacy_policy').prop('checked')==true){ 
+       terms_of_use_privacy_policy = 1;
+    }
+	
 	var cnt = 0;
 	var f = 0;
 	
@@ -101,6 +110,7 @@ $('#title').keypress(function (e) {
 	$('#email_error').html("");
 	$('#password_error').html("");
 	$('#confirm_password_error').html("");
+	$('#terms_of_use_privacy_policy_error').html("");
 	
 
     function ValidateEmail(email) {
@@ -249,6 +259,16 @@ $('#title').keypress(function (e) {
 		}
 	}
 	
+	if (terms_of_use_privacy_policy == 0) {
+		$('#terms_of_use_privacy_policy_error').html("Agreement is required");
+		cnt = 1;
+		f++;
+		if(f == 1)
+		{
+			$('#terms_of_use_privacy_policy').focus();
+		}
+	}
+	
 	
 	if (cnt == 1) {
 		$(':input[type="submit"]').prop('disabled', false);
@@ -258,19 +278,5 @@ $('#title').keypress(function (e) {
 	}
 }); 
  
- 
- $('.home-carousel').owlCarousel({
-    loop:true,
-    autoplayTimeout:12000,
-	autoplay:true,
-    margin:10,
-    nav:false,
-    dots:false,
-    responsive:{
-        0:{
-            items:1
-        }
-    }
-});
 
 </script>

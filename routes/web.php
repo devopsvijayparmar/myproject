@@ -24,7 +24,7 @@ Route::get("/testpage", function(){
 });
 
 /*supar admin*/
-Route::group(['prefix' => 'super-admin', 'namespace' => 'super_admin'], function () {
+Route::group(['prefix' => 'super-admin', 'namespace' => 'super_admin','middleware' => ['preventBackHistory']], function () {
 	Route::get('/super-admin/home', 'HomeController@index');
 	Route::resource('web-templates', 'WebTemplatesController');
 	Route::resource('pricing', 'PricingController');
@@ -40,7 +40,7 @@ Route::group(['prefix' => 'super-admin', 'namespace' => 'super_admin'], function
 /*supar admin*/
 
 /*supar admin front*/
-Route::group(['namespace' => 'front'], function () {
+Route::group(['namespace' => 'front','middleware' => ['preventBackHistory']], function () {
 	
 	Route::get('/signup', 'RegisterController@index');
 	Route::post('/signup', 'RegisterController@register');
@@ -55,15 +55,23 @@ Route::group(['namespace' => 'front'], function () {
 	Route::get('/contact-us', 'HomeController@contactUs');
 	Route::post('/front-contact-us', 'HomeController@contact_us_store');
 	Route::get('/purchase-plan/{id}', 'PurchasePlanController@index');
+	Route::get('/bussiness', 'BussinessController@index');
+	Route::post('/bussiness', 'BussinessController@store');
+	Route::post('/send-message', 'BussinessController@sendMessage')->name('send-message');
+	Route::get('/chat', 'BussinessController@chat')->middleware('auth');
 
 });
 /*supar admin front*/
 
 /*admin Routes*/
+Route::group(['middleware' => ['preventBackHistory']], function () {
 Auth::routes();
+Route::post('custom-login', 'Auth\LoginController@customLogin')->name('custom-login');
+});
+
 Route::get('logout', 'Auth\LoginController@logout');
 
-Route::group(['prefix' => 'admin', 'namespace' => 'admin'], function () {
+Route::group(['prefix' => 'admin', 'namespace' => 'admin','middleware' => ['preventBackHistory']], function () {
 
 	Route::group(['middleware' => ['auth']], function() {
 		
@@ -104,6 +112,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'admin'], function () {
 		Route::resource('slider', 'SliderController');
 		Route::resource('orders', 'OrdersController');
 		Route::resource('type', 'TypeController');
+		Route::get('my-account', 'MyAccountController@index')->name('my-account');
+		Route::post('my-account', 'MyAccountController@update')->name('my-account-update');
 		
 		/*Business Routes*/
 		Route::group(['middleware' => ['purchaseplan']], function() {
@@ -124,6 +134,7 @@ Route::get('/{title}/landing-page/{url_name}', 'admin\CommanController@preview')
 
 
 /*Front*/
+Route::group(['middleware' => ['preventBackHistory']], function () {
 Route::get('{title}', 'websites\HomeController@index');
 Route::get('{title}/about-us', 'websites\HomeController@about_us');
 Route::get('{title}/service', 'websites\HomeController@service');
@@ -149,6 +160,7 @@ Route::post('{title}/order', 'websites\HomeController@order');
 Route::post('{title}/mobile-orders', 'websites\HomeController@mobileorder');
 Route::get('{title}/plan', 'websites\HomeController@plan');
 Route::get('{title}/{id}/single-plan', 'websites\HomeController@single_plan');
+});
 /*Front end*/
 
 

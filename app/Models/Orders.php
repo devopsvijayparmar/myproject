@@ -15,7 +15,7 @@ class Orders extends Authenticatable
     use Notifiable;
 	use SoftDeletes;
     protected $table = 'orders';
-    protected $fillable = ['user_id','product_id','quantity','name','mobile','email','pincode','company','area','landmark','city','state','created_by','created_at','updated_by','updated_at','deleted_by','deleted_at','product_name','product_image','price','currency_symbol','currency_code','product_description','product_category','product_brand','product_type','mobile_image'];
+    protected $fillable = ['user_id','product_id','quantity','name','mobile','email','pincode','company','area','landmark','city','state','created_by','created_at','updated_by','updated_at','deleted_by','deleted_at','product_name','product_image','price','currency_symbol','currency_code','product_description','product_category','product_brand','product_type','mobile_image','order_id'];
 	
 	public static function getOrderslist(){
 		$query = Orders::where('user_id',Auth::user()->id);
@@ -102,6 +102,16 @@ class Orders extends Authenticatable
 		}
 		
 		return $status;
+	}
+	
+	public static function takeOrders(){
+		$query = Orders::where('user_id',Auth::user()->id)->take(10)->get();
+	    return $query;
+	}
+	
+	public static function orderCount(){
+		$query = Orders::where('user_id',Auth::user()->id)->count();
+	    return $query;
 	}
 	
 	

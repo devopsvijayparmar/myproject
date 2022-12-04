@@ -329,9 +329,11 @@ class HomeController extends Controller
 			$currency_code = $site_setting->currency_code;
 		}
         $input = $request->all();
+		$order_id = $this->generateUniqueCode();
 		$product_id = Crypt::decrypt($request->product_id);
 		$input['created_at'] = date('Y-m-d H:i:s');
 		$input['product_id'] = $product_id;
+		$input['order_id'] = $order_id;
 		$input['user_id'] = $user->id;
 		$input['currency_symbol'] = $currency_symbol;
 		$input['currency_code'] = $currency_code;
@@ -354,8 +356,12 @@ class HomeController extends Controller
 			$input['price'] = $products->price;
 		}
 		
-		
-		$order = Orders::create($input);
+		$check_order_id = Orders::where("order_id", $order_id)->first();
+		if(empty($check_order_id)){
+			$order = Orders::create($input);
+		}else{
+			return redirect()->back()->with('error', "we`re sorry,but something went wrong.Please try again");
+		}
 		
 		if($order){
 			return redirect($title.'/'.$request->product_id.'/'.$request->url)->with('success', 'Our customer service representative will be in touch shortly');
@@ -406,5 +412,14 @@ class HomeController extends Controller
 	    $this->data['contact_us'] = ContactUs::getContactUsForWebsite($user->id);
 	    $this->data['event'] = Event::find($id);
 		return view('websites.'.$user->site_name.'.single_event',$this->data);
+    }
+	
+	public function generateUniqueCode()
+    {
+        do {
+            $code = random_int(10000000000000000, 99999999999999999);
+        } while (Orders::where("order_id", "=", $code)->first());
+  
+        return $code;
     }
 } 

@@ -4,13 +4,13 @@
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
+      <!--<li class="nav-item d-none d-sm-inline-block">
         <a href="{{route('home')}}" class="nav-link">Home</a>
-      </li>
+      </li>-->
     </ul>
 
     <!-- SEARCH FORM -->
-    <form class="form-inline ml-3">
+    <!--<form class="form-inline ml-3">
       <div class="input-group input-group-sm">
         <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
         <div class="input-group-append">
@@ -19,7 +19,10 @@
           </button>
         </div>
       </div>
-    </form>
+    </form>-->
+	<h4 href="javascript:void(0)" class="nav-link">
+		<i class="nav-icon fas fa-globe"></i> <strong>{{ ucfirst(Auth::user()->name) }}</strong>
+	</h4>
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
@@ -83,48 +86,29 @@
       </li>-->
       <!-- Notifications Dropdown Menu -->
 	  
-      <!--<li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="far fa-bell"></i>
-          <span class="badge badge-warning navbar-badge">15</span>
+     <li class="nav-item dropdown">
+        <a title="My Account" style="color:#303e67!important;" class="nav-link" data-toggle="dropdown" href="#">
+          <i class="nav-icon fas fa-cog"></i>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <span class="dropdown-item dropdown-header">15 Notifications</span>
+         
           <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item">
-            <i class="fas fa-envelope mr-2"></i> 4 new messages
-            <span class="float-right text-muted text-sm">3 mins</span>
+            <i class="nav-icon fas fa-globe mr-2"></i> <strong>Website</strong>
           </a>
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-users mr-2"></i> 8 friend requests
-            <span class="float-right text-muted text-sm">12 hours</span>
+          <a href="{{route('my-account')}}" class="dropdown-item">
+            <i class="nav-icon fas fa-cog mr-2"></i> <strong>My Account</strong>
           </a>
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-file mr-2"></i> 3 new reports
-            <span class="float-right text-muted text-sm">2 days</span>
+          <a  href="javascript:void(0)"  class="dropdown-item" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+            <i class="nav-icon fas fa-sign-out-alt mr-2"></i> <strong>Logout</strong>
           </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-        </div>
-      </li>-->
-	  
-	  
-	    <li class="nav-item">
-			<a style="color:#007bff;" href="javascript:void(0)" class="nav-link">
-			<i class="nav-icon fas fa-globe"></i> <strong>Website</strong>
-			</a>
-	   </li>
-	  
-	   <li class="nav-item">
-			<a href="javascript:void(0)" onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="nav-link">
-			<i class="nav-icon fas fa-sign-out-alt"></i> <strong>Logout</strong>
-			</a>
-			<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+		  	<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
 			 {{ csrf_field() }}
 			</form>
-	   </li>
+        </div>
+      </li>
 	  
       <!--<li class="nav-item">
         <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#">

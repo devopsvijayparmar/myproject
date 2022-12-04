@@ -54,7 +54,7 @@
 			<li id="templatetab"><a href="{{ url('/web-templates') }}">Web Templates</a></li>
 			<li id="pricingtab"><a href="{{ url('/pricing') }}">Pricing</a></li>
 			<li id="abouttab"><a href="{{ url('/page/about-us') }}">About Us</a></li>
-			<li id="bussinesstab"><a href="{{ url('/') }}">Bussiness</a></li>
+			<li id="bussinesstab"><a href="{{ url('/bussiness') }}">Bussiness</a></li>
 			<li id="contacttab" class="menu-has-children"  style="margin-right: 70px;"><a href="javascript:void(0)">Help</a>
 				<ul>
 				  <li><a href="#">Documentation</a></li>
@@ -64,6 +64,7 @@
 			
 		@auth	
 		<li><a href="{{url('/logout')}}">Logout</a></li>
+		<li><a href="{{route('home')}}">Dashboard</a></li>
 		@else
 		<li><a href="{{url('/login')}}">Sign In</a></li>
 		<li><a href="{{url('/signup')}}">Register</a></li>

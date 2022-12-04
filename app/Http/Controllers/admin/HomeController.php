@@ -5,6 +5,10 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\PurchasePlan;
+use App\Models\Orders;
+use App\Models\Products;
+use App\Models\Projects;
+use App\Models\Mobile;
 use App\Models\PurchasePlanHistory;
 use App\Models\front\TopUp;
 use Illuminate\Support\Facades\Lang;
@@ -81,6 +85,11 @@ class HomeController extends Controller
 			$data['dateTableTitle'] = "Dashboard";
 			$data['dataTableId'] = time();
 			$data['purchaseplan'] = PurchasePlan::userPurchasePlan($user->id);
+			$data['orders'] = Orders::takeOrders();
+			$data['orders_count'] = Orders::orderCount();
+			$data['products_count'] = Products::ProductCount();
+			$data['projects_count'] = Projects::ProjectCount();
+			$data['mobiles_count'] = Mobile::mobileCount();
 			$data['topup'] = TopUp::find(1);
 			return view('admin.pages.home',$data);
 		

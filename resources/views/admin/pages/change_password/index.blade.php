@@ -29,18 +29,18 @@
 				<div class="card-body p-0">
 				  <ul class="nav nav-pills flex-column vp-tab">
 					<li class="nav-item">
-					  <a href="{{route('user-settings')}}" class="nav-link">
-						<i class="fas fa-sliders-h"></i> Home Slider
+					  <a style="color:#303e67!important;" href="{{route('user-settings')}}" class="nav-link">
+						<i class="fas fa-sliders-h"></i> <strong>Home Slider</strong>
 					  </a>
 					</li>
 					<li class="nav-item active">
-					  <a href="{{route('change-password')}}" class="nav-link">
-						<i class="fas fa-key"></i> Change Password
+					  <a style="color:#303e67!important;" href="{{route('change-password')}}" class="nav-link">
+						<i class="fas fa-key"></i> <strong>Change Password</strong>
 					  </a>
 					</li>
 					<li class="nav-item">
-					  <a href="{{route('site-settings.index')}}" class="nav-link">
-						<i class="fas fa-cog"></i> Site Settings
+					  <a style="color:#303e67!important;" href="{{route('site-settings.index')}}" class="nav-link">
+						<i class="fas fa-cog"></i> <strong>Site Settings</strong>
 					  </a>
 					</li>
 				  </ul>
@@ -53,7 +53,7 @@
 			 <div class="col-md-9">
             <div class="card card-primary card-outline">
             <div class="card-header" style="margin-bottom:10px">
-              <h3 class="card-title">Change Password</h3>
+              <h3 class="card-title"><strong>Change Password</strong></h3>
               <!-- /.card-tools -->
             </div>
 			 <div class="col-md-12">

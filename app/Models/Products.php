@@ -85,4 +85,9 @@ class Products extends Authenticatable
 	    return $query;
 	} 
 	
+	public static function productCount(){
+		$query = Products::where('created_by',Auth::user()->id)->count();
+	    return $query;
+	}
+	
 }

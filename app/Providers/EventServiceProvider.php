@@ -27,6 +27,9 @@ class EventServiceProvider extends ServiceProvider
 		'App\Events\EmailNotifications' => [
             'App\Listeners\EmailNotificationsListener',
         ],
+		'App\Events\CommomEmail' => [
+            'App\Listeners\CommomEmailNotificationListener',
+        ],
     ];
 
     /**

@@ -23,7 +23,7 @@ class CheckAuth
 		$auth = Auth::user();
 		if(isset($auth))
 		{
-			return redirect('/admin/home');
+			return redirect('/admin/dashboard');
 		}
 		return $next($request);
 		

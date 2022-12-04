@@ -14,7 +14,7 @@ class AdminSitesettings extends Authenticatable
     use Notifiable;
 	use SoftDeletes;
     protected $table = 'admin_site_settings';
-    protected $fillable = ['title','fav_icon','site_logo','created_by','created_at','updated_by','updated_at','deleted_by','deleted_at','landing_page_email'];
+    protected $fillable = ['title','fav_icon','site_logo','created_by','created_at','updated_by','updated_at','deleted_by','deleted_at','landing_page_email','email'];
 	
 	
 	function getSiteLogoAttribute($image){

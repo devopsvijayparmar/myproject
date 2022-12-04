@@ -68,4 +68,9 @@ class Projects extends Authenticatable
 	    return $query;
 	} 
 	
+	public static function projectCount(){
+		$query = Projects::where('created_by',Auth::user()->id)->count();
+	    return $query;
+	}
+	
 }

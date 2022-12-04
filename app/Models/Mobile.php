@@ -96,5 +96,10 @@ class Mobile extends Authenticatable
 
 	} 
 	
+	public static function mobileCount(){
+		$query = Mobile::where('created_by',Auth::user()->id)->count();
+	    return $query;
+	}
+	
 
 }

@@ -67,6 +67,57 @@
     </div>
 
   </footer>
+  
+  
+  
+<div class="modal fade" id="modal-default">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+			  <h4 class="modal-title">Sign in</h4>
+			  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			  </button>
+			</div>
+			<div class="modal-body">
+				<div class="form">
+				<form method="POST" action="{{ route('login') }}">
+				@csrf
+				<input type="hidden" name="url" value="" id="loginurl">
+				<div class="form-group">
+					 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autocomplete="email" placeholder="Email address" autofocus>
+					 <span class="validation-error" id="email_error">@error('email'){{ $message }}@enderror</span>
+				</div>
+				  
+				<div class="form-group">
+					<input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="current-password" placeholder="Password">
+					<span class="validation-error" id="password_error">@error('password'){{ $message }}@enderror</span>
+				</div>
+				
+				<div class="form-group">
+					<input class="" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+						{{ __('Remember Me') }}
+				</div>
+				
+				<div class="text-center"><button type="submit" class="btn" style="width: 100%;background: #0f66dc!important;">Sign In</button></div>
+				</form>
+			
+				<div class="d-flex justify-content-center links mt-3">
+					Don't have an account? <a href="{{url('/signup')}}"  class="ml-2">Sign Up</a>
+				</div>
+				
+				@if (Route::has('password.request'))
+				<div class="d-flex justify-content-center links">
+					<a href="{{ route('password.request') }}">Forgot your password?</a>
+				</div>
+				@endif
+			  </div>
+			</div>
+			
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	</div>
 
 
 
@@ -103,3 +154,26 @@ toastr.success('<?php echo Session::get('success') ?>', '', {timeOut: 5000});
 toastr.error('<?php echo Session::get('error') ?>', '', {timeOut: 5000});
 </script>
 @endif
+<script>
+function myFunction() {
+  var x = document.getElementById("password");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+
+function loginPopup(url){
+	$('#loginurl').val(url);
+	$('#modal-default').modal('show');
+}
+
+function isNumberKey(evt) {
+	var charCode = (evt.which) ? evt.which : evt.keyCode
+	if (charCode > 31 && (charCode < 48 || charCode > 57))
+		return false;
+	return true;
+}
+
+</script>
