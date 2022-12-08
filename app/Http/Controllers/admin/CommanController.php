@@ -12,12 +12,16 @@ use App\Models\Category;
 use App\Models\Type;
 use App\Models\User;
 use App\Models\LandingPage;
+use App\Traits\ImageUpload;
 use Auth;
 use Hash;
+use URL;
 
 
 class CommanController extends Controller
 {
+	
+	use ImageUpload;
     /**
      * Display a listing of the resource.
      *
@@ -51,5 +55,15 @@ class CommanController extends Controller
 		$this->data['landing_page'] = LandingPage::getRecordByUser($user->id,$url_name);
 		return view('admin.pages.landing_page.preview',$this->data);
 	}
+	
+	public function summerNoteImage(Request $request){
+		/*Image Upload Trait*/
+		if ($request->hasfile('image')) {
+			$image_name = $this->imageUpload($request->file('image'),'summernotes');
+			return url("/uploads/summernotes/$image_name");
+		}
+	}
+	
+	
 	
 }

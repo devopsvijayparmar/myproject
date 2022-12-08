@@ -34,7 +34,7 @@
         <script type="text/javascript" src="{{asset('keditor-master/examples/plugins/code-prettify/src/prettify.js')}}"></script>
         <script type="text/javascript" src="{{asset('keditor-master/examples/plugins/js-beautify-1.7.5/js/lib/beautify.js')}}"></script>
         <script type="text/javascript" src="{{asset('keditor-master/examples/plugins/js-beautify-1.7.5/js/lib/beautify-html.js')}}"></script>
-        <script type="text/javascript" src="{{asset('keditor-master/examples/js/examples.js"></script>
+        <script type="text/javascript" src="{{asset('keditor-master/examples/js/examples.js')}}"></script>
          <script type="text/javascript" data-keditor="script">
             $(function () {
                 $('#content-area').keditor();

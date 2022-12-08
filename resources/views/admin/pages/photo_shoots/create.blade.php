@@ -78,6 +78,7 @@
 @endsection
 @section('script')
 <script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
+<script src="{{ asset('/admin/plugins/ckeditor/ckeditor.js') }}"></script>
 {!! $validator->selector('#main_id') !!}
 <script>
 $('#photoshoottab').addClass('active');

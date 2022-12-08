@@ -88,6 +88,5 @@
 {!! $validator->selector('#main_id') !!}
 <script>
 $('#our_teamtab').addClass('active');
-CKEDITOR.replace( 'description' );
 </script>
 @endsection

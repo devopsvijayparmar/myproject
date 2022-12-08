@@ -255,7 +255,7 @@
 				@can('page_builder')
 					@if($user_purchase_plan->page_builder == 'Yes')
 					<li class="nav-item">
-						<a href="{{route('purchase-plan')}}" class="nav-link" id="page-builder-tab">
+						<a href="{{route('page-builder.index')}}" class="nav-link" id="page-builder-tab">
 						<i class="nav-icon fas fa-pager"></i>
 						<p>Page builder</p>
 						</a>

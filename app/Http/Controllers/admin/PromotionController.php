@@ -18,7 +18,7 @@ class PromotionController extends Controller
 {
 	
 	protected $validationRules = [
-        'description' => 'required|max:10000',
+        'description' => 'required',
     ]; 
     /**
      * Display a listing of the resource.
@@ -33,7 +33,7 @@ class PromotionController extends Controller
 	
 	public function index(Request $request)
     {    
-	   
+	   $auth = Auth::user();
 	    $data['validator'] = JsValidator::make($this->validationRules);
         $data['data'] = Promotion::editRecordByUserId();	
 		return view('admin.pages.promotion.index',$data);

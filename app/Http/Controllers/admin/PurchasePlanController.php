@@ -110,6 +110,7 @@ class PurchasePlanController extends Controller
 			}
 			elseif($type == 'pagebuilder'){
 				$input['no_of_page_builder'] = (int)$topup->no_of_page_builder + (int)$purchaseplan->no_of_page_builder;
+				$input['page_builder'] = 'Yes';
 				$price = $topup->no_of_page_builder_price;
 			}else{
 				$input['no_of_address_book'] = (int)$topup->no_of_address_book + (int)$purchaseplan->no_of_address_book;

@@ -21,7 +21,7 @@
 <script src="{{ asset('/admin/plugins/summernote/summernote-bs4.min.js') }}"></script>
 <!-- overlayScrollbars -->
 <script src="{{ asset('/admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
-<script src="{{ asset('/admin/plugins/ckeditor/ckeditor.js') }}"></script>
+
 <!-- AdminLTE App -->
 <script src="{{ asset('/admin/dist/js/adminlte.js') }}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
@@ -35,6 +35,7 @@
 <script src="{{ asset('/admin/dist/js/knockout-file-bindings.js') }}"></script>
 <script src="{{ asset('/admin/dist/js/select2.min.js') }}"></script>
 <script src="{{ asset('/admin/dist/js/common.js') }}"></script>
+
 @yield('script')
 
 </body>

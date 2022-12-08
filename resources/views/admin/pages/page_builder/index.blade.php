@@ -7,12 +7,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>About Us</h1>
+            <h1>Page Builder</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
-              <li class="breadcrumb-item active">About Us</li>
+              <li class="breadcrumb-item active">Page Builder</li>
             </ol>
           </div>
         </div>
@@ -28,20 +28,10 @@
             <!-- general form elements -->
             <div class="card card-primary">
               <!-- form start -->
-			   <form id="form" method="POST" action="{{route('about-us.update',1)}}" enctype="multipart/form-data">
-				@method('PUT')
-				@csrf
-                <div class="card-body">
-					<div class="form-group">
-						<label for="exampleInputEmail1">Description<span class="error">*</span></label>
-						<textarea type="text" class="form-control" id="description" name="description" placeholder="Enter Description">@if(isset($data->description)){!!$data->description!!}@endif</textarea>
-						<span class="error" id='description_error'>{{$errors->first('description')}}</span>
-					</div>
+                <div class="card-body table-responsive">
+					<a type="button" class="btn btn-primary float-right ml-2" href="{{route('page-builder.create')}}">Create Page</a>
+					
                 </div>
-				<div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Update</button>
-                </div>
-				</form>
             </div>
             <!-- /.card -->
           </div>
@@ -53,14 +43,9 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  
 @endsection
 @section('script')
-<script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
-<script src="{{ asset('/admin/plugins/ckeditor/ckeditor.js') }}"></script>
-{!!$validator->selector('#form')!!}
 <script>
-$('#about-us-tab').addClass('active');
-CKEDITOR.replace( 'description' );
+$('#blogtab').addClass('active');
 </script>
 @endsection

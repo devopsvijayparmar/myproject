@@ -7,13 +7,13 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Blog</h1>
+            <h1>Page Builder</h1>
           </div>
 		   <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
-              <li class="breadcrumb-item"><a href="{{route('blog.index')}}">Blogs</a></li>
-              <li class="breadcrumb-item active">Add Blog</li>
+              <li class="breadcrumb-item"><a href="{{route('blog.index')}}">Page Builder</a></li>
+              <li class="breadcrumb-item active">Create Page</li>
             </ol>
           </div>
         </div>
@@ -29,30 +29,29 @@
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Add Blog</h3>
+                <h3 class="card-title">Create Page</h3>
               </div>
 			 
               <!-- /.card-header -->
               <!-- form start -->
-			   <form id="main_id" method="POST" action="{{route('blog.store')}}" enctype="multipart/form-data">
+			   <form id="main_id" method="POST" action="{{route('page-builder.store')}}" enctype="multipart/form-data">
 				@method('POST')
 				@csrf
                 <div class="card-body">
 					<div class="form-group">
-						 <label for="exampleInputEmail1">Title <span class="error">*</span></label>
-						  <input type="text" class="form-control" id="title" placeholder="Enter title" name="title" maxlength="255" value="{{old('title')}}">
+						 <label for="exampleInputEmail1">Page Title <span class="error">*</span></label>
+						  <input type="text" class="form-control" id="title" placeholder="Enter page title" name="title" maxlength="255" value="{{old('title')}}">
 						 <span class="error" id='title_error'>{{$errors->first('title')}}</span>
 					</div>
 					<div class="form-group">
-						<label for="exampleInputEmail1">Description<span class="error">*</span></label>
-						<textarea type="text" class="form-control" id="description" name="description" placeholder="Enter Description">	{{old('description')}}</textarea>
-						<span class="error" id='description_error'>{{$errors->first('description')}}</span>
+						 <label for="exampleInputEmail1">Page Name <span class="error">*</span></label>
+						  <input type="text" class="form-control" id="name" placeholder="Enter page name" name="name" maxlength="255" value="{{old('name')}}">
+						 <span class="error" id='name_error'>{{$errors->first('name')}}</span>
 					</div>
 					<div class="form-group">
-						<label for="exampleInputFile">Image<span class="error">*</span></label>
-						<input type="file" onchange="ValidateSize(this)" class="form-control" name="image" id="image">
-						<img class="mar-top-10 rp-img100" id="blah"/ ></br>
-						<span class="error" id='image_error'>{{$errors->first('image')}}</span>
+						<label for="exampleInputEmail1">Content<span class="error">*</span></label>
+						<textarea type="text" class="form-control" id="description" name="description" placeholder="Enter Content">	{{old('description')}}</textarea>
+						<span class="error" id='description_error'>{{$errors->first('description')}}</span>
 					</div>
                 </div>
 				<div class="card-footer">
@@ -73,10 +72,20 @@
 @endsection
 @section('script')
 <script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
-<script src="{{ asset('/admin/plugins/ckeditor/ckeditor.js') }}"></script>
 {!! $validator->selector('#main_id') !!}
 <script>
-$('#blogtab').addClass('active');
-CKEDITOR.replace( 'description' );
+$('#pagebuildertab').addClass('active');
+$("#description").summernote({
+  callbacks: {
+	// callback for pasting text only (no formatting)
+	onPaste: function (e) {
+	  var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+	  e.preventDefault();
+	  bufferText = bufferText.replace(/\r?\n/g, '<br>');
+	  document.execCommand('insertHtml', false, bufferText);
+	}
+  }
+});
+
 </script>
 @endsection

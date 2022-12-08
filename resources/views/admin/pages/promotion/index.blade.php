@@ -60,6 +60,39 @@
 {!!$validator->selector('#form')!!}
 <script>
 $('#promotion-tab').addClass('active');
- $('#description').summernote()
+
+
+$('#description').summernote({
+	
+	height: ($(window).height() - 300),
+	callbacks: {
+		onImageUpload: function(image) {
+			uploadImage(image[0]);
+		}
+	}
+});
+
+function uploadImage(image) {
+	var data = new FormData();
+	data.append("image", image);
+	data.append("_token", '{{csrf_token()}}');
+	$.ajax({
+		url: "{{route('upload-image')}}",
+		cache: false,
+		contentType: false,
+		processData: false,
+		data: data,
+		type: "POST",
+		success: function(url) {
+			var image = $('<img>').attr('src', url);
+			$('#description').summernote("insertNode", image[0]);
+		},
+		error: function(data) {
+			console.log(data);
+		}
+	});
+}
+
+
 </script>
 @endsection

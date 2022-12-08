@@ -71,7 +71,7 @@ class SliderController extends Controller
 	public function edit($id)
     {
 		 $id = Crypt::decrypt($id);
-		 $data['data'] = Slider::getRecordById($id);	
+		 $data['data'] = Slider::find($id);	
 		 $data['validator'] = JsValidator::make($this->validationRulesEdit);
 		 return view('admin.pages.slider.edit',$data);
         

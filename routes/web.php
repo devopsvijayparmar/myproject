@@ -114,6 +114,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'admin','middleware' => ['prev
 		Route::resource('type', 'TypeController');
 		Route::get('my-account', 'MyAccountController@index')->name('my-account');
 		Route::post('my-account', 'MyAccountController@update')->name('my-account-update');
+		Route::resource('page-builder', 'PageBuilderController');
+		Route::POST('upload-image', 'CommanController@summerNoteImage')->name('upload-image');
 		
 		/*Business Routes*/
 		Route::group(['middleware' => ['purchaseplan']], function() {
