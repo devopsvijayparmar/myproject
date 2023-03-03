@@ -21,9 +21,9 @@
           <div class="block-blog text-left">
             <a href="{{url('/web-templates')}}/{{$webtemplatesdata->slug}}"><img src="{{ url('/uploads/front/web_templates') }}/{{$webtemplatesdata->image}}" alt="img"></a>
             <div class="content-blog">
-				<h4><a href="{{$webtemplatesdata->url}}" target="_blank">{{$webtemplatesdata->title}}</a></h4>
-				<a href="{{$webtemplatesdata->url}}" target="_blank" class="csm-btn-1 btn"><i class="fa fa-search"></i>  Demo Preview</a>
-                <a href="{{url('/signup')}}/?site={{$webtemplatesdata->slug}}" class="csm-btn-2 btn"><i class="fa fa-wrench"></i> Build Your Website</a>
+				<h4><a href="{{url('/web-templates')}}/{{$webtemplatesdata->slug}}">{{$webtemplatesdata->title}}</a></h4>
+				<a href="{{$webtemplatesdata->preview}}" target="_blank" class="csm-btn-1 btn"><i class="fa fa-search"></i>  Demo Preview</a>
+                <a href="{{url('/signup')}}/?site={{$webtemplatesdata->url}}" class="csm-btn-2 btn"><i class="fa fa-wrench"></i> Build Your Website</a>
             </div>
           </div>
         </div>

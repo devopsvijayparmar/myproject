@@ -40,8 +40,8 @@ class SettingsController extends Controller
 		
     	 $validator = Validator::make($request->all(), [
 			'title' => 'required',
-			'fav_icon'=>'mimes:jpeg,jpg,png|max:20480',
-			'site_logo'=>'mimes:jpeg,jpg,png|max:20480'
+			'fav_icon'=>'mimes:jpeg,jpg,png,svg|max:20480',
+			'site_logo'=>'mimes:jpeg,jpg,png,svg|max:20480'
         ]);
 
 
@@ -54,8 +54,7 @@ class SettingsController extends Controller
 		$auth = Auth::user();
 		$input = $request->all();
 		$input['updated_at'] = date('Y-m-d H:i:s');
-		$input['created_by'] = $auth->id;
-         
+		
 		if ($request->hasfile('fav_icon')) {
 			$image_name = $this->imageUpload($request->file('fav_icon'),'front/settings');
 			$input['fav_icon'] = $image_name;

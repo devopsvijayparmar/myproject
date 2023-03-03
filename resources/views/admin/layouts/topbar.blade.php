@@ -20,9 +20,9 @@
         </div>
       </div>
     </form>-->
-	<h4 href="javascript:void(0)" class="nav-link">
+	<a target="_blank" href="{{ Auth::user()->my_website }}" ><h4 target="_blank" class="nav-link">
 		<i class="nav-icon fas fa-globe"></i> <strong>{{ ucfirst(Auth::user()->name) }}</strong>
-	</h4>
+	</h4></a>
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
@@ -93,7 +93,7 @@
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
          
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
+          <a target="_blank" href="{{ Auth::user()->my_website }}" class="dropdown-item">
             <i class="nav-icon fas fa-globe mr-2"></i> <strong>Website</strong>
           </a>
           <div class="dropdown-divider"></div>

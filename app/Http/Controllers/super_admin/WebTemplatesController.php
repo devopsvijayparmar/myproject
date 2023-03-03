@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Session;
 use DB;
 use Validator;
 use App\Models\front\WebTemplates;
+use App\Helpers\SlugHelper;
+use App\Models\front\Sites;
 use Auth;
 use Hash;
 use Crypt;
@@ -36,13 +38,14 @@ class WebTemplatesController extends Controller
 
 	public function create(Request $request)
     { 	
+	     $this->data['sites'] = Sites::getSites(); 
 		return view('super_admin.front.web_templates.create',$this->data);
     }
 	
 	public function store(Request $request)
     {
     	 $validator = Validator::make($request->all(), [
-			'title' => 'required',
+			'url' => 'required',
 			'description' => 'required',
 			'image'=>'required'
         ]);
@@ -56,9 +59,12 @@ class WebTemplatesController extends Controller
 		$auth = Auth::user();
         $input = $request->all();
 		
-		$input['created_at'] = date('Y-m-d H:i:s');
-		$input['created_by'] = $auth->id;
+		$site = Sites::where('site_name',$request->url)->first();
 		
+		$input['created_at'] = date('Y-m-d H:i:s');
+		$input['slug'] = SlugHelper::slug($request->title,'front_web_templates');
+		$input['title'] = $site->name;
+	
 		if ($request->hasfile('image')) {
 			$file = $request->file('image');
 			$name_1 = $file->getClientOriginalName();
@@ -107,7 +113,6 @@ class WebTemplatesController extends Controller
 		$auth = Auth::user();
 		$input = $request->all();
 		$input['updated_at'] = date('Y-m-d H:i:s');
-		$input['updated_by'] = $auth->id;
 		
 		if ($request->hasfile('image')) {
 			$file = $request->file('image');
@@ -149,7 +154,7 @@ class WebTemplatesController extends Controller
 		$id = Crypt::decrypt($id);
 		/*Record Delete*/
 		$auth = Auth::user(); 	
-	    $delete = WebTemplates::where('id', $id)->update(['deleted_by' => $auth->id,'deleted_at'=>date('Y-m-d H:i:s')]);
+	    $delete = WebTemplates::where('id', $id)->delete();
 		return $delete;
     }
 	

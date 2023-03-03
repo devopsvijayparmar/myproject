@@ -39,6 +39,24 @@
 							<img class="mar-top-10 rp-img100" src="<?php echo url('/uploads/slider/'.$data->image);?>" id="blah"/ ></br>
 							<span class="error" id='image_error'>{{$errors->Slider->first('image')}}</span>
 						</div>
+						
+						<div class="form-group col-md-6">
+							<label for="exampleInputEmail1">Title <span class="error">*</span></label>
+							<input type="text" class="form-control" maxlength="100" id="title" placeholder="Enter title" name="title" maxlength="255" value="{{$data->title}}">
+							<span class="error" id='email_error'></span>
+						</div>
+						
+						<div class="form-group col-md-6">
+							<label for="exampleInputEmail1">Description<span class="error">*</span></label>
+							<textarea type="text" class="form-control" id="description" name="description" placeholder="Enter Desc">{!!$data->description!!}</textarea>
+							<span class="error" id='address_error'></span>
+						</div> 
+						
+						<div class="form-group col-md-6">
+							<label for="exampleInputEmail1">URL <span class="error">*</span></label>
+							<input type="text" class="form-control" id="url" placeholder="Enter url" name="url" maxlength="255" value="{{$data->url}}">
+							
+						</div>
 					
 					</div>		
                 </div>

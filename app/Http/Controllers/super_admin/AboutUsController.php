@@ -49,8 +49,7 @@ class AboutUsController extends Controller
 			$auth = Auth::user();
 			$input = $request->all();
 			$input['updated_at'] = date('Y-m-d H:i:s');
-			$input['created_by'] = $auth->id;
-
+			
 			$aboutus = CMS::where('type','about-us')->first();
 			$aboutus->update($input);
 			

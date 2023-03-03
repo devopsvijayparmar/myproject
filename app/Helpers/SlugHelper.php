@@ -12,7 +12,7 @@ class SlugHelper {
      * @params url du document ajout�
      */
 
-    public static function slug($string, $table,$auth_id, $field = 'slug', $key = NULL, $value = NULL) {
+    public static function slug($string, $table, $field = 'slug', $key = NULL, $value = NULL) {
         
                 $slug = $string;
                 $slug = strtolower($slug);
@@ -24,7 +24,7 @@ class SlugHelper {
                 if ($key)
                     $params["$key !="] = $value;
 
-                while (DB::table($table)->where($params)->where('created_by',$auth_id)->count()) {
+                while (DB::table($table)->where($params)->count()) {
                     if (!preg_match('/-{1}[0-9]+$/', $slug))
                         $slug .= '-' . ++$i;
                     else

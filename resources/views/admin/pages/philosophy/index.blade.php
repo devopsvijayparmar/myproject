@@ -39,7 +39,6 @@
                 <div class="card-body">
 					
 					<div class="form-group">
-						<label for="exampleInputEmail1">Description<span class="error">*</span></label>
 						<textarea type="text" class="form-control" id="description" name="description" placeholder="Enter Description">@if(isset($data->description)){{$data->description}}@endif</textarea>
 						<span class="error" id='description_error'>{{$errors->first('description')}}</span>
 					</div>
@@ -61,10 +60,39 @@
 @endsection
 @section('script')
 <script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
-<script src="{{ asset('/admin/plugins/ckeditor/ckeditor.js') }}"></script>
 {!! $validator->selector('#main_id') !!}
 <script>
 $('#philosophy-tab').addClass('active');
-CKEDITOR.replace( 'description');
+$('#description').summernote({
+	
+	height: ($(window).height() - 300),
+	callbacks: {
+		onImageUpload: function(image) {
+			uploadImage(image[0]);
+		}
+	}
+});
+
+function uploadImage(image) {
+	var data = new FormData();
+	data.append("image", image);
+	data.append("_token", '{{csrf_token()}}');
+	$.ajax({
+		url: "{{route('upload-image')}}",
+		cache: false,
+		contentType: false,
+		processData: false,
+		data: data,
+		type: "POST",
+		success: function(url) {
+			var image = $('<img>').attr('src', url);
+			$('#description').summernote("insertNode", image[0]);
+		},
+		error: function(data) {
+			console.log(data);
+		}
+	});
+}
+
 </script>
 @endsection  

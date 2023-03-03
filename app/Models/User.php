@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
+use Auth;
 
 class User extends Authenticatable
 {
@@ -53,5 +54,9 @@ class User extends Authenticatable
 	
 	function getProfileAttribute($image){
 		return $image == null ? url('/images/boxed-bg.jpg') : asset('/uploads/profile/'.$image);
+	}
+	
+	function getMyWebsiteAttribute(){
+		return url('/'.Auth::user()->title);
 	}
 }

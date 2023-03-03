@@ -63,7 +63,6 @@ class PricingController extends Controller
         $input = $request->all();
 		
 		$input['created_at'] = date('Y-m-d H:i:s');
-		$input['created_by'] = $auth->id;
 		
 		$pricing = Pricing::create($input);
 		
@@ -113,7 +112,6 @@ class PricingController extends Controller
 		$auth = Auth::user();
 		$input = $request->all();
 		$input['updated_at'] = date('Y-m-d H:i:s');
-		$input['updated_by'] = $auth->id;
 		
 		$pricing = Pricing::find($id);
 		$pricing->update($input);
@@ -147,7 +145,7 @@ class PricingController extends Controller
 		$id = Crypt::decrypt($id);
 		/*Record Delete*/
 		$auth = Auth::user(); 	
-	    $delete = Pricing::where('id', $id)->update(['deleted_by' => $auth->id,'deleted_at'=>date('Y-m-d H:i:s')]);
+	    $delete = Pricing::where('id', $id)->delete();
 		return $delete;
     }
 	

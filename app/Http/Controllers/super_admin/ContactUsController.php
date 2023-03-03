@@ -43,29 +43,27 @@ class ContactUsController extends Controller
 			'contact_2' => 'min:11|numeric',
         ]);
 
-
         if ($validator->fails()) {
             return redirect()->back()
                             ->withErrors($validator, 'ContactUS')
                             ->withInput();
         } else {
 			
-			   $auth = Auth::user();
-				$input = $request->all();
-				$input['updated_at'] = date('Y-m-d H:i:s');
-				$input['created_by'] = $auth->id;
-
-				$contactus = ContactUs::find(1);
-				$contactus->update($input);
-				
-				
-				if($contactus){
-					$request->session()->flash('success', 'Successfully Updated');
-				}
-				else{
-					$request->session()->flash('error', "we're sorry,but something went wrong.Please try again");
-				}
-				return redirect()->back();
+			$auth = Auth::user();
+			$input = $request->all();
+			$input['updated_at'] = date('Y-m-d H:i:s');
+			
+			$contactus = ContactUs::find(1);
+			$contactus->update($input);
+			
+			
+			if($contactus){
+				$request->session()->flash('success', 'Successfully Updated');
+			}
+			else{
+				$request->session()->flash('error', "we're sorry,but something went wrong.Please try again");
+			}
+			return redirect()->back();
 		}
     }
 	

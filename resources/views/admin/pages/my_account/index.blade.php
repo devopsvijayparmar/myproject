@@ -30,19 +30,19 @@
 							<p class="text-muted text-center"><strong>{{ Auth::user()->email }}</strong></p>
 							<ul class="list-group list-group-unbordered mb-3">
 							<li class="list-group-item">
-							<b><a style="color:#303e67!important;" href="{{route('user-settings')}}"><i class="nav-icon fas fa-sliders-h"></i> Settings</a></b> 
+							<b><a target="_blank" style="color:#303e67!important;" href="{{route('user-settings')}}"><i class="nav-icon fas fa-sliders-h"></i> Settings</a></b> 
 							</li>
 							<li class="list-group-item">
-							<b><a style="color:#303e67!important;" href="{{route('change-password')}}"><i class="fas fa-key"></i> Change Passowrd</a></b>
+							<b><a target="_blank" style="color:#303e67!important;" href="{{route('change-password')}}"><i class="fas fa-key"></i> Change Passowrd</a></b>
 							</li>
 							<li class="list-group-item">
-							<b><a style="color:#303e67!important;" href="{{route('change-password')}}"><i class="fas fa-globe"></i> My Website</a></b>
+							<b><a target="_blank" style="color:#303e67!important;" href="{{ Auth::user()->my_website }}"><i class="fas fa-globe"></i> My Website</a></b>
 							</li>
 							<li class="list-group-item">
-							<b><a style="color:#303e67!important;" href="{{url('/pricing')}}"><i class="fas fa-tags"></i> Pricing</a></b>
+							<b><a target="_blank" style="color:#303e67!important;" href="{{url('/pricing')}}"><i class="fas fa-tags"></i> Pricing</a></b>
 							</li>
 							<li class="list-group-item">
-							<b><a style="color:#303e67!important;" href="{{url('/')}}"><i class="fas fa-globe"></i> websphare.com</a></b>
+							<b><a target="_blank" style="color:#303e67!important;" href="{{url('/')}}"><i class="fas fa-globe"></i> websphare.com</a></b>
 							</li>
 							</ul>
 							

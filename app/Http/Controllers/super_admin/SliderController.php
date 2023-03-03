@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Session;
+use App\Models\front\Sites;
 use DB;
 use Validator;
 use App\Models\front\Slider;
@@ -36,6 +37,7 @@ class SliderController extends Controller
 	
 	public function create(Request $request)
     {    
+	     $this->data['sites'] = Sites::getSites(); 
 		return view('super_admin.front.slider.create',$this->data);
     }
 	
@@ -55,7 +57,6 @@ class SliderController extends Controller
         $input = $request->all();
 		
 		$input['created_at'] = date('Y-m-d H:i:s');
-		$input['created_by'] = $auth->id;
 		
 		if ($request->hasfile('image')) {
 			$file = $request->file('image');
@@ -93,8 +94,6 @@ class SliderController extends Controller
 		$auth = Auth::user();
 		$input = $request->all();
 		$input['updated_at'] = date('Y-m-d H:i:s');
-		$input['updated_by'] = $auth->id;
-        
 		
 		if ($request->hasfile('image')) {
 			$file = $request->file('image');
@@ -129,7 +128,7 @@ class SliderController extends Controller
 		$id = Crypt::decrypt($id);
 		/*Record Delete*/
 		$auth = Auth::user(); 	
-	    $update = Slider::where('id', $id)->update(['deleted_by' => $auth->id,'deleted_at'=>date('Y-m-d H:i:s')]);
+	    $update = Slider::where('id', $id)->delete();
 		return $update;
     }
 	

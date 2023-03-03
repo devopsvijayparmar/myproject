@@ -1,4 +1,23 @@
  @include('front.include.header')
+
+ <style>
+ .centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+ 
+}
+.centered h1{
+	 color:white;
+}
+.centered p{
+	color:white;
+	font-size: 14px;
+	font-weight:400;
+	font-family: "Roboto", "Arial","sans-serif";
+}
+ </style>
   <!--==========================
     Hero Section
   ============================-->
@@ -9,6 +28,8 @@
 	   @foreach($slider as $sliderdata)
 		<div class="item">
 			<img class="home-img" src="{{ url('/uploads/slider') }}/{{$sliderdata->image}}">
+			 <a href="{{$sliderdata->url}}"><div class="centered"><h1>{{$sliderdata->title}}</h1></br><p>{!!$sliderdata->description!!}</p></div>	</a>
+			
 		</div>
 		@endforeach
 	</div>
@@ -68,10 +89,13 @@
     <div class="container">
       <div class="owl-carousel owl-theme">
 	    @foreach($webtemplates as $webtemplatesdata)
-        <a href="{{url('/web-templates')}}/{{$webtemplatesdata->slug}}"><div><h4 class="pull-left">{{$webtemplatesdata->title}}</h4><img src="{{ url('/uploads/front/web_templates') }}/{{$webtemplatesdata->image}}" alt="img" class="img-responsive" style="height:300px!important;"></div></a>
+        <a href="{{url('/web-templates')}}/{{$webtemplatesdata->slug}}"><div><h4 class="pull-left">{{$webtemplatesdata->title}}</h4><img src="{{ url('/uploads/front/web_templates') }}/{{$webtemplatesdata->image}}" alt="img" class="img-responsive" style="height:250px!important;"></div></a>
 		@endforeach
       </div>
     </div>
+
+	
+	<a href="{{ url('/web-templates') }}" target="_blank" class="csm-btn-1 btn">See more...</a>
 
   </section>
 
@@ -111,7 +135,7 @@
   <!--==========================
     Pricing Table Section
   ============================-->
-  <section id="pricing" class="padd-section text-center wow fadeInUp">
+ <!-- <section id="pricing" class="padd-section text-center wow fadeInUp">
 
     <div class="container">
       <div class="section-title text-center">
@@ -143,7 +167,7 @@
 		
       </div>
     </div>
-  </section>
+  </section>-->
 
 
 

@@ -38,6 +38,30 @@
 							<img class="mar-top-10 rp-img100" id="blah"/ ></br>
 							<span class="error" id='image_error'>{{$errors->Slider->first('image')}}</span>
 						</div>
+						
+						<div class="form-group col-md-6">
+							<select name="title" class="form-control" id="title"/>
+								<option value="">Select Website</option>
+								@foreach($sites as $site)
+								<option @if(old('title') == $site->name) selected @endif value="{{$site->name}}">{{$site->name}}</option>
+								@endforeach
+							<select>
+						</div>
+						
+						<div class="form-group col-md-6">
+							<label for="exampleInputEmail1">Description<span class="error">*</span></label>
+							<textarea type="text" class="form-control" id="description" name="description" placeholder="Enter Desc"></textarea>
+							<span class="error" id='address_error'></span>
+						</div> 
+						
+						<div class="form-group col-md-6">
+							<label for="exampleInputEmail1">URL <span class="error">*</span></label>
+							<input type="text" class="form-control" id="url" placeholder="Enter url" name="url" maxlength="255" value="">
+							
+						</div>
+						
+						
+						
 					</div>	
 				   
 				</div>

@@ -33,7 +33,7 @@
 				@csrf
                 <div class="card-body">
 					<div class="form-group">
-						<label for="exampleInputEmail1">Description<span class="error">*</span></label>
+						
 						<textarea type="text" class="form-control" id="description" name="description" placeholder="Enter Description">@if(isset($data->description)){!!$data->description!!}@endif</textarea>
 						<span class="error" id='description_error'>{{$errors->first('description')}}</span>
 					</div>

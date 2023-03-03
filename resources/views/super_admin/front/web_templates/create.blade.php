@@ -31,16 +31,15 @@
 				@csrf
 				<div class="card-body">
 					<div class="row">
-						<div class="form-group col-md-6">
-							 <label for="exampleInputEmail1">Title <span class="error">*</span></label>
-							  <input type="text" class="form-control" id="title" placeholder="Enter title" name="title" maxlength="255" value="{{ old('title') }}">
-							  <span class="error" id='title_error'>{{$errors->WebTemplates->first('title')}}</span>
-						</div>
+						
 						
 						<div class="form-group col-md-6">
-							 <label for="exampleInputEmail1">URL <span class="error">*</span></label>
-							  <input type="text" class="form-control" id="url" placeholder="Enter URL" name="url" maxlength="255" value="{{ old('url') }}">
-							  <span class="error" id='url_error'>{{$errors->WebTemplates->first('url')}}</span>
+							<select name="url" class="form-control" id="url"/>
+								<option value="">Select Website</option>
+								@foreach($sites as $site)
+								<option @if(old('url') == $site->site_name) selected @endif value="{{$site->site_name}}">{{$site->name}}</option>
+								@endforeach
+							<select>
 						</div>
 						
 						<div class="form-group col-md-6">

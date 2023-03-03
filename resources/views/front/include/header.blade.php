@@ -8,7 +8,7 @@
   <meta content="" name="description">
 
   <!-- Favicons -->
-  <link href="{{ url('/front/img/favicon.png') }}" rel="icon">
+  <link href="{{$admin_site_setting->fav_icon}}" rel="icon">
   <link href="{{ url('/front/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -43,7 +43,7 @@
     <div class="container">
 
       <div id="logo" class="pull-left">
-        <h1><a href="{{ url('/') }}" class="scrollto"><span>e</span>Startup</a></h1>
+        <h1><a href="{{ url('/') }}"  class="scrollto"><img src="{{$admin_site_setting->site_logo}}" style="height:40px!important"></a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="#body"><img src="img/logo.png" alt="" title="" /></a>-->
       </div>
@@ -52,7 +52,7 @@
         <ul class="nav-menu">
 			<li id="hometab"><a href="{{ url('/') }}">Home</a></li>
 			<li id="templatetab"><a href="{{ url('/web-templates') }}">Web Templates</a></li>
-			<li id="pricingtab"><a href="{{ url('/pricing') }}">Pricing</a></li>
+			<!--<li id="pricingtab"><a href="{{ url('/pricing') }}">Pricing</a></li>-->
 			<li id="abouttab"><a href="{{ url('/page/about-us') }}">About Us</a></li>
 			<li id="bussinesstab"><a href="{{ url('/bussiness') }}">Bussiness</a></li>
 			<li id="contacttab" class="menu-has-children"  style="margin-right: 70px;"><a href="javascript:void(0)">Help</a>

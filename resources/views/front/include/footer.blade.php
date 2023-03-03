@@ -5,7 +5,7 @@
         <div class="col-md-12 col-lg-4">
           <div class="footer-logo">
 
-            <a class="navbar-brand" href="#">eStartup</a>
+			<a href="{{ url('/') }}"  class="navbar-brand"><img src="{{$admin_site_setting->site_logo}}" style="height:40px!important"></a>
             <p>Sign up for a free website builder. Choose what kind of website you want to create. Publish your website and go live. Start building your professional online presence.</p>
 
           </div>
@@ -59,10 +59,8 @@
 
     <div class="copyrights">
       <div class="container">
-        <p>&copy; Copyrights eStartup. All rights reserved.</p>
-        <div class="credits">
-          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-        </div>
+        <p>&copy; Copyrights websphare. All rights reserved.</p>
+       
       </div>
     </div>
 

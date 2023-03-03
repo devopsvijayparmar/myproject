@@ -92,7 +92,7 @@ class ProjectTypeController extends Controller
 		$project_type = ProjectType::create($input);
 	
 		if($project_type){
-			return redirect()->route('project-pype.index')->with('success', Lang::get('messages.created'));
+			return redirect()->route('project-type.index')->with('success', Lang::get('messages.created'));
 		}else{
 			return redirect()->back()->with('error', Lang::get('messages.error'));
 		}

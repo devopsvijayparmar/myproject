@@ -56,7 +56,6 @@ class SystemController extends Controller
         $input = $request->all();
 		
 		$input['created_at'] = date('Y-m-d H:i:s');
-		$input['created_by'] = $auth->id;
 		
 		if ($request->hasfile('image')) {
 			$file = $request->file('image');
@@ -106,8 +105,7 @@ class SystemController extends Controller
 		$auth = Auth::user();
 		$input = $request->all();
 		$input['updated_at'] = date('Y-m-d H:i:s');
-		$input['updated_by'] = $auth->id;
-		
+	
 		if ($request->hasfile('image')) {
 			$file = $request->file('image');
 			$name_1 = $file->getClientOriginalName();
@@ -149,7 +147,7 @@ class SystemController extends Controller
 		$id = Crypt::decrypt($id);
 		/*Record Delete*/
 		$auth = Auth::user(); 	
-	    $delete = System::where('id', $id)->update(['deleted_by' => $auth->id,'deleted_at'=>date('Y-m-d H:i:s')]);
+	    $delete = System::where('id', $id)->delete();
 		return $delete;
     }
 	
