@@ -22,7 +22,7 @@
 			@csrf
 			 
             <div class="form-group">
-				<input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autocomplete="email" autofocus>
+				<input id="email" type="email" placeholder="Email Address" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autocomplete="off" autofocus>
 				<span class="validation-error" id="email_error">@error('email'){{ $message }}@enderror</span>
             </div>
 			

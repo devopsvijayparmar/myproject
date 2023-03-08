@@ -3,6 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\UserRegistered;
+use App\Models\AdminSitesettings;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Mail;
@@ -34,11 +35,16 @@ class UserRegistrationNotificationListener
     {
         $user = $event;
 		
+		$site_setting = AdminSitesettings::first();
+		$site_logo = "";
+		if(isset($site_setting->site_logo)){
+			$site_logo = $site_setting->site_logo;
+		}
 		
 	    $userid = Crypt::encrypt($user->user['id']);
 	    $link = url('verify-account/'.$userid);
 		
-        $data = array( 'email' => $user->user['email'], 'name' => $user->user['name'], 'link'=>$link);
+        $data = array( 'email' => $user->user['email'], 'name' => $user->user['name'], 'link'=>$link,'site_logo'=>$site_logo);
        
 		Mail::send('emails.users.verify_email', $data, function($message) use ($data)
         {

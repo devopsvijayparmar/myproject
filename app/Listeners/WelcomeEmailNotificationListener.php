@@ -3,6 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\WelcomeEmail;
+use App\Models\AdminSitesettings;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Mail;
@@ -33,10 +34,16 @@ class WelcomeEmailNotificationListener
     {
         $user = $event;
 		
+		$site_setting = AdminSitesettings::first();
+		$site_logo = "";
+		if(isset($site_setting->site_logo)){
+			$site_logo = $site_setting->site_logo;
+		}
+		
 	    $adminlink = url('/admin/dashboard');
 	    $websitelink = url('/'.$user->user['title']);
 		
-        $data = array( 'email' => $user->user['email'], 'name' => $user->user['name'], 'adminlink'=>$adminlink,'websitelink'=>$websitelink);
+        $data = array( 'email' => $user->user['email'], 'name' => $user->user['name'], 'adminlink'=>$adminlink,'websitelink'=>$websitelink,'site_logo'=>$site_logo);
        
 		Mail::send('emails.users.welcome_email', $data, function($message) use ($data)
         {

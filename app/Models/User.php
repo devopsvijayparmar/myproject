@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
+use App\Notifications\ResetPasswordNotification;
 use Auth;
 
 class User extends Authenticatable
@@ -58,5 +59,10 @@ class User extends Authenticatable
 	
 	function getMyWebsiteAttribute(){
 		return url('/'.Auth::user()->title);
+	}
+	
+	public function sendPasswordResetNotification($token)
+	{
+		$this->notify(new ResetPasswordNotification($token));
 	}
 }

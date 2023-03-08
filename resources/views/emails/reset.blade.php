@@ -18,23 +18,25 @@
 					<table width="90%" border="0" cellspacing="0" cellpadding="0">
 						<tr>
 							<td>
-								<strong>Dear {{$name}}</strong><br/><br/>
-								<strong>Thanks for getting started with websphare!</strong><br/><br/>
-								We just need to verify your email address before you can access websphare.<br/><br/>
-								This link will verify your email address, and then you’ll officially be a part of the websphare community.<br/><br/>
-								See you there!<br/><br/>
+								<strong>Hello!</strong><br/><br/>
+								
+								You are receiving this email because we received a password reset request for your account<br/><br/>
+								
 							</td>
 						</tr>
 						<tr>
 							<td align="center">
 								<div style="line-height: 24px;">
-									<a class="button" href="{{$link}}" target="_blank" style=" background-color: #1d3d72!important;border: none;color: white;padding: 8px 34px;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;margin: 4px 2px;cursor: pointer;">
-										Verify your email address
+									<a class="button" href="{{$url}}" target="_blank" style=" background-color: #1d3d72!important;border: none;color: white;padding: 8px 34px;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;margin: 4px 2px;cursor: pointer;">
+										Reset Password
 									</a>
 									
 								</div>
 								<div style="line-height: 24px;">
-									<span style="font-size: 13px; color: #96a5b5;">This verification link will expire in 24 hours.</span>
+									<span style="font-size: 13px; color: #96a5b5;">This password reset link will expire in 60 minutes.</span></br>
+								</div>
+								<div style="line-height: 24px;">
+									<span style="font-size: 13px; color: #96a5b5;">If you did not request a password reset, no further action is required..<a href="{{$url}}">{{$url}}</a></span></br>
 								</div>
 								<br/>
 							</td>
@@ -42,7 +44,7 @@
 						<tr>
 							<td>
 								Thanks! – The Websphare Team<br/>
-								<a href="www.websphare.com">www.websphare.com</a>
+								<a href="#">www.websphare.com</a>
 								<div style="height: 60px; line-height: 60px; font-size: 10px;"></div>
 							</td>
 						</tr>

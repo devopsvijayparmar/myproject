@@ -9,7 +9,7 @@
 				<td align="center">
 					<a href="#" target="_blank" style="color: #596167; float:left; width:100%; padding:20px;text-align:center; font-size: 13px;">
 					<font size="3" color="#596167">
-					<img src="http://talmanagency.com/wp-content/uploads/2014/12/cropped-logo-new.png" width="250" alt="Metronic" border="0"  /></font></a>
+					<img src="{{$site_logo}}" width="250" alt="Websphare" border="0"  /></font></a>
 				</td>
 			</tr>
 			<tr>
@@ -35,7 +35,7 @@
 						<tr>
 							<td>
 								Thanks! – The Websphare Team<br/>
-								<a href="#">www.websphare.com</a>
+								<a href="www.websphare.com">www.websphare.com</a>
 								<div style="height: 60px; line-height: 60px; font-size: 10px;"></div>
 							</td>
 						</tr>
