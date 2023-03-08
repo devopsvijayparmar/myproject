@@ -18,7 +18,7 @@
 					<table width="90%" border="0" cellspacing="0" cellpadding="0">
 						<tr>
 							<td>
-								<strong>Dear {{$name}}</strong><br/><br/>
+								<strong>Hello!</strong><br/><br/>
 								<strong>Thanks for getting started with websphare!</strong><br/><br/>
 								We just need to verify your email address before you can access websphare.<br/><br/>
 								This link will verify your email address, and then you’ll officially be a part of the websphare community.<br/><br/>
