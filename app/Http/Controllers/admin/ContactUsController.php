@@ -53,9 +53,17 @@ class ContactUsController extends Controller
 		$input['updated_at'] = date('Y-m-d H:i:s');
 		$input['created_by'] = $auth->id;
 
-		$contact_us = ContactUs::getRecordByUserId();
-		$contact_us->update($input);
+        $contact_us = ContactUs::getRecordByUserId();
 		
+		if($contact_us){
+			$contact_us->update($input);
+			Session::flash('success', Lang::get('messages.updated'));
+		}
+		else {
+			$contact_us = ContactUs::create($input);
+			Session::flash('success', Lang::get('messages.created'));
+		}
+
 		if($contact_us){
 			return redirect()->route('contact-us.index')->with('success', Lang::get('messages.updated'));
 		}

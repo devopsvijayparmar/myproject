@@ -5,7 +5,7 @@
         <div class="col-md-12 col-lg-4">
           <div class="footer-logo">
 
-			<a href="{{ url('/') }}"  class="navbar-brand"><img src="{{$admin_site_setting->site_logo}}" style="height:40px!important"></a>
+			<a href="{{ url('/') }}"  class="navbar-brand"><img src="{{$admin_site_setting->site_logo}}" style="height:40px!important"></a></br>
             <p>Sign up for a free website builder. Choose what kind of website you want to create. Publish your website and go live. Start building your professional online presence.</p>
 
           </div>
@@ -20,6 +20,9 @@
               <li><a href="{{url('/page/terms-of-use')}}" target="_blank">Terms of Use</a></li>
               <li><a href="{{url('/page/privacy-policy')}}" target="_blank">Privacy Policy</a></li>
 			  <li><a href="{{ url('/page/about-us') }}" >About us</a></li>
+			  <li><a href="{{ url('/business') }}" >Business</a></li>
+			  <li><a href="{{ url('/business') }}" >Cookie Settings</a></li>
+			  <li><a href="{{ url('/business') }}" >Cookie Policy</a></li>
             </ul>
 
           </div>
@@ -33,6 +36,23 @@
             <ul class="list-unstyled">
               <li><a href="{{ url('/web-templates') }}">Download</a></li>
               <li><a href="#">Documentation</a></li>
+              <li><a href="{{ url('/web-templates') }}">100+ Features Websites</a></li>
+			   <li><a href="{{ url('/web-templates') }}">Email Marketing</a></li>
+            </ul>
+
+          </div>
+        </div>
+		
+		 <div class="col-sm-6 col-md-3 col-lg-2">
+          <div class="list-menu">
+
+            <h4>FEATURES</h4>
+
+            <ul class="list-unstyled">
+              <li><a href="{{ url('/signup') }}">Free Updates</a></li>
+              <li><a href="{{ url('/signup') }}">Clean Code</a></li>
+              <li><a href="{{ url('/signup') }}">Free Customization </a></li>
+              <li><a href="{{ url('/signup') }}">landing Page Builder</a></li>
             </ul>
 
           </div>
@@ -45,8 +65,10 @@
 
             <ul class="list-unstyled">
               <li><a href="{{ url('/contact-us') }}">Contact Support</a></li>
+              <li><a href="{{ url('/page/faq') }}">FAQ</a></li>
               <li><a href="{{ url('/login') }}">Sign In</a></li>
               <li><a href="{{ url('/signup') }}">Register</a></li>
+              <li><a href="{{ url('/customization') }}">Customization & feedback</a></li>
             </ul>
 
           </div>

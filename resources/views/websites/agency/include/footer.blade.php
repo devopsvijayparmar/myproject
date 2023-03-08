@@ -7,8 +7,8 @@
 				@if(isset($contact_us->contact_1))<span class="topbar-label"><i class="fa fa-phone"></i></span> <span class="topbar-hightlight mr-10"><a href="tel: {{$contact_us->contact_1}}">{{ $contact_us->contact_1}}</a></span>@endif
                 </div>
 				<div class="col-sm-3">
-				   <li id="" class="scroll"><a href="{{url('/')}}/{{$title}}/ourteam">Our Teams</a></li>
-				    <li id="" class="scroll"><a href="{{url('/')}}/{{$title}}/blog">Blog</a></li>
+				   <!--<li id="" class="scroll"><a href="{{url('/')}}/{{$title}}/ourteam">Our Teams</a></li>-->
+				   <li id="" class="scroll"><a href="{{url('/')}}/{{$title}}/blog">Blog</a></li>
 				   <li id="" class="scroll"><a href="{{url('/')}}/{{$title}}/about-us">About Us</a></li>
                    <li id="" class="scroll"><a href="{{url('/')}}/{{$title}}/contact-us">Contact Us</a></li>   
 				</div>

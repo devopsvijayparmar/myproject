@@ -34,7 +34,7 @@
 						</div>
 						<div class="media-body">
 							<h4 class="media-heading">{{$servicedata->name}}</h4>
-							<p>{{$servicedata->description}}</p>
+							<p>{!!$servicedata->description!!}</p>
 						</div>
 					</div>
 				</div><!--/.col-md-4-->
@@ -46,7 +46,7 @@
 						</div>
 						<div class="media-body">
 							<h4 class="media-heading">{{$servicedata->name}}</h4>
-							<p>{{$servicedata->description}}</p>
+							<p>{!!$servicedata->description!!}</p>
 						</div>
 					</div>
 				</div><!--/.col-md-4-->

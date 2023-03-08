@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use DB;
 use Validator;
-use App\Models\front\Bussiness;
+use App\Models\front\Business;
 use App\Models\AdminSitesettings;
 use App\Events\CommomEmail;
 use JsValidator;
@@ -15,7 +15,7 @@ use Auth;
 use Crypt;
 
 
-class BussinessController extends Controller
+class BusinessController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -43,16 +43,16 @@ class BussinessController extends Controller
 		$data['validator'] = JsValidator::make($this->validationRules);
 		$data['message']= "";
 		if(isset($auth)){
-			$data['message'] = Bussiness::getLastMessageBySupport($auth->id);
+			$data['message'] = Business::getLastMessageBySupport($auth->id);
 		}
-		return view('front.bussiness',$data);
+		return view('front.business',$data);
     }
 	
 	public function chat(Request $request)
     {  
 	    $auth = Auth::user();
-	    $data['chat'] = Bussiness::getChatByUser($auth->id);
-		Bussiness::where('send_by',1)->where('is_read',0)->where('user_id',$auth->id)->update(['is_read'=>1]);
+	    $data['chat'] = Business::getChatByUser($auth->id);
+		Business::where('send_by',1)->where('is_read',0)->where('user_id',$auth->id)->update(['is_read'=>1]);
 		return view('front.chat',$data);
     }
 	
@@ -69,15 +69,15 @@ class BussinessController extends Controller
         $input = $request->all();
 		$input['created_at'] = date('Y-m-d H:i:s');
 	
-		$bussiness = Bussiness::create($input);
+		$business = Business::create($input);
 		
 		$html = "Name : $request->name <br> Email: $request->email <br> Phone: $request->phone <br> Country: $request->country <br> About: $request->about <br> Project detail: $request->project_detail";
 		
-		$array = array('email'=>$this->data['admin_site_settings']->email,'message'=>$html,'subject'=>'Bussiness inquiry');
+		$array = array('email'=>$this->data['admin_site_settings']->email,'message'=>$html,'subject'=>'Business inquiry');
 		event(new CommomEmail($array));
 	
-		if($bussiness){
-			Session::flash('success', 'Our bussiness service representative will be in touch shortly');
+		if($business){
+			Session::flash('success', 'Our business service representative will be in touch shortly');
 			 return redirect()->back();
 		}else{
 			 Session::flash('error', "we're sorry,but something went wrong.Please try again");
@@ -96,9 +96,9 @@ class BussinessController extends Controller
 		$input['send_by'] = 2;
 		$input['message'] = $request->message;
 	
-		$data['message'] = $bussiness = Bussiness::create($input);
+		$data['message'] = $business = Business::create($input);
 		
-		if($bussiness){
+		if($business){
 			 return view('front.chat_message',$data);
 		}else{
 			 return 0;

@@ -16,6 +16,7 @@ use App\Models\front\Pricing;
 use App\Models\front\System;
 use App\Models\front\WebTemplates;
 use App\Models\front\ContactUs;
+use App\Models\front\Customization;
 use App\Models\front\CMS;
 use Hash;
 use Crypt;
@@ -72,17 +73,23 @@ class HomeController extends Controller
 	
 	public function contactUs(Request $request)
     {  
-		return view('front.contact_us');
+		return view('front.contact_us',$this->data);
+    }
+	
+	public function customization(Request $request)
+    {  
+	    $this->data['sites'] = Sites::getSites(); 
+		return view('front.customization',$this->data);
     }
 	
 	public function contact_us_store(Request $request)
     {
 		
-    	 $validator = Validator::make($request->all(), [
+    	$validator = Validator::make($request->all(), [
 			'name' => 'required|max:255',
 			'email' => 'required|email|max:255',
-			'message' => 'required',
-			'subject' => 'required',
+			'message' => 'required|max:10000',
+			'subject' => 'required|max:255',
         ]);
 
         if ($validator->fails()) {
@@ -95,6 +102,40 @@ class HomeController extends Controller
 		$input['created_at'] = date('Y-m-d H:i:s');
 	
 		$inser_id = new FrontContactUs($input);
+		$inser_id->save();
+		$inser_id = $inser_id->id;
+		
+		if($inser_id){
+			Session::flash('success', 'Our customer service representative will be in touch shortly');
+			 return redirect()->back();
+		}else{
+			 Session::flash('error', "we're sorry,but something went wrong.Please try again");
+			 return redirect()->back();
+		}
+
+		}
+    }
+	
+	public function customizationStore(Request $request)
+    {
+	
+    	$validator = Validator::make($request->all(), [
+			'name' => 'required|max:255',
+			'email' => 'required|email|max:255',
+			'message' => 'required|max:10000',
+			'subject' => 'required|max:255',
+        ]);
+
+        if ($validator->fails()) {
+             return redirect()->back()
+                            ->withErrors($validator, 'customization_error')
+                            ->withInput();
+        } else {
+		
+        $input = $request->all();
+		$input['created_at'] = date('Y-m-d H:i:s');
+	
+		$inser_id = new Customization($input);
 		$inser_id->save();
 		$inser_id = $inser_id->id;
 		

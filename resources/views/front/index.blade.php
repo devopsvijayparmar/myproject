@@ -135,7 +135,7 @@
   <!--==========================
     Pricing Table Section
   ============================-->
- <!-- <section id="pricing" class="padd-section text-center wow fadeInUp">
+  <section id="pricing" class="padd-section text-center wow fadeInUp">
 
     <div class="container">
       <div class="section-title text-center">
@@ -167,7 +167,7 @@
 		
       </div>
     </div>
-  </section>-->
+  </section>
 
 
 

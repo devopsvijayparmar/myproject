@@ -274,7 +274,7 @@ body{
   ============================-->
 <section id="contact" class="padd-section wow fadeInUp">
 		<div class="container">
-		<a href="{{url('/bussiness')}}" style="color: black;" class="nav-link"><i class="fas fa-inbox"></i> Inbox</a>
+		<a href="{{url('/business')}}" style="color: black;" class="nav-link"><i class="fas fa-inbox"></i> Inbox</a>
             <div class="chat">
 			
                 <div class="chat-history">
@@ -307,7 +307,7 @@ body{
                     </div>
                 </div>
             </div>
-			<a href="{{url('/bussiness')}}" style="color: black;" class="nav-link"><i class="fas fa-inbox"></i> Inbox</a>
+			<a href="{{url('/business')}}" style="color: black;" class="nav-link"><i class="fas fa-inbox"></i> Inbox</a>
 			</div>
 </section><!-- #contact -->
 
@@ -330,7 +330,7 @@ body{
   <script src="{{ url('/front/js/main.js') }}"></script>
   <script src="{{ url('/admin/plugins/toastr/toastr.min.js') }}"></script>
 <script>
-$('#bussinesstab').addClass('menu-active');
+$('#businesstab').addClass('menu-active');
 $(document).ready(function() {
 	$(document).scrollTop($(document).height());
 });

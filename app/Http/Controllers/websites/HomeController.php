@@ -60,6 +60,7 @@ class HomeController extends Controller
 	    $this->data['service'] = Service::takeRecordForWebsite($user->id,4);
 	    $this->data['service6'] = Service::takeRecordForWebsite($user->id,6);
 	    $this->data['product'] = Products::takeRecordForWebsite($user->id,6);
+	    $this->data['product8'] = Products::takeRecordForWebsite($user->id,8);
 	    $this->data['projects'] = Projects::takeRecordForWebsite($user->id,6);
 	    $this->data['mobile'] = Mobile::takeRecordForWebsite($user->id,12);
 	    $this->data['electric'] = Electric::takeRecordForWebsite($user->id,12);
@@ -69,6 +70,7 @@ class HomeController extends Controller
 	    $this->data['projecttype'] = ProjectType::getProjectTypeForWebsite($user->id);
 	    $this->data['ourteam'] = OurTeam::takeRecordForWebsite($user->id,8);
 		$this->data['gallery'] = Gallery::takeRecordForWebsite($user->id,6);
+		$this->data['gallery8'] = Gallery::takeRecordForWebsite($user->id,8);
 		$this->data['event'] = Event::takeRecordForWebsite($user->id,6);
 		$this->data['plan'] = Plan::takeRecordForWebsite($user->id,6);
 		return view('websites.'.$user->site_name.'.index',$this->data);

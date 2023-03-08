@@ -25,7 +25,7 @@
   <div class="container">
    <div class="row">
       <div class="col-md-12">
-        <div class="full">
+        <div class="">
           <div class="main_heading text_align_center">
             <h2>About Us</h2>
           </div>

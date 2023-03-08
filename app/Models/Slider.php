@@ -26,7 +26,7 @@ class Slider extends Authenticatable
 	}
 	
 	public static function getSlidersByUserId($id){
-		$query = Slider::orderBy('id','desc')->where('created_by',$id)->get();
+		$query = Slider::orderBy('id','asc')->where('created_by',$id)->get();
 		return $query;
 	}
 	

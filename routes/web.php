@@ -28,7 +28,8 @@ Route::group(['prefix' => 'super-admin', 'namespace' => 'super_admin','middlewar
 	Route::get('/super-admin/home', 'HomeController@index');
 	Route::resource('web-templates', 'WebTemplatesController');
 	Route::resource('pricing', 'PricingController');
-	Route::resource('about-us', 'AboutUsController');
+	Route::get('/cms/{type}', 'CMSController@index');
+	Route::post('/cms/{id}', 'CMSController@update')->name('cms');
 	Route::resource('contact-us', 'ContactUsController');
 	Route::resource('system', 'SystemController');
 	Route::resource('amazing-features', 'AmazingFeaturesController');
@@ -55,10 +56,12 @@ Route::group(['namespace' => 'front','middleware' => ['preventBackHistory']], fu
 	Route::get('/contact-us', 'HomeController@contactUs');
 	Route::post('/front-contact-us', 'HomeController@contact_us_store');
 	Route::get('/purchase-plan/{id}', 'PurchasePlanController@index');
-	Route::get('/bussiness', 'BussinessController@index');
-	Route::post('/bussiness', 'BussinessController@store');
-	Route::post('/send-message', 'BussinessController@sendMessage')->name('send-message');
-	Route::get('/chat', 'BussinessController@chat')->middleware('auth');
+	Route::get('/business', 'BusinessController@index');
+	Route::post('/business', 'BusinessController@store');
+	Route::post('/send-message', 'BusinessController@sendMessage')->name('send-message');
+	Route::get('/chat', 'BusinessController@chat')->middleware('auth');
+	Route::get('/customization', 'HomeController@customization');
+	Route::post('/customization', 'HomeController@customizationStore');
 
 });
 /*supar admin front*/

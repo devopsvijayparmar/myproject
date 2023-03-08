@@ -49,7 +49,7 @@
 				<div class="icon"> <img src="{{ url('/websites/watch/images/it_service/i3.png') }}" alt="#" /> </div>
 			  </div>
 			<h4 class="theme_color">{{$servicedata->name}}</h4>
-			  <p>{{$servicedata->description}}</p>
+			  <p>{!!$servicedata->description!!}</p>
 			</div>
 		  </div>
 	      @else
@@ -59,7 +59,7 @@
 					<div class="icon"> <img src="{{ url('/websites/watch/images/it_service/i2.png') }}" alt="#" /> </div>
 				</div>
 				<h4 class="theme_color">{{$servicedata->name}}</h4>
-				<p>{{$servicedata->description}}</p>
+				<p>{!!$servicedata->description!!}</p>
 			</div>
 			</div> 
 		  @endif

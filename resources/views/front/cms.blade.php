@@ -26,3 +26,9 @@
 $('#abouttab').addClass('menu-active');
 </script>
 @endif
+
+@if($cms->type == 'faq')
+<script>
+$('#contacttab').addClass('menu-active');
+</script>
+@endif

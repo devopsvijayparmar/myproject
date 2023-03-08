@@ -13,7 +13,7 @@ use Auth;
 use Hash;
 
 
-class AboutUsController extends Controller
+class CMSController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -26,11 +26,11 @@ class AboutUsController extends Controller
 		$this->data['title'] = 'About Us';
     }
 	
-	public function index(Request $request)
+	public function index(Request $request,$type)
     {    
 	   
-        $this->data['data'] = CMS::where('type','about-us')->first();	
-		return view('super_admin.front.about_us.index',$this->data);
+        $this->data['data'] = CMS::where('type',$type)->first();	
+		return view('super_admin.front.cms.index',$this->data);
     }
 
 	public function update(Request $request,$id)
@@ -50,10 +50,10 @@ class AboutUsController extends Controller
 			$input = $request->all();
 			$input['updated_at'] = date('Y-m-d H:i:s');
 			
-			$aboutus = CMS::where('type','about-us')->first();
-			$aboutus->update($input);
+			$cms = CMS::find($id);
+			$cms->update($input);
 			
-			if($aboutus) {
+			if($cms) {
 				$request->session()->flash('success', 'Successfully Updated');
 			}
 			else {

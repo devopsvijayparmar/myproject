@@ -16,7 +16,10 @@
               <li><a href="{{ url('/super-admin/pricing') }}" class="dropdown-item">Pricing</a></li>
               <li><a href="{{ url('/super-admin/system') }}" class="dropdown-item">System</a></li>
               <li><a href="{{ url('/super-admin/amazing-features') }}" class="dropdown-item">Amazing Features</a></li>
-              <li><a href="{{ url('/super-admin/about-us') }}" class="dropdown-item">About</a></li>
+              <li><a href="{{ url('/super-admin/cms/about-us') }}" class="dropdown-item">About us</a></li>
+              <li><a href="{{ url('/super-admin/cms/faq') }}" class="dropdown-item">FAQ</a></li>
+              <li><a href="{{ url('/super-admin/cms/privacy-policy') }}" class="dropdown-item">Privacy Policy</a></li>
+              <li><a href="{{ url('/super-admin/cms/terms-of-use') }}" class="dropdown-item">Terms Of Use</a></li>
               <li><a href="{{ url('/super-admin/contact-us') }}" class="dropdown-item">Contact</a></li>
               <li><a href="#" class="dropdown-item">Contact inquiry</a></li>
 			    <li><a href="{{ url('/super-admin/admin-slider') }}" class="dropdown-item">Slider</a></li>

@@ -51,14 +51,16 @@
       <nav id="nav-menu-container">
         <ul class="nav-menu">
 			<li id="hometab"><a href="{{ url('/') }}">Home</a></li>
-			<li id="templatetab"><a href="{{ url('/web-templates') }}">Web Templates</a></li>
-			<!--<li id="pricingtab"><a href="{{ url('/pricing') }}">Pricing</a></li>-->
+			<li id="templatetab"><a href="{{ url('/web-templates') }}">Website Builders</a></li>
+		    <li id="pricingtab"><a href="{{ url('/pricing') }}">Pricing</a></li>
 			<li id="abouttab"><a href="{{ url('/page/about-us') }}">About Us</a></li>
-			<li id="bussinesstab"><a href="{{ url('/bussiness') }}">Bussiness</a></li>
+			<li id="businesstab"><a href="{{ url('/business') }}">Business</a></li>
 			<li id="contacttab" class="menu-has-children"  style="margin-right: 70px;"><a href="javascript:void(0)">Help</a>
 				<ul>
 				  <li><a href="#">Documentation</a></li>
 				  <li><a href="{{ url('/contact-us') }}">Contact Support</a></li>
+				  <li><a href="{{ url('/customization') }}">Customization & feedback</a></li>
+				  <li><a href="{{ url('/page/faq') }}">FAQ</a></li>
 				</ul>
 			</li>
 			
@@ -67,7 +69,7 @@
 		<li><a href="{{route('home')}}">Dashboard</a></li>
 		@else
 		<li><a href="{{url('/login')}}">Sign In</a></li>
-		<li><a href="{{url('/signup')}}">Register</a></li>
+		<li><a href="{{url('/signup')}}">Sign up</a></li>
 		 @endauth
         </ul>
       </nav><!-- #nav-menu-container -->

@@ -80,8 +80,8 @@
       </div>
     </div>
     <div class="row">
-	 @if(count($product) > 0)
-	 @foreach($product as $productdata)
+	 @if(count($product8) > 0)
+	 @foreach($product8 as $productdata)
       <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 margin_bottom_30_all">
         <div class="product_list">
           <div class="product_img"> <a href="{{$productdata->getDetailPageLink($title)}}"><img class="img-responsive card_img" src="{{$productdata->image_1}}" alt=""></a> </div>
@@ -107,9 +107,9 @@
 	<div class="col-md-12"><p class="text-center">No Products Available</p></div>
     @endif
     </div>
-	@if(count($product) >0)
+	@if(count($product8) >0)
 	 <div class="text_align_center">
-		<a class="btn main_bt" href="{{$product[0]->getProjectCategoryLink($title)}}">See More...</a>
+		<a class="btn main_bt" href="{{$product8[0]->getProjectCategoryLink($title)}}">See More...</a>
 	 </div>
 	@endif
   </div>
@@ -127,8 +127,8 @@
       </div>
     </div>
     <div class="row">
-	@if(count($gallery) > 0)
-	@foreach($gallery as $retrieved_data)
+	@if(count($gallery8) > 0)
+	@foreach($gallery8 as $retrieved_data)
       <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
         <div class="full">
           <div class="blog_section">
