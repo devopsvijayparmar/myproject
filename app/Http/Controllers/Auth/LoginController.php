@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Validator;
+use JsValidator;
 use Auth;
 
 class LoginController extends Controller
@@ -24,11 +25,6 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 	
-	protected $validationRules = [
-        'email' => 'required|email|regex:/(.+)@(.+)\.(.+)/i|string|max:255',
-		'password' => 'required|min:8',
-    ]; 
-
     /**
      * Where to redirect users after login.
      *

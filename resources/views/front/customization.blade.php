@@ -7,20 +7,21 @@
   <section id="contact" class="padd-section wow fadeInUp">
 
     <div class="container">
-      <div class="section-title text-center">
+      <div class="section-title text-center" style="margin-bottom: 40px;">
         <h2>Customization  Support</h2>
         <p class="separator">Help us improve websphare</p>
       </div>
     </div>
 
     <div class="container">
+	 @include('front.include.success_message')
       <div class="row justify-content-center">
 
         <div class="col-lg-7 col-md-8">
           <div class="form">
             <div id="sendmessage">Your message has been sent. Thank you!</div>
             <div id="errormessage"></div>
-            <form id="main_id12" method="POST" action="{{url('/customization')}}" enctype="multipart/form-data" autocomplete="off">
+            <form id="customization_id" method="POST" action="{{url('/customization')}}" enctype="multipart/form-data" autocomplete="off">
 			@method('POST')
 			@csrf
 			 <div class="form-group">
@@ -64,93 +65,8 @@
     Footer
   ============================-->
  @include('front.include.footer')
+ <script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
+ {!! $validator->selector('#customization_id') !!}
 <script>
 $('#contacttab').addClass('menu-active');
-
-$('#main_id12').submit(function (e) {
-	   
-	$(':input[type="submit"]').prop('disabled', true);
-	
-	var name = $('#name').val();
-	var email = $('#email').val();
-	var subject = $('#subject').val();
-	var message = $('#message').val();
-	
-	var cnt = 0;
-	var f = 0;
-	
-	$('#name_error').html("");
-	$('#email_error').html("");
-	$('#subject_error').html("");
-	$('#message_error').html("");
-	
-
-    function ValidateEmail(email) {
-		var expr = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-		return expr.test(email);
-	};
-  
-	if (name.trim() == '') {
-		$('#name_error').html("Please enter Name");
-		cnt = 1;
-		f++;
-		if(f == 1)
-		{
-			$('#title').focus();
-		}
-	}
-	
-	if (email.trim() == '') {
-		$('#email_error').html("Please enter Email");
-		cnt = 1;
-		f++;
-		if(f == 1)
-		{
-			$('#email').focus();
-		}
-	}
-	 if(email)
-	{
-		if (!ValidateEmail(email)) {
-			$('#email_error').html("Please enter valid email");
-			cnt = 1;
-			f++;
-			if(f == 1)
-			{
-				$('#email').focus();
-			}
-		}
-	}
-	
-	if(subject.trim() ==''){
-		$('#subject_error').html("Please enter Subject");
-		cnt =1;
-		f++;
-		if(f == 1)
-		{
-			$('#subject').focus();
-		}
-	
-	}
-	
-	if(message.trim() ==''){
-		$('#message_error').html("Please enter details");
-		cnt =1;
-		f++;
-		if(f == 1)
-		{
-			$('#message').focus();
-		}
-	
-	}
-	
-	if (cnt == 1) {
-		$(':input[type="submit"]').prop('disabled', false);
-		return false;
-	} else {
-		return true;
-	}
-}); 
- 
-
 </script>

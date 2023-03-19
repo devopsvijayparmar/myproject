@@ -19,7 +19,8 @@
 						<tr>
 							<td>
 								<strong>Hello!</strong><br/><br/>
-								<strong>Thanks for getting started with websphare!</strong><br/><br/>
+								<strong>Verify your email address</strong><br/><br/>
+								Thanks for getting started with websphare!<br/><br/>
 								We just need to verify your email address before you can access websphare.<br/><br/>
 								This link will verify your email address, and then you’ll officially be a part of the websphare community.<br/><br/>
 								See you there!<br/><br/>
@@ -41,8 +42,9 @@
 						</tr>
 						<tr>
 							<td>
-								Thanks! – The Websphare Team<br/>
-								<a href="www.websphare.com">www.websphare.com</a>
+							    Thank you for your participation in the Websphare Web Services community.<br/><br/>
+								Sincerely,<br/>
+								The Websphare Team
 								<div style="height: 60px; line-height: 60px; font-size: 10px;"></div>
 							</td>
 						</tr>

@@ -143,6 +143,12 @@ return [
 		'brand_id' => [
            'required' => 'Please select Brand',
         ],
+		'terms_of_use_privacy_policy' => [
+           'required' => 'By creating an account you agree to our Terms and Conditions, Privacy Policy.',
+        ],
+		'site_name' => [
+           'required' => 'Please select website.',
+        ],
     ],
 
     /*

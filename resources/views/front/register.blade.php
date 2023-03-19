@@ -3,19 +3,19 @@
 <section id="contact" class="padd-section wow fadeInUp">
 
     <div class="container">
-      <div class="section-title text-center mb-5"">
-        <h2>Register</h2>
-        <p class="separator">Build your Dynemic Free here. Make your own website and get built-in tools to grow your business online.</p>
+      <div class="section-title text-center mb-5">
+        <h2>Sign Up. Let's build a website free</h2>
+        <p class="separator">Build your Dynemic Website Free here. Make your own website and get built-in tools to grow your business online.</p>
       </div>
     </div>
-
+   
     <div class="container">
+     @include('front.include.success_message')
       <div class="row justify-content-center">
         <div class="col-lg-7 col-md-8">
           <div class="form">
-            <div id="sendmessage">Your message has been sent. Thank you!</div>
             <div id="errormessage"></div>
-			<form id="main_id12" method="POST" action="{{url('/signup')}}" enctype="multipart/form-data" autocomplete="off">
+			<form id="signup_id" method="POST" action="{{url('/signup')}}" enctype="multipart/form-data" autocomplete="off">
 			@method('POST')
 			@csrf
 			 <div class="form-group">
@@ -28,9 +28,9 @@
                 <span class="validation-error" id="site_name_error">{{$errors->register->first('site_name')}}</span>
               </div>
 			  
-			  <div class="form-group">
-                <input type="text" onkeypress="return onlyAlphabets(event, this);"  maxlength="255" name="title" class="form-control" id="title" value="{{ old('title') }}" style='text-transform:lowercase'  placeholder="Enter Site Name / Domain" data-toggle="tooltip" data-placement="top" title="Only Alphabets and Numbers are allowed"/>
-				<span class="validation-error" id="title_error">{{$errors->register->first('title')}}</span>
+			   <div class="form-group">
+                <input type="text" name="domain_name" id="title" style='text-transform:lowercase' onkeypress="return onlyAlphabets(event, this);" class="form-control"  maxlength="255" value="{{ old('title') }}"  placeholder="Site Name / Domain"  title="Only Alphabets and Numbers are allowed" />
+				 <span class="validation-error" id="name_error">{{$errors->register->first('name')}}</span>
               </div>
 			  
               <div class="form-group">
@@ -44,18 +44,24 @@
 			  
 			   <div class="form-group">
                 <input type="password" name="password" maxlength="255" autocomplete="new-password" value="{{ old('password') }}"  class="form-control" id="password" placeholder="Password" data-toggle="tooltip" data-placement="top" title="Your password must contain min. 8 characters" />
-				<input type="checkbox" onclick="myFunction()"> <small>Show Password<small></br>
-				 <span class="validation-error" id="password_error">{{$errors->register->first('password')}}</span>
+				<input type="checkbox" onclick="myFunction()"> <small style="color: #7f8183;">Show Password<small></br>
+				<span class="validation-error" id="password_error">{{$errors->register->first('password')}}</span>
               </div>
 			  
 			   <div class="form-group">
                 <input type="password" name="confirm_password"  maxlength="255" autocomplete="new-password" value="{{ old('confirm_password') }}"  class="form-control" id="confirm_password" placeholder="Confirm Password" />
 				 <span class="validation-error" id="confirm_password_error">{{$errors->register->first('confirm_password')}}</span>
                </div>
-			   <p class="form__checkboxText"><input id="terms_of_use_privacy_policy" name="terms_of_use_privacy_policy" type="checkbox" value="yes"> <strong>I agree to websphare's <a class="form__checkboxLink" href="{{url('/page/terms-of-use')}}" target="_blank" rel="noopener noreferrer">Terms &amp; Conditions</a> and <a class="form__checkboxLink" href="{{url('/page/privacy-policy')}}" target="_blank" rel="noopener noreferrer">Privacy Policy</a></strong> <span class="validation-error" id="terms_of_use_privacy_policy_error">{{$errors->register->first('terms_of_use_privacy_policy_error')}}</span></p>
+			   
+			   <p style="margin:0;" class="form__checkboxText"><input id="terms_of_use_privacy_policy" name="terms_of_use_privacy_policy" type="checkbox" value="yes"> <strong>I agree to websphare's <a class="form__checkboxLink" href="{{url('/page/terms-of-use')}}" target="_blank" rel="noopener noreferrer">Terms &amp; Conditions</a> and <a class="form__checkboxLink" href="{{url('/page/privacy-policy')}}" target="_blank" rel="noopener noreferrer">Privacy Policy</a></strong> <span class="validation-error" id="terms_of_use_privacy_policy_error">{{$errors->register->first('terms_of_use_privacy_policy_error')}}</span></p>
 			   
               
               <div class="text-center"><button class="btn" type="submit" style="width: 100%;">Register</button></div>
+			  
+			
+				<div class="d-flex mt-3" style="font-size:14px">
+					Have an account? <a href="{{url('/login')}}"  class="ml-2">Sign In</a>
+				</div>
             </form>
           </div>
         </div>
@@ -67,12 +73,12 @@
     Footer
   ============================-->
  @include('front.include.footer')
+ <script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
+ {!! $validator->selector('#signup_id') !!}
  <script>
+$('#signuptab').addClass('menu-active');
 
-$(function () {
-  $('[data-toggle="tooltip"]').tooltip()
-}) 
- 
+
 $('#title').keypress(function (e) {
     var regex = new RegExp("^[a-zA-Z0-9]+$");
     var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
@@ -83,200 +89,6 @@ $('#title').keypress(function (e) {
     e.preventDefault();
     return false;
 });
- 
- $('#main_id12').submit(function (e) {
-	   
-	$(':input[type="submit"]').prop('disabled', true);
-	
-	
-	var site_name = $('#site_name').val();
-	var title = $('#title').val();
-	var name = $('#name').val();
-	var email = $('#email').val();
-	var password = $('#password').val();
-	var confirm_password = $('#confirm_password').val();
-	
-	var terms_of_use_privacy_policy = 0;
-	if ($('#terms_of_use_privacy_policy').prop('checked')==true){ 
-       terms_of_use_privacy_policy = 1;
-    }
-	
-	var cnt = 0;
-	var f = 0;
-	
-	$('#title_error').html("");
-	$('#site_name_error').html("");
-	$('#name_error').html("");
-	$('#email_error').html("");
-	$('#password_error').html("");
-	$('#confirm_password_error').html("");
-	$('#terms_of_use_privacy_policy_error').html("");
-	
 
-    function ValidateEmail(email) {
-		var expr = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-		return expr.test(email);
-	};
-  
-	if (site_name.trim() == '') {
-		$('#site_name_error').html("Please select Your Website");
-		cnt = 1;
-		f++;
-		if(f == 1)
-		{
-			$('#site_name').focus();
-		}
-	}
-	
-	if (title.trim() == '') {
-		$('#title_error').html("Please enter Site Name");
-		cnt = 1;
-		f++;
-		if(f == 1)
-		{
-			$('#title').focus();
-		}
-	}
-	
-	if(title)
-	{
-		$.ajax({
-			async: false,
-            global: false,
-			url: "{{url('/check-site-name')}}",
-			type: "POST",
-			data: {title:title, _token: "{{csrf_token()}}"},
-			success: function (response) {
-			   if(response == 1)
-			   {
-				   $('#title_error').html("The site name has already been taken");
-					cnt = 1;
-					f++;
-					if(f == 1)
-					{
-						$('#title').focus();
-					}
-			   }
-			}
-		});
-	}
-	
-	if (name.trim() == '') {
-		$('#name_error').html("Please enter Name");
-		cnt = 1;
-		f++;
-		if(f == 1)
-		{
-			$('#name').focus();
-		}
-	}
-	
-	if (email.trim() == '') {
-		$('#email_error').html("Please enter Email");
-		cnt = 1;
-		f++;
-		if(f == 1)
-		{
-			$('#email').focus();
-		}
-	}
-	 if(email)
-	{
-		if (!ValidateEmail(email)) {
-			$('#email_error').html("Please enter valid email");
-			cnt = 1;
-			f++;
-			if(f == 1)
-			{
-				$('#email').focus();
-			}
-		}
-	}
-	
-	if(email)
-	{
-		$.ajax({
-			async: false,
-            global: false,
-			url: "{{url('/check-email')}}",
-			type: "POST",
-			data: {email:email, _token: "{{csrf_token()}}"},
-			success: function (response) {
-			   if(response == 1)
-			   {
-				   $('#email_error').html("The email has already been taken");
-					cnt = 1;
-					f++;
-					if(f == 1)
-					{
-						$('#email').focus();
-					}
-			   }
-			}
-		});
-	}
-		
-	if(password.trim() ==''){
-		$('#password_error').html("Please enter Password");
-		cnt =1;
-		f++;
-		if(f == 1)
-		{
-			$('#password').focus();
-		}
-	
-	}
-	
-	if(password)
-	{
-		if(password.length<8) {
-			$('#password_error').html("Password should be atleast 8 characters");
-			cnt =1;
-			f++;
-			if(f == 1)
-			{
-				$('#password').focus();
-			}
-		}
-	}
-	
-	if(confirm_password != password){
-		$('#confirm_password_error').html("Password and Confirm Password does not match");
-		cnt =1;
-		f++;
-		if(f == 1)
-		{
-			$('#confirm_password').focus();
-		}
-	}
-	if(confirm_password.trim() == ''){
-		$('#confirm_password_error').html("Please enter Confirm Password");
-		cnt =1;
-		f++;
-		if(f == 1)
-		{
-			$('#confirm_password').focus();
-		}
-	}
-	
-	if (terms_of_use_privacy_policy == 0) {
-		$('#terms_of_use_privacy_policy_error').html("Agreement is required");
-		cnt = 1;
-		f++;
-		if(f == 1)
-		{
-			$('#terms_of_use_privacy_policy').focus();
-		}
-	}
-	
-	
-	if (cnt == 1) {
-		$(':input[type="submit"]').prop('disabled', false);
-		return false;
-	} else {
-		return true;
-	}
-}); 
- 
 
 </script>

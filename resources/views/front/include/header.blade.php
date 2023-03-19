@@ -68,8 +68,8 @@
 		<li><a href="{{url('/logout')}}">Logout</a></li>
 		<li><a href="{{route('home')}}">Dashboard</a></li>
 		@else
-		<li><a href="{{url('/login')}}">Sign In</a></li>
-		<li><a href="{{url('/signup')}}">Sign up</a></li>
+		<li id="logintab"><a href="{{url('/login')}}">Sign In</a></li>
+		<li id="signuptab"><a href="{{url('/signup')}}">Sign up</a></li>
 		 @endauth
         </ul>
       </nav><!-- #nav-menu-container -->

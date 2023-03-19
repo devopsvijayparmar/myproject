@@ -21,8 +21,7 @@
               <li><a href="{{url('/page/privacy-policy')}}" target="_blank">Privacy Policy</a></li>
 			  <li><a href="{{ url('/page/about-us') }}" >About us</a></li>
 			  <li><a href="{{ url('/business') }}" >Business</a></li>
-			  <li><a href="{{ url('/business') }}" >Cookie Settings</a></li>
-			  <li><a href="{{ url('/business') }}" >Cookie Policy</a></li>
+			  
             </ul>
 
           </div>
@@ -110,7 +109,7 @@
 				</div>
 				  
 				<div class="form-group">
-					<input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="current-password" placeholder="Password">
+					<input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="new-password" placeholder="Password">
 					<span class="validation-error" id="password_error">@error('password'){{ $message }}@enderror</span>
 				</div>
 				
@@ -162,18 +161,6 @@
 
 </body>
 </html>
-
-@if(Session::has('success'))
-<script>
-toastr.success('<?php echo Session::get('success') ?>', '', {timeOut: 5000});
-</script>
-@endif
-
-@if(Session::has('error'))
-<script>
-toastr.error('<?php echo Session::get('error') ?>', '', {timeOut: 5000});
-</script>
-@endif
 <script>
 function myFunction() {
   var x = document.getElementById("password");
@@ -194,6 +181,5 @@ function isNumberKey(evt) {
 	if (charCode > 31 && (charCode < 48 || charCode > 57))
 		return false;
 	return true;
-}
 
 </script>

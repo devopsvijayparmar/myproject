@@ -47,7 +47,7 @@ class WelcomeEmailNotificationListener
        
 		Mail::send('emails.users.welcome_email', $data, function($message) use ($data)
         {
-            $message->to($data['email'], 'Websphare')->subject('Welcome to Websphare! ');
+            $message->to($data['email'], 'Websphare')->subject('Your Websphare Account is Ready - Get Started Now');
         });
 
     }

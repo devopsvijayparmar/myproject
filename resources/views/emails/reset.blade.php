@@ -43,8 +43,9 @@
 						</tr>
 						<tr>
 							<td>
-								Thanks! – The Websphare Team<br/>
-								<a href="#">www.websphare.com</a>
+							    Thank you for your participation in the Websphare Web Services community.<br/><br/>
+								Sincerely,<br/>
+								The Websphare Team
 								<div style="height: 60px; line-height: 60px; font-size: 10px;"></div>
 							</td>
 						</tr>

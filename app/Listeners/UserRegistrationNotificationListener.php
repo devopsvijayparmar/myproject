@@ -48,7 +48,7 @@ class UserRegistrationNotificationListener
        
 		Mail::send('emails.users.verify_email', $data, function($message) use ($data)
         {
-            $message->to($data['email'], 'Webcom')->subject('Please Verify Your Email Address');
+            $message->to($data['email'], 'Webcom')->subject('Websphare Email Verification');
         });
 
     }

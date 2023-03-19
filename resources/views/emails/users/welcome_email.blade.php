@@ -18,8 +18,8 @@
 					<table width="90%" border="0" cellspacing="0" cellpadding="0">
 						<tr>
 							<td>
-								<strong>You're on your way!</strong><br/><br/>
-								Please find below your website details.<br/><br/>
+								Welcome to Websphare Web Services!</strong><br/><br/>
+								<strong>Account Management & Credentials.<strong><br/><br/>
 							</td>
 						</tr>
 						<tr>
@@ -34,8 +34,9 @@
 						</tr>
 						<tr>
 							<td>
-								Thanks! – The Websphare Team<br/>
-								<a href="www.websphare.com">www.websphare.com</a>
+							    Thank you for your participation in the Websphare Web Services community.<br/><br/>
+								Sincerely,<br/>
+								The Websphare Team
 								<div style="height: 60px; line-height: 60px; font-size: 10px;"></div>
 							</td>
 						</tr>

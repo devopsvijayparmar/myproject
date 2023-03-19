@@ -18,6 +18,7 @@ use App\Models\front\WebTemplates;
 use App\Models\front\ContactUs;
 use App\Models\front\Customization;
 use App\Models\front\CMS;
+use JsValidator;
 use Hash;
 use Crypt;
 
@@ -29,6 +30,21 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+	 
+	 protected $validationRulesContactUs = [
+        'name' => 'required|max:255',
+		'email' => 'required|email|max:255',
+		'message' => 'required|max:10000',
+		'subject' => 'required|max:255',
+    ];  
+	
+	protected $validationRulesFeedback = [
+        'name' => 'required|max:255',
+		'email' => 'required|email|max:255',
+		'message' => 'required|max:10000',
+		'subject' => 'required|max:255',
+		'site_name' => 'required|max:255',
+    ];  
 	 
 	function __construct()
     {
@@ -73,34 +89,27 @@ class HomeController extends Controller
 	
 	public function contactUs(Request $request)
     {  
+	    $this->data['validator'] = JsValidator::make($this->validationRulesContactUs);
 		return view('front.contact_us',$this->data);
     }
 	
 	public function customization(Request $request)
     {  
+	    $this->data['validator'] = JsValidator::make($this->validationRulesFeedback);
 	    $this->data['sites'] = Sites::getSites(); 
 		return view('front.customization',$this->data);
     }
 	
 	public function contact_us_store(Request $request)
     {
+		$input = $request->all();
 		
-    	$validator = Validator::make($request->all(), [
-			'name' => 'required|max:255',
-			'email' => 'required|email|max:255',
-			'message' => 'required|max:10000',
-			'subject' => 'required|max:255',
-        ]);
-
-        if ($validator->fails()) {
-             return redirect()->back()
-                            ->withErrors($validator, 'contact_us_error')
-                            ->withInput();
-        } else {
-		
-        $input = $request->all();
-		$input['created_at'] = date('Y-m-d H:i:s');
+		$validator = Validator::make($input, $this->validationRulesContactUs);
+		if($validator->fails()) {
+			return redirect()->back()->withErrors($validator)->withInput();
+		}
 	
+		$input['created_at'] = date('Y-m-d H:i:s');
 		$inser_id = new FrontContactUs($input);
 		$inser_id->save();
 		$inser_id = $inser_id->id;
@@ -113,24 +122,16 @@ class HomeController extends Controller
 			 return redirect()->back();
 		}
 
-		}
     }
 	
 	public function customizationStore(Request $request)
     {
-	
-    	$validator = Validator::make($request->all(), [
-			'name' => 'required|max:255',
-			'email' => 'required|email|max:255',
-			'message' => 'required|max:10000',
-			'subject' => 'required|max:255',
-        ]);
-
-        if ($validator->fails()) {
-             return redirect()->back()
-                            ->withErrors($validator, 'customization_error')
-                            ->withInput();
-        } else {
+		
+	    $input = $request->all();
+		$validator = Validator::make($input, $this->validationRulesFeedback);
+		if($validator->fails()) {
+			return redirect()->back()->withErrors($validator)->withInput();
+		}
 		
         $input = $request->all();
 		$input['created_at'] = date('Y-m-d H:i:s');
@@ -147,7 +148,6 @@ class HomeController extends Controller
 			 return redirect()->back();
 		}
 
-		}
     }
 	
 	
