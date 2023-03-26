@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-sm-12 text-center clr-white">
                     <h2 class="clr-white">About Us</h2>
-					<a class="clr-white" href="{{url('/')}}/{{$title}}">Home</a> <a class="clr-white">/<a> <a class="clr-white" href="javascript:void(0)">About Us</a>
+					<a class="clr-white" href="{{url('/')}}">Home</a> <a class="clr-white">/<a> <a class="clr-white" href="javascript:void(0)">About Us</a>
                 </div>
             </div>
         </div>

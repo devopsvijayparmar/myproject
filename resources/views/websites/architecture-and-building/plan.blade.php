@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-sm-12 text-center clr-white">
                     <h2 class="clr-white">Our Plans</h2>
-					<a class="clr-white" href="{{url('/')}}/{{$title}}">Home</a> <a class="clr-white">/<a> <a class="clr-white" href="#">Plans</a>
+					<a class="clr-white" href="{{url('/')}}">Home</a> <a class="clr-white">/<a> <a class="clr-white" href="#">Plans</a>
                 </div>
             </div>
         </div>
@@ -25,11 +25,11 @@
                         <article>
                             <header class="entry-header">
                                 <div class="entry-thumbnail">
-                                    <a href="{{$plandata->getDetailPageLink($title)}}"><img class="img-responsive card_img" src="{{$plandata->image_1}}" alt=""></a>
+                                    <a href="{{$plandata->getDetailPageLink()}}"><img class="img-responsive card_img" src="{{$plandata->image_1}}" alt=""></a>
                                     <a class="preview" href="{{$plandata->image_1}}" rel="prettyPhoto"><span class="post-format post-format-video"><i class="fa fa-film"></i></span></a>
                                 </div>
                                 <div class="entry-date">{{$plandata->created_at}}</div>
-                                <h2 class="entry-title"><a href="{{$plandata->getDetailPageLink($title)}}">{{$plandata->title}}</a></h2>
+                                <h2 class="entry-title"><a href="{{$plandata->getDetailPageLink()}}">{{$plandata->title}}</a></h2>
                             </header>
                             <div class="entry-content">
 							{!! mb_strimwidth($plandata->description, 0, 200, "...") !!}

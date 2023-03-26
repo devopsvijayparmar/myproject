@@ -20,9 +20,9 @@
         </div>
       </div>
     </form>-->
-	<a target="_blank" href="{{ Auth::user()->my_website }}" ><h4 target="_blank" class="nav-link">
-		<i class="nav-icon fas fa-globe"></i> <strong>{{ ucfirst(Auth::user()->name) }}</strong>
-	</h4></a>
+	<a target="_blank" href="{{ Auth::user()->my_website_link }}" ><h5 style="font-size: 17px;">
+		<i class="nav-icon fas fa-globe"></i> {{ Auth::user()->my_website }}
+	</h5></a>
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
@@ -91,14 +91,13 @@
           <i class="nav-icon fas fa-cog"></i>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-         
-          <div class="dropdown-divider"></div>
-          <a target="_blank" href="{{ Auth::user()->my_website }}" class="dropdown-item">
-            <i class="nav-icon fas fa-globe mr-2"></i> <strong>Website</strong>
-          </a>
-          <div class="dropdown-divider"></div>
+		 <div class="dropdown-divider"></div>
           <a href="{{route('my-account')}}" class="dropdown-item">
             <i class="nav-icon fas fa-cog mr-2"></i> <strong>My Account</strong>
+          </a>
+         <div class="dropdown-divider"></div>
+          <a href="{{route('user-settings')}}" class="dropdown-item">
+            <i class="nav-icon fas fa-cog mr-2"></i> <strong>Settings</strong>
           </a>
           <div class="dropdown-divider"></div>
           <a  href="javascript:void(0)"  class="dropdown-item" onclick="event.preventDefault();document.getElementById('logout-form').submit();">

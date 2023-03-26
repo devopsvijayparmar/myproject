@@ -31,18 +31,18 @@
             <div class="card-body p-0">
 			   <ul class="nav nav-pills flex-column vp-tab">
                 <li class="nav-item active">
-                  <a style="color:#303e67!important;" href="{{route('user-settings')}}" class="nav-link">
+                  <a style="color:#303e67!important;font-size: 14px;" href="{{route('user-settings')}}" class="nav-link">
                     <i class="fas fa-sliders-h"></i> <strong>Home Slider</strong>
                    
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a style="color:#303e67!important;" href="{{route('change-password')}}" class="nav-link">
+                  <a style="color:#303e67!important;font-size: 14px;" href="{{route('change-password')}}" class="nav-link">
                     <i class="fas fa-key"></i> <strong>Change Password</strong>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a style="color:#303e67!important;" href="{{route('site-settings.index')}}" class="nav-link">
+                  <a style="color:#303e67!important;font-size: 14px;" href="{{route('site-settings.index')}}" class="nav-link">
                     <i class="fas fa-cog"></i> <strong>Site Settings</strong>
                   </a>
                 </li>

@@ -34,7 +34,7 @@
 			 
 				<div class="card-body">
 					<div class="row">
-						<div class="col-12 col-sm-6">
+						<div class="col-12 col-sm-4">
 							<div class="col-12">
 								<img src="{{$data->image_1}}" class="product-image" alt="Product Image">
 							</div>
@@ -49,7 +49,7 @@
 								@endif
 							</div>
 						</div>
-						<div class="col-12 col-sm-6">
+						<div class="col-12 col-sm-8">
 							<h3 class="my-3">{{$data->name}}</h3>
 							<p>{!! $data->description !!}</p>
 							<hr>

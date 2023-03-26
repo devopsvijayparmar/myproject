@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-sm-12 text-center clr-white">
                     <h2 class="clr-white">Projects</h2>
-					<a class="clr-white" href="{{url('/')}}/{{$title}}">Home</a> <a class="clr-white">/<a> <a class="clr-white" href="javascript:void(0)">Projects</a>
+					<a class="clr-white" href="{{url('/')}}">Home</a> <a class="clr-white">/<a> <a class="clr-white" href="javascript:void(0)">Projects</a>
                 </div>
             </div>
         </div>
@@ -22,11 +22,11 @@
 			<div class="col-md-4 col-sm-6">
 				<div class="product-grid" style="padding:0!important">
 					<div class="product-image">
-						<a href="{{$projectsdata->getDetailPageLink($title)}}">
+						<a href="{{$projectsdata->getDetailPageLink()}}">
 							<img class="pic-1" src="{{$projectsdata->image_1}}">
 						</a>
 						<ul class="social">
-							<li><a href="{{$projectsdata->getDetailPageLink($title)}}" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
+							<li><a href="{{$projectsdata->getDetailPageLink()}}" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
 						</ul>
 						<!--<span class="product-new-label">Sale</span>
 						<span class="product-discount-label">20%</span>-->

@@ -4,7 +4,7 @@
 		<div class="row">
 			<div class="col-sm-12 text-center clr-white">
 				<h2 class="clr-white">Our Blogs</h2>
-				<a class="clr-white" href="{{url('/')}}/{{$title}}">Home</a> <a class="clr-white">/<a> <a class="clr-white" href="#">Blogs</a>
+				<a class="clr-white" href="{{url('/')}}">Home</a> <a class="clr-white">/<a> <a class="clr-white" href="#">Blogs</a>
 			</div>
 		</div>
 	</div>
@@ -23,11 +23,11 @@
 					<article>
 						<header class="entry-header">
 							<div class="entry-thumbnail">
-								<a href="{{$blogdata->getDetailPageLink($title)}}"><img class="img-responsive card_img" src="{{$blogdata->image}}" alt=""></a>
+								<a href="{{$blogdata->getDetailPageLink()}}"><img class="img-responsive card_img" src="{{$blogdata->image}}" alt=""></a>
 								<a class="preview" href="{{$blogdata->image}}" rel="prettyPhoto"><span class="post-format post-format-video"><i class="fa fa-film"></i></span></a>
 							</div>
 							<div class="entry-date">{{$blogdata->created_at}}</div>
-							<h2 class="entry-title"><a href="{{$blogdata->getDetailPageLink($title)}}">{{$blogdata->title}}</a></h2>
+							<h2 class="entry-title"><a href="{{$blogdata->getDetailPageLink()}}">{{$blogdata->title}}</a></h2>
 						</header>
 						<div class="entry-content">
 						{!!  mb_strimwidth($blogdata->description, 0, 200, "...") !!}

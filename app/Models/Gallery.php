@@ -31,7 +31,7 @@ class Gallery extends Authenticatable
 	}
 	
 	function getImagePathAttribute(){
-		return $this->image == null ? url('/images/image_not_found.jpg') : asset('/uploads/gallery/'.$this->image);
+		return $this->image == null ? asset('/images/image_not_found.jpg') : asset('/uploads/gallery/'.$this->image);
 	}
 	
 	public static function takeRecordForWebsite($id,$node){

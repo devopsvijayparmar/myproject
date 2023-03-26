@@ -36,24 +36,24 @@ class Electric extends Authenticatable
 	}
 	
 	function getImage1Attribute($image){
-		return $image == null ? url('/images/image_not_found.jpg') : asset('/uploads/electric/'.$image);
+		return $image == null ? asset('/images/image_not_found.jpg') : asset('/uploads/electric/'.$image);
 	}
 	function getImage2Attribute($image){
-		return $image == null ? url('/images/image_not_found.jpg') : asset('/uploads/electric/'.$image);
+		return $image == null ? asset('/images/image_not_found.jpg') : asset('/uploads/electric/'.$image);
 	}
 	function getImage3Attribute($image){
-		return $image == null ? url('/images/image_not_found.jpg') : asset('/uploads/electric/'.$image);
+		return $image == null ? asset('/images/image_not_found.jpg') : asset('/uploads/electric/'.$image);
 	}
 	
 	public static function takeRecordForWebsite($id,$node){
 		$query = Electric::where('created_by',$id)->with('category','type')->take($node)->get();
 	    return $query;
 	}
-	function getDetailPageLink($title){
-		return url('/'.$title.'/'.Crypt::encrypt($this->id).'/single-electric');
+	function getDetailPageLink(){
+		return url('/'.Crypt::encrypt($this->id).'/single-electric');
 	}
-	function getProjectCategoryLink($title){
-		return url('/'.$title.'/products/category');
+	function getProjectCategoryLink(){
+		return url('products/category');
 	}
 	public static function getRecordForWebsite($user_id,$cat,$search,$node){
 		

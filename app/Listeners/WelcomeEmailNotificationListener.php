@@ -41,7 +41,7 @@ class WelcomeEmailNotificationListener
 		}
 		
 	    $adminlink = url('/admin/dashboard');
-	    $websitelink = url('/'.$user->user['title']);
+	    $websitelink = 'http://'.$user->user['title'].'.'.config('enum.website');
 		
         $data = array( 'email' => $user->user['email'], 'name' => $user->user['name'], 'adminlink'=>$adminlink,'websitelink'=>$websitelink,'site_logo'=>$site_logo);
        

@@ -57,10 +57,10 @@ class Orders extends Authenticatable
 	}
 	
 	function getProductImageAttribute($image){
-		return $image == null ? url('/images/image_not_found.jpg') : asset('/uploads/products/'.$image);
+		return $image == null ? asset('/images/image_not_found.jpg') : asset('/uploads/products/'.$image);
 	}
 	function getMobileImageAttribute($image){
-		return $image == null ? url('/images/image_not_found.jpg') : asset('/uploads/mobile/'.$image);
+		return $image == null ? asset('/images/image_not_found.jpg') : asset('/uploads/mobile/'.$image);
 	}
 	
 	public function getChangeStatusAttribute(){

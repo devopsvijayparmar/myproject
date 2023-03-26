@@ -7,9 +7,9 @@
 		<table width="90%" border="0" cellspacing="0" cellpadding="0">
 			<tr>
 				<td align="center">
-					<a href="#" target="_blank" style="color: #596167; float:left; width:100%; padding:20px;text-align:center; font-size: 13px;">
+					<a href="{{url('/')}}" target="_blank" style="color: #596167; float:left; width:100%;padding: 25px 0px;text-align:center; font-size: 13px;">
 					<font size="3" color="#596167">
-					<img src="{{$site_logo}}" width="250" alt="Websphare" border="0"  /></font></a>
+					<img src="{{$site_logo}}" style="height: 55px;width: 221px;" alt="Websphare" border="0"/></font></a>
 				</td>
 			</tr>
 			<tr>

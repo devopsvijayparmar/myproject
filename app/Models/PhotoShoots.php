@@ -25,7 +25,7 @@ class PhotoShoots extends Authenticatable
 	}
 	
 	function getImageAttribute($image){
-		return $image == null ? url('/images/image_not_found.jpg') : asset('/uploads/photo_shoots/'.$image);
+		return $image == null ? asset('/images/image_not_found.jpg') : asset('/uploads/photo_shoots/'.$image);
 	}
 	
 	public static function takeRecordForWebsite($id,$node){
@@ -33,8 +33,8 @@ class PhotoShoots extends Authenticatable
 	    return $query;
 	}
 	
-	function getPhotoShootCategoryLink($title){
-		return url('/'.$title.'/products/category');
+	function getPhotoShootCategoryLink(){
+		return url('products/category');
 	}
 	
 	public static function getRecordForWebsiteByCategory($user_id,$cat,$node){

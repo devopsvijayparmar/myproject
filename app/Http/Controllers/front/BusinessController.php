@@ -34,26 +34,27 @@ class BusinessController extends Controller
 	 
 	function __construct()
     {
+		$this->data['title'] = 'Bussiness';
 		$this->data['admin_site_settings'] = AdminSitesettings::first();
     }
 	
 	public function index(Request $request)
     {  
 	    $auth = Auth::user();
-		$data['validator'] = JsValidator::make($this->validationRules);
-		$data['message']= "";
+		$this->data['validator'] = JsValidator::make($this->validationRules);
+		$this->data['message']= "";
 		if(isset($auth)){
-			$data['message'] = Business::getLastMessageBySupport($auth->id);
+			$this->data['message'] = Business::getLastMessageBySupport($auth->id);
 		}
-		return view('front.business',$data);
+		return view('front.business',$this->data);
     }
 	
 	public function chat(Request $request)
     {  
 	    $auth = Auth::user();
-	    $data['chat'] = Business::getChatByUser($auth->id);
+	    $this->data['chat'] = Business::getChatByUser($auth->id);
 		Business::where('send_by',1)->where('is_read',0)->where('user_id',$auth->id)->update(['is_read'=>1]);
-		return view('front.chat',$data);
+		return view('front.chat',$this->data);
     }
 	
 	public function store(Request $request)
@@ -96,10 +97,10 @@ class BusinessController extends Controller
 		$input['send_by'] = 2;
 		$input['message'] = $request->message;
 	
-		$data['message'] = $business = Business::create($input);
+		$this->data['message'] = $business = Business::create($input);
 		
 		if($business){
-			 return view('front.chat_message',$data);
+			 return view('front.chat_message',$this->data);
 		}else{
 			 return 0;
 		}

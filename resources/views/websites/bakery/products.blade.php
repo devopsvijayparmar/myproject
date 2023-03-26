@@ -9,7 +9,7 @@
             <div class="title-holder-cell text-left">
               <h1 class="page-title">Products</h1>
               <ol class="breadcrumb">
-                <li><a href="{{url('/')}}/{{$title}}">Home</a></li>
+                <li><a href="{{url('/')}}">Home</a></li>
                 <li class="active"> Products</li>
               </ol>
             </div>
@@ -30,7 +30,7 @@
 		   @foreach($products as $productdata)
           <div class="col-md-4 col-sm-6 col-xs-12 margin_bottom_30_all">
             <div class="product_list">
-              <div class="product_img">  <a href="{{$productdata->getDetailPageLink($title)}}"><img class="img-responsive card_img" src="{{$productdata->image_1}}" alt=""></a> </div>
+              <div class="product_img">  <a href="{{$productdata->getDetailPageLink()}}"><img class="img-responsive card_img" src="{{$productdata->image_1}}" alt=""></a> </div>
               <div class="product_detail_btm">
                 <div class="center">
                   <h4><a href="javascript:void(0);">{{ mb_strimwidth($productdata->name, 0, 40, "...")}}</a></h4>
@@ -64,7 +64,7 @@
         <div class="side_bar">
 		<div class="side_bar_blog">
             <h4>Search</h4>
-			 <form  method="get" action="{{url('/')}}/{{$title}}/products/category">
+			 <form  method="get" action="{{url('products/category')}}">
             <div class="side_bar_search">
               <div class="input-group stylish-input-group">
                 <input class="form-control" placeholder="Search by keywords" type="text" name="search" value="{{$search}}">
@@ -80,7 +80,7 @@
             <div class="categary">
               <ul>
 			   @foreach($category as $categorydata)
-               <a href="{{url('/')}}/{{$title}}/products/{{$categorydata->slug}}"> <li class="@if($cat == $categorydata->slug) active @endif"><i class="fa fa-angle-right"></i> {{$categorydata->name}}</li></a>
+               <a href="{{url('products')}}/{{$categorydata->slug}}"> <li class="@if($cat == $categorydata->slug) active @endif"><i class="fa fa-angle-right"></i> {{$categorydata->name}}</li></a>
 				@endforeach
               </ul>
             </div>

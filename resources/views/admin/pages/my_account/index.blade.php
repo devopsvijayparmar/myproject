@@ -26,23 +26,25 @@
 					<div class="card card-primary card-outline">
 						<div class="card-body box-profile">
 							
-							<h3  class="profile-username text-center"><strong>{{ Auth::user()->name }}</strong></h3>
-							<p class="text-muted text-center"><strong>{{ Auth::user()->email }}</strong></p>
+							
+							<h5 style="margin-bottom:1px;"><strong>{{ Auth::user()->title }}</strong></h5>
+							<p style="color:#303e67!important;margin-bottom:1px;font-size: 13px;"><strong>{{ Auth::user()->my_website }}</strong></p>
+							<p style="font-size:13px;" class="text-muted"><strong>Domain</strong></p>
 							<ul class="list-group list-group-unbordered mb-3">
 							<li class="list-group-item">
 							<b><a target="_blank" style="color:#303e67!important;" href="{{route('user-settings')}}"><i class="nav-icon fas fa-sliders-h"></i> Settings</a></b> 
 							</li>
 							<li class="list-group-item">
-							<b><a target="_blank" style="color:#303e67!important;" href="{{route('change-password')}}"><i class="fas fa-key"></i> Change Passowrd</a></b>
+							<b><a target="_blank" style="color:#303e67!important;" href="{{route('change-password')}}"><i class="fas fa-key"></i> Change Password</a></b>
 							</li>
 							<li class="list-group-item">
-							<b><a target="_blank" style="color:#303e67!important;" href="{{ Auth::user()->my_website }}"><i class="fas fa-globe"></i> My Website</a></b>
+							<b><a target="_blank" style="color:#303e67!important;" href="{{ Auth::user()->my_website_link }}"><i class="fas fa-globe"></i> My Website</a></b>
 							</li>
 							<li class="list-group-item">
 							<b><a target="_blank" style="color:#303e67!important;" href="{{url('/pricing')}}"><i class="fas fa-tags"></i> Pricing</a></b>
 							</li>
 							<li class="list-group-item">
-							<b><a target="_blank" style="color:#303e67!important;" href="{{url('/')}}"><i class="fas fa-globe"></i> websphare.com</a></b>
+							<b><a target="_blank" style="color:#303e67!important;" href="{{url('/')}}"><i class="fas fa-globe"></i> www.websphare.com</a></b>
 							</li>
 							</ul>
 							

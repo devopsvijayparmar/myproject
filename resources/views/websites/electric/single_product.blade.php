@@ -1,7 +1,7 @@
  @include('websites.electric.include.header')
  
  <link href="{{ asset('/websites/electric/css/single_product.css') }}" rel="stylesheet">
- <link rel='stylesheet' href="{{ url('/websites/electric/css/hizoom.css') }}">
+ <link rel='stylesheet' href="{{ asset('/websites/electric/css/hizoom.css') }}">
 <div id="inner_banner" class="section inner_banner_section">
   <div class="container">
     <div class="row">
@@ -11,7 +11,7 @@
             <div class="title-holder-cell text-left">
               <h1 class="page-title">Product Detail</h1>
               <ol class="breadcrumb">
-                <li><a href="{{url('/')}}/{{$title}}">Home</a></li>
+                <li><a href="{{url('/')}}">Home</a></li>
                 <li class="active">Product Detail</li>
               </ol>
             </div>
@@ -60,7 +60,7 @@
 			</div>
              <div class="detail-contant">
              {!! mb_strimwidth($electric->description, 0, 500, "...") !!}
-               <form class="cart" method="post" action="{{url('/')}}/{{$title}}/addresses">
+               <form class="cart" method="post" action="{{url('addresses')}}">
 			   <input type="hidden" name="product_id" value="{{Crypt::encrypt($electric->id)}}">
 			     @csrf
 				<div class="quantity">
@@ -105,11 +105,11 @@
 		 @foreach($electrics as $productdata)
           <div class="col-md-4 col-sm-6 col-xs-12 margin_bottom_30_all">
             <div class="product_list">
-              <div class="product_img">  <a href="{{$productdata->getDetailPageLink($title)}}"><img class="img-responsive card_img" src="{{$productdata->image_1}}" alt=""></a> </div>
+              <div class="product_img">  <a href="{{$productdata->getDetailPageLink()}}"><img class="img-responsive card_img" src="{{$productdata->image_1}}" alt=""></a> </div>
 					
               <div class="product_detail_btm">
                 <div class="center">
-                  <h4><a href="{{$productdata->getDetailPageLink($title)}}">{{ mb_strimwidth($productdata->name, 0, 40, "...")}}</a></h4>
+                  <h4><a href="{{$productdata->getDetailPageLink()}}">{{ mb_strimwidth($productdata->name, 0, 40, "...")}}</a></h4>
                 </div>
 				<div class="product_price">
 				 <p><span class="">{{$productdata->type_name}}</span></p>
@@ -137,7 +137,7 @@
         <div class="side_bar">
 			<div class="side_bar_blog">
             <h4>Search</h4>
-			 <form  method="get" action="{{url('/')}}/{{$title}}/products/category">
+			 <form  method="get" action="{{url('products/category')}}">
             <div class="side_bar_search">
               <div class="input-group stylish-input-group">
                 <input class="form-control" placeholder="Search by keywords" type="text" name="search">
@@ -153,7 +153,7 @@
             <div class="categary">
               <ul>
 			   @foreach($category as $categorydata)
-               <a href="{{url('/')}}/{{$title}}/products/{{$categorydata->slug}}"> <li class=""><i class="fa fa-angle-right"></i> {{$categorydata->name}}</li></a>
+               <a href="{{url('products')}}/{{$categorydata->slug}}"> <li class=""><i class="fa fa-angle-right"></i> {{$categorydata->name}}</li></a>
 				@endforeach
               </ul>
             </div>
@@ -165,7 +165,7 @@
 </div>
 <!-- end section -->
 @include('websites.electric.include.footer')
- <script src="{{ url('/websites/electric/js/hizoom.js') }}"></script>
+ <script src="{{ asset('/websites/electric/js/hizoom.js') }}"></script>
 <script>
 $('#products').addClass('active');
 	$('.hi1').hiZoom({

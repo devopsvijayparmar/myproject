@@ -6,10 +6,10 @@
 				@if(isset($contact_us->contact_1))<span class="topbar-label"><i class="fa fa-phone"></i></span> <span class="topbar-hightlight mr-10"><a href="tel: {{$contact_us->contact_1}}">{{ $contact_us->contact_1}}</a></span>@endif
                 </div>
 				<div class="col-sm-3">
-				   <li id="" class="scroll"><a href="{{url('/')}}/{{$title}}/ourteam">Our Teams</a></li>
-				    <li id="" class="scroll"><a href="{{url('/')}}/{{$title}}/blog">Blog</a></li>
-				   <li id="" class="scroll"><a href="{{url('/')}}/{{$title}}/about-us">About Us</a></li>
-                   <li id="" class="scroll"><a href="{{url('/')}}/{{$title}}/contact-us">Contact Us</a></li>   
+				   <li id="" class="scroll"><a href="{{url('ourteam')}}">Our Teams</a></li>
+				    <li id="" class="scroll"><a href="{{url('blog')}}">Blog</a></li>
+				   <li id="" class="scroll"><a href="{{url('about-us')}}">About Us</a></li>
+                   <li id="" class="scroll"><a href="{{url('contact-us')}}">Contact Us</a></li>   
 				</div>
                 <div class="col-sm-3">
                     <ul class="social-icons">
@@ -37,12 +37,12 @@
 </html>
 @if(Session::has('success'))
 <script>
-toastr.success('<?php echo Session::get('success') ?>', '', {timeOut: 5000});
+toastr.success('{{Session::get('success')}}', '', {timeOut: 5000});
 </script>
 @endif
 
 @if(Session::has('error'))
 <script>
-toastr.error('<?php echo Session::get('error') ?>', '', {timeOut: 5000});
+toastr.error('{{Session::get('error')}}', '', {timeOut: 5000});
 </script>
 @endif

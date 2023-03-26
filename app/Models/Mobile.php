@@ -36,24 +36,24 @@ class Mobile extends Authenticatable
 	}
 	
 	function getImage1Attribute($image){
-		return $image == null ? url('/images/image_not_found.jpg') : asset('/uploads/mobile/'.$image);
+		return $image == null ? asset('/images/image_not_found.jpg') : asset('/uploads/mobile/'.$image);
 	}
 	function getImage2Attribute($image){
-		return $image == null ? url('/images/image_not_found.jpg') : asset('/uploads/mobile/'.$image);
+		return $image == null ? asset('/images/image_not_found.jpg') : asset('/uploads/mobile/'.$image);
 	}
 	function getImage3Attribute($image){
-		return $image == null ? url('/images/image_not_found.jpg') : asset('/uploads/mobile/'.$image);
+		return $image == null ? asset('/images/image_not_found.jpg') : asset('/uploads/mobile/'.$image);
 	}
 	
 	public static function takeRecordForWebsite($id,$node){
 		$query = Mobile::where('created_by',$id)->with('category','brand')->take($node)->get();
 	    return $query;
 	}
-	function getDetailPageLink($title){
-		return url('/'.$title.'/'.Crypt::encrypt($this->id).'/single-mobile');
+	function getDetailPageLink(){
+		return url('/'.Crypt::encrypt($this->id).'/single-mobile');
 	}
-	function getMobileCategoryLink($title){
-		return url('/'.$title.'/products/category');
+	function getMobileCategoryLink(){
+		return url('products/category');
 	}
 	
 	public static function getRecordForWebsite($user_id,$cat,$search,$node){

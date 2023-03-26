@@ -23,7 +23,7 @@ class Blog extends Authenticatable
 	}
 	
 	function getImageAttribute($image){
-		return $image == null ? url('/images/image_not_found.jpg') : asset('/uploads/blog/'.$image);
+		return $image == null ? asset('/images/image_not_found.jpg') : asset('/uploads/blog/'.$image);
 	}
 	
 	public static function takeRecordForWebsite($id,$node){
@@ -36,12 +36,12 @@ class Blog extends Authenticatable
 	    return $query;
 	}
 	
-	function getDetailPageLink($title){
-		return url('/'.$title.'/'.Crypt::encrypt($this->id).'/single-blog');
+	function getDetailPageLink(){
+		return url('/'.Crypt::encrypt($this->id).'/single-blog');
 	}
 	
-	function getBlogPageLink($title){
-		return url('/'.$title.'/blog');
+	function getBlogPageLink(){
+		return url('blog');
 	}
 
 }

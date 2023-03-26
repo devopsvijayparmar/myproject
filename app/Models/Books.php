@@ -31,13 +31,13 @@ class Books extends Authenticatable
 	}
 	
 	function getImage1Attribute($image){
-		return $image == null ? url('/images/image_not_found.jpg') : asset('/uploads/books/'.$image);
+		return $image == null ? asset('/images/image_not_found.jpg') : asset('/uploads/books/'.$image);
 	}
 	function getImage2Attribute($image){
-		return $image == null ? url('/images/image_not_found.jpg') : asset('/uploads/books/'.$image);
+		return $image == null ? asset('/images/image_not_found.jpg') : asset('/uploads/books/'.$image);
 	}
 	function getImage3Attribute($image){
-		return $image == null ? url('/images/image_not_found.jpg') : asset('/uploads/books/'.$image);
+		return $image == null ? asset('/images/image_not_found.jpg') : asset('/uploads/books/'.$image);
 	}
 	
 }

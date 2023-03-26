@@ -143,6 +143,7 @@
 @endsection
 @section('script')
 <script src="{{asset('vendor/multiselect/dist/js/bootstrap-multiselect.js')}}"></script>
+<script src="{{ asset('/admin/plugins/ckeditor/ckeditor.js') }}"></script>
 @include('admin.include.table_script')
 <script>
 $('#landing-page-tab').addClass('active');

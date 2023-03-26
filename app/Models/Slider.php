@@ -22,7 +22,7 @@ class Slider extends Authenticatable
 		return $query;
 	} 
 	function getImageAttribute($image){
-		return $image == null ? url('/images/image_not_found.jpg') : asset('/uploads/slider/'.$image);
+		return $image == null ? asset('/images/image_not_found.jpg') : asset('/uploads/slider/'.$image);
 	}
 	
 	public static function getSlidersByUserId($id){

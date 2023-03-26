@@ -105,23 +105,26 @@ class GroupController extends Controller
 		$auth = Auth::user();
         $input = $request->all();
 		
-		$input['created_at'] = date('Y-m-d H:i:s');
-		$input['created_by'] = $auth->id;
-		$group = Group::create($input);
+		
 		
 		if($request->for == 1)
 		{
 			if(isset($request->users)){
 				$users = $request->users;
 			}else{
-				return redirect()->back()->with('error', Lang::get('messages.error'));
+				return redirect()->back()->with('error', Lang::get('messages.group_contacts'));
 			}
 		
 		}
 		else{
 			$users = $address_book;
 		}
-		if(count($users) >0 )
+		
+		$input['created_at'] = date('Y-m-d H:i:s');
+		$input['created_by'] = $auth->id;
+		$group = Group::create($input);
+		
+		if(count($users) > 0)
 		{
 			$insertData = array();
 			foreach($users as $data)
@@ -171,20 +174,22 @@ class GroupController extends Controller
 		$input['updated_at'] = date('Y-m-d H:i:s');
 		$input['updated_by'] = $auth->id;
 		
-		$group = Group::where('created_by', Auth::user()->id)->where('id',$id)->first();
-		$group->update($input);
-		$delete = GroupData::where('group_id',$id)->delete();
 		if($request->for == 1)
 		{
 			if(isset($request->users)){
 				$users = $request->users;
 			}else{
-				return redirect()->back()->with('error', Lang::get('messages.error'));
+				return redirect()->back()->with('error', Lang::get('messages.group_contacts'));
 			}
 		}
 		else{
 			$users = $address_book;
 		}
+		
+		$group = Group::where('created_by', Auth::user()->id)->where('id',$id)->first();
+		$group->update($input);
+		$delete = GroupData::where('group_id',$id)->delete();
+		
 		if(count($users) >0 )
 		{
 			$insertData = array();

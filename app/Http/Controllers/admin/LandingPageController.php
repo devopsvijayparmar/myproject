@@ -36,6 +36,7 @@ class LandingPageController extends Controller
 	protected $validationRules = [
 		'title' => 'required|string|max:255',
 		'url_name' => 'required|string|max:255',
+		'description' => 'required|max:1000000',
     ];  
 	
 	protected $validationRulesSend = [
@@ -138,6 +139,7 @@ class LandingPageController extends Controller
 
 	public function create(Request $request)
     { 	
+	    $data['validator'] = JsValidator::make($this->validationRules);
 	    $data['auth'] = Auth::user();
 		return view('admin.pages.landing_page.create',$data);
     }
@@ -161,9 +163,8 @@ class LandingPageController extends Controller
 
 		$input['created_at'] = date('Y-m-d H:i:s');
 		$input['created_by'] = $auth->id;
-		$input['url'] = url("/").'/'.$auth->title.'/landing-page/'.$request->url_name;
+		$input['url'] = 'http://'.$auth->title.'.'.config('enum.website').'/landing-page/'.$request->url_name;
 	   
-	
 		$landingpage = LandingPage::create($input);
 		
 		if($landingpage){
@@ -176,6 +177,7 @@ class LandingPageController extends Controller
 	
 	public function edit($id)
     { 		
+	     $data['validator'] = JsValidator::make($this->validationRules);
 	     $data['auth'] = Auth::user();
 	     $id = Crypt::decrypt($id);
 		 $data['data'] = LandingPage::find($id);
@@ -204,7 +206,7 @@ class LandingPageController extends Controller
 			
 		$input['updated_at'] = date('Y-m-d H:i:s');
 		$input['updated_by'] = $auth->id;
-		$input['url'] = url("/").'/'.$auth->title.'/landing-page/'.$request->url_name;
+		$input['url'] = 'http://'.$auth->title.'.'.config('enum.website').'/landing-page/'.$request->url_name;
 		
 		$landingpage = LandingPage::where('created_by', Auth::user()->id)->where('id',$id)->first();
 		$landingpage->update($input);

@@ -29,12 +29,12 @@ class Event extends Authenticatable
 	    return $query;
 	}
 	
-	function getDetailPageLink($title){
-		return url('/'.$title.'/'.Crypt::encrypt($this->id).'/single-event');
+	function getDetailPageLink(){
+		return url('/'.Crypt::encrypt($this->id).'/single-event');
 	}
 	
-	function getEventPageLink($title){
-		return url('/'.$title.'/events');
+	function getEventPageLink(){
+		return url('events');
 	}
 	
 	public static function getRecordForWebsite($id,$node){

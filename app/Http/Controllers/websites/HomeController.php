@@ -222,12 +222,12 @@ class HomeController extends Controller
     	$validator = Validator::make($request->all(), [
 			'name' => 'required|string|regex:/^[A-Za-z0-9\-\s]+$/|min:2|max:255',
 			'email' => 'required|unique:users|email|regex:/(.+)@(.+)\.(.+)/i|string|max:255',
-			'mobile' => 'required',
+			'mobile' => 'required|max:12',
 			'message' => 'required|max:5000',
         ]);
 
         if ($validator->fails()) {
-            return redirect($title."/contact-us")
+            return redirect()->back()
                             ->withErrors($validator, 'contact_us_error')
                             ->withInput();
         } 
@@ -243,8 +243,7 @@ class HomeController extends Controller
 		if($inser_id){
 			return redirect()->back()->with('success', 'Our Customer Service Representative will be in touch shortly');
 		}else{
-			 Session::flash('error', "we`re sorry,but something went wrong.Please try again");
-			 return redirect()->back();
+			return redirect()->back()->with('error', "we`re sorry,but something went wrong.Please try again");
 		}
 
     }
@@ -318,7 +317,7 @@ class HomeController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect($title.'/'.$request->product_id.'/'.$request->url)
+            return redirect($request->product_id.'/'.$request->url)
                             ->withErrors($validator, 'addresses')
                             ->withInput();
         } 
@@ -339,7 +338,6 @@ class HomeController extends Controller
 		$input['user_id'] = $user->id;
 		$input['currency_symbol'] = $currency_symbol;
 		$input['currency_code'] = $currency_code;
-		
 		
 		if($request->product_type == 'product')
 		{
@@ -366,7 +364,7 @@ class HomeController extends Controller
 		}
 		
 		if($order){
-			return redirect($title.'/'.$request->product_id.'/'.$request->url)->with('success', 'Our customer service representative will be in touch shortly');
+			return redirect($request->product_id.'/'.$request->url)->with('success', 'Our customer service representative will be in touch shortly');
 		}else{
 			return redirect()->back()->with('error', "we`re sorry,but something went wrong.Please try again");
 		}

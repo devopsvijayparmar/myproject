@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-sm-12 text-center clr-white">
                     <h2 class="clr-white">Contact Us</h2>
-					<a class="clr-white" href="{{url('/')}}/{{$title}}">Home</a> <a class="clr-white">/<a> <a class="clr-white" href="#">Contact Us</a>
+					<a class="clr-white" href="{{url('/')}}">Home</a> <a class="clr-white">/<a> <a class="clr-white" href="#">Contact Us</a>
                 </div>
               
             </div>
@@ -60,7 +60,7 @@
 					
 					<div class="col-md-6 col-sm-6 wow fadeInUp" data-wow-duration="300ms" data-wow-delay="200ms">
                         <div class="media service-box">
-								<form  method="POST" action="{{url('/')}}/{{$title}}/contact-us" enctype="multipart/form-data" id="main_id" class="form_contant">
+								<form  method="POST" action="{{url('contact-us')}}" enctype="multipart/form-data" id="main_id" class="form_contant">
 								@csrf
 								<div class="form-group">
 									<input type="text" name="name" id="name" class="form-control" placeholder="Name">

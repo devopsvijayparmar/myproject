@@ -49,6 +49,7 @@ class HomeController extends Controller
 	function __construct()
     {
 		$this->data['contactus'] = ContactUs::find(1); 
+		$this->data['title'] = 'Home';
     }
 	
 	public function index(Request $request)
@@ -65,36 +66,44 @@ class HomeController extends Controller
 	
 	public function webTemplate(Request $request)
     {  
+	    $this->data['title'] = 'Web Templates';
 	    $this->data['webtemplates'] = WebTemplates::all(); 
 		return view('front.web_templates',$this->data);
     }
 	
 	public function singleWebTemplate(Request $request,$slug)
     {  
+	    $this->data['title'] = 'Web Templates';
 	    $this->data['webtemplates'] = WebTemplates::getRecordBySlug($slug); 
 		return view('front.single_web_templates',$this->data);
     }
 	
 	public function pricing(Request $request)
     {  
+	    $this->data['title'] = 'Pricing';
 	    $this->data['pricing'] = Pricing::all(); 
 		return view('front.pricing',$this->data);
     }
 	
 	public function Cms(Request $request,$type)
     {  
+	     
+	   
 	    $this->data['cms'] = CMS::where('type',$type)->first(); 
+		$this->data['title'] = $this->data['cms']->title;
 		return view('front.cms',$this->data);
     }
 	
 	public function contactUs(Request $request)
     {  
+	    $this->data['title'] = 'Contact Us';
 	    $this->data['validator'] = JsValidator::make($this->validationRulesContactUs);
 		return view('front.contact_us',$this->data);
     }
 	
 	public function customization(Request $request)
     {  
+	    $this->data['title'] = 'Customization';
 	    $this->data['validator'] = JsValidator::make($this->validationRulesFeedback);
 	    $this->data['sites'] = Sites::getSites(); 
 		return view('front.customization',$this->data);
@@ -102,6 +111,7 @@ class HomeController extends Controller
 	
 	public function contact_us_store(Request $request)
     {
+		
 		$input = $request->all();
 		
 		$validator = Validator::make($input, $this->validationRulesContactUs);
@@ -115,11 +125,9 @@ class HomeController extends Controller
 		$inser_id = $inser_id->id;
 		
 		if($inser_id){
-			Session::flash('success', 'Our customer service representative will be in touch shortly');
-			 return redirect()->back();
+			return redirect()->back()->with('success', 'Our customer service representative will be in touch shortly');
 		}else{
-			 Session::flash('error', "we're sorry,but something went wrong.Please try again");
-			 return redirect()->back();
+			return redirect()->back()->with('error', "we're sorry,but something went wrong.Please try again");
 		}
 
     }
@@ -141,11 +149,9 @@ class HomeController extends Controller
 		$inser_id = $inser_id->id;
 		
 		if($inser_id){
-			Session::flash('success', 'Our customer service representative will be in touch shortly');
-			 return redirect()->back();
+			return redirect()->back()->with('success', 'Our customer service representative will be in touch shortly');
 		}else{
-			 Session::flash('error', "we're sorry,but something went wrong.Please try again");
-			 return redirect()->back();
+			return redirect()->back()->with('error', "we're sorry,but something went wrong.Please try again");
 		}
 
     }

@@ -41,18 +41,18 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="{{url('/')}}/{{$title}}"><img src="{{$site_logo}}" alt="logo"></a>
+                    <a class="navbar-brand" href="{{url('/')}}"><img src="{{$site_logo}}" alt="logo"></a>
                 </div>
 				
                 <div class="collapse navbar-collapse navbar-right">
                     <ul class="nav navbar-nav">
-                        <li id="hometab" class="scroll"><a href="{{url('/')}}/{{$title}}">Home</a></li>
-						<li id="philosophy_tab" class="scroll"><a href="{{url('/')}}/{{$title}}/philosophy">Philosophy</a></li>
-                        <li id="servicetab" class="scroll"><a href="{{url('/')}}/{{$title}}/service">Service</a></li>
-						<li id="gallerytab" class="scroll"><a href="{{url('/')}}/{{$title}}/gallery">Gallery</a></li>
-                        <li id="promotiontab" class="scroll"><a href="{{url('/')}}/{{$title}}/promotion">Promotion</a></li>
-                        <li id="about_us_tab" class="scroll"><a href="{{url('/')}}/{{$title}}/about-us">About Us</a></li>  
-						 <li id="contact-us-tab" class="scroll"><a href="{{url('/')}}/{{$title}}/contact-us">Contact Us</a></li>   	
+                        <li id="hometab" class="scroll"><a href="{{url('/')}}">Home</a></li>
+						<li id="philosophy_tab" class="scroll"><a href="{{url('philosophy')}}">Philosophy</a></li>
+                        <li id="servicetab" class="scroll"><a href="{{url('service')}}">Service</a></li>
+						<li id="gallerytab" class="scroll"><a href="{{url('gallery')}}">Gallery</a></li>
+                        <li id="promotiontab" class="scroll"><a href="{{url('promotion')}}">Promotion</a></li>
+                        <li id="about_us_tab" class="scroll"><a href="{{url('about-us')}}">About Us</a></li>  
+						 <li id="contact-us-tab" class="scroll"><a href="{{url('contact-us')}}">Contact Us</a></li>   	
                     </ul>
                 </div>
             </div><!--/.container-->

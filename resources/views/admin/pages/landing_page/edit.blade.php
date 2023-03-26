@@ -57,31 +57,14 @@
 						  <span class="error">{{$errors->first('url')}}</span>
 					</div>
 					
-					<iframe src="{{route('landing-page-edit-editor',$data->id)}}" style="width: 100%;height: 600px;border: none;" frameborder="0" scrolling="no" id="editoriframe" onload="resizeIframe(this)"></iframe>
-                        <script>
-                            function resizeIframe(obj) {
-                                obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
-                            }
-                        
-							function getcontent(){
-								var cntn = document.getElementById("editoriframe").contentWindow.testGetc();
-								$("#txtareaacontent").html(cntn);
-								$("#dvstore").html(cntn);
-								console.log(cntn,'log');
-							}
-							
-							function geturlname(urlname)
-							{
-								var url = '{{url("/")}}/{{$auth->title}}/landing-page/';
-								$('#url').val(url+urlname);
-							}
-						</script>
-						<textarea style="display:none" id="txtareaacontent" name="description" ></textarea>
-						<div id="dvstore" style="display:none;"></div>
+				    <div class="form-group">
+						<textarea type="text" class="form-control" id="description" name="description" placeholder="Enter Description">{!!$data->description!!}</textarea>
+						<span class="error" id='description_error'>{{$errors->first('description')}}</span>
+					</div>	
 					
                 </div>
 				<div class="card-footer">
-                  <button type="button" id="submitform" class="btn btn-primary" onclick="validation();">Update</button>
+                  <button type="submit" id="submitform" class="btn btn-primary">Update</button>
                 </div>
 				</form>
             </div>
@@ -97,74 +80,45 @@
   <!-- /.content-wrapper -->
 @endsection
 @section('script')
+<script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
+{!!$validator->selector('#main_id')!!}
 <script>
 $('#landing-page-tab').addClass('active');
 
-function validation(){
-	
-	getcontent();
-	
-	$('#submitform').prop('disabled', true);
-	var title = $('#title').val();
-	var url_name = $('#url_name').val();
+function geturlname(urlname)
+{
+	var url = '{{$auth->title}}.{{config('enum.website')}}/landing-page/';
+	$('#url').val(url+urlname);
+}
 
-	var cnt = 0;
-	var f = 0;
-	
-	$('#title_error').html("");
-	$('#url_name_error').html("");
-	
-	if (title.trim() == '') {
-		$('#title_error').html("Please enter Title");
-		cnt = 1;
-		f++;
-		if(f == 1)
-		{
-			$('#title').focus();
+$('#description').summernote({
+	height: ($(window).height() - 300),
+	callbacks: {
+		onImageUpload: function(image) {
+			uploadImage(image[0]);
 		}
 	}
-	
-	if (url_name.trim() == '') {
-		$('#url_name_error').html("Please enter url name");
-		cnt = 1;
-		f++;
-		if(f == 1)
-		{
-			$('#url_name').focus();
+});
+
+function uploadImage(image) {
+	var data = new FormData();
+	data.append("image", image);
+	data.append("_token", '{{csrf_token()}}');
+	$.ajax({
+		url: "{{route('upload-image')}}",
+		cache: false,
+		contentType: false,
+		processData: false,
+		data: data,
+		type: "POST",
+		success: function(url) {
+			var image = $('<img>').attr('src', url);
+			$('#description').summernote("insertNode", image[0]);
+		},
+		error: function(data) {
+			console.log(data);
 		}
-	}
-	
-	
-	if (url_name) {
-		var id = '{{$data->id}}';
-		$.ajax({
-			async : false,
-			url: "{{route('landing-page-exit-title-edit')}}",
-			type: "POST",
-			data: {url_name: url_name,id:id, _token: "{{ csrf_token() }}"},
-			success: function (response) {
-				if(response == 1)
-				{
-					$('#url_name_error').html("{{__('messages.url_name_already_been_taken')}})");
-					cnt = 1;
-					f++;
-					if(f == 1)
-					{
-						$('#url_name').focus();
-					}
-				}
-			}
-		});
-	}
-	
-	
-	if (cnt == 1) {
-		$('#submitform').prop('disabled', false);
-		return false;
-	} else {
-		$('#main_id').submit();
-	}
-	
+	});
 }
 </script>
 @endsection  

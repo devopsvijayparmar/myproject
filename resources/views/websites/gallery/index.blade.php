@@ -99,11 +99,11 @@
 					<article>
 						<header class="entry-header">
 							<div class="entry-thumbnail">
-								<a href="{{$blogdata->getDetailPageLink($title)}}"><img class="img-responsive card_img" src="{{$blogdata->image}}" alt=""></a>
+								<a href="{{$blogdata->getDetailPageLink()}}"><img class="img-responsive card_img" src="{{$blogdata->image}}" alt=""></a>
 								<a class="preview" href="{{$blogdata->image}}" rel="prettyPhoto"><span class="post-format post-format-video"><i class="fa fa-film"></i></span></a>
 							</div>
 							<div class="entry-date">{{$blogdata->created_at}}</div>
-							<h2 class="entry-title"><a href="{{$blogdata->getDetailPageLink($title)}}">{{$blogdata->title}}</a></h2>
+							<h2 class="entry-title"><a href="{{$blogdata->getDetailPageLink()}}">{{$blogdata->title}}</a></h2>
 						</header>
 						<div class="entry-content">
 						{!! mb_strimwidth($blogdata->description, 0, 200, "...") !!}
@@ -118,7 +118,7 @@
 		</div>
 		@if(count($blog) > 0)
 		<div class="text_align_center">
-			<a class="btn btn-primary" href="{{$blog[0]->getBlogPageLink($title)}}">See More...</a>
+			<a class="btn btn-primary" href="{{$blog[0]->getBlogPageLink()}}">See More...</a>
 		</div>
 		@endif
 	</div>

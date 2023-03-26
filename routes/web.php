@@ -40,31 +40,7 @@ Route::group(['prefix' => 'super-admin', 'namespace' => 'super_admin','middlewar
 });
 /*supar admin*/
 
-/*supar admin front*/
-Route::group(['namespace' => 'front','middleware' => ['preventBackHistory']], function () {
-	
-	Route::get('/signup', 'RegisterController@index');
-	Route::post('/signup', 'RegisterController@register');
-	Route::post('/check-site-name', 'RegisterController@checkSiteName');
-	Route::post('/check-email', 'RegisterController@checkEmail');
-	Route::get('verify-account/{token}', 'RegisterController@verifyAccount');
-	Route::get('/', 'HomeController@index');
-	Route::get('/web-templates', 'HomeController@webTemplate');
-	Route::get('/web-templates/{id}', 'HomeController@singleWebTemplate');
-	Route::get('/pricing', 'HomeController@pricing');
-	Route::get('/page/{type}', 'HomeController@Cms');
-	Route::get('/contact-us', 'HomeController@contactUs');
-	Route::post('/front-contact-us', 'HomeController@contact_us_store');
-	Route::get('/purchase-plan/{id}', 'PurchasePlanController@index');
-	Route::get('/business', 'BusinessController@index');
-	Route::post('/business', 'BusinessController@store');
-	Route::post('/send-message', 'BusinessController@sendMessage')->name('send-message');
-	Route::get('/chat', 'BusinessController@chat')->middleware('auth');
-	Route::get('/customization', 'HomeController@customization');
-	Route::post('/customization', 'HomeController@customizationStore');
 
-});
-/*supar admin front*/
 
 /*admin Routes*/
 Route::group(['middleware' => ['preventBackHistory']], function () {
@@ -134,37 +110,66 @@ Route::group(['prefix' => 'admin', 'namespace' => 'admin','middleware' => ['prev
 	Route::post('checkoldpassword', 'CommanController@checkoldpassword')->name('checkoldpassword');
 });
 
-Route::get('/{title}/landing-page/{url_name}', 'admin\CommanController@preview');
+
 /*admin Routes End*/
 
+/*supar admin front*/
+Route::domain('www.websphare.com')->group(function () {
+	Route::group(['namespace' => 'front','middleware' => ['preventBackHistory']], function () {
+		Route::get('/signup', 'RegisterController@index');
+		Route::post('/signup', 'RegisterController@register');
+		Route::post('/check-site-name', 'RegisterController@checkSiteName');
+		Route::post('/check-email', 'RegisterController@checkEmail');
+		Route::get('verify-account/{token}', 'RegisterController@verifyAccount');
+		Route::get('/', 'HomeController@index');
+		Route::get('/web-templates', 'HomeController@webTemplate');
+		Route::get('/web-templates/{id}', 'HomeController@singleWebTemplate');
+		Route::get('/pricing', 'HomeController@pricing');
+		Route::get('/page/{type}', 'HomeController@Cms');
+		Route::get('/contact-us', 'HomeController@contactUs');
+		Route::post('/front-contact-us', 'HomeController@contact_us_store');
+		Route::get('/purchase-plan/{id}', 'PurchasePlanController@index');
+		Route::get('/business', 'BusinessController@index');
+		Route::post('/business', 'BusinessController@store');
+		Route::post('/send-message', 'BusinessController@sendMessage')->name('send-message');
+		Route::get('/chat', 'BusinessController@chat')->middleware('auth');
+		Route::get('/customization', 'HomeController@customization');
+		Route::post('/customization', 'HomeController@customizationStore');
+
+	});
+});
+/*supar admin front*/
 
 /*Front*/
-Route::group(['middleware' => ['preventBackHistory']], function () {
-Route::get('{title}', 'websites\HomeController@index');
-Route::get('{title}/about-us', 'websites\HomeController@about_us');
-Route::get('{title}/service', 'websites\HomeController@service');
-Route::get('{title}/gallery', 'websites\HomeController@gallery');
-Route::get('{title}/blog', 'websites\HomeController@blog');
-Route::get('{title}/events', 'websites\HomeController@events');
-Route::get('{title}/products/{cat}', 'websites\HomeController@products');
-Route::get('{title}/{id}/single-product', 'websites\HomeController@single_product');
-Route::get('{title}/{id}/single-electric', 'websites\HomeController@single_electric');
-Route::get('{title}/{id}/single-mobile', 'websites\HomeController@single_mobile');
-Route::get('{title}/{id}/single-blog', 'websites\HomeController@single_blog');
-Route::get('{title}/{id}/single-event', 'websites\HomeController@singleEvent');
-Route::get('{title}/contact-us', 'websites\HomeController@contact_us');
-Route::post('{title}/contact-us', 'websites\HomeController@contact_us_store');
-Route::get('{title}/photo-shoots/{cat}', 'websites\HomeController@photo_shoots');
-Route::get('{title}/ourteam', 'websites\HomeController@ourteam');
-Route::get('{title}/philosophy', 'websites\HomeController@philosophy');
-Route::get('{title}/projects/{cat}', 'websites\HomeController@projects');
-Route::get('{title}/{id}/single-project', 'websites\HomeController@single_project');
-Route::get('{title}/promotion', 'websites\HomeController@promotion');
-Route::post('{title}/addresses', 'websites\HomeController@addresses');
-Route::post('{title}/order', 'websites\HomeController@order');
-Route::post('{title}/mobile-orders', 'websites\HomeController@mobileorder');
-Route::get('{title}/plan', 'websites\HomeController@plan');
-Route::get('{title}/{id}/single-plan', 'websites\HomeController@single_plan');
+Route::domain('{subdomain}.websphare.com')->group(function () {
+	Route::get('landing-page/{url_name}', 'admin\CommanController@preview');
+	Route::group(['middleware' => ['preventBackHistory'],'namespace' => 'websites'], function () {
+		Route::get('/', 'HomeController@index');
+		Route::get('about-us', 'HomeController@about_us');
+		Route::get('service', 'HomeController@service');
+		Route::get('gallery', 'HomeController@gallery');
+		Route::get('blog', 'HomeController@blog');
+		Route::get('events', 'HomeController@events');
+		Route::get('products/{cat}', 'HomeController@products');
+		Route::get('{id}/single-product', 'HomeController@single_product');
+		Route::get('{id}/single-electric', 'HomeController@single_electric');
+		Route::get('{id}/single-mobile', 'HomeController@single_mobile');
+		Route::get('{id}/single-blog', 'HomeController@single_blog');
+		Route::get('{id}/single-event', 'HomeController@singleEvent');
+		Route::get('contact-us', 'HomeController@contact_us');
+		Route::post('contact-us', 'HomeController@contact_us_store');
+		Route::get('photo-shoots/{cat}', 'HomeController@photo_shoots');
+		Route::get('ourteam', 'HomeController@ourteam');
+		Route::get('philosophy', 'HomeController@philosophy');
+		Route::get('projects/{cat}', 'HomeController@projects');
+		Route::get('{id}/single-project', 'HomeController@single_project');
+		Route::get('promotion', 'HomeController@promotion');
+		Route::post('addresses', 'HomeController@addresses');
+		Route::post('order', 'HomeController@order');
+		Route::post('mobile-orders', 'HomeController@mobileorder');
+		Route::get('plan', 'HomeController@plan');
+		Route::get('{id}/single-plan', 'HomeController@single_plan');
+	});
 });
 /*Front end*/
 

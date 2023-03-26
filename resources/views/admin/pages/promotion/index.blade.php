@@ -61,7 +61,6 @@
 <script>
 $('#promotion-tab').addClass('active');
 
-
 $('#description').summernote({
 	
 	height: ($(window).height() - 300),
@@ -92,7 +91,5 @@ function uploadImage(image) {
 		}
 	});
 }
-
-
 </script>
 @endsection

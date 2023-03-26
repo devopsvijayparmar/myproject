@@ -60,7 +60,7 @@
 			  
 			
 				<div class="d-flex mt-3" style="font-size:14px">
-					Have an account? <a href="{{url('/login')}}"  class="ml-2">Sign In</a>
+					Have an account? <a href="{{url('/login')}}" class="ml-2">Sign In</a>
 				</div>
             </form>
           </div>
@@ -77,7 +77,6 @@
  {!! $validator->selector('#signup_id') !!}
  <script>
 $('#signuptab').addClass('menu-active');
-
 
 $('#title').keypress(function (e) {
     var regex = new RegExp("^[a-zA-Z0-9]+$");

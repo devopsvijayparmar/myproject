@@ -9,7 +9,7 @@
             <div class="title-holder-cell text-left">
               <h1 class="page-title">Blog</h1>
               <ol class="breadcrumb">
-                <li><a href="{{url('/')}}/{{$title}}">Home</a></li>
+                <li><a href="{{url('order')}}">Home</a></li>
                 <li class="active">Blog</li>
               </ol>
             </div>
@@ -37,7 +37,7 @@
 	@foreach($blog as $blogdata)
     <div class="col-md-4 blog-border">
         <div class="full blog_colum">
-         <a href="{{$blogdata->getDetailPageLink($title)}}"> <div class="blog_feature_img"> <img class="card_img" src="{{$blogdata->image}}" alt="#" /> </div></a>
+         <a href="{{$blogdata->getDetailPageLink()}}"> <div class="blog_feature_img"> <img class="card_img" src="{{$blogdata->image}}" alt="#" /> </div></a>
 		 <div class="p-3">
           <div class="post_time">
             <p><i class="fa fa-clock-o"></i>{{$blogdata->created_at}}</p>

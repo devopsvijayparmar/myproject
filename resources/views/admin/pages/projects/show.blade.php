@@ -33,7 +33,7 @@
               </div>
                 <div class="card-body">
 					<div class="row">
-					<div class="col-12 col-sm-6">
+					<div class="col-12 col-sm-4">
 						<div class="col-12">
 							<img src="{{$data->image_1}}" class="product-image" alt="Product Image">
 						</div>
@@ -48,10 +48,16 @@
 							@endif
 						</div>
 					</div>
-					<div class="col-12 col-sm-6">
-					  <h3 class="my-3">{{$data->price}}</h3>
-					  <h3 class="my-3">{{$data->name}}</h3>
-					  <span class="description">Project Type - {{$data->project_type->name}}</span></br></br>
+					<div class="col-12 col-sm-8">
+					    <h3 class="my-3">{{$data->name}}</h3>
+					    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+						<label class="btn btn-default text-center">
+						<input type="radio" name="color_option" id="color_option_b1" autocomplete="off">
+						<span style="font-size: 19px!important;" class="text-xl">Project Type</span>
+						<br>
+						{{$data->project_type->name}}
+						</label>
+						</div>
 					  <p>{!! $data->description !!}</p>
 					  <hr>
 					</div>
@@ -69,6 +75,6 @@
 @endsection
 @section('script')
 <script>
-$('#electrictab').addClass('active');
+$('#projecttab').addClass('active');
 </script>
 @endsection

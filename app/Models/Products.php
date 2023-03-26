@@ -27,13 +27,13 @@ class Products extends Authenticatable
 	}
 	
 	function getImage1Attribute($image){
-		return $image == null ? url('/images/image_not_found.jpg') : asset('/uploads/products/'.$image);
+		return $image == null ? asset('/images/image_not_found.jpg') : asset('/uploads/products/'.$image);
 	}
 	function getImage2Attribute($image){
-		return $image == null ? url('/images/image_not_found.jpg') : asset('/uploads/products/'.$image);
+		return $image == null ? asset('/images/image_not_found.jpg') : asset('/uploads/products/'.$image);
 	}
 	function getImage3Attribute($image){
-		return $image == null ? url('/images/image_not_found.jpg') : asset('/uploads/products/'.$image);
+		return $image == null ? asset('/images/image_not_found.jpg') : asset('/uploads/products/'.$image);
 	}
 	
 	public static function takeRecordForWebsite($id,$node){
@@ -41,11 +41,11 @@ class Products extends Authenticatable
 	    return $query;
 	}
 	
-	function getDetailPageLink($title){
-		return url('/'.$title.'/'.Crypt::encrypt($this->id).'/single-product');
+	function getDetailPageLink(){
+		return url('/'.Crypt::encrypt($this->id).'/single-product');
 	}
-	function getProjectCategoryLink($title){
-		return url('/'.$title.'/products/category');
+	function getProjectCategoryLink(){
+		return url('products/category');
 	}
 	
 	public static function getRecordForWebsite($user_id,$cat,$search,$node){

@@ -25,6 +25,7 @@ return [
     'name_already_been_taken' => 'This name is already been taken',
     'url_name_already_been_taken' => 'This url name is already been taken',
 	'email_limit' => 'Opps.. Reached your emails limits!',
+	'group_contacts' => 'The contacts field is required.',
    
 
 ];

@@ -18,11 +18,11 @@ class AdminSitesettings extends Authenticatable
 	
 	
 	function getSiteLogoAttribute($image){
-		return $image == null ? url('/images/image_not_found.jpg') : asset('/uploads/front/settings/'.$image);
+		return $image == null ? asset('/images/image_not_found.jpg') : asset('/uploads/front/settings/'.$image);
 	}
 	
 	function getFavIconAttribute($image){
-		return $image == null ? url('/images/image_not_found.jpg') : asset('/uploads/front/settings/'.$image);
+		return $image == null ? asset('/images/image_not_found.jpg') : asset('/uploads/front/settings/'.$image);
 	}
 	
 	

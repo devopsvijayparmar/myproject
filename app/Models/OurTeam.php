@@ -21,6 +21,10 @@ class OurTeam extends Authenticatable
 	    return $query;
 	}
 	
+	function getImageUrlAttribute($image){
+		return $image == null ? url('/images/image_not_found.jpg') : asset('/uploads/our_team/'.$image);
+	}
+	
 	function getImageAttribute($image){
 		return $image == null ? url('/images/image_not_found.jpg') : asset('/uploads/our_team/'.$image);
 	}
@@ -30,8 +34,8 @@ class OurTeam extends Authenticatable
 		return $query;
 	}
 	
-	function getOurTeamPageLink($title){
-		return url('/'.$title.'/ourteam');
+	function getOurTeamPageLink(){
+		return url('ourteam');
 	}
 	
 	public static function getOurTeamListForIndex($id,$node){

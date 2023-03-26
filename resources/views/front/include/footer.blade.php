@@ -122,12 +122,12 @@
 				</form>
 			
 				<div class="d-flex justify-content-center links mt-3">
-					Don't have an account? <a href="{{url('/signup')}}"  class="ml-2">Sign Up</a>
+					Don't have an account? <a  style="font-size: 13px;"  href="{{url('/signup')}}"  class="ml-2">Sign Up</a>
 				</div>
 				
 				@if (Route::has('password.request'))
 				<div class="d-flex justify-content-center links">
-					<a href="{{ route('password.request') }}">Forgot your password?</a>
+					<a  style="font-size: 13px;"  href="{{ route('password.request') }}">Forgot your password?</a>
 				</div>
 				@endif
 			  </div>
@@ -137,8 +137,6 @@
 		<!-- /.modal-content -->
 	</div>
 	</div>
-
-
 
   <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
 
@@ -181,5 +179,5 @@ function isNumberKey(evt) {
 	if (charCode > 31 && (charCode < 48 || charCode > 57))
 		return false;
 	return true;
-
+}
 </script>

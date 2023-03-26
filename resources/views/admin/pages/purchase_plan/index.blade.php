@@ -37,7 +37,7 @@
 	  
 	    @if($purchaseplan)
 		<div class="row">
-			 <div class="col-sm-4">
+			 <div class="col-sm-4 ribbon-font">
 				<div class="position-relative p-3 bg-info" style="height: 180px">
 				<div class="ribbon-wrapper ribbon-lg">
 				<div class="ribbon bg-danger">
@@ -57,7 +57,7 @@
 						<span class="info-box-icon bg-info"><i class="far fa-envelope"></i></span>
 						<div class="info-box-content">
 						<a href="{{url('/admin/upgrade-plan/emails')}}" class="badge badge-danger navbar-badge">${{$topup->no_of_emails_price}} Upgrade</a>
-						<span class="info-box-text">EMAILS</span>
+						<span class="info-box-text">Emails</span>
 						<span class="info-box-number">{{$topup->no_of_emails}}</span>
 						</div>
 					</div>
@@ -110,36 +110,52 @@
 					<div class="row">
 					  <div class="col-sm-3 col-6">
 						<div class="description-block border-right">
-						 
-						  <h5 class="description-header">{{$purchaseplan->no_of_emails}}</h5>
-						  <span class="description-text">Remaining Emails</span>
+						    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+								<label class="btn btn-default text-center">
+								<input type="radio" name="color_option" id="color_option_b1" autocomplete="off">
+								<span style="font-size: 23px!important;" class="text-xl">{{$purchaseplan->no_of_emails}}</span>
+								<br>
+								Remaining Emails
+							</div>
 						</div>
 						<!-- /.description-block -->
 					  </div>
 					  <!-- /.col -->
 					  <div class="col-sm-3 col-6">
 						<div class="description-block border-right">
-						 
-						  <h5 class="description-header">{{$purchaseplan->no_of_landing_page}}</h5>
-						  <span class="description-text">Remaining Landingpage</span>
+						   <div class="btn-group btn-group-toggle" data-toggle="buttons">
+								<label class="btn btn-default text-center">
+								<input type="radio" name="color_option" id="color_option_b1" autocomplete="off">
+								<span style="font-size: 23px!important;" class="text-xl">{{$purchaseplan->no_of_landing_page}}</span>
+								<br>
+								Remaining Landingpage
+							</div>
 						</div>
 						<!-- /.description-block -->
 					  </div>
 					  <!-- /.col -->
 					  <div class="col-sm-3 col-6">
 						<div class="description-block border-right">
-						  
-						  <h5 class="description-header">{{$purchaseplan->no_of_page_builder}}</h5>
-						  <span class="description-text">Remaining Page builder</span>
+						   <div class="btn-group btn-group-toggle" data-toggle="buttons">
+								<label class="btn btn-default text-center">
+								<input type="radio" name="color_option" id="color_option_b1" autocomplete="off">
+								<span style="font-size: 23px!important;" class="text-xl">{{$purchaseplan->no_of_page_builder}}</span>
+								<br>
+								Remaining Page builder
+							</div>
 						</div>
 						<!-- /.description-block -->
 					  </div>
 					  <!-- /.col -->
 					  <div class="col-sm-3 col-6">
 						<div class="description-block">
-						  
-						  <h5 class="description-header">{{$purchaseplan->no_of_address_book}}</h5>
-						  <span class="description-text">Remaining Addressbook</span>
+						   <div class="btn-group btn-group-toggle" data-toggle="buttons">
+								<label class="btn btn-default text-center">
+								<input type="radio" name="color_option" id="color_option_b1" autocomplete="off">
+								<span style="font-size: 23px!important;" class="text-xl">{{$purchaseplan->no_of_address_book}}</span>
+								<br>
+								Remaining Addressbook
+							</div>
 						</div>
 						<!-- /.description-block -->
 					  </div>

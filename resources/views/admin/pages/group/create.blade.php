@@ -60,20 +60,20 @@
 				@method('POST')
 				@csrf
                 <div class="card-body">
-					<div class="form-group">
+					<div class="form-group col-md-6">
 						 <label for="exampleInputEmail1">Group Name <span class="error">*</span></label>
 						  <input type="text" class="form-control" id="name" placeholder="Group Name" name="name" maxlength="255" value="{{ old('name') }}">
 						  <span class="error">{{$errors->first('name')}}</span>
 					</div>
 					
-					<div class="form-group">
+					<div class="form-group col-md-6">
 						 <label for="exampleInputEmail1">For <span class="error">*</span></label>
 						   <input type="radio" name="for" value="1" checked onclick="changeuser();"> Custom
 						  <input type="radio"  name="for" value="2" onclick="changeuser();"> All
 						  <span class="error">{{$errors->first('for')}}</span>
 					</div>
 					
-					<div class="form-group" id="userdiv">
+					<div class="form-group col-md-6" id="userdiv">
 						<label for="exampleInputEmail1">Contacts <span class="error">*</span></label>
 					    <select class="form-control" name="users[]" id="users" multiple="multiple" data-placeholder="Select Contacts" style="display:none;">
 						@foreach($address_book as $address_book_data)

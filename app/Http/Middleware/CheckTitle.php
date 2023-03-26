@@ -21,8 +21,7 @@ class CheckTitle
      */
     public function handle($request, Closure $next)
     {
-	
-		$user = User::getRecordByTitle($request->title);
+		$user = User::getRecordByTitle($request->subdomain);
 		if(empty($user))
 		{
 			abort(404);

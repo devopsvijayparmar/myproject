@@ -54,11 +54,15 @@ class User extends Authenticatable
 	} 
 	
 	function getProfileAttribute($image){
-		return $image == null ? url('/images/boxed-bg.jpg') : asset('/uploads/profile/'.$image);
+		return $image == null ? asset('/images/boxed-bg.jpg') : asset('/uploads/profile/'.$image);
 	}
 	
 	function getMyWebsiteAttribute(){
-		return url('/'.Auth::user()->title);
+		return Auth::user()->title.'.'.config('enum.website');
+	}
+	
+	function getMyWebsiteLinkAttribute(){
+		return 'http://'.Auth::user()->title.'.'.config('enum.website');
 	}
 	
 	public function sendPasswordResetNotification($token)

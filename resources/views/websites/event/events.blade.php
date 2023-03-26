@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-sm-12 text-center clr-white">
                     <h2 class="clr-white">Events</h2>
-					<a class="clr-white" href="{{url('/')}}/{{$title}}">Home</a> <a class="clr-white">/<a> <a class="clr-white" href="#">Events</a>
+					<a class="clr-white" href="{{url('/')}}">Home</a> <a class="clr-white">/<a> <a class="clr-white" href="#">Events</a>
                 </div>
               
             </div>
@@ -26,12 +26,12 @@
                         <article>
                             <header class="entry-header">
                                 <div class="entry-thumbnail">
-                                    <a href="{{$eventsdata->getDetailPageLink($title)}}"><img class="img-responsive card_img" src="{{$eventsdata->image}}" alt=""></a>
+                                    <a href="{{$eventsdata->getDetailPageLink()}}"><img class="img-responsive card_img" src="{{$eventsdata->image}}" alt=""></a>
                                     <a class="preview" href="{{$eventsdata->image}}" rel="prettyPhoto"><span class="post-format post-format-video"><i class="fa fa-film"></i></span></a>
                                 </div>
                                 <div class="entry-date">Start Date: {{$eventsdata->start_date}}</div>
                                 <div class="entry-date">End Date: {{$eventsdata->end_date}}</div>
-                                <h2 class="entry-title"><a href="{{$eventsdata->getDetailPageLink($title)}}">{{$eventsdata->title}}</a></h2>
+                                <h2 class="entry-title"><a href="{{$eventsdata->getDetailPageLink()}}">{{$eventsdata->title}}</a></h2>
                             </header>
 
                             <div class="entry-content">

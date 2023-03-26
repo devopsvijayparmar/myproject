@@ -8,9 +8,9 @@
                 </div>
 				<div class="col-sm-3">
 				   <!--<li id="" class="scroll"><a href="{{url('/')}}/{{$title}}/ourteam">Our Teams</a></li>-->
-				   <li id="" class="scroll"><a href="{{url('/')}}/{{$title}}/blog">Blog</a></li>
-				   <li id="" class="scroll"><a href="{{url('/')}}/{{$title}}/about-us">About Us</a></li>
-                   <li id="" class="scroll"><a href="{{url('/')}}/{{$title}}/contact-us">Contact Us</a></li>   
+				   <li id="" class="scroll"><a href="{{url('blog')}}">Blog</a></li>
+				   <li id="" class="scroll"><a href="{{url('about-us')}}">About Us</a></li>
+                   <li id="" class="scroll"><a href="{{url('contact-us')}}">Contact Us</a></li>   
 				</div>
                 <div class="col-sm-3">
                     <ul class="social-icons">

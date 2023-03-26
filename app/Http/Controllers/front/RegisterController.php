@@ -40,6 +40,7 @@ class RegisterController extends Controller
 	 
 	function __construct()
     {
+		$this->data['title'] = 'Register';
 		$this->middleware('CheckAuth');
 		$this->data['contactus'] = ContactUs::find(1); 
     }

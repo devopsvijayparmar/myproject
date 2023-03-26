@@ -9,7 +9,7 @@
             <div class="title-holder-cell text-left">
               <h1 class="page-title">Service</h1>
               <ol class="breadcrumb">
-                <li><a href="{{url('/')}}/{{$title}}">Home</a></li>
+                <li><a href="{{url('/')}}">Home</a></li>
                 <li class="active">Service</li>
               </ol>
             </div>
@@ -46,7 +46,7 @@
 		  <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 			<div class="full text_align_center margin_bottom_30">
 			  <div class="center">
-				<div class="icon"> <img src="{{ url('/websites/bakery/images/it_service/i3.png') }}" alt="#" /> </div>
+				<div class="icon"> <img src="{{ asset('/websites/bakery/images/it_service/i3.png') }}" alt="#" /> </div>
 			  </div>
 			<h4 class="theme_color">{{$servicedata->name}}</h4>
 			  <p>{{$servicedata->description}}</p>
@@ -56,7 +56,7 @@
 			<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 			<div class="full text_align_center margin_bottom_30">
 				<div class="center">
-					<div class="icon"> <img src="{{ url('/websites/bakery/images/it_service/i2.png') }}" alt="#" /> </div>
+					<div class="icon"> <img src="{{ asset('/websites/bakery/images/it_service/i2.png') }}" alt="#" /> </div>
 				</div>
 				<h4 class="theme_color">{{$servicedata->name}}</h4>
 				<p>{{$servicedata->description}}</p>

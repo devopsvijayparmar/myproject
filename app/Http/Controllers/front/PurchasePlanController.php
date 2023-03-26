@@ -27,6 +27,7 @@ class PurchasePlanController extends Controller
 	function __construct()
     {
 		$this->middleware('auth');
+		$this->data['title'] = 'Purchase Plan';
     }
 	
 	public function index(Request $request, $id)

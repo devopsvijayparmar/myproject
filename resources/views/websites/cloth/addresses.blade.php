@@ -9,7 +9,7 @@
             <div class="title-holder-cell text-left">
               <h1 class="page-title">Order</h1>
               <ol class="breadcrumb">
-                <li><a href="{{url('/')}}/{{$title}}">Home</a></li>
+                <li><a href="{{url('/')}}">Home</a></li>
                 <li class="active">Order</li>
               </ol>
             </div>
@@ -36,8 +36,8 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 contant_form">
               <div class="form_section">
                
-				<form  method="POST" action="{{url('/')}}/{{$title}}/order" enctype="multipart/form-data" id="main_id" class="form_contant">
-			        @csrf
+				<form  method="POST" action="{{url('order')}}" enctype="multipart/form-data" id="main_id" class="form_contant">
+			    @csrf
                   <fieldset>
                   <div class="row">
                     <input type="hidden" name="quantity" value="{{$quantity}}">

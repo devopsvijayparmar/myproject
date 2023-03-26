@@ -20,13 +20,13 @@ class Plan extends Authenticatable
 	    return $query;
 	}
 	function getImage1Attribute($image){
-		return $image == null ? url('/images/image_not_found.jpg') : asset('/uploads/plan/'.$image);
+		return $image == null ? asset('/images/image_not_found.jpg') : asset('/uploads/plan/'.$image);
 	}
 	function getImage2Attribute($image){
-		return $image == null ? url('/images/image_not_found.jpg') : asset('/uploads/plan/'.$image);
+		return $image == null ? asset('/images/image_not_found.jpg') : asset('/uploads/plan/'.$image);
 	}
 	function getImage3Attribute($image){
-		return $image == null ? url('/images/image_not_found.jpg') : asset('/uploads/plan/'.$image);
+		return $image == null ? asset('/images/image_not_found.jpg') : asset('/uploads/plan/'.$image);
 	}
 	public static function takeRecordForWebsite($id,$node){
 		$query = Plan::where('created_by',$id)->orderBy('id','desc')->take($node)->get();
@@ -36,8 +36,8 @@ class Plan extends Authenticatable
 		$query = Plan::where('created_by',$id)->paginate($node);
 	    return $query;
 	}
-	function getDetailPageLink($title){
-		return url('/'.$title.'/'.Crypt::encrypt($this->id).'/single-plan');
+	function getDetailPageLink(){
+		return url('/'.Crypt::encrypt($this->id).'/single-plan');
 	}
 	
 	

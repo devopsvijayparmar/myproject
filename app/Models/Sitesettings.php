@@ -32,11 +32,11 @@ class Sitesettings extends Authenticatable
 	}
 	
 	function getSiteLogoAttribute($image){
-		return $image == null ? url('/images/image_not_found.jpg') : asset('/uploads/site_settings/'.$image);
+		return $image == null ? asset('/images/image_not_found.jpg') : asset('/uploads/site_settings/'.$image);
 	}
 	
 	function getFavIconAttribute($image){
-		return $image == null ? url('/images/image_not_found.jpg') : asset('/uploads/site_settings/'.$image);
+		return $image == null ? asset('/images/image_not_found.jpg') : asset('/uploads/site_settings/'.$image);
 	}
 	
 	

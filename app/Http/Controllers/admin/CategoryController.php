@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Lang;
 use Validator;
 use JsValidator;
 use App\Models\Category;
+use App\Helpers\SlugHelper;
 use Auth;
 use Hash;
 use Crypt;
@@ -88,6 +89,7 @@ class CategoryController extends Controller
 			
 		$input['created_at'] = date('Y-m-d H:i:s');
 		$input['created_by'] = $auth->id;
+		$input['slug'] = SlugHelper::slug($request->name,'category');
 		
 		$category = Category::create($input);
 	

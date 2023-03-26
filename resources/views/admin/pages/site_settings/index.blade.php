@@ -29,17 +29,17 @@
             <div class="card-body p-0">
               <ul class="nav nav-pills flex-column vp-tab">
                 <li class="nav-item">
-                  <a style="color:#303e67!important;" href="{{route('user-settings')}}" class="nav-link">
+                  <a style="color:#303e67!important;font-size: 14px;" href="{{route('user-settings')}}" class="nav-link">
                     <i class="fas fa-sliders-h"></i> <strong>Home Slider</strong>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a style="color:#303e67!important;" href="{{route('change-password')}}" class="nav-link">
+                  <a style="color:#303e67!important;font-size: 14px;" href="{{route('change-password')}}" class="nav-link">
                     <i class="fas fa-key"></i> <strong>Change Password</strong>
                   </a>
                 </li>
                 <li class="nav-item active">
-                  <a style="color:#303e67!important;" href="{{route('site-settings.index')}}" class="nav-link">
+                  <a style="color:#303e67!important;font-size: 14px;" href="{{route('site-settings.index')}}" class="nav-link">
                     <i class="fas fa-cog"></i> <strong>Site Settings</strong>
                   </a>
                 </li>
@@ -70,11 +70,11 @@
 				
 				  <ul class="mailbox-attachments d-flex align-items-stretch clearfix">
 				   
-					<li style="width: 254px!important;">
+					<li style="width: 210px!important;">
 					  <span class="mailbox-attachment-icon has-img"><img id="blah" src="@if(isset($data->site_logo)) {{ $data->site_logo }}@endif" class="rp-img-setting"></span>
 
 					  <div class="mailbox-attachment-info">
-						<a href="#" class="mailbox-attachment-name"><i class="fas fa-paperclip"></i> Site Logo</a>
+						<a style="font-size: 14px;" href="javascript:void(0)"  class="mailbox-attachment-name"><i class="fas fa-paperclip"></i> Site Logo</a>
 							<span class="mailbox-attachment-size clearfix mt-1">
 							<div class="btn btn-default btn-file">
 							<i class="fas fa-camera"></i> Choose File
@@ -84,11 +84,11 @@
 					  </div>
 					   <span class="error" id="site_logo_error"></span>
 					</li>
-					<li style="width: 254px!important;">
+					<li style="width: 210px!important;">
 					  <span class="mailbox-attachment-icon has-img"><img id="blah1" src="@if(isset($data->fav_icon)) {{ $data->fav_icon }}@endif"  class="rp-img-setting"></span>
 
 					  <div class="mailbox-attachment-info">
-						<a href="#" class="mailbox-attachment-name"><i class="fas fa-paperclip"></i> Fav Icon</a>
+						<a style="font-size: 14px;" href="javascript:void(0)" class="mailbox-attachment-name"><i class="fas fa-paperclip"></i> Fav Icon</a>
 							<span class="mailbox-attachment-size clearfix mt-1">
 							
 							 <div class="btn btn-default btn-file">
@@ -103,7 +103,7 @@
 				  <div class="form-group col-md-6" style="padding-left: 0;">
 						 <label for="exampleInputEmail1">Preferred Currency <span class="error">*</span></label>
 						  <select class="form-control" id="currency_id" name="currency_id">
-							<option value="">select currency</option>
+							<option value="">Select Currency</option>
 							@foreach($currency as $retrieved_data)
 							<option @if(isset($data->currency_id)) @if($data->currency_id == $retrieved_data->id) selected @endif @endif value="{{$retrieved_data->id}}">{{$retrieved_data->name}}({{$retrieved_data->code}})</option>
 							@endforeach

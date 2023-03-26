@@ -19,7 +19,7 @@ a:hover {
     <div class="container">
       <div class="section-title text-center">
 		<h2><strong style="color:#1a2b5f!important">We are here for your business</strong></h2>
-        <p class="separator" style="color: #1a2b5f;">Connecting every dot from design to Web development or mobile app development is our claim to fame. We’re your digital partner for catering bespoke industry equipped solutions to strictly meet your business requirements.</p>
+        <p class="separator" style="color: #1a2b5f;">We Are Your Digital Partner For Catering Bespoke Industry Equipped Solutions To Strictly Meet Your Business Requirements. We Are Your Digital Partner For Catering Bespoke Industry Equipped Solutions To Strictly Meet Your Business Requirements.</p>
 
       </div>
     </div>
@@ -55,7 +55,7 @@ a:hover {
 
             <img src="http://127.0.0.1:8000/uploads/front/system/20210801040911cloud.svg" alt="img" class="img-fluid">
             <h4>Web development</h4>
-           <p>Let’s get your business set up in the digital space with a unique and intuitive website, a digital brand image for your physical business.</p>
+           <p>Create a digital brand image for your physical business with a unique and intuitive website.</p>
             <!--<a href="#">read more</a>-->
 
           </div>

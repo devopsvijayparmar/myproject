@@ -27,13 +27,13 @@ class Projects extends Authenticatable
 	}
 	
 	function getImage1Attribute($image){
-		return $image == null ? url('/images/image_not_found.jpg') : asset('/uploads/projects/'.$image);
+		return $image == null ? asset('/images/image_not_found.jpg') : asset('/uploads/projects/'.$image);
 	}
 	function getImage2Attribute($image){
-		return $image == null ? url('/images/image_not_found.jpg') : asset('/uploads/projects/'.$image);
+		return $image == null ? asset('/images/image_not_found.jpg') : asset('/uploads/projects/'.$image);
 	}
 	function getImage3Attribute($image){
-		return $image == null ? url('/images/image_not_found.jpg') : asset('/uploads/projects/'.$image);
+		return $image == null ? asset('/images/image_not_found.jpg') : asset('/uploads/projects/'.$image);
 	}
 	
 	public static function takeRecordForWebsite($id,$node){
@@ -41,12 +41,12 @@ class Projects extends Authenticatable
 	    return $query;
 	}
 	
-	function getDetailPageLink($title){
-		return url('/'.$title.'/'.Crypt::encrypt($this->id).'/single-project');
+	function getDetailPageLink(){
+		return url('/'.Crypt::encrypt($this->id).'/single-project');
 	}
 	
-	function getProjectCategoryLink($title){
-		return url('/'.$title.'/projects/category');
+	function getProjectCategoryLink(){
+		return url('projects/category');
 	}
 	public static function getRecordForWebsite($user_id,$cat,$node){
 		$TEMP = "projects.created_by = '$user_id'";

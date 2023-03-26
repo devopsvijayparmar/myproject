@@ -33,7 +33,7 @@
               </div>
                 <div class="card-body">
 					<div class="row">
-					<div class="col-12 col-sm-6">
+					<div class="col-12 col-sm-4">
 						<div class="col-12">
 							<img src="{{$data->image_1}}" class="product-image" alt="Product Image">
 						</div>
@@ -48,10 +48,25 @@
 							@endif
 						</div>
 					</div>
-					<div class="col-12 col-sm-6">
-					  <h3 class="my-3">{{$data->price}}</h3>
+					<div class="col-12 col-sm-8">
+					
+					 
 					  <h3 class="my-3">{{$data->name}}</h3>
-					  <span class="description">Category - {{$data->category->name}}</span></br></br>
+					 
+					    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+						<label class="btn btn-default text-center">
+						<input type="radio" name="color_option" id="color_option_b1" autocomplete="off">
+						<span style="font-size: 19px!important;" class="text-xl">Category</span>
+						<br>
+						{{$data->category->name}}
+						</label>
+						<label class="btn btn-default text-center">
+						<input type="radio" name="color_option" id="color_option_b2" autocomplete="off">
+						<span style="font-size: 19px!important;" class="text-xl">Price</span>
+						<br>
+						@if(isset($user_site_setting)) {{$user_site_setting->currency->symbol}} @endif{{$data->price}}
+						</label>
+						</div>
 					  <p>{!! $data->description !!}</p>
 					  <hr>
 					</div>
