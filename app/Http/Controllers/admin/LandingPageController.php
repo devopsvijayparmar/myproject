@@ -338,14 +338,14 @@ class LandingPageController extends Controller
 			}
 			
 			if ($insertData) {
-				Session::flash('success', 'Emails sent');
+				Session::flash('success', __('messages.landingpage_sent'));
 				 return redirect()->back();
 			} else {
-				Session::flash('error', 'Something went wrong data not Imported');
+				Session::flash('error', __('messages.error'));
 				 return redirect()->back();
 			}
 		} else {
-			Session::flash('error', 'Something went wrong data not Imported');
+			Session::flash('error',  __('messages.error'));
 			 return redirect()->back();
 		}
 		

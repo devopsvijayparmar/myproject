@@ -152,17 +152,15 @@ class EmailMarketingController extends Controller
 			return redirect()->back()->withErrors($validator)->withInput();
         } 
 			
-		
 		$id = Crypt::decrypt($request->email_id);
 		$email = EmailMarketing::find($id);
 		
 		$input['created_at'] = date('Y-m-d H:i:s');
 		$input['created_by'] = $auth->id;
 	
-	   
-	
 	    if($request->for == 1)
 		{
+
 			$group_data = GroupData::getRecordByGroupId($request->group);
 			$address_data = AddressBook::getRecordForLandingPage($group_data);
 		}
@@ -175,19 +173,15 @@ class EmailMarketingController extends Controller
 			}
 		}
 		
-		$array = array('users'=>$address_data);
-		SendMail::dispatch($array);
-		
-		
+		//$array = array('users'=>$address_data);
+		//SendMail::dispatch($array);
+		$insertData =[];
 		foreach($address_data as $retrieved_data)
 		{
 			$html = $email->email;
 			$subject = $email->subject;
 			$html = str_replace('{{USER_NAME}}',$retrieved_data->name , $html);
 			
-			
-			
-		
 			$insertData[] = array(
 				'to' => $retrieved_data->email,
 				'email' => $html,
@@ -198,20 +192,21 @@ class EmailMarketingController extends Controller
 		}
 		
 		if (!empty($insertData)) {
+		
 			$newary = array_chunk($insertData, 500);
 			foreach ($newary as $inskey) {
 				$insert = EmailsBroadCast::insert($inskey);
 			}
 			
 			if ($insertData) {
-				Session::flash('success', 'Emails sent');
+				Session::flash('success', __('messages.email_sent'));
 				 return redirect()->back();
 			} else {
-				Session::flash('error', 'Something went wrong data not Imported');
+				Session::flash('error',  __('messages.error'));
 				 return redirect()->back();
 			}
 		} else {
-			Session::flash('error', 'Something went wrong data not Imported');
+			Session::flash('error', __('messages.error'));
 			return redirect()->back();
 		}
 		

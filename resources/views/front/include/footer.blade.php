@@ -5,7 +5,7 @@
         <div class="col-md-12 col-lg-4">
           <div class="footer-logo">
 
-			<a href="{{ url('/') }}"  class="navbar-brand"><img src="{{$admin_site_setting->site_logo}}" style="height:40px!important"></a></br>
+			<a href="{{ url('/') }}"  class="navbar-brand logo-bg"><img src="{{$admin_site_setting->site_logo}}" style="height:40px!important"></a></br>
             <p>Sign up for a free website builder. Choose what kind of website you want to create. Publish your website and go live. Start building your professional online presence.</p>
 
           </div>
@@ -80,7 +80,7 @@
 
     <div class="copyrights">
       <div class="container">
-        <p>&copy; Copyrights websphare. All rights reserved.</p>
+        <p>&copy; Copyrights {{date('Y')}} websphare. All rights reserved.</p>
        
       </div>
     </div>

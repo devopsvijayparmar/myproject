@@ -34,10 +34,10 @@
 	 @foreach($mobile as $productdata)
       <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 margin_bottom_30_all">
         <div class="product_list">
-          <div class="product_img"> <a href="{{$productdata->getDetailPageLink($title)}}"><img class="img-responsive card_img" src="{{$productdata->image_1}}" alt=""></a> </div>
+          <div class="product_img"> <a href="{{$productdata->getDetailPageLink()}}"><img class="img-responsive card_img" src="{{$productdata->image_1}}" alt=""></a> </div>
           <div class="product_detail_btm">
             <div class="center">
-              <h4><a href="it_shop_detail.html">{{ mb_strimwidth($productdata->name, 0, 40, "...")}}</a></h4>
+              <h4><a href="{{$productdata->getDetailPageLink()}}">{{ mb_strimwidth($productdata->name, 0, 40, "...")}}</a></h4>
             </div>
 			<div class="product_price">
 			<p><span class="">{{ mb_strimwidth($productdata->brand->name, 0, 100, "...")}}</span></p>
@@ -59,7 +59,7 @@
     </div>
 	@if(count($mobile) >0)
 	 <div class="text_align_center">
-		<a class="btn main_bt" href="{{$product[0]->getMobileCategoryLink($title)}}">See More...</a>
+		<a class="btn main_bt" href="{{$product[0]->getMobileCategoryLink()}}">See More...</a>
 	 </div>
 	@endif
   </div>
@@ -137,7 +137,7 @@
 	@foreach($blog as $blogdata)
       <div class="col-md-4 blog-border">
         <div class="full blog_colum">
-          <a href="{{$blogdata->getDetailPageLink($title)}}"> <div class="blog_feature_img"> <img class="card_img" src="{{$blogdata->image}}" alt="#" /> </div></a>
+          <a href="{{$blogdata->getDetailPageLink()}}"> <div class="blog_feature_img"> <img class="card_img" src="{{$blogdata->image}}" alt="#" /> </div></a>
 		  <div class="p-3">
 			  <div class="post_time">
 				<p><i class="fa fa-clock-o"></i>{{$blogdata->created_at}}</p>
@@ -158,7 +158,7 @@
     </div>
 	@if(count($blog) > 0)
 	<div class="text_align_center">
-	<a class="btn main_bt" href="{{$blog[0]->getBlogPageLink($title)}}">See More...</a>
+	<a class="btn main_bt" href="{{$blog[0]->getBlogPageLink()}}">See More...</a>
 	</div>
 	@endif
   </div>

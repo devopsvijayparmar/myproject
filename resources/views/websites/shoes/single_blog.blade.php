@@ -9,7 +9,7 @@
             <div class="title-holder-cell text-left">
               <h1 class="page-title">Blog Detail</h1>
               <ol class="breadcrumb">
-                <li><a href="{{url('/')}}/{{$title}}">Home</a></li>
+                <li><a href="{{url('/')}}">Home</a></li>
                 <li class="active">Blog Detail</li>
               </ol>
             </div>
@@ -47,10 +47,9 @@
             <h4>RECENT POST</h4>
             <div class="recent_post">
               <ul>
-			  
 			    @foreach($bloglast3 as $retrieved_data)
                 <li>
-				<p class="post_head"><a href="{{$retrieved_data->getDetailPageLink($title)}}">{{$retrieved_data->title}}</a></p>
+				<p class="post_head"><a href="{{$retrieved_data->getDetailPageLink()}}">{{$retrieved_data->title}}</a></p>
                   <p class="post_date"><i class="fa fa-calendar" aria-hidden="true"></i> {{$retrieved_data->created_at}}</p>
                 </li>
                 @endforeach

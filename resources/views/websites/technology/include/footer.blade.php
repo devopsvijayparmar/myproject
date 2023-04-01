@@ -40,12 +40,12 @@
 </html>
 @if(Session::has('success'))
 <script>
-toastr.success('<?php echo Session::get('success') ?>', '', {timeOut: 5000});
+toastr.success('{{ Session::get('success') }}', '', {timeOut: 5000});
 </script>
 @endif
 
 @if(Session::has('error'))
 <script>
-toastr.error('<?php echo Session::get('error') ?>', '', {timeOut: 5000});
+toastr.error('{{ Session::get('error') }}', '', {timeOut: 5000});
 </script>
 @endif

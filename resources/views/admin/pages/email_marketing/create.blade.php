@@ -47,8 +47,12 @@
 						<textarea type="text" class="form-control" id="description" name="email">{{old('email')}}</textarea>
 						<span class="error">{{$errors->first('email')}}</span>
 					</div>
+					<div class="btn-group btn-group-toggle mb-1" data-toggle="buttons">
+						<label style="text-align: left;" class="btn btn-default">
+						<p class="m-0"><em><strong>Note</strong>: The values of these parameters will be replaced.</em></p>
+					</div>
 					<div class="form-group">
-					 <p>User Name: <?php echo "{{USER_NAME}}";?></p>
+					 <p style="font-size: 14px;">User Name: <?php echo "{{USER_NAME}}";?></p>
 					</div>
                 </div>
 				<div class="card-footer">
@@ -68,10 +72,38 @@
 @endsection
 @section('script')
 <script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
-<script src="{{ asset('/admin/plugins/ckeditor/ckeditor.js') }}"></script>
 {!! $validator->selector('#main_id') !!}
 <script>
 $('#emailtab').addClass('active');
-CKEDITOR.replace('description');
+$('#description').summernote({
+	
+	height: ($(window).height() - 300),
+	callbacks: {
+		onImageUpload: function(image) {
+			uploadImage(image[0]);
+		}
+	}
+});
+
+function uploadImage(image) {
+	var data = new FormData();
+	data.append("image", image);
+	data.append("_token", '{{csrf_token()}}');
+	$.ajax({
+		url: "{{route('upload-image')}}",
+		cache: false,
+		contentType: false,
+		processData: false,
+		data: data,
+		type: "POST",
+		success: function(url) {
+			var image = $('<img>').attr('src', url);
+			$('#description').summernote("insertNode", image[0]);
+		},
+		error: function(data) {
+			console.log(data);
+		}
+	});
+}
 </script>
 @endsection

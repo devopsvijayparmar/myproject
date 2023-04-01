@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-sm-12 text-center clr-white">
                     <h2 class="clr-white">music-and-entertainments</h2>
-					<a class="clr-white" href="{{url('/')}}/{{$title}}">Home</a> <a class="clr-white">/<a> <a class="clr-white" href="#">music-and-entertainments</a>
+					<a class="clr-white" href="{{url('/')}}">Home</a> <a class="clr-white">/<a> <a class="clr-white" href="#">music-and-entertainments</a>
                 </div>
               
             </div>
@@ -26,12 +26,12 @@
                         <article>
                             <header class="entry-header">
                                 <div class="entry-thumbnail">
-                                    <a href="{{$music-and-entertainmentsdata->getDetailPageLink($title)}}"><img class="img-responsive card_img" src="{{$music-and-entertainmentsdata->image}}" alt=""></a>
+                                    <a href="{{$music-and-entertainmentsdata->getDetailPageLink()}}"><img class="img-responsive card_img" src="{{$music-and-entertainmentsdata->image}}" alt=""></a>
                                     <a class="preview" href="{{$music-and-entertainmentsdata->image}}" rel="prettyPhoto"><span class="post-format post-format-video"><i class="fa fa-film"></i></span></a>
                                 </div>
                                 <div class="entry-date">Start Date: {{$music-and-entertainmentsdata->start_date}}</div>
                                 <div class="entry-date">End Date: {{$music-and-entertainmentsdata->end_date}}</div>
-                                <h2 class="entry-title"><a href="{{$music-and-entertainmentsdata->getDetailPageLink($title)}}">{{$music-and-entertainmentsdata->title}}</a></h2>
+                                <h2 class="entry-title"><a href="{{$music-and-entertainmentsdata->getDetailPageLink()}}">{{$music-and-entertainmentsdata->title}}</a></h2>
                             </header>
 
                             <div class="entry-content">

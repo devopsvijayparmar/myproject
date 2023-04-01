@@ -26,6 +26,9 @@ return [
     'url_name_already_been_taken' => 'This url name is already been taken',
 	'email_limit' => 'Opps.. Reached your emails limits!',
 	'group_contacts' => 'The contacts field is required.',
+	'email_sent' => 'Emails will be sent within 10 to 15 minutes.',
+	'email_note' => 'It will take 10 to 15 minutes for emails to be sent',
+	'landingpage_sent' => 'Landing page will be sent within 10 to 15 minutes.',
    
 
 ];

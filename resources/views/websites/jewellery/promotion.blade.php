@@ -9,7 +9,7 @@
             <div class="title-holder-cell text-left">
               <h1 class="page-title">Promotion</h1>
               <ol class="breadcrumb">
-                <li><a href="{{url('/')}}/{{$title}}">Home</a></li>
+                <li><a href="{{url('/')}}">Home</a></li>
                 <li class="active">Promotion</li>
               </ol>
             </div>

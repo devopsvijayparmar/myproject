@@ -20,20 +20,20 @@
         <div class="col-lg-4 col-md-4">
 
           <div class="info">
-            <div>
+            <!--<div>
               <i class="fa fa-map-marker"></i>
               <p>A108 Adam Street<br>New York, NY 535022</p>
-            </div>
+            </div>-->
 
             <div class="email">
               <i class="fa fa-envelope"></i>
-              <p>info@example.com</p>
+              <p>support@websphare.com</p>
             </div>
 
-            <div>
+            <!--<div>
               <i class="fa fa-phone"></i>
               <p>+1 5589 55488 55s</p>
-            </div>
+            </div>-->
           </div>
 
           <div class="social-links">

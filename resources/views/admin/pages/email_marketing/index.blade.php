@@ -106,6 +106,7 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
+			
 			<form id="main_id" method="POST" action="{{route('send-email')}}" enctype="multipart/form-data">
 			@method('POST')
 			@csrf
@@ -138,6 +139,10 @@
 					@endforeach
 					</select>
 					<span class="error">{{$errors->first('users')}}</span>
+				</div>
+				<div class="btn-group btn-group-toggle" data-toggle="buttons">
+					<label style="text-align: left;" class="btn btn-default">
+					<p class="m-0"><em><strong>Important Note</strong>: {{ __('messages.email_note') }}.</em></p>
 				</div>
 				
             </div>

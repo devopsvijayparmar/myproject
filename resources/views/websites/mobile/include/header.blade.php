@@ -102,7 +102,7 @@ footer {
       <div class="row">
         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
           <!-- logo start -->
-          <div class="logo"> <a href="{{url('/'.$title)}}"><img class="object-fit" src="{{$site_logo}}" alt="logo" /></a> </div>
+          <div class="logo"> <a href="{{url('/')}}"><img class="object-fit" src="{{$site_logo}}" alt="logo" /></a> </div>
           <!-- logo end -->
         </div>
         <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
@@ -111,13 +111,13 @@ footer {
             <div id="navbar_menu">
               <ul class="first-ul">
                
-				<li><a id="home" href="{{url('/'.$title)}}">Home</a></li>
-				<li><a id="products" href="{{url('/'.$title.'/products/category')}}">Mobiles</a></li>
-				<li><a id="gallery" href="{{url('/'.$title.'/gallery')}}">Gallery</a></li>
-				 <li><a id="service" href="{{url('/'.$title.'/service')}}">Services</a></li>
-				  <li><a id="promotion" href="{{url('/'.$title.'/promotion')}}">Promotions</a></li>
-                <li><a id="about_us" href="{{url('/'.$title.'/about-us')}}">About Us</a></li>
-                <li><a id="contact-us" href="{{url('/'.$title.'/contact-us')}}">Contact Us</a></li>
+				<li><a id="home" href="{{url('/')}}">Home</a></li>
+				<li><a id="products" href="{{url('products/category')}}">Mobiles</a></li>
+				<li><a id="gallery" href="{{url('gallery')}}">Gallery</a></li>
+				 <li><a id="service" href="{{url('service')}}">Services</a></li>
+				  <li><a id="promotion" href="{{url('promotion')}}">Promotions</a></li>
+                <li><a id="about_us" href="{{url('about-us')}}">About Us</a></li>
+                <li><a id="contact-us" href="{{url('contact-us')}}">Contact Us</a></li>
                
               </ul>
             </div>

@@ -13,11 +13,11 @@
 		
 		<div class="col-md-4">
 			<ul class="first-ul" style="color:white;">
-				<li><a id="blog" href="{{url('/'.$title.'/blog')}}">Blog</a></li>
-				<li><a id="service" href="{{url('/'.$title.'/service')}}">Services</a></li>
-				<li><a id="promotion" href="{{url('/'.$title.'/promotion')}}">Promotions</a></li>
-				<li><a id="about_us" href="{{url('/'.$title.'/about-us')}}">About Us</a></li>
-				<li><a id="contact-us" href="{{url('/'.$title.'/contact-us')}}">Contact Us</a></li>
+				<li><a id="blog" href="{{url('blog')}}">Blog</a></li>
+				<li><a id="service" href="{{url('service')}}">Services</a></li>
+				<li><a id="promotion" href="{{url('promotion')}}">Promotions</a></li>
+				<li><a id="about_us" href="{{url('about-us')}}">About Us</a></li>
+				<li><a id="contact-us" href="{{url('contact-us')}}">Contact Us</a></li>
 			</ul>
 		</div> 
 		 <div class="col-md-4">

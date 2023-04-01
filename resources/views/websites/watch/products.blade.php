@@ -33,7 +33,7 @@
               <div class="product_img">  <a href="{{$productdata->getDetailPageLink()}}"><img class="img-responsive card_img" src="{{$productdata->image_1}}" alt=""></a> </div>
               <div class="product_detail_btm">
                 <div class="center">
-                  <h4><a href="{{$productdata->getDetailPageLink($title)}}">{{ mb_strimwidth($productdata->name, 0, 40, "...")}}</a></h4>
+                  <h4><a href="{{$productdata->getDetailPageLink()}}">{{ mb_strimwidth($productdata->name, 0, 40, "...")}}</a></h4>
                 </div>
               
 				<div class="product_price">

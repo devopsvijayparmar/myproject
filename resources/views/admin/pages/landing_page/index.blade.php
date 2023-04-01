@@ -122,12 +122,18 @@
 					<textarea type="text" class="form-control" id="description" name="description" placeholder="Enter Description">{!! $admin_site_setting->landing_page_email !!}</textarea>
 					<span class="error" id='description_error'>{{$errors->first('description') }}</span>
 				</div>
-				
-				<div class="form-group">
-				 <p>User Name: <?php echo "{{USER_NAME}}";?></p>
-				 <p>Landing Page Link here to share with your contacts: <?php echo "{{LANDING_PAGE_LINK}}";?></p>
+				<div class="btn-group btn-group-toggle mb-1" data-toggle="buttons">
+					<label style="text-align: left;" class="btn btn-default">
+					<p class="m-0"><em><strong>Note</strong>: The values of these parameters will be replaced.</em></p>
 				</div>
-				
+				<div class="form-group">
+					 <p style="font-size: 14px;">User Name: <?php echo "{{USER_NAME}}";?></p>
+				     <p style="font-size: 14px;">Landing Page Link here to share with your contacts: <?php echo "{{LANDING_PAGE_LINK}}";?></p>
+				</div>
+				<div class="btn-group btn-group-toggle" data-toggle="buttons">
+					<label style="text-align: left;" class="btn btn-default">
+					<p class="m-0"><em><strong>Important Note</strong>: {{ __('messages.email_note') }}.</em></p>
+				</div>
             </div>
             <div class="modal-footer justify-content-between">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

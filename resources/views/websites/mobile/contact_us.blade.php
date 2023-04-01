@@ -9,7 +9,7 @@
             <div class="title-holder-cell text-left">
               <h1 class="page-title">Contact Us</h1>
               <ol class="breadcrumb">
-                <li><a href="{{url('/')}}/{{$title}}">Home</a></li>
+                <li><a href="{{url('/')}}">Home</a></li>
                 <li class="active">Contact Us</li>
               </ol>
             </div>
@@ -65,7 +65,7 @@
               <h2 class="text_align_center">SEND MESSAGER</h2>
               <div class="form_section">
                
-				<form  method="POST" action="{{url('/')}}/{{$title}}/contact-us" enctype="multipart/form-data" id="main_id" class="form_contant">
+				<form  method="POST" action="{{url('contact-us')}}" enctype="multipart/form-data" id="main_id" class="form_contant">
 			        @csrf
                   <fieldset>
                   <div class="row">
