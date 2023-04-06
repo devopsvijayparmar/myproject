@@ -6,7 +6,7 @@
           <div class="footer-logo">
 
 			<a href="{{ url('/') }}"  class="navbar-brand logo-bg"><img src="{{$admin_site_setting->site_logo}}" style="height:40px!important"></a></br>
-            <p>Sign up for a free website builder. Choose what kind of website you want to create. Publish your website and go live. Start building your professional online presence.</p>
+            <p>Sign up now for our free website builder, select the type of website you want to create, publish your website, and go live to start building your professional online presence today.</p>
 
           </div>
         </div>

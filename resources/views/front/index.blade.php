@@ -47,7 +47,7 @@
       <div class="section-title text-center">
 
         <h2>simple system</h2>
-        <p class="separator">Manage, Promote and Grow Your Business Online .</p>
+        <p class="separator">Our platform provides the tools and resources you need to manage, promote, and grow your business online, helping you reach a wider audience and achieve your business goals.</p>
 
       </div>
     </div>
@@ -81,8 +81,8 @@
 
     <div class="container">
       <div class="section-title text-center">
-        <h2>Web Template Categories </h2>
-        <p class="separator">Make your own website and get built-in tools to grow your business online.</p>
+        <h2>Web Template Categories</h2>
+        <p class="separator">Empower your business with an online presence by creating your own website and utilizing the power of the internet to grow your business.</p>
       </div>
     </div>
 
@@ -93,8 +93,6 @@
 		@endforeach
       </div>
     </div>
-
-	
 	<a href="{{ url('/web-templates') }}" target="_blank" class="csm-btn-1 btn">See more...</a>
 
   </section>
@@ -110,7 +108,7 @@
     <div class="container">
       <div class="section-title text-center">
         <h2>Amazing Features</h2>
-        <p class="separator">Integer cursus bibendum augue ac cursus .</p>
+        <p class="separator">Our website builder offers customizable templates, drag-and-drop interface, e-commerce integrations, and more amazing features to create stunning and functional websites with ease.</p>
       </div>
     </div>
 
