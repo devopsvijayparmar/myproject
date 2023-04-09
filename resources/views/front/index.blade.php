@@ -58,12 +58,10 @@
         @foreach($system as $systemdata)
         <div class="col-md-6 col-lg-4">
           <div class="feature-block">
-
             <img src="{{ url('/uploads/front/system') }}/{{$systemdata->image}}" alt="img" class="img-fluid">
             <h4>{{$systemdata->title}}</h4>
             <p>{!!$systemdata->description!!}</p>
             <!--<a href="#">read more</a>-->
-
           </div>
         </div>
         @endforeach
@@ -89,7 +87,7 @@
     <div class="container">
       <div class="owl-carousel owl-theme">
 	    @foreach($webtemplates as $webtemplatesdata)
-        <a href="{{url('/web-templates')}}/{{$webtemplatesdata->slug}}"><div><h4 class="pull-left">{{$webtemplatesdata->title}}</h4><img src="{{ url('/uploads/front/web_templates') }}/{{$webtemplatesdata->image}}" alt="img" class="img-responsive" style="height:250px!important;"></div></a>
+        <a href="{{url('/web-templates')}}/{{$webtemplatesdata->slug}}"><div><h4 class="pull-left card_product_h4">{{$webtemplatesdata->title}}</h4><img src="{{ url('/uploads/front/web_templates') }}/{{$webtemplatesdata->image}}" alt="img" class="img-responsive" style="height:250px!important;"></div></a>
 		@endforeach
       </div>
     </div>

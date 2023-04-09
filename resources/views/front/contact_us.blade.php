@@ -4,12 +4,12 @@
   <!--==========================
     Contact Section
   ============================-->
-  <section id="contact" class="padd-section wow fadeInUp">
+  <section id="contact" class="padd-section padd-top wow fadeInUp">
 
     <div class="container">
-      <div class="section-title text-center">
+      <div class="section-title padd-bottom text-center">
         <h2>Contact Support</h2>
-      
+         <p class="separator">If you're experiencing any issues or have any questions, please don't hesitate to contact support for assistance.</p>
       </div>
     </div>
 
@@ -17,35 +17,22 @@
 	 @include('front.include.success_message')
       <div class="row justify-content-center">
 
-        <div class="col-lg-4 col-md-4">
+        <div class="col-lg-4 col-md-4 p-0">
 
-          <div class="info">
-            <!--<div>
-              <i class="fa fa-map-marker"></i>
-              <p>A108 Adam Street<br>New York, NY 535022</p>
-            </div>-->
-
-            <div class="email">
-              <i class="fa fa-envelope"></i>
-              <p>support@websphare.com</p>
+            <div class="">
+              <p><img style="height: 34px;" src="{{asset('social/email.png')}}"> support@websphare.com</p>
             </div>
+			
 
-            <!--<div>
-              <i class="fa fa-phone"></i>
-              <p>+1 5589 55488 55s</p>
-            </div>-->
-          </div>
-
-          <div class="social-links">
-            <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
-            <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
-            <a href="#" class="instagram"><i class="fa fa-instagram"></i></a>
-            <a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a>
+          <div class="">
+            <a href="#"><img style="height: 34px;" src="{{asset('social/facebook.png')}}"></a>
+            <a href="#"><img style="height: 34px;" src="{{asset('social/instagram.png')}}"></a>
+            <a href="#"><img style="height: 34px;" src="{{asset('social/linkedin.png')}}"></a>
           </div>
 
         </div>
 
-        <div class="col-lg-7 col-md-8">
+        <div class="col-lg-7 col-md-8 p-0">
           <div class="form">
             <div id="sendmessage">Your message has been sent. Thank you!</div>
             <div id="errormessage"></div>
@@ -72,7 +59,7 @@
                 <div class="validation"></div>
 				<span class="validation-error" id="message_error">{{$errors->contact_us_error->first('message')}}</span>
               </div>
-              <div class="text-center"><button type="submit" style="width: 100%;">Send Message</button></div>
+			   <div class="text-center"><button class="btn" type="submit" style="width: 100%;">Send Message</button></div>
             </form>
           </div>
         </div>

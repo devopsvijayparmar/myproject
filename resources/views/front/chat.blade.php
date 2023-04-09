@@ -272,7 +272,7 @@ body{
   <!--==========================
     Contact Section
   ============================-->
-<section id="contact" class="padd-section wow fadeInUp">
+<section id="contact" class="padd-section padd-top wow fadeInUp">
 		<div class="container">
 		<a href="{{url('/business')}}" style="color: black;" class="nav-link"><i class="fas fa-inbox"></i> Inbox</a>
             <div class="chat">

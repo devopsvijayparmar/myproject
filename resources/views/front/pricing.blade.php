@@ -3,13 +3,13 @@
   <!--==========================
     Price Section
   ============================-->
-   <section id="pricing" class="padd-section text-center wow fadeInUp">
+   <section id="pricing" class="padd-section padd-top text-center wow fadeInUp">
 
     <div class="container">
       <div class="section-title text-center">
 
         <h2>Meet With Price</h2>
-        <p class="separator">Integer cursus bibendum augue ac cursus .</p>
+        <p class="separator">Choose a pricing option that works for you.</p>
 
       </div>
     </div>

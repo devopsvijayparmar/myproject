@@ -1,11 +1,11 @@
  @include('front.include.header')
  
-<section id="contact" class="padd-section wow fadeInUp">
+<section id="contact" class="padd-section wow padd-top fadeInUp">
 
     <div class="container">
       <div class="section-title text-center mb-5">
         <h2>Sign Up. Let's build a website free</h2>
-        <p class="separator">Build your Dynemic Website Free here. Make your own website and get built-in tools to grow your business online.</p>
+        <p class="separator">Create your own dynamic website for free and gain access to built-in tools that will help you expand your online business presence.</p>
       </div>
     </div>
    

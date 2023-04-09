@@ -3,7 +3,7 @@
   <!--==========================
     Price Section
   ============================-->
-   <section id="pricing" class="padd-section text-center wow fadeInUp">
+   <section id="pricing" class="padd-section padd-top text-center wow fadeInUp">
 
     <div class="container">
       <div class="section-title text-center">

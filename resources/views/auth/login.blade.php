@@ -1,6 +1,6 @@
 @include('front.include.header')
  
-<section id="contact" class="padd-section wow fadeInUp">
+<section id="contact" class="padd-section padd-top wow fadeInUp">
 
     <div class="container">
 		 @include('front.include.success_message')

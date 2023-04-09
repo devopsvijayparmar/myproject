@@ -4,12 +4,12 @@
   <!--==========================
     Contact Section
   ============================-->
-  <section id="contact" class="padd-section wow fadeInUp">
+  <section id="contact" class="padd-section padd-top wow fadeInUp">
 
     <div class="container">
       <div class="section-title text-center" style="margin-bottom: 40px;">
         <h2>Customization  Support</h2>
-        <p class="separator">Help us improve websphare</p>
+        <p class="separator">We value your feedback and would greatly appreciate it if you could take a moment to share your thoughts on how we can improve websphare to better meet your needs and expectations</p>
       </div>
     </div>
 
@@ -53,7 +53,7 @@
                 <div class="validation"></div>
 				<span class="validation-error" id="message_error">{{$errors->contact_us_error->first('message')}}</span>
               </div>
-              <div class="text-center"><button type="submit" style="width: 100%;">Send Message</button></div>
+              <div class="text-center"><button class="btn" type="submit" style="width: 100%;">Send Message</button></div>
             </form>
           </div>
         </div>

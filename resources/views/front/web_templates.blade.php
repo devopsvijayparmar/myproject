@@ -3,33 +3,34 @@
   <!--==========================
     Team Section
   ============================-->
-  <section id="blog" class="padd-section wow fadeInUp">
+  <section id="blog" class="padd-section padd-top wow fadeInUp">
 
     <div class="container">
       <div class="section-title text-center">
 
         <h2>Web Templates</h2>
-        <p class="separator">Make Your Own Website And Get Built-In Tools To Grow Your Business Online.</p>
+        <p class="separator">Empower your business with an online presence by creating your own website and utilizing the power of the internet to grow your business.</p>
 
       </div>
     </div>
 
     <div class="container">
       <div class="row">
-         @foreach($webtemplates as $webtemplatesdata)
-        <div class="col-md-6 col-lg-4">
-          <div class="block-blog text-left">
-            <a href="{{url('/web-templates')}}/{{$webtemplatesdata->slug}}"><img src="{{ url('/uploads/front/web_templates') }}/{{$webtemplatesdata->image}}" alt="img"></a>
-            <div class="content-blog">
-				<h4><a href="{{url('/web-templates')}}/{{$webtemplatesdata->slug}}">{{$webtemplatesdata->title}}</a></h4>
-				<a href="{{$webtemplatesdata->preview}}" target="_blank" class="csm-btn-1 btn"><i class="fa fa-search"></i>  Demo Preview</a>
-                <a href="{{url('/signup')}}/?site={{$webtemplatesdata->url}}" class="csm-btn-2 btn"><i class="fa fa-wrench"></i> Build Your Website</a>
-            </div>
-          </div>
-        </div>
-         @endforeach
-      
-
+        @foreach($webtemplates as $webtemplatesdata)
+		<div class="col-md-6 col-lg-4 col-xl-3">
+		 <h4 class="card_product_h4">{{$webtemplatesdata->title}}</h4>
+			<div class="card text-center card-product">
+				<div class="card-product__img">
+					<a href="{{url('/web-templates')}}/{{$webtemplatesdata->slug}}"><img class="card-img" src="{{ url('/uploads/front/web_templates') }}/{{$webtemplatesdata->image}}" alt=""></a>
+					<ul class="card-product__imgOverlay">
+					<li><a fdprocessedid="ucvatl" title="Details Page" href="{{url('/web-templates')}}/{{$webtemplatesdata->slug}}"><i class="fa fa-info"></i></a></li>
+					<li><a fdprocessedid="ucvatl" title="Demo Preview" href="{{$webtemplatesdata->preview}}"><i class="fa fa-search"></i></a></li>
+					<li><a fdprocessedid="1au9gg" title="Build Your Website" href="{{url('/signup')}}/?site={{$webtemplatesdata->url}}"><i class="fa fa-wrench"></i></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+        @endforeach
       </div>
     </div>
   </section>
