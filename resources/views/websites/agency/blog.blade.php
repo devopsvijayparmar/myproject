@@ -23,10 +23,10 @@
 					<article>
 						<header class="entry-header">
 							<div class="entry-thumbnail">
-								<a href="{{$blogdata->getDetailPageLink()}}"><img class="img-responsive card_img" src="{{$blogdata->image}}" alt=""></a>
-								<a class="preview" href="{{$blogdata->image}}" rel="prettyPhoto"><span class="post-format post-format-video"><i class="fa fa-film"></i></span></a>
+								<a href="{{$blogdata->getDetailPageLink()}}"><img class="card-img-top" src="{{$blogdata->image_url}}" alt=""></a>
+								<a class="preview" href="{{$blogdata->image_url}}" rel="prettyPhoto"><span class="post-format post-format-video"><i class="fa fa-film"></i></span></a>
 							</div>
-							<div class="entry-date">{{$blogdata->created_at}}</div>
+							<div class="entry-date">{{date('D, M d, Y',strtotime($blogdata->created_at))}}</div>
 							<h2 class="entry-title"><a href="{{$blogdata->getDetailPageLink()}}">{{$blogdata->title}}</a></h2>
 						</header>
 						<div class="entry-content">

@@ -30,14 +30,14 @@
         <div class="row">
           <div class="col-xl-6 col-lg-12 col-md-12">
             <div class="product_detail_feature_img hizoom hi2">
-              <div class='hizoom hi2'> <img src="{{$product->image_1}}" alt="#" /> </div>
+              <div class='hizoom hi2'> <img src="{{$product->image_url_1}}" class="img-thumbnail" alt="#" /> </div>
             </div>
 			<ul class="preview-thumbnail nav nav-tabs">
 				@if($product->image_2)
-			   <li> <a class="preview" href="{{$product->image_2}}" rel="prettyPhoto"><img src="{{$product->image_2}}" /></a></li>
+			   <li> <a class="preview" href="{{$product->image_url_2}}" rel="prettyPhoto"><img class="img-thumbnail" src="{{$product->image_url_2}}" /></a></li>
 				@endif
 			   @if($product->image_3)
-			   <li> <a class="preview" href="{{$product->image_3}}" rel="prettyPhoto"><img src="{{$product->image_3}}" /></a></li>
+			   <li> <a class="preview" href="{{$product->image_url_3}}" rel="prettyPhoto"><img class="img-thumbnail" src="{{$product->image_url_3}}" /></a></li>
 				@endif
 			</ul>
           </div>
@@ -51,7 +51,7 @@
 				@php
 				$currency_symbol = "";
 				@endphp
-				@if(isset($site_setting->currency_symbol)) @php $currency_symbol = $site_setting->currency_symbol @endphp @endif
+				@if(isset($site_setting->currency->symbol)) @php $currency_symbol = $site_setting->currency->symbol @endphp @endif
 				@if($product->price)
 				{{$currency_symbol.$product->price}}
 				@endif
@@ -104,7 +104,7 @@
 		 @foreach($products as $productdata)
           <div class="col-md-4 col-sm-6 col-xs-12 margin_bottom_30_all">
             <div class="product_list">
-              <div class="product_img">  <a href="{{$productdata->getDetailPageLink()}}"><img class="img-responsive card_img" src="{{$productdata->image_1}}" alt=""></a> </div>
+              <div class="product_img">  <a href="{{$productdata->getDetailPageLink()}}"><img class="img-thumbnail" src="{{$productdata->image_url_1}}" alt=""></a> </div>
 					
               <div class="product_detail_btm">
                 <div class="center">
@@ -115,7 +115,7 @@
 				@php
 				$currency_symbol = "";
 				@endphp
-				@if(isset($site_setting->currency_symbol)) @php $currency_symbol = $site_setting->currency_symbol @endphp @endif
+				@if(isset($site_setting->currency->symbol)) @php $currency_symbol = $site_setting->currency->symbol @endphp @endif
 				@if($productdata->price)
 				<div class="product_price">
 				  <p><span class="new_price">{{$currency_symbol.$productdata->price}}</span></p>

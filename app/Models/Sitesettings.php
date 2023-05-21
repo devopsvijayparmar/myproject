@@ -15,7 +15,7 @@ class Sitesettings extends Authenticatable
     use Notifiable;
 	use SoftDeletes;
     protected $table = 'site_settings';
-    protected $fillable = ['title','fav_icon','site_logo','created_by','created_at','updated_by','updated_at','deleted_by','deleted_at','currency_id'];
+    protected $fillable = ['title','fav_icon','site_logo','created_by','created_at','updated_by','updated_at','deleted_by','deleted_at','currency_id','footer_about_us'];
 	
 	public function currency(){
 		return $this->belongsTo(Currency::class, 'currency_id', 'id');

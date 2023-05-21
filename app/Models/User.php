@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 use App\Notifications\ResetPasswordNotification;
+use App\Models\PageBuilder;
 use Auth;
 
 class User extends Authenticatable
@@ -20,7 +21,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name','email','password','site','title','site_name','email_verified','profile',
+        'name','email','password','site','title','site_name','email_verified','profile','page_name',
     ];
 
     /**
@@ -69,4 +70,5 @@ class User extends Authenticatable
 	{
 		$this->notify(new ResetPasswordNotification($token));
 	}
+	
 }

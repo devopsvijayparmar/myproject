@@ -66,7 +66,7 @@ class MobileController extends Controller
 			
 			->editColumn('image', function ($row)
 			{
-			   return '<img class="rp-img" src="'.$row['image_1'].'">';
+			   return '<img class="rp-img" src="'.$row['image_url_1'].'">';
 			})
 		     ->addColumn('category', function ($row) {
 				return $row->category->name;

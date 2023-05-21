@@ -10,30 +10,24 @@
 	</div>
 </section>
 
-<section id="blog">
+<section id="portfolio">
 	<div class="container">
 		<div class="section-header">
-			<h2 class="section-title text-center wow fadeInDown">PROJECTS</h2>
+			<h2 class="section-title text-center wow fadeInDown">Projects</h2>
+			<p class="text-center wow fadeInDown animated" style="visibility: visible; animation-name: fadeInDown;">Our innovative project aims to streamline operations,<br> increase efficiency, and drive significant cost savings for your business</p>
 		</div>
-		
 		<div class="row">
 			@if(count($projects) >0)
 			@foreach($projects as $projectsdata) 
-			<div class="col-md-4 col-sm-6">
+			<div class="col-md-4 col-sm-6 mb-2">
 				<div class="product-grid" style="padding:0!important">
-					<div class="product-image">
+					<div class="product-image card-product">
 						<a href="{{$projectsdata->getDetailPageLink()}}">
-							<img class="pic-1" src="{{$projectsdata->image_1}}">
+							<img class="img-thumbnail p-0" src="{{$projectsdata->image_url_1}}">
 						</a>
-						<ul class="social">
-							<li><a href="{{$projectsdata->getDetailPageLink()}}" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
+						<ul class="card-product__imgOverlay">
+						<a href="{{$projectsdata->getDetailPageLink()}}"><li>{{$projectsdata->name}}</li></a>
 						</ul>
-						<!--<span class="product-new-label">Sale</span>
-						<span class="product-discount-label">20%</span>-->
-					</div>
-					<div class="p-2">
-						<div class="font-clr">{{ mb_strimwidth($projectsdata->name, 0, 50, "...")}}</div>
-						<div class="font-clr"><div class="">{{ mb_strimwidth($projectsdata->project_type->name, 0, 50, "...")}}</div></div>
 					</div>
 				</div>
 			</div>
@@ -42,7 +36,6 @@
 				<h4 class="text-center">No Record Available</h4>
 			@endif
 		</div>
-		
 		
 	</div><!--/.container-->
 	@if(count($projects) >0)
@@ -56,54 +49,55 @@
 	<div class="container">
 		<div class="section-header">
 			<h2 class="section-title text-center wow fadeInDown">Our Services</h2>
+			<p class="text-center wow fadeInDown animated" style="visibility: visible; animation-name: fadeInDown;">Unlock convenience and peace of mind with our reliable service solutions designed to simplify your life</p>
 		</div>
+		
 		<div class="row">
-			<div class="features">
-			  @php  $i=0; @endphp
-			  @if(count($service6) > 0)
-				  @foreach($service6 as $servicedata)
-					@php
-						$i++;
-						$remainder = $i % 2;
-					@endphp
-					@if($remainder == 0)
-						<div class="col-md-4 col-sm-6 wow fadeInUp" data-wow-duration="300ms" data-wow-delay="100ms">
-							<div class="media service-box">
-								<div class="pull-left">
-									<i class="fa fa-cubes"></i>
-								</div>
-								<div class="media-body">
-									<h4 class="media-heading">{{$servicedata->name}}</h4>
-									<p>{!! $servicedata->description !!}</p>
-								</div>
+		  @php  $i=0; @endphp
+		  @if(count($service6) > 0)
+			  @foreach($service6 as $servicedata)
+				@php
+					$i++;
+					$remainder = $i % 2;
+				@endphp
+				@if($remainder == 0)
+					<div class="col-md-4 col-sm-6 wow fadeInUp" data-wow-duration="300ms" data-wow-delay="100ms">
+						<div class="media service-box">
+							<div class="pull-left">
+								<i class="fa fa-cubes"></i>
 							</div>
-						</div><!--/.col-md-4-->
-						@else
-						<div class="col-md-4 col-sm-6 wow fadeInUp" data-wow-duration="300ms" data-wow-delay="200ms">
-							<div class="media service-box">
-								<div class="pull-left">
-									<i class="fa fa-pie-chart"></i>
-								</div>
-								<div class="media-body">
-									<h4 class="media-heading">{{$servicedata->name}}</h4>
-									<p>{!! $servicedata->description !!}</p>
-								</div>
+							<div class="media-body">
+								<h4 class="media-heading">{{$servicedata->name}}</h4>
+								<p>{!! $servicedata->description !!}</p>
 							</div>
-						</div><!--/.col-md-4-->
-						@endif
-					@endforeach	
+						</div>
+					</div><!--/.col-md-4-->
 					@else
-					 <h4 class="text-center">No Record Available</h4> 
+					<div class="col-md-4 col-sm-6 wow fadeInUp" data-wow-duration="300ms" data-wow-delay="200ms">
+						<div class="media service-box">
+							<div class="pull-left">
+								<i class="fa fa-pie-chart"></i>
+							</div>
+							<div class="media-body">
+								<h4 class="media-heading">{{$servicedata->name}}</h4>
+								<p>{!! $servicedata->description !!}</p>
+							</div>
+						</div>
+					</div><!--/.col-md-4-->
 					@endif
-			</div>
+				@endforeach	
+				@else
+				 <h4 class="text-center">No Record Available</h4> 
+				@endif
 		</div><!--/.row-->    
 	</div><!--/.container-->
 </section><!--/#services-->
 
-<section id="features">
+<section id="portfolio">
 	<div class="container">
 		<div class="section-header">
-			<h2 class="section-title text-center wow fadeInDown">Our Gallery</h2>
+			<h2 class="section-title text-center wow fadeInDown">Gallery</h2>
+			<p class="text-center wow fadeInDown animated" style="visibility: visible; animation-name: fadeInDown;">Immerse yourself in a visual journey through our diverse image gallery,<br> where every picture tells a unique story and sparks inspiration</p>
 		</div>
 		<div class="row">
 			@if(count($gallery) > 0)
@@ -114,7 +108,7 @@
 						<header class="entry-header">
 							<div class="entry-thumbnail">
 							<a class="preview" href="{{$retrieved_data->image_path}}" rel="prettyPhoto">
-								<img class="img-responsive card_img" src="{{$retrieved_data->image_path}}" alt="">
+								<img class="img-thumbnail" src="{{$retrieved_data->image_path}}" alt="">
 							</a>
 							</div>
 						</header>
@@ -133,19 +127,21 @@
 	<div class="container">
 		<div class="section-header">
 			<h2 class="section-title text-center wow fadeInDown">Blogs</h2>
+			<p class="text-center wow fadeInDown animated" style="visibility: visible; animation-name: fadeInDown;">In our latest blog post, we delve into the secrets of effective time management,<br> offering practical tips to boost productivity and achieve work-life balance</p>
 		</div>
 		<div class="row">
 			 @if(count($blog) > 0)
 			 @foreach($blog as $blogdata)
-			 <div class="col-sm-4">
+
+			 <div class="col-sm-4 mb-2">
 				<div class="blog-post blog-large wow fadeInLeft animated" data-wow-duration="300ms" data-wow-delay="0ms" style="visibility: visible; animation-duration: 300ms; animation-delay: 0ms; animation-name: fadeInLeft;">
 					<article>
 						<header class="entry-header">
 							<div class="entry-thumbnail">
-								<a href="{{$blogdata->getDetailPageLink()}}"><img class="img-responsive card_img" src="{{$blogdata->image}}" alt=""></a>
-								<a class="preview" href="{{$blogdata->image}}" rel="prettyPhoto"><span class="post-format post-format-video"><i class="fa fa-film"></i></span></a>
+								<a href="{{$blogdata->getDetailPageLink()}}"><img class="card-img-top" src="{{$blogdata->image_url}}" alt=""></a>
+								<a class="preview" href="{{$blogdata->image_url}}" rel="prettyPhoto"><span class="post-format post-format-video"><i class="fa fa-film"></i></span></a>
 							</div>
-							<div class="entry-date">{{$blogdata->created_at}}</div>
+							<div class="entry-date">{{date('D, M d, Y',strtotime($blogdata->created_at))}}</div>
 							<h2 class="entry-title"><a href="{{$blogdata->getDetailPageLink()}}">{{$blogdata->title}}</a></h2>
 						</header>
 						<div class="entry-content">

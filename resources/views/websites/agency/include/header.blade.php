@@ -9,7 +9,7 @@
 	@php $fav_icon = "";@endphp @if(isset($site_setting->fav_icon)) @php $fav_icon = $site_setting->fav_icon @endphp @else @php $fav_icon = $admin_site_setting->fav_icon @endphp @endif
 	@php $site_logo = "";@endphp @if(isset($site_setting->site_logo)) @php $site_logo = $site_setting->site_logo @endphp @else @php $site_logo = $admin_site_setting->site_logo @endphp @endif
 	<!-- core CSS -->
-    <link href="{{ asset('/websites/agency/css/bootstrap.min.css') }}" rel="stylesheet">
+  <link rel="stylesheet" href="{{ asset('/websites/watch/css/bootstrap.min.css') }}" />
     <link href="{{ asset('/websites/agency/css/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('/websites/agency/css/animate.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/owl/owl.carousel-2.3.4.min.css') }}">
@@ -24,36 +24,57 @@
 </head><!--/head-->
 <style>
 
+.mr-2{
+	margin-left:10px!important;
+}
+.first-ul a{
+	color:white;
+}
+.first-ul li{
+	margin-bottom:20px!important;
+}
+.nav-link{
+	color:black!important;
+}
 </style>
 <body id="home" class="homepage">
 
-    <header id="header">
-        <nav id="main-menu" class="navbar navbar-default navbar-fixed-top" role="banner">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand"  href="{{url('/')}}"><img style="height:40px!important" src="{{$site_logo}}" alt="logo"></a>
-                </div>
-				
-                <div class="collapse navbar-collapse navbar-right">
-                    <ul class="nav navbar-nav">
-                        <li id="hometab" class="scroll"><a href="{{url('/')}}">Home</a></li>
-						<li id="projects" class="scroll"><a href="{{url('projects/category')}}">Projects</a></li>
-						 <li id="products" class="scroll"><a href="{{url('products/category')}}">Products</a></li>
-                        <li id="servicetab" class="scroll"><a href="{{url('service')}}">Service</a></li>
-						 <li id="gallerytab" class="scroll"><a href="{{url('gallery')}}">Gallery</a></li>
-                        <li id="promotiontab" class="scroll"><a href="{{url('promotion')}}">Promotion</a></li>
-                        <li id="about_us_tab" class="scroll"><a href="{{url('about-us')}}">About Us</a></li>  		
-                    </ul>
-                </div>
-            </div><!--/.container-->
-        </nav><!--/nav-->
-    </header><!--/header-->
+	<header id="default_header" class="header_style_1">
+		<nav class="navbar navbar-expand-lg navbar-dark mx-background-top-linear">
+			<div class="container">
+			 <a href="{{url('/')}}"><img style="height: 40px!important;" src="{{$site_logo}}" alt="logo" /></a>
+			  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon" style="color:black;"><i class="fa fa-bars" aria-hidden="true"></i></span>
+			  </button>
+			  <div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item"><a class="nav-link" id="hometab" href="{{url('/')}}">Home</a></li>
+					<li class="nav-item"><a class="nav-link" id="projects" href="{{url('projects/category')}}">Projects</a></li>
+					<li class="nav-item"><a class="nav-link" id="products" href="{{url('products/category')}}">Products</a></li>
+					<li class="nav-item"><a class="nav-link" id="servicetab" href="{{url('service')}}">Services</a></li>
+						<li class="nav-item"><a class="nav-link" id="gallerytab" href="{{url('gallery')}}">Gallery</a></li>
+					<li class="nav-item"><a class="nav-link" id="promotiontab" href="{{url('promotion')}}">Promotions</a></li>
+					<li class="nav-item"><a class="nav-link" id="about_us_tab" href="{{url('about-us')}}">About Us</a></li>
+					
+					@if(isset($page_builder))
+						 @if(count($page_builder) > 0)
+						 <li class="dropdown"><a class="dropdown-toggle nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">{{$user->page_name}} </a>
+							<div class="dropdown-menu" role="menu">
+							@foreach($page_builder as $page_builder_data)
+								<a class="dropdown-item" role="presentation" href="{{$page_builder_data->url}}">{{$page_builder_data->title}}</a>
+							@endforeach	
+							</div>
+						</li>
+						@endif
+					@endif
+				</ul>
+			  </div>
+			</div>
+		  </nav>
+		  <!-- header bottom end -->
+		</header>
+	
+	
 	<script>
     document.addEventListener("DOMContentLoaded", function(){
 	// make it as accordion for smaller screens

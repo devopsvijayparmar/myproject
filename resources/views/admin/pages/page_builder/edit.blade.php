@@ -46,9 +46,14 @@
 					</div>
 					
 					<div class="form-group">
-						 <label for="exampleInputEmail1">Page Name <span class="error">*</span></label>
-						  <input type="text" class="form-control" id="name" placeholder="Enter page name" name="name" maxlength="255" value="{{$data->name}}">
-						  <span class="error">{{$errors->first('name')}}</span>
+						 <label for="exampleInputEmail1">Page Url Name <span class="error">*</span></label>
+						  <input type="text" onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false" class="form-control" style='text-transform:lowercase' onkeypress="return onlyAlphabets(event, this);" onkeyup="geturlname(this.value);" id="url_name" placeholder="Enter Page URL Name" name="url_name" maxlength="255" value="{{$data->url_name}}">
+						 <span class="error" id='url_name_error'>{{$errors->first('name')}}</span>
+					</div>
+					<div class="form-group">
+						 <label for="exampleInputEmail1">URL<span class="error">*</span></label>
+						  <input type="text" class="form-control" value="{{$data->url}}" id="url" readonly value="{{$auth->title}}.{{config('enum.website')}}/page/">
+						  <span class="error" id="url">{{$errors->first('url')}}</span>
 					</div>
 					
 					<div class="form-group">
@@ -78,16 +83,51 @@
 {!! $validator->selector('#main_id') !!}
 <script>
 $('#pagebuildertab').addClass('active');
-$("#description").summernote({
-  callbacks: {
-	// callback for pasting text only (no formatting)
-	onPaste: function (e) {
-	  var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
-	  e.preventDefault();
-	  bufferText = bufferText.replace(/\r?\n/g, '<br>');
-	  document.execCommand('insertHtml', false, bufferText);
+
+$('#description').summernote({
+	height: ($(window).height() - 300),
+	callbacks: {
+		onImageUpload: function(image) {
+			uploadImage(image[0]);
+		}
 	}
-  }
 });
+function geturlname(urlname)
+{
+	var url = '{{$auth->title}}.{{config('enum.website')}}/page/';
+	$('#url').val(url+urlname);
+}
+$('#url_name').keypress(function (e) {
+    var regex = new RegExp("^[a-zA-Z0-9]+$");
+    var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+    if (regex.test(str)) {
+        return true;
+    }
+
+    e.preventDefault();
+    return false;
+})
+
+
+function uploadImage(image) {
+	var data = new FormData();
+	data.append("image", image);
+	data.append("_token", '{{csrf_token()}}');
+	$.ajax({
+		url: "{{route('upload-image')}}",
+		cache: false,
+		contentType: false,
+		processData: false,
+		data: data,
+		type: "POST",
+		success: function(url) {
+			var image = $('<img>').attr('src', url);
+			$('#description').summernote("insertNode", image[0]);
+		},
+		error: function(data) {
+			console.log(data);
+		}
+	});
+}
 </script>
 @endsection

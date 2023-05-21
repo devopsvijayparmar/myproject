@@ -13,7 +13,7 @@
             <ol class="breadcrumb float-sm-right">
                <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
               <li class="breadcrumb-item"><a href="{{route('plan.index')}}">Plans</a></li>
-              <li class="breadcrumb-item active">Edit Book</li>
+              <li class="breadcrumb-item active">Edit Plan</li>
             </ol>
           </div>
         </div>
@@ -56,19 +56,19 @@
 							<div class="col-md-4">
 								<label for="exampleInputFile">Image 1<span class="error">*</span></label>
 								<input type="file" onchange="ValidateSize(this)" class="form-control" name="image_1" id="image_1">
-								<img class="mar-top-10 rp-img100" src="{{$data->image_1}}" id="blah_1"/ ></br>
+								<img class="mar-top-10 rp-img100" src="{{$data->image_url_1}}" id="blah_1"/ ></br>
 								<span class="error" id='image_1_error'>{{$errors->first('image_1')}}</span>
 							</div>
 							<div class="col-md-4">
 								<label for="exampleInputFile">Image 2</label>
 								<input type="file" onchange="ValidateSize(this)" class="form-control" name="image_2" id="image_2">
-								<img class="mar-top-10 rp-img100" @if($data->image_2) src="{{$data->image_2}}" @endif id="blah_2"/ ></br>
+								<img class="mar-top-10 rp-img100" @if($data->image_2) src="{{$data->image_url_2}}" @endif id="blah_2"/ ></br>
 								<span class="error" id='image_2_error'>{{$errors->first('image_2')}}</span>
 							</div>
 							<div class="col-md-4">
 								<label for="exampleInputFile">Image 3</label>
 								<input type="file" onchange="ValidateSize(this)" class="form-control" name="image_3" id="image_3">
-								<img class="mar-top-10 rp-img100" @if($data->image_3) src="{{$data->image_3}}" @endif id="blah_3"/ ></br>
+								<img class="mar-top-10 rp-img100" @if($data->image_3) src="{{$data->image_url_3}}" @endif id="blah_3"/ ></br>
 								<span class="error" id='image_3_error'>{{$errors->first('image_3')}}</span>
 							</div>
 						</div>

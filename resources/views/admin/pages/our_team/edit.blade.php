@@ -62,7 +62,7 @@
 						<div class="col-md-4">
 						<label for="exampleInputFile">Image<span class="error">*</span></label>
 						<input type="file" onchange="ValidateSize(this)" class="form-control" name="image" id="image">
-						<img class="mar-top-10 rp-img100" src="{{$data->image}}" id="blah"/ ></br>
+						<img class="mar-top-10 rp-img100" src="{{$data->image_url}}" id="blah"/ ></br>
 						<span class="error">{{$errors->first('image') }}</span>
 					</div>	
 					</div>

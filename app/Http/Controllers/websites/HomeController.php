@@ -30,6 +30,7 @@ use App\Models\Promotion;
 use App\Models\Orders;
 use App\Models\Plan;
 use App\Models\MobileOrders;
+use App\Models\PageBuilder;
 use App\Models\Event;
 use Auth;
 use Hash;
@@ -52,9 +53,10 @@ class HomeController extends Controller
 	
 	public function index(Request $request, $title)
     {    
-	    $user = User::getRecordByTitle($title);
+	    $this->data['user'] = $user = User::getRecordByTitle($title);
 	    $this->data['title'] = $title;
 	    $this->data['slider'] = Slider::getSlidersByUserId($user->id);
+	    $this->data['page_builder'] = PageBuilder::getPageBuilderListForWebsite($user->id);
 	    $this->data['site_setting'] = Sitesettings::getRecordByUserIdForWebsite($user->id);
 	    $this->data['contact_us'] = ContactUs::getContactUsForWebsite($user->id);
 	    $this->data['service'] = Service::takeRecordForWebsite($user->id,4);
@@ -79,8 +81,9 @@ class HomeController extends Controller
 	
 	public function about_us(Request $request, $title)
     {    
-	    $user = User::getRecordByTitle($title);
+	    $this->data['user'] = $user = User::getRecordByTitle($title);
 	    $this->data['title'] = $title;
+		$this->data['page_builder'] = PageBuilder::getPageBuilderListForWebsite($user->id);
 	    $this->data['site_setting'] = Sitesettings::getRecordByUserIdForWebsite($user->id);
 	    $this->data['contact_us'] = ContactUs::getContactUsForWebsite($user->id);
 	    $this->data['about_us'] = AboutUs::getRecordForWebsite($user->id);
@@ -90,9 +93,10 @@ class HomeController extends Controller
 	
 	public function service(Request $request, $title)
     {    
-	    $user = User::getRecordByTitle($title);
+	    $this->data['user'] = $user = User::getRecordByTitle($title);
 	    $this->data['title'] = $title;
 	    $this->data['site_setting'] = Sitesettings::getRecordByUserIdForWebsite($user->id);
+		$this->data['page_builder'] = PageBuilder::getPageBuilderListForWebsite($user->id);
 	    $this->data['contact_us'] = ContactUs::getContactUsForWebsite($user->id);
 	    $this->data['service'] = Service::getRecordForWebsite($user->id,8);
 		return view('websites.'.$user->site_name.'.service',$this->data);
@@ -100,9 +104,10 @@ class HomeController extends Controller
 	
 	public function gallery(Request $request, $title)
     {    
-	    $user = User::getRecordByTitle($title);
+	    $this->data['user'] = $user = User::getRecordByTitle($title);
 	    $this->data['title'] = $title;
 	    $this->data['site_setting'] = Sitesettings::getRecordByUserIdForWebsite($user->id);
+		$this->data['page_builder'] = PageBuilder::getPageBuilderListForWebsite($user->id);
 	    $this->data['contact_us'] = ContactUs::getContactUsForWebsite($user->id);
 	    $this->data['gallery'] = Gallery::getRecordForWebsite($user->id,16);
 		return view('websites.'.$user->site_name.'.gallery',$this->data);
@@ -110,8 +115,9 @@ class HomeController extends Controller
 	
 	public function blog(Request $request, $title)
     {     
-	    $user = User::getRecordByTitle($title);
+	    $this->data['user'] = $user = User::getRecordByTitle($title);
 	    $this->data['title'] = $title;
+		$this->data['page_builder'] = PageBuilder::getPageBuilderListForWebsite($user->id);
 	    $this->data['site_setting'] = Sitesettings::getRecordByUserIdForWebsite($user->id);
 	    $this->data['contact_us'] = ContactUs::getContactUsForWebsite($user->id);
 	    $this->data['blog'] = Blog::getRecordForWebsite($user->id,12);
@@ -121,9 +127,10 @@ class HomeController extends Controller
 	public function single_blog(Request $request, $title,$id)
     {     
 	    $id = Crypt::decrypt($id);
-	    $user = User::getRecordByTitle($title);
+	     $this->data['user'] = $user = User::getRecordByTitle($title);
 	    $this->data['title'] = $title;
 	    $this->data['site_setting'] = Sitesettings::getRecordByUserIdForWebsite($user->id);
+		$this->data['page_builder'] = PageBuilder::getPageBuilderListForWebsite($user->id);
 	    $this->data['contact_us'] = ContactUs::getContactUsForWebsite($user->id);
 	    $this->data['blog'] = Blog::find($id);
 		$this->data['bloglast3'] = Blog::takeRecordForWebsite($user->id,3);
@@ -132,11 +139,12 @@ class HomeController extends Controller
 	
 	public function products(Request $request, $title,$cat)
     {   
-     	$user = User::getRecordByTitle($title);
+     	$this->data['user'] = $user = User::getRecordByTitle($title);
 	    $this->data['search'] = $request->search;
 	    $this->data['title'] = $title;
 	    $this->data['cat'] = $cat;
 	    $this->data['site_setting'] = Sitesettings::getRecordByUserIdForWebsite($user->id);
+		$this->data['page_builder'] = PageBuilder::getPageBuilderListForWebsite($user->id);
 	    $this->data['contact_us'] = ContactUs::getContactUsForWebsite($user->id);
 		$this->data['products'] = Products::getRecordForWebsite($user->id,$cat,$request->search,12);
 		$this->data['mobile'] = Mobile::getRecordForWebsite($user->id,$cat,$request->search,20);
@@ -147,12 +155,13 @@ class HomeController extends Controller
 	
 	public function projects(Request $request, $title,$cat)
     {   
-     	$user = User::getRecordByTitle($title);
+     	$this->data['user'] = $user = User::getRecordByTitle($title);
 	    $this->data['title'] = $title;
 	    $this->data['cat'] = $cat;
 	    $this->data['site_setting'] = Sitesettings::getRecordByUserIdForWebsite($user->id);
+		$this->data['page_builder'] = PageBuilder::getPageBuilderListForWebsite($user->id);
 	    $this->data['contact_us'] = ContactUs::getContactUsForWebsite($user->id);
-		$this->data['projects'] = Projects::getRecordForWebsite($user->id,$cat,20);
+		$this->data['projects'] = Projects::getRecordForWebsite($user->id,$cat,12);
 		$this->data['projecttype'] = ProjectType::getProjectTypeForWebsite($user->id);
 		return view('websites.'.$user->site_name.'.projects',$this->data);
     }
@@ -161,12 +170,13 @@ class HomeController extends Controller
 	public function single_product(Request $request, $title,$id)
     {     
 	    $id = Crypt::decrypt($id);
-	    $user = User::getRecordByTitle($title);
+	     $this->data['user'] = $user = User::getRecordByTitle($title);
 	    $this->data['title'] = $title;
 	    $this->data['site_setting'] = Sitesettings::getRecordByUserIdForWebsite($user->id);
+		$this->data['page_builder'] = PageBuilder::getPageBuilderListForWebsite($user->id);
 	    $this->data['contact_us'] = ContactUs::getContactUsForWebsite($user->id);
 		$this->data['product'] = Products::getRecordById($id);
-		$this->data['products'] = Products::getRecordForWebsiteByCategory($user->id,$this->data['product']->category_name,$id,12);
+		$this->data['products'] = Products::getRecordForWebsiteByCategory($user->id,$this->data['product']->category->name,$id,12);
 		$this->data['category'] = Category::getCategoryByUserId($user->id);
 		return view('websites.'.$user->site_name.'.single_product',$this->data);
     }
@@ -174,9 +184,10 @@ class HomeController extends Controller
 	public function single_project(Request $request, $title,$id)
     {     
 	    $id = Crypt::decrypt($id);
-	    $user = User::getRecordByTitle($title);
+	    $this->data['user'] = $user = User::getRecordByTitle($title);
 	    $this->data['title'] = $title;
 	    $this->data['site_setting'] = Sitesettings::getRecordByUserIdForWebsite($user->id);
+		$this->data['page_builder'] = PageBuilder::getPageBuilderListForWebsite($user->id);
 	    $this->data['contact_us'] = ContactUs::getContactUsForWebsite($user->id);
 		$this->data['project'] = Projects::getRecordById($id);
 		return view('websites.'.$user->site_name.'.single_project',$this->data);
@@ -185,9 +196,10 @@ class HomeController extends Controller
 	public function single_electric(Request $request, $title,$id)
     {     
 	    $id = Crypt::decrypt($id);
-	    $user = User::getRecordByTitle($title);
+	    $this->data['user'] = $user = User::getRecordByTitle($title);
 	    $this->data['title'] = $title;
 	    $this->data['site_setting'] = Sitesettings::getRecordByUserIdForWebsite($user->id);
+		$this->data['page_builder'] = PageBuilder::getPageBuilderListForWebsite($user->id);
 	    $this->data['contact_us'] = ContactUs::getContactUsForWebsite($user->id);
 		$this->data['electric'] = Electric::getRecordById($id);
 		$this->data['electrics'] = Electric::getRecordForWebsiteByCategory($user->id,$this->data['electric']->category_name,12);
@@ -198,9 +210,10 @@ class HomeController extends Controller
 	public function single_mobile(Request $request, $title,$id)
     {     
 	    $id = Crypt::decrypt($id);
-	    $user = User::getRecordByTitle($title);
+	    $this->data['user'] = $user = User::getRecordByTitle($title);
 	    $this->data['title'] = $title;
 	    $this->data['site_setting'] = Sitesettings::getRecordByUserIdForWebsite($user->id);
+		$this->data['page_builder'] = PageBuilder::getPageBuilderListForWebsite($user->id);
 	    $this->data['contact_us'] = ContactUs::getContactUsForWebsite($user->id);
 		$this->data['mobile'] = Mobile::getRecordById($id);
 		$this->data['mobiles'] = Mobile::getRecordForWebsiteByCategory($user->id,$this->data['mobile']->category_name,12);
@@ -210,9 +223,10 @@ class HomeController extends Controller
 	
 	public function contact_us(Request $request, $title)
     {  
-	    $user = User::getRecordByTitle($title);
+	    $this->data['user'] = $user = User::getRecordByTitle($title);
 	    $this->data['title'] = $title;
 	    $this->data['site_setting'] = Sitesettings::getRecordByUserIdForWebsite($user->id);
+		$this->data['page_builder'] = PageBuilder::getPageBuilderListForWebsite($user->id);
 	    $this->data['contact_us'] = ContactUs::getContactUsForWebsite($user->id);
 		return view('websites.'.$user->site_name.'.contact_us',$this->data);
     }
@@ -250,10 +264,11 @@ class HomeController extends Controller
 	
 	public function photo_shoots(Request $request, $title,$cat)
     {   
-     	$user = User::getRecordByTitle($title);
+     	$this->data['user'] = $user = User::getRecordByTitle($title);
 	    $this->data['title'] = $title;
 	    $this->data['cat'] = $cat;
 	    $this->data['site_setting'] = Sitesettings::getRecordByUserIdForWebsite($user->id);
+		$this->data['page_builder'] = PageBuilder::getPageBuilderListForWebsite($user->id);
 	    $this->data['contact_us'] = ContactUs::getContactUsForWebsite($user->id);
 		$this->data['photoshoots'] = PhotoShoots::getRecordForWebsiteByCategory($user->id,$cat,20);
 		$this->data['category'] = Category::getCategoryByUserId($user->id);
@@ -262,9 +277,10 @@ class HomeController extends Controller
 	
 	public function ourteam(Request $request, $title)
     {   
-     	$user = User::getRecordByTitle($title);
+     	$this->data['user'] = $user = User::getRecordByTitle($title);
 	    $this->data['title'] = $title;
 	    $this->data['site_setting'] = Sitesettings::getRecordByUserIdForWebsite($user->id);
+		$this->data['page_builder'] = PageBuilder::getPageBuilderListForWebsite($user->id);
 	    $this->data['contact_us'] = ContactUs::getContactUsForWebsite($user->id);
 		$this->data['ourteam'] = OurTeam::getOurTeamListForIndex($user->id,20);
 		return view('websites.'.$user->site_name.'.our_teams',$this->data);
@@ -272,9 +288,10 @@ class HomeController extends Controller
 
     public function philosophy(Request $request, $title)
     {    
-	    $user = User::getRecordByTitle($title);
+	    $this->data['user'] = $user = User::getRecordByTitle($title);
 	    $this->data['title'] = $title;
 	    $this->data['site_setting'] = Sitesettings::getRecordByUserIdForWebsite($user->id);
+		$this->data['page_builder'] = PageBuilder::getPageBuilderListForWebsite($user->id);
 	    $this->data['contact_us'] = ContactUs::getContactUsForWebsite($user->id);
 	    $this->data['philosophy'] = Philosophy::getRecordByUserId($user->id);
 		return view('websites.'.$user->site_name.'.philosophy',$this->data);
@@ -282,9 +299,10 @@ class HomeController extends Controller
 	
 	public function promotion(Request $request, $title)
     {    
-	    $user = User::getRecordByTitle($title);
+	    $this->data['user'] = $user = User::getRecordByTitle($title);
 	    $this->data['title'] = $title;
 	    $this->data['site_setting'] = Sitesettings::getRecordByUserIdForWebsite($user->id);
+		$this->data['page_builder'] = PageBuilder::getPageBuilderListForWebsite($user->id);
 	    $this->data['contact_us'] = ContactUs::getContactUsForWebsite($user->id);
 	    $this->data['promotion'] = Promotion::getRecordByUserId($user->id);
 		return view('websites.'.$user->site_name.'.promotion',$this->data);
@@ -293,11 +311,12 @@ class HomeController extends Controller
 	
 	public function addresses(Request $request, $title)
     {    
-	    $user = User::getRecordByTitle($title);
+	    $this->data['user'] = $user = User::getRecordByTitle($title);
 	    $this->data['title'] = $title;
 	    $this->data['quantity'] = $request->quantity;
 	    $this->data['product_id'] = $request->product_id;
 	    $this->data['site_setting'] = Sitesettings::getRecordByUserIdForWebsite($user->id);
+		$this->data['page_builder'] = PageBuilder::getPageBuilderListForWebsite($user->id);
 	    $this->data['contact_us'] = ContactUs::getContactUsForWebsite($user->id);
 		return view('websites.'.$user->site_name.'.addresses',$this->data);
     }
@@ -373,9 +392,10 @@ class HomeController extends Controller
 	
 	public function plan(Request $request, $title)
     {     
-	    $user = User::getRecordByTitle($title);
+	    $this->data['user'] = $user = User::getRecordByTitle($title);
 	    $this->data['title'] = $title;
 	    $this->data['site_setting'] = Sitesettings::getRecordByUserIdForWebsite($user->id);
+		$this->data['page_builder'] = PageBuilder::getPageBuilderListForWebsite($user->id);
 	    $this->data['contact_us'] = ContactUs::getContactUsForWebsite($user->id);
 	    $this->data['plan'] = Plan::getRecordForWebsite($user->id,12);
 		return view('websites.'.$user->site_name.'.plan',$this->data);
@@ -384,9 +404,10 @@ class HomeController extends Controller
 	public function single_plan(Request $request, $title,$id)
     {     
 	    $id = Crypt::decrypt($id);
-	    $user = User::getRecordByTitle($title);
+	    $this->data['user'] = $user = User::getRecordByTitle($title);
 	    $this->data['title'] = $title;
 	    $this->data['site_setting'] = Sitesettings::getRecordByUserIdForWebsite($user->id);
+		$this->data['page_builder'] = PageBuilder::getPageBuilderListForWebsite($user->id);
 	    $this->data['contact_us'] = ContactUs::getContactUsForWebsite($user->id);
 	    $this->data['plan'] = Plan::find($id);
 		$this->data['planlast3'] = Plan::takeRecordForWebsite($user->id,3);
@@ -395,9 +416,10 @@ class HomeController extends Controller
 	
 	public function events(Request $request, $title)
     {     
-	    $user = User::getRecordByTitle($title);
+	    $this->data['user'] = $user = User::getRecordByTitle($title);
 	    $this->data['title'] = $title;
 	    $this->data['site_setting'] = Sitesettings::getRecordByUserIdForWebsite($user->id);
+		$this->data['page_builder'] = PageBuilder::getPageBuilderListForWebsite($user->id);
 	    $this->data['contact_us'] = ContactUs::getContactUsForWebsite($user->id);
 	    $this->data['events'] = Event::getRecordForWebsite($user->id,12);
 		return view('websites.'.$user->site_name.'.events',$this->data);
@@ -406,9 +428,10 @@ class HomeController extends Controller
 	public function singleEvent(Request $request, $title,$id)
     {     
 	    $id = Crypt::decrypt($id);
-	    $user = User::getRecordByTitle($title);
+	    $this->data['user'] = $user = User::getRecordByTitle($title);
 	    $this->data['title'] = $title;
 	    $this->data['site_setting'] = Sitesettings::getRecordByUserIdForWebsite($user->id);
+		$this->data['page_builder'] = PageBuilder::getPageBuilderListForWebsite($user->id);
 	    $this->data['contact_us'] = ContactUs::getContactUsForWebsite($user->id);
 	    $this->data['event'] = Event::find($id);
 		return view('websites.'.$user->site_name.'.single_event',$this->data);
@@ -422,4 +445,18 @@ class HomeController extends Controller
   
         return $code;
     }
+	
+	
+	public function page(Request $request, $title,$url_name)
+    {   
+     	$this->data['user'] = $user = User::getRecordByTitle($title);
+	    $this->data['title'] = $title;
+	    $this->data['site_setting'] = Sitesettings::getRecordByUserIdForWebsite($user->id);
+		$this->data['page_builder'] = PageBuilder::getPageBuilderListForWebsite($user->id);
+	    $this->data['contact_us'] = ContactUs::getContactUsForWebsite($user->id);
+		$this->data['page'] = PageBuilder::getRecordByUser($user->id,$url_name);
+		return view('websites.'.$user->site_name.'.page',$this->data);
+    }
+	
+	
 } 

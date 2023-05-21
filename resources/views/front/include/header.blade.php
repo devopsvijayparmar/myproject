@@ -7,20 +7,12 @@
   <meta content="" name="keywords">
   <meta content="" name="description">
 
-  <!-- Favicons -->
   <link href="{{$admin_site_setting->fav_icon}}" rel="icon">
-  <link href="{{ asset('/front/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
-  <!-- Google Fonts -->
- 
-  <!-- Bootstrap css -->
-  <!-- <link rel="stylesheet" href="css/bootstrap.css"> -->
   <link href="{{ asset('/front/lib/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-  <!-- Libraries CSS Files -->
   <link href="{{ asset('/front/lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
   <link href="{{ asset('/front/lib/owlcarousel/assets/owl.theme.default.min.css') }}" rel="stylesheet">
   <link href="{{ asset('/front/lib/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
   <link href="{{ asset('/front/lib/animate/animate.min.css') }}" rel="stylesheet">
-  <!-- Main Stylesheet File -->
   <link href="{{ asset('/front/css/style.css') }}" rel="stylesheet">
   <link rel="stylesheet" href="{{ asset('/admin/plugins/toastr/toastr.min.css') }}">
 </head>
@@ -32,8 +24,6 @@
 
       <div id="logo" class="pull-left">
         <h1><a href="{{ url('/') }}"  class="scrollto"><img src="{{$admin_site_setting->site_logo}}"></a></h1>
-        <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="#body"><img src="img/logo.png" alt="" title="" /></a>-->
       </div>
 
       <nav id="nav-menu-container">

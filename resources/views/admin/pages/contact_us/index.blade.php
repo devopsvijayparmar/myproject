@@ -27,12 +27,7 @@
           <div class="col-md-12">
             <!-- general form elements -->
             <div class="card card-primary">
-              <div class="card-header">
-                <h3 class="card-title">Contact Us</h3>
-              </div>
-			 
-              <!-- /.card-header -->
-              <!-- form start -->
+             
 			   <form id="main_id" method="POST" action="{{route('contact-us.update',1)}}" enctype="multipart/form-data">
 				@method('PUT')
 				@csrf

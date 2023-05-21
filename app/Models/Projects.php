@@ -26,14 +26,14 @@ class Projects extends Authenticatable
 	    return $query;
 	}
 	
-	function getImage1Attribute($image){
-		return $image == null ? asset('/images/image_not_found.jpg') : asset('/uploads/projects/'.$image);
+	function getImageUrl1Attribute(){
+		return $this->image_1 == null ? asset('/images/image_not_found.jpg') : asset('/uploads/projects/'.$this->image_1);
 	}
-	function getImage2Attribute($image){
-		return $image == null ? asset('/images/image_not_found.jpg') : asset('/uploads/projects/'.$image);
+	function getImageUrl2Attribute(){
+		return $this->image_2 == null ? asset('/images/image_not_found.jpg') : asset('/uploads/projects/'.$this->image_2);
 	}
-	function getImage3Attribute($image){
-		return $image == null ? asset('/images/image_not_found.jpg') : asset('/uploads/projects/'.$image);
+	function getImageUrl3Attribute(){
+		return $this->image_3 == null ? asset('/images/image_not_found.jpg') : asset('/uploads/projects/'.$this->image_3);
 	}
 	
 	public static function takeRecordForWebsite($id,$node){

@@ -27,10 +27,7 @@
           <div class="col-md-12">
             <!-- general form elements -->
             <div class="card card-primary">
-              <div class="card-header">
-                <h3 class="card-title">Books</h3>
-              </div>
-              <!-- form start -->
+              
                 <div class="card-body table-responsive">
 					<a type="button" class="btn btn-primary float-right ml-2" href="{{$createUrl}}">Add</a>
 					@include('admin.include.table')

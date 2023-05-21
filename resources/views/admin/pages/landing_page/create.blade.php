@@ -55,7 +55,7 @@
 					<div class="form-group">
 						 <label for="exampleInputEmail1">URL<span class="error">*</span></label>
 						  <input type="text" class="form-control" id="url" readonly value="{{$auth->title}}.{{config('enum.website')}}/landing-page/">
-						  <span class="error" id="url_name">{{$errors->first('url')}}</span>
+						  <span class="error" id="url_error">{{$errors->first('url')}}</span>
 					</div>
 					
 					<div class="form-group">

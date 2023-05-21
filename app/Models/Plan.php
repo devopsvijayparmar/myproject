@@ -19,14 +19,14 @@ class Plan extends Authenticatable
 		$query = Plan::where('created_by',Auth::user()->id);
 	    return $query;
 	}
-	function getImage1Attribute($image){
-		return $image == null ? asset('/images/image_not_found.jpg') : asset('/uploads/plan/'.$image);
+	function getImageUrl1Attribute(){
+		return $this->image_1 == null ? asset('/images/image_not_found.jpg') : asset('/uploads/plan/'.$this->image_1);
 	}
-	function getImage2Attribute($image){
-		return $image == null ? asset('/images/image_not_found.jpg') : asset('/uploads/plan/'.$image);
+	function getImageUrl2Attribute(){
+		return $this->image_2 == null ? asset('/images/image_not_found.jpg') : asset('/uploads/plan/'.$this->image_2);
 	}
-	function getImage3Attribute($image){
-		return $image == null ? asset('/images/image_not_found.jpg') : asset('/uploads/plan/'.$image);
+	function getImage3UrlAttribute(){
+		return $this->image_3 == null ? asset('/images/image_not_found.jpg') : asset('/uploads/plan/'.$this->image_3);
 	}
 	public static function takeRecordForWebsite($id,$node){
 		$query = Plan::where('created_by',$id)->orderBy('id','desc')->take($node)->get();

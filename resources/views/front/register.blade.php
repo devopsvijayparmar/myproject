@@ -4,8 +4,8 @@
 
     <div class="container">
       <div class="section-title text-center mb-5">
-        <h2>Sign Up. Let's build a website free</h2>
-        <p class="separator">Create your own dynamic website for free and gain access to built-in tools that will help you expand your online business presence.</p>
+        <h2 style="text-transform: none;">Sign Up. Let's build a website free</h2>
+        <p class="separator">Unlock the potential of your online business with a free, dynamic website. Access a suite of built-in tools that effortlessly expand your online presence and drive growth. Experience the power of digital success today.</p>
       </div>
     </div>
    
@@ -44,7 +44,9 @@
 			  
 			   <div class="form-group">
                 <input type="password" name="password" maxlength="255" autocomplete="new-password" value="{{ old('password') }}"  class="form-control" id="password" placeholder="Password" data-toggle="tooltip" data-placement="top" title="Your password must contain min. 8 characters" />
-				<input type="checkbox" onclick="myFunction()"> <small style="color: #7f8183;">Show Password<small></br>
+				 <div class="input-group-addon">
+				  <i class="fa fa-eye-slash"></i>
+				</div>
 				<span class="validation-error" id="password_error">{{$errors->register->first('password')}}</span>
               </div>
 			  

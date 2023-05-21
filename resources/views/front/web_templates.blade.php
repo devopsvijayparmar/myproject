@@ -7,10 +7,8 @@
 
     <div class="container">
       <div class="section-title text-center">
-
         <h2>Web Templates</h2>
-        <p class="separator">Empower your business with an online presence by creating your own website and utilizing the power of the internet to grow your business.</p>
-
+        <p class="separator">Build your brand's online presence and expand your business with a professional website.Leverage the internet's potential to reach a wider audience, increase visibility, and boost sales.</p>
       </div>
     </div>
 

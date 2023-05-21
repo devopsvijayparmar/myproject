@@ -50,7 +50,6 @@
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Email Marketing</h3>
 				<a type="button" class="btn btn-primary float-right ml-2" href="{{route('email-marketing.create')}}">Add</a>
               </div>
               <!-- /.card-header -->

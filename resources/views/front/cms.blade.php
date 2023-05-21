@@ -7,8 +7,8 @@
 
     <div class="container">
       <div class="section-title text-center">
-
         <h2>{{$cms->title}}</h2>
+	
       </div>
     </div>
 

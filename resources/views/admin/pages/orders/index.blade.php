@@ -27,12 +27,7 @@
           <div class="col-md-12">
             <!-- general form elements -->
             <div class="card card-primary">
-              <div class="card-header">
-                <h3 class="card-title">Orders</h3>
-              </div>
-			 
-              <!-- /.card-header -->
-              <!-- form start -->
+              
                 <div class="card-body table-responsive">
                 @include('admin.include.table')
                 </div>

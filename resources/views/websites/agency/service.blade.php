@@ -16,7 +16,6 @@
 			<h2 class="section-title text-center wow fadeInDown">Our Services</h2>
 		</div>
 		<div class="row">
-			<div class="features">
 			 @php
 			  $i=0;
 			  @endphp
@@ -55,8 +54,10 @@
 				@else
 				   <h4 class="text-center">No Record Available</h4>
 				@endif
-			</div>
-		</div><!--/.row-->    
+		</div><!--/.row--> 
+		<div class="center centered-div">
+			{{ $service->appends(request()->except('page'))->links("pagination::bootstrap-4") }}
+		</div>		
 	</div><!--/.container-->
 </section><!--/#services-->
 @include('websites.agency.include.footer')

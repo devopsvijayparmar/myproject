@@ -22,8 +22,8 @@ class Blog extends Authenticatable
 	    return $query;
 	}
 	
-	function getImageAttribute($image){
-		return $image == null ? asset('/images/image_not_found.jpg') : asset('/uploads/blog/'.$image);
+	function getImageUrlAttribute(){
+		return $this->image == null ? asset('/images/image_not_found.jpg') : asset('/uploads/blog/'.$this->image);
 	}
 	
 	public static function takeRecordForWebsite($id,$node){

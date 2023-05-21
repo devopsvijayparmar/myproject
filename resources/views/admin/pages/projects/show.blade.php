@@ -7,13 +7,13 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Products</h1>
+            <h1>Projects</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
 				<li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
-				<li class="breadcrumb-item"><a href="{{route('electric.index')}}">Products</a></li>
-				<li class="breadcrumb-item active">Product Detail</li>
+				<li class="breadcrumb-item"><a href="{{route('projects.index')}}">Projects</a></li>
+				<li class="breadcrumb-item active">Project Detail</li>
             </ol>
           </div>
         </div>
@@ -29,22 +29,22 @@
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Product Detail</h3>
+                <h3 class="card-title">Project Detail</h3>
               </div>
                 <div class="card-body">
 					<div class="row">
 					<div class="col-12 col-sm-4">
 						<div class="col-12">
-							<img src="{{$data->image_1}}" class="product-image" alt="Product Image">
+							<img src="{{$data->image_url_1}}" class="img-thumbnail" alt="Product Image">
 						</div>
 						<div class="col-12 product-image-thumbs">
-							<div class="product-image-thumb active"><img src="{{$data->image_1}}" alt="Product Image"></div>
+							<div class="product-image-thumb active"><img class="img-thumbnail" src="{{$data->image_url_1}}" alt="Product Image"></div>
 							@if($data->image_2)
-							<div class="product-image-thumb" ><img src="{{$data->image_2}}" alt="Product Image"></div>
+							<div class="product-image-thumb" ><img class="img-thumbnail" src="{{$data->image_url_2}}" alt="Product Image"></div>
 							@endif
 						
 							@if($data->image_3)
-							<div class="product-image-thumb" ><img src="{{$data->image_3}}" alt="Product Image"></div>
+							<div class="product-image-thumb" ><img class="img-thumbnail" src="{{$data->image_url_3}}" alt="Product Image"></div>
 							@endif
 						</div>
 					</div>

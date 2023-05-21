@@ -1,22 +1,35 @@
 @include('websites.watch.include.header')
 <!-- section -->
-<div id="slider" class="section main_slider">
-	<div class="container-fuild">
-		<div class="row">
-		  <div id="rev_slider_4_1_wrapper" class="rev_slider_wrapper fullwidthbanner-container" data-alias="classicslider1" style="margin:0px auto;background-color:transparent;padding:0px;margin-top:0px;margin-bottom:0px;">
-			<div class="owl-carousel owl-theme home-carousel">
-				@foreach($slider as $retrieved_data)
-				<div class="item">
-					<img class="home-img" src="{{$retrieved_data->image}}">
-				</div>
-				@endforeach
-			</div>
-			</div>
+<div id="slider" class="section main_slider pb-40">
+	<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+	  <ol class="carousel-indicators">
+	    @php $i=0; @endphp
+		@foreach($slider as $retrieved_data)
+		<li data-target="#carouselExampleIndicators" style="width:20px" data-slide-to="{{$i}}" class="@if($i == 0) active @endif"></li>
+		@php $i++; @endphp
+		@endforeach
+	  </ol>
+	  <div class="carousel-inner">
+		@php $i=0; @endphp
+		@foreach($slider as $retrieved_data)
+		<div class="carousel-item @if($i == 0) active @endif">
+			<img class="d-block w-100" src="{{$retrieved_data->image}}">
 		</div>
+		@php $i++; @endphp
+		@endforeach
+	  </div>
+	  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		<span class="sr-only">Previous</span>
+	  </a>
+	  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+		<span class="carousel-control-next-icon" aria-hidden="true"></span>
+		<span class="sr-only">Next</span>
+	  </a>
 	</div>
 </div>
 
-<div class="section padding_layout_1 padding_btm-0">
+<div class="section pb-40">
   <div class="container">
     <div class="row">
       <div class="col-md-12">
@@ -68,7 +81,7 @@
 </div>
 
 
-<div class="section padding_layout_1 padding_btm-0">
+<div class="section pb-40">
   <div class="container">
     <div class="row">
       <div class="col-md-12">
@@ -84,7 +97,7 @@
 	 @foreach($product8 as $productdata)
       <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 margin_bottom_30_all">
         <div class="product_list">
-          <div class="product_img"> <a href="{{$productdata->getDetailPageLink()}}"><img class="img-responsive card_img" src="{{$productdata->image_1}}" alt=""></a> </div>
+          <div class="product_img"> <a href="{{$productdata->getDetailPageLink()}}"><img class="img-thumbnail" src="{{$productdata->image_url_1}}" alt=""></a> </div>
           <div class="product_detail_btm">
             <div class="center">
 				<h4><a href="#">{{ mb_strimwidth($productdata->name, 0, 40, "...")}}</a></h4>
@@ -94,7 +107,7 @@
 			@php
 		    $currency_symbol = "";
 			@endphp
-		    @if(isset($site_setting->currency_symbol)) @php $currency_symbol = $site_setting->currency_symbol @endphp @endif
+		    @if(isset($site_setting->currency->symbol)) @php $currency_symbol = $site_setting->currency->symbol @endphp @endif
 			@if($productdata->price)
             <p><span class="new_price">{{$currency_symbol.$productdata->price}}</span></p>
 			@endif
@@ -108,14 +121,14 @@
     @endif
     </div>
 	@if(count($product8) >0)
-	 <div class="text_align_center">
-		<a class="btn main_bt" href="{{$product8[0]->getProjectCategoryLink()}}">See More...</a>
+	 <div class="text_align_center pt-2">
+		<a class="main_bt_new" href="{{$product8[0]->getProjectCategoryLink()}}">See More...</a>
 	 </div>
 	@endif
   </div>
 </div>
 
-<div class="section padding_layout_1 blog_grid" style="padding-bottom:0px!important">
+<div class="section pb-40">
   <div class="container">
    <div class="row">
       <div class="col-md-12">
@@ -130,11 +143,9 @@
 	@if(count($gallery8) > 0)
 	@foreach($gallery8 as $retrieved_data)
       <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
-        <div class="full">
+        <div class="full pb-2">
           <div class="blog_section">
-            <div class="blog_feature_img"> <a class="preview" href="{{$retrieved_data->image_path}}" rel="prettyPhoto"><img class="img-responsive card_img" src="{{$retrieved_data->image_path}}" ></a> </div>
-            <div class="blog_feature_cantant">
-            </div>
+            <div class="blog_feature_img"> <a class="preview" href="{{$retrieved_data->image_path}}" rel="prettyPhoto"><img class="img-thumbnail" src="{{$retrieved_data->image_path}}" ></a> </div>
           </div>
         </div>
       </div>
@@ -143,11 +154,16 @@
 		<div class="col-md-12"><p class="text-center">No Record Available</p></div>		
 	@endif
     </div>
+	@if(count($product8) >0)
+	 <div class="text_align_center pt-2">
+		<a class="main_bt_new" href="{{$product8[0]->getProjectCategoryLink()}}">See More...</a>
+	 </div>
+	@endif
   </div>
 </div>
 
 <!-- section -->
-<div class="section padding_layout_1">
+<div class="section pb-40">
 	<div class="container">
 	<div class="row">
 	  <div class="col-md-12">
@@ -164,7 +180,7 @@
 	@foreach($blog as $blogdata)
       <div class="col-md-4 blog-border">
         <div class="full blog_colum">
-          <a href="{{$blogdata->getDetailPageLink()}}"> <div class="blog_feature_img"> <img class="card_img" src="{{$blogdata->image}}" alt="#" /> </div></a>
+          <a href="{{$blogdata->getDetailPageLink()}}"> <div class="blog_feature_img"> <img class="card-img-top" src="{{$blogdata->image_url}}" alt="#" /> </div></a>
 		  <div class="p-3">
 			  <div class="post_time">
 				<p><i class="fa fa-clock-o"></i>{{$blogdata->created_at}}</p>
@@ -184,8 +200,8 @@
     @endif
     </div>
 	@if(count($blog) > 0)
-	<div class="text_align_center">
-	<a class="btn main_bt" href="{{$blog[0]->getBlogPageLink()}}">See More...</a>
+	<div class="text_align_center pt-2">
+	<a class="main_bt_new" href="{{$blog[0]->getBlogPageLink()}}">See More...</a>
 	</div>
 	@endif
   </div>
@@ -194,19 +210,6 @@
 @include('websites.watch.include.footer')
 <script>
 
-$('.home-carousel').owlCarousel({
-    loop:true,
-    autoplayTimeout:12000,
-	autoplay:true,
-    margin:10,
-    nav:false,
-    dots:false,
-    responsive:{
-        0:{
-            items:1
-        }
-    }
-});
 
 $('#home').addClass('active');
 </script>

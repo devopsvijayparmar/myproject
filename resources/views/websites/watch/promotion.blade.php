@@ -1,6 +1,6 @@
  @include('websites.watch.include.header')
 <!-- inner page banner -->
-<div id="inner_banner" class="section inner_banner_section">
+<div id="inner_banner" class="section inner_banner_section mb-5">
   <div class="container">
     <div class="row">
       <div class="col-md-12">
@@ -21,7 +21,7 @@
 </div>
 <!-- end inner page banner -->
 <!-- section -->
-<div class="section padding_layout_1">
+<div class="section pb-40">
   <div class="container">
     <div class="row">
       <div class="col-md-12">

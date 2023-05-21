@@ -11,39 +11,33 @@
     </section><!--/#cta-->
 
     <section id="blog" class="mb-5" style="margin-bottom:80px;">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title text-center wow fadeInDown">Projects</h2>
-            </div>
-			
-			<div class="row">
-			@if(count($projects) >0)
-			@foreach($projects as $projectsdata) 
-			<div class="col-md-4 col-sm-6">
-				<div class="product-grid" style="padding:0!important">
-					<div class="product-image">
-						<a href="{{$projectsdata->getDetailPageLink()}}">
-							<img class="pic-1" src="{{$projectsdata->image_1}}">
-						</a>
-						<ul class="social">
-							<li><a href="{{$projectsdata->getDetailPageLink()}}" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
-						</ul>
-						<!--<span class="product-new-label">Sale</span>
-						<span class="product-discount-label">20%</span>-->
-					</div>
-					<div class="p-2">
-						<div class="font-clr">{{ mb_strimwidth($projectsdata->name, 0, 50, "...")}}</div>
-						<div class="font-clr"><div class="">{{ mb_strimwidth($projectsdata->project_type_name, 0, 50, "...")}}</div></div>
-					</div>
+	    @if(count($projects) >0)
+	   @foreach($projects as $projectsdata) 
+	  
+			<div class="container mt-4">
+			    <div class="row">
+				
+				<div class="col-md-6">
+				<a href="{{$projectsdata->getDetailPageLink()}}">
+				  <img src="{{$projectsdata->image_url_1}}" alt="Property Image" class="img-fluid">
+				  </a>
+				</div>
+				
+				<div class="col-md-6">
+				  <h3> {{ $projectsdata->name }}</h3>
+				  <p>{{ mb_strimwidth($projectsdata->project_type->name, 0, 50, "...")}}: 3</p>
+				  {!! $projectsdata->description !!}
+				</div>
 				</div>
 			</div>
-			@endforeach
-			@else
-				<h4 class="text-center">No Record Available</h4>
-			@endif
-			</div>
-        </div><!--/.container-->
+		 
+		  @endforeach
+		@endif
+		<div class="center centered-div">
+		{{ $projects->appends(request()->except('page'))->links("pagination::bootstrap-4") }}
+		</div>
     </section><!--/#portfolio-->
+	
   @include('websites.agency.include.footer')
   <script>
 $('#projects').addClass('active');

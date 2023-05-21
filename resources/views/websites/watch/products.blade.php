@@ -30,7 +30,7 @@
 		   @foreach($products as $productdata)
           <div class="col-md-4 col-sm-6 col-xs-12 margin_bottom_30_all">
             <div class="product_list">
-              <div class="product_img">  <a href="{{$productdata->getDetailPageLink()}}"><img class="img-responsive card_img" src="{{$productdata->image_1}}" alt=""></a> </div>
+              <div class="product_img">  <a href="{{$productdata->getDetailPageLink()}}"><img class="img-thumbnail" src="{{$productdata->image_url_1}}" alt=""></a> </div>
               <div class="product_detail_btm">
                 <div class="center">
                   <h4><a href="{{$productdata->getDetailPageLink()}}">{{ mb_strimwidth($productdata->name, 0, 40, "...")}}</a></h4>
@@ -41,7 +41,7 @@
 				@php
 				$currency_symbol = "";
 				@endphp
-				@if(isset($site_setting->currency_symbol)) @php $currency_symbol = $site_setting->currency_symbol @endphp @endif
+				@if(isset($site_setting->currency->symbol)) @php $currency_symbol = $site_setting->currency->symbol @endphp @endif
 				@if($productdata->price)
 				 <p><span class="new_price">{{$currency_symbol.$productdata->price}}</span></p>
 				@endif

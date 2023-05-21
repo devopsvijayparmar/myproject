@@ -24,8 +24,8 @@ class PhotoShoots extends Authenticatable
 	    return $query;
 	}
 	
-	function getImageAttribute($image){
-		return $image == null ? asset('/images/image_not_found.jpg') : asset('/uploads/photo_shoots/'.$image);
+	function getImageUrlAttribute(){
+		return $this->image == null ? asset('/images/image_not_found.jpg') : asset('/uploads/photo_shoots/'.$this->image);
 	}
 	
 	public static function takeRecordForWebsite($id,$node){

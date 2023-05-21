@@ -36,16 +36,16 @@
 					<div class="row">
 						<div class="col-12 col-sm-4">
 							<div class="col-12">
-								<img src="{{$data->image_1}}" class="product-image" alt="Product Image">
+								<img src="{{$data->image_url_1}}" class="img-thumbnail" alt="Product Image">
 							</div>
 							<div class="col-12 product-image-thumbs">
-								<div class="product-image-thumb active"><img src="{{$data->image_1}}" alt="Plan Image"></div>
+								<div class="product-image-thumb active"><img class="img-thumbnail" src="{{$data->image_url_1}}" alt="Plan Image"></div>
 								@if($data->image_2)
-								<div class="product-image-thumb" ><img src="{{$data->image_2}}" alt="Plan Image"></div>
+								<div class="product-image-thumb" ><img class="img-thumbnail" src="{{$data->image_url_2}}" alt="Plan Image"></div>
 								@endif
 							
 								@if($data->image_3)
-								<div class="product-image-thumb" ><img src="{{$data->image_3}}" alt="Plan Image"></div>
+								<div class="product-image-thumb" ><img class="img-thumbnail" src="{{$data->image_url_3}}" alt="Plan Image"></div>
 								@endif
 							</div>
 						</div>

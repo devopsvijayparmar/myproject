@@ -31,7 +31,7 @@ class ProjectsController extends Controller
 	protected $validationRules = [
 		'project_type_id' => 'required|max:11',
 		'name' => 'required|string|max:255',
-		'description' => 'required|max:500',
+		'description' => 'required|max:50000',
 		'image_1'=>'required|mimes:jpeg,jpg,png|max:20480',
 		'image_2'=>'mimes:jpeg,jpg,png|max:20480',
 		'image_3'=>'mimes:jpeg,jpg,png|max:20480',
@@ -40,7 +40,7 @@ class ProjectsController extends Controller
 	protected $validationRulesEdit = [
 		'project_type_id' => 'required|max:11',
 		'name' => 'required|string|max:255',
-		'description' => 'required|max:500',
+		'description' => 'required|max:50000',
 		'image_1'=>'mimes:jpeg,jpg,png|max:20480',
 		'image_2'=>'mimes:jpeg,jpg,png|max:20480',
 		'image_3'=>'mimes:jpeg,jpg,png|max:20480',
@@ -64,7 +64,7 @@ class ProjectsController extends Controller
 			
 			->editColumn('image', function ($row)
 			{
-			   return '<img class="rp-img" src="'.$row['image_1'].'">';
+			   return '<img class="rp-img" src="'.$row->image_url_1.'">';
 			})
 		     ->addColumn('project_type', function ($row) {
 				return $row->project_type->name;

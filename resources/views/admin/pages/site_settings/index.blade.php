@@ -68,6 +68,12 @@
 				  <span class="error" id="title_error"></span>
 				</div>
 				
+				<div class="form-group col-md-6" style="padding-left: 0;">
+				 <label for="exampleInputEmail1">About Your Website</label>
+				  <textarea class="form-control form-control-sm" id="footer_about_us" placeholder="Enter about us" name="footer_about_us" maxlength="500">@if(isset($data->footer_about_us)) {{ $data->footer_about_us }}@endif</textarea>
+				  <span class="error" id="title_error"></span>
+				</div>
+				
 				  <ul class="mailbox-attachments d-flex align-items-stretch clearfix">
 				   
 					<li style="width: 210px!important;">

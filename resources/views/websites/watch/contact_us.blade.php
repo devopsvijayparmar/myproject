@@ -1,6 +1,6 @@
  @include('websites.watch.include.header')
 <!-- inner page banner -->
-<div id="inner_banner" class="section inner_banner_section">
+<div id="inner_banner" class="section inner_banner_section mb-5">
   <div class="container">
     <div class="row">
       <div class="col-md-12">
@@ -20,7 +20,7 @@
   </div>
 </div>
 <!-- end inner page banner -->
-<div class="section padding_layout_1">
+<div class="section pb-40">
   <div class="container">
     <div class="row">
       <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-xs-12"></div>
@@ -33,7 +33,7 @@
               </div>
             </div>
             <div class="contact_information">
-              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 adress_cont">
+              <div class="col-md-4 col-md-4 col-sm-4 col-xs-12 adress_cont">
                 <div class="information_bottom text_align_center">
                   <div class="icon_bottom"> <i class="fa fa-road" aria-hidden="true"></i> </div>
                   <div class="info_cont">
@@ -44,10 +44,10 @@
               </div>
               <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 adress_cont">
                 <div class="information_bottom text_align_center">
-                  <div class="icon_bottom"> <i class="fa fa-user" aria-hidden="true"></i> </div>
+                  <div class="icon_bottom"> <i class="fa fa-phone" aria-hidden="true"></i> </div>
                   <div class="info_cont">
-                    <p>@if(isset($contact_us->contact_1)) <i class="fa fa-phone"></i> {!! $contact_us->contact_1 !!} @endif</p>
-                    <p>@if(isset($contact_us->contact_2)) <i class="fa fa-phone"></i> {!! $contact_us->contact_2 !!} @endif</p>
+                    <p>@if(isset($contact_us->contact_1)) {!! $contact_us->contact_1 !!} @endif</p>
+                    <p>@if(isset($contact_us->contact_2)) {!! $contact_us->contact_2 !!} @endif</p>
                   </div>
                 </div>
               </div>
@@ -62,22 +62,22 @@
               </div>
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 contant_form">
-              <h2 class="text_align_center">SEND MESSAGER</h2>
+              <h2 class="text_align_center">SEND MESSAGE</h2>
               <div class="form_section">
                
 				<form  method="POST" action="{{url('contact-us')}}" enctype="multipart/form-data" id="main_id" class="form_contant">
 			        @csrf
                   <fieldset>
                   <div class="row">
-                    <div class="field col-lg-4 col-md-4 col-sm-8 col-xs-8 mb-2">
+                    <div class="field col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-2">
                       <input class="field_custom  mb-0" placeholder="Your Name" type="text" name="name" id="name">
 					  <span id="name_error" style="color:red;"></span>
                     </div>
-                    <div class="field col-lg-4 col-md-4 col-sm-8 col-xs-8 mb-2">
+                    <div class="field col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-2">
                       <input class="field_custom  mb-0" placeholder="Email Address" type="text" name="email" id="email">
 					  <span id="email_error" style="color:red;"></span>
                     </div>
-                    <div class="field col-lg-4 col-md-4 col-sm-8 col-xs-8 mb-2">
+                    <div class="field col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-2">
                       <input class="field_custom mb-0" placeholder="Phone Number" onkeypress="return isNumberKey(event)" type="text" name="mobile" id="mobile">
 					  <span id="mobile_error" style="color:red;"></span>
                     </div>

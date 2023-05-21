@@ -11,40 +11,41 @@
         </div>
     </section><!--/#cta-->
 
-      <section id="blog" style="margin-bottom:80px;">
+      <section id="meet-team" style="margin-bottom:80px;">
         <div class="container">
             <div class="row">
 				@if(count($products) > 0)
-				@foreach($products as $productdata)
-				<div class="col-md-3 col-sm-6">
-					<div class="product-grid">
-						<div class="product-image">
-							<a href="{{$productdata->getDetailPageLink()}}">
-								<img class="pic-1" src="{{$productdata->image_1}}">
-							</a>
-							<ul class="social">
-								<li><a href="{{$productdata->getDetailPageLink()}}" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
-							</ul>
-							<!--<span class="product-new-label">Sale</span>
-							<span class="product-discount-label">20%</span>-->
-						</div>
-						<div class="product-content">
-							<h3 class="title"><a href="{{$productdata->getDetailPageLink()}}">{{ mb_strimwidth($productdata->name, 0, 40, "...")}}</a></h3>
+			   	@foreach($products as $productdata)
+			
+			    <div class="col-sm-6 col-md-3 pb-4">
+                    <div class="team-member wow fadeInUp" data-wow-duration="400ms" data-wow-delay="0ms">
+                        <div class="team-img">
+						<a href="{{$productdata->getDetailPageLink()}}">
+                            <img class="img-thumbnail p-0" src="{{$productdata->image_url_1}}" alt="">
+						</a>
+                        </div>
+                        <div class="team-info">
+						   <h5 class="product-ttl"> {{ mb_strimwidth($productdata->name, 0, 40, "...")}}</h5>
 							@php
 							$currency_symbol = "";
 							@endphp
-							@if(isset($site_setting->currency_symbol)) @php $currency_symbol = $site_setting->currency_symbol @endphp @endif
+							@if(isset($site_setting->currency->symbol)) @php $currency_symbol = $site_setting->currency->symbol @endphp @endif
 							@if($productdata->price)
-							<div class="price">{{$currency_symbol.$productdata->price}}</div>
+								 <span>{{$currency_symbol.$productdata->price}}</span>
 							@endif
-						</div>
-					</div>
-				</div>
+                           
+                        </div>
+                    </div>
+                </div>
+			    
 				@endforeach
 				@else
 					<h4 class="text-center">No Record Available</h4>
 			    @endif
 			</div>
+			 <div class="center">
+		   {{ $products->appends(request()->except('page'))->links("pagination::bootstrap-4") }}
+		  </div>
         </div><!--/.container-->
     </section><!--/#portfolio-->
   @include('websites.agency.include.footer')

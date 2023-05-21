@@ -20,7 +20,6 @@
             </div>
 
             <div class="row">
-                <div class="features">
                     <div class="col-md-4 col-sm-6 wow fadeInUp" data-wow-duration="300ms" data-wow-delay="0ms">
                         <div class="media service-box">
                             <div class="pull-left">
@@ -59,7 +58,6 @@
                     </div><!--/.col-md-4-->
 					
 					<div class="col-md-6 col-sm-6 wow fadeInUp" data-wow-duration="300ms" data-wow-delay="200ms">
-                        <div class="media service-box">
 								<form  method="POST" action="{{url('contact-us')}}" enctype="multipart/form-data" id="main_id" class="form_contant">
 								@csrf
 								<div class="form-group">
@@ -81,9 +79,7 @@
 								</div>
 								<button type="submit" class="btn btn-primary">Send Message</button>
 							</form>
-					    </div>
                     </div><!--/.col-md-4-->
-                </div>
             </div><!--/.row-->    
         </div><!--/.container-->
     </section><!--/#services-->

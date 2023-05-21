@@ -7,13 +7,13 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Products</h1>
+            <h1>Projects</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
-              <li class="breadcrumb-item"><a href="{{route('projects.index')}}">Products</a></li>
-              <li class="breadcrumb-item active">Edit Product</li>
+              <li class="breadcrumb-item"><a href="{{route('projects.index')}}">Projects</a></li>
+              <li class="breadcrumb-item active">Edit Project</li>
             </ol>
           </div>
         </div>
@@ -29,7 +29,7 @@
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Edit Product</h3>
+                <h3 class="card-title">Edit Project</h3>
               </div>
               <!-- form start -->
 			    <form id="main_id" method="POST" action="{{route('projects.update',Crypt::encrypt($data->id))}}" enctype="multipart/form-data">
@@ -64,19 +64,19 @@
 							<div class="col-md-4">
 								<label for="exampleInputFile">Image 1<span class="error">*</span></label>
 								<input type="file" onchange="ValidateSize(this)" class="form-control" name="image_1" id="image_1">
-								<img class="mar-top-10 rp-img100" src="{{$data->image_1}}" id="blah_1"/ ></br>
+								<img class="mar-top-10 rp-img100" src="{{$data->image_url_1}}" id="blah_1"/ ></br>
 								<span class="error">{{$errors->first('image_1')}}</span>
 							</div>
 							<div class="col-md-4">
 								<label for="exampleInputFile">Image 2</label>
 								<input type="file" onchange="ValidateSize(this)" class="form-control" name="image_2" id="image_2">
-								<img class="mar-top-10 rp-img100" @if($data->image_2) src="{{$data->image_2}}" @endif id="blah_2"/ ></br>
+								<img class="mar-top-10 rp-img100" @if($data->image_2) src="{{$data->image_url_2}}" @endif id="blah_2"/ ></br>
 								<span class="error">{{$errors->first('image_2')}}</span>
 							</div>
 							<div class="col-md-4">
 								<label for="exampleInputFile">Image 3</label>
 								<input type="file" onchange="ValidateSize(this)" class="form-control" name="image_3" id="image_3">
-								<img class="mar-top-10 rp-img100" @if($data->image_3) src="{{$data->image_3}}" @endif id="blah_3"/ ></br>
+								<img class="mar-top-10 rp-img100" @if($data->image_3) src="{{$data->image_url_3}}" @endif id="blah_3"/ ></br>
 								<span class="error">{{$errors->first('image_3')}}</span>
 							</div>
 						</div>

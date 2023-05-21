@@ -21,12 +21,8 @@ class OurTeam extends Authenticatable
 	    return $query;
 	}
 	
-	function getImageUrlAttribute($image){
-		return $image == null ? url('/images/image_not_found.jpg') : asset('/uploads/our_team/'.$image);
-	}
-	
-	function getImageAttribute($image){
-		return $image == null ? url('/images/image_not_found.jpg') : asset('/uploads/our_team/'.$image);
+	function getImageUrlAttribute(){
+		return $this->image == null ? url('/images/image_not_found.jpg') : asset('/uploads/our_team/'.$this->image);
 	}
 	
 	public static function takeRecordForWebsite($id,$node){

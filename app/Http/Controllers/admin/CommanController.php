@@ -12,6 +12,7 @@ use App\Models\Category;
 use App\Models\Type;
 use App\Models\User;
 use App\Models\LandingPage;
+use App\Models\PageBuilder;
 use App\Traits\ImageUpload;
 use Auth;
 use Hash;
@@ -54,6 +55,12 @@ class CommanController extends Controller
 		$user = User::getRecordByTitle($title);
 		$this->data['landing_page'] = LandingPage::getRecordByUser($user->id,$url_name);
 		return view('admin.pages.landing_page.preview',$this->data);
+	}
+	
+	public function previewPageBuilder($title,$url_name){
+		$user = User::getRecordByTitle($title);
+		$this->data['page'] = PageBuilder::getRecordByUser($user->id,$url_name);
+		return view('admin.pages.page_builder.preview',$this->data);
 	}
 	
 	public function summerNoteImage(Request $request){

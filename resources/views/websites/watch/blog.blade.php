@@ -1,6 +1,6 @@
  @include('websites.watch.include.header')
 <!-- inner page banner -->
-<div id="inner_banner" class="section inner_banner_section">
+<div id="inner_banner" class="section inner_banner_section mb-5">
   <div class="container">
     <div class="row">
       <div class="col-md-12">
@@ -21,7 +21,7 @@
 </div>
 <!-- end inner page banner -->
 <!-- section -->
-<div class="section padding_layout_1">
+<div class="section pb-40">
   <div class="container">
      <div class="row">
       <div class="col-md-12">
@@ -37,7 +37,7 @@
 	@foreach($blog as $blogdata)
     <div class="col-md-4 blog-border">
         <div class="full blog_colum">
-         <a href="{{$blogdata->getDetailPageLink()}}"> <div class="blog_feature_img"> <img class="card_img" src="{{$blogdata->image}}" alt="#" /> </div></a>
+         <a href="{{$blogdata->getDetailPageLink()}}"> <div class="blog_feature_img"> <img class="card-img-top" src="{{$blogdata->image_url}}" alt="#" /> </div></a>
 		 <div class="p-3">
           <div class="post_time">
             <p><i class="fa fa-clock-o"></i>{{$blogdata->created_at}}</p>

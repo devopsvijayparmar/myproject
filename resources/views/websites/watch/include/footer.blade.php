@@ -1,37 +1,48 @@
-<!-- Footer -->
-<div class="section it_service_policy" style="padding: 30px 0px 30px 0px;background: #2e2e2e; color: white;">
-	<div class="container">
-		<div class="row">
-	   
-		 <div class="col-md-4">
-		   <ul class="first-ul" style="color:white;">
-				<li>@if(isset($contact_us->address))<i class="fa fa-home"></i> {{$contact_us->address}} @endif</li>
+
+ <!-- Site footer -->
+    <footer class="site-footer">
+      <div class="container">
+        <div class="row" style="padding-top: 20px;">
+          <div class="col-sm-12 col-md-6">
+            <h6>About</h6>
+            <p class="text-justify">@if(isset($site_setting->footer_about_us)) {!! mb_strimwidth($site_setting->footer_about_us, 0, 500, "...") !!} @endif</p>
+          </div>
+
+          <div class="col-xs-6 col-md-3">
+            <h6>Contact Us</h6>
+            <ul class="footer-links">
+                <li>@if(isset($contact_us->address))<i class="fa fa-home"></i> {{$contact_us->address}} @endif</li>
 				<li>@if(isset($contact_us->email))<i class="fa fa-envelope-o"></i> <a style="color:white" href="mailto:{{$contact_us->email}}">{{$contact_us->email}}</a> @endif</li>
 				<li> @if(isset($contact_us->contact_1))<i class="fa fa-phone"></i> <a style="color:white" href="tel:{{$contact_us->contact_1}}">{{$contact_us->contact_1}}</a>@endif</li>
-			</ul>
-		</div>
-		
-		<div class="col-md-4">
-			<ul class="first-ul" style="color:white;">
+            </ul>
+          </div>
+
+          <div class="col-xs-6 col-md-3">
+            <h6>Quick Links</h6>
+            <ul class="footer-links">
 				<li><a id="blog" href="{{url('blog')}}">Blog</a></li>
 				<li><a id="service" href="{{url('service')}}">Services</a></li>
 				<li><a id="promotion" href="{{url('promotion')}}">Promotions</a></li>
 				<li><a id="about_us" href="{{url('about-us')}}">About Us</a></li>
 				<li><a id="contact-us" href="{{url('contact-us')}}">Contact Us</a></li>
-			</ul>
-		</div> 
-		 <div class="col-md-4">
-		  <ul class="first-ul" style="color:white;">
-				<li> @if(isset($contact_us->facebook))<a style="color:white" class="fa fa-facebook mr-2 font-25" href="{{$contact_us->facebook}}" title="Facebook" target="_blank"></a>@endif</li>
-				<li>@if(isset($contact_us->twitter))<a style="color:white" class="fa fa-twitter mr-2 font-25" href="{{$contact_us->twitter}}" title="Twitter" target="_blank"></a>@endif</li>
-				<li> @if(isset($contact_us->linkedin))<a style="color:white" class="fa fa-linkedin mr-2 font-25" href="{{$contact_us->linkedin}}" title="LinkedIn" target="_blank"></a>@endif</li>
-				<li>  @if(isset($contact_us->instagram))<a style="color:white" class="fa fa-instagram mr-2 font-25" href="{{$contact_us->instagram}}" title="Instagram" target="_blank"></a>@endif</li>
-			</ul>
-		</div>
-		</div>
-	</div>
-</div>
-
+            </ul>
+          </div>
+        </div>
+        <hr>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 col-sm-6 col-xs-12">
+            <ul class="social-icons">
+              @if(isset($contact_us->facebook))<li><a class="" href="{{$contact_us->facebook}}"><img style="height: 34px;" src="{{asset('social/facebook.png')}}"></a></li>@endif
+              @if(isset($contact_us->twitter))<li><a class="" href="{{$contact_us->twitter}}"><img style="height: 34px;" src="{{asset('social/twitter.png')}}"></a></li>@endif
+              @if(isset($contact_us->instagram))<li><a class="" href="{{$contact_us->instagram}}"><img style="height: 34px;" src="{{asset('social/instagram.png')}}"></a></li>@endif
+              @if(isset($contact_us->linkedin))<li><a class="" href="{{$contact_us->linkedin}}"><img style="height: 34px;" src="{{asset('social/linkedin.png')}}"></a></li>@endif
+            </ul>
+          </div>
+        </div>
+      </div>
+</footer>
 
 <!-- end footer -->
 <!-- js section -->

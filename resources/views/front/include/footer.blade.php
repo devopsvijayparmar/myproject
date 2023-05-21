@@ -14,7 +14,7 @@
         <div class="col-sm-6 col-md-3 col-lg-2">
           <div class="list-menu">
 
-            <h4>COMPANY</h4>
+            <h4>Company</h4>
 
             <ul class="list-unstyled">
               <li><a href="{{url('/page/terms-of-use')}}" target="_blank">Terms of Use</a></li>
@@ -30,7 +30,7 @@
         <div class="col-sm-6 col-md-3 col-lg-2">
           <div class="list-menu">
 
-            <h4>PRODUCT</h4>
+            <h4>Product</h4>
 
             <ul class="list-unstyled">
               <li><a href="{{ url('/web-templates') }}">Download</a></li>
@@ -45,7 +45,7 @@
 		 <div class="col-sm-6 col-md-3 col-lg-2">
           <div class="list-menu">
 
-            <h4>FEATURES</h4>
+            <h4>Features</h4>
 
             <ul class="list-unstyled">
               <li><a href="{{ url('/signup') }}">Free Updates</a></li>
@@ -140,34 +140,34 @@
 
   <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
 
-  <!-- JavaScript Libraries -->
   <script src="{{ url('/front/lib/jquery/jquery.min.js') }}"></script>
   <script src="{{ url('/front/lib/jquery/jquery-migrate.min.js') }}"></script>
   <script src="{{ url('/front/lib/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
   <script src="{{ url('/front/lib/superfish/hoverIntent.js') }}"></script>
   <script src="{{ url('/front/lib/superfish/superfish.min.js') }}"></script>
-  <script src="{{ url('/front/lib/easing/easing.min.js') }}"></script>
   <script src="{{ url('/front/lib/modal-video/js/modal-video.js') }}"></script>
   <script src="{{ url('/front/lib/owlcarousel/owl.carousel.min.js') }}"></script>
   <script src="{{ url('/front/lib/wow/wow.min.js') }}"></script>
-  <!-- Contact Form JavaScript File -->
-  <script src="{{ url('/front/contactform/contactform.js') }}"></script>
-
-  <!-- Template Main Javascript File -->
   <script src="{{ url('/front/js/main.js') }}"></script>
   <script src="{{ url('/admin/plugins/toastr/toastr.min.js') }}"></script>
 
 </body>
 </html>
 <script>
-function myFunction() {
-  var x = document.getElementById("password");
-  if (x.type === "password") {
-    x.type = "text";
-  } else {
-    x.type = "password";
-  }
-}
+ $(document).ready(function() {
+ $('.input-group-addon').click(function() {
+	var passwordInput = $('#password');
+	var type = passwordInput.attr('type');
+	
+	if (type === 'password') {
+	  passwordInput.attr('type', 'text');
+	  $('.input-group-addon i').removeClass('fa-eye-slash').addClass('fa-eye');
+	} else {
+	  passwordInput.attr('type', 'password');
+	  $('.input-group-addon i').removeClass('fa-eye').addClass('fa-eye-slash');
+	}
+  });
+});
 
 function loginPopup(url){
 	$('#loginurl').val(url);

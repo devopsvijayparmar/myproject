@@ -15,26 +15,48 @@
         <div class="container">
             	<div class="container-fliud">
 				<div class="wrapper row">
-					<div class="preview col-md-6">
-						
-						<div class="preview-pic tab-content">
-						  <div class="tab-pane active" id="pic-1"><a class="preview" href="{{$project->image_1}}" rel="prettyPhoto"><img src="{{$project->image_1}}" /></a></div>
-						</div>
-						<ul class="preview-thumbnail nav nav-tabs">
-						
-						  
-						    <li class="active"> <a class="preview" href="{{$project->image_1}}" rel="prettyPhoto"><img src="{{$project->image_1}}" /></a></li>
-							
-							@if($project->image_2)
-						   <li> <a class="preview" href="{{$project->image_2}}" rel="prettyPhoto"><img src="{{$project->image_2}}" /></a></li>
-							@endif
-						   @if($project->image_3)
-						   <li> <a class="preview" href="{{$project->image_3}}" rel="prettyPhoto"><img src="{{$project->image_3}}" /></a></li>
-							@endif
+					<div id="productCarousel" class="carousel slide" data-ride="carousel">
+						<!-- Indicators -->
+						<ul class="carousel-indicators">
+						  <li data-target="#productCarousel" data-slide-to="0" class="active"></li>
+						   @if(isset($project->image_2))
+						  <li data-target="#productCarousel" data-slide-to="1"></li>
+					      @endif
+						  @if(isset($project->image_3))
+						  <li data-target="#productCarousel" data-slide-to="2"></li>
+					      @endif
 						</ul>
-						
-					</div>
-					<div class="details col-md-6 detail-desc">
+
+						<!-- Slides -->
+						<div class="carousel-inner">
+						  <div class="carousel-item active">
+							<img src="{{$project->image_url_1}}"  alt="Product 1" class="d-block w-100 img-thumbnail">
+						  </div>
+						  @if(isset($project->image_2))
+						  <div class="carousel-item">
+							<img src="{{$project->image_url_2}}" alt="Product 2" class="d-block w-100 img-thumbnail">
+						  </div>
+						  @endif
+						  
+						  @if(isset($project->image_3))
+						  <div class="carousel-item">
+							<img src="{{$project->image_url_3}}" alt="Product 3" class="d-block w-100 img-thumbnail">
+						  </div>
+						  @endif
+						  
+						</div>
+
+						<!-- Controls -->
+						<a class="carousel-control-prev" href="#productCarousel" role="button" data-slide="prev">
+						  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+						  <span class="sr-only">Previous</span>
+						</a>
+						<a class="carousel-control-next" href="#productCarousel" role="button" data-slide="next">
+						  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+						  <span class="sr-only">Next</span>
+						</a>
+					  </div>
+					<div class="details col-md-6">
 						<h3 class="product-title">{{$project->name}}</h3>
 						<div class="rating">
 							<span class="review-no">{{$project->project_type->name}}</span>

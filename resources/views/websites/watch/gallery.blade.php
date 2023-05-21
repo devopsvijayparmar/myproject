@@ -1,6 +1,6 @@
  @include('websites.watch.include.header')
 <!-- inner page banner -->
-<div id="inner_banner" class="section inner_banner_section">
+<div id="inner_banner" class="section inner_banner_section mb-5">
   <div class="container">
     <div class="row">
       <div class="col-md-12">
@@ -21,7 +21,7 @@
 </div>
 <!-- end inner page banner -->
 <!-- section -->
-<div class="section padding_layout_1 blog_grid">
+<div class="section pb-40">
   <div class="container">
    <div class="row">
       <div class="col-md-12">
@@ -36,11 +36,10 @@
 	@if(count($gallery) > 0)
 	@foreach($gallery as $retrieved_data)
       <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
-        <div class="full">
+        <div class="full pb-2">
           <div class="blog_section">
-            <div class="blog_feature_img"> <a class="preview" href="{{$retrieved_data->image_path}}" rel="prettyPhoto"><img class="img-responsive card_img" src="{{$retrieved_data->image_path}}" ></a> </div>
-            <div class="blog_feature_cantant">
-            </div>
+            <div class="blog_feature_img"> <a class="preview" href="{{$retrieved_data->image_path}}" rel="prettyPhoto"><img class="img-thumbnail" src="{{$retrieved_data->image_path}}" ></a> </div>
+          
           </div>
         </div>
       </div>

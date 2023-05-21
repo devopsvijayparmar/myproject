@@ -63,20 +63,20 @@ class LandingPageController extends Controller
 			->addIndexColumn()
 			
 		     ->addColumn('url', function ($row) {
-				return '<a href="'.$row['url'].'" target="_blank">'.$row->url.'</a>';
+				return '<label style="text-align: left;" class="btn btn-default"><p class="m-0"> <a href="'.$row['url'].'" target="_blank"><i class="fas fa-external-link-alt"></i> '.$row->url.'</a></p></label>';
 			})
 			 ->addColumn('status', function ($row) {
 				 
 				if($row['status'] == 0)
 				{
 					$class = 'warning';
-					$status = 'pending';
+					$status = '<i class="fas fa-info-circle"></i> pending';
 					$sendname = 'send';
 				}
 				else
 				{
 					$class = 'success';
-					$status = 'sent';
+					$status = '<i class="fas fa-check-circle"></i> sent';
 					$sendname = 'send again';
 				}
 				return '<span class="badge badge-'.$class.'">'.$status.'</span>';
@@ -96,7 +96,7 @@ class LandingPageController extends Controller
 				$send_link = Crypt::encrypt($row['id']);
 			    $send_link = "'" . $send_link . "'";
 				
-				$btn = '<a href="javascript:void(0)" onclick="sendLandingPage('.$send_link.')"><span class="badge badge-info mr-2">'.$sendname.'</span></a>';
+				$btn = '<a href="javascript:void(0)" onclick="sendLandingPage('.$send_link.')"><span class="badge badge-info mr-2"><i class="fas fa-share-square"></i> '.$sendname.'</span></a>';
 				
 			   $btn .= '<a title="Edit" class="mr-2" href="' . route('landing-page.edit', Crypt::encrypt($row['id'])) . '" class="mr-2"><i class="fas fa-edit text-info font-16"></i></a>';
 			  

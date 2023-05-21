@@ -18,18 +18,14 @@
       <div class="row justify-content-center">
 
         <div class="col-lg-4 col-md-4 p-0">
-
             <div class="">
               <p><img style="height: 34px;" src="{{asset('social/email.png')}}"> support@websphare.com</p>
             </div>
-			
-
           <div class="">
-            <a href="#"><img style="height: 34px;" src="{{asset('social/facebook.png')}}"></a>
-            <a href="#"><img style="height: 34px;" src="{{asset('social/instagram.png')}}"></a>
-            <a href="#"><img style="height: 34px;" src="{{asset('social/linkedin.png')}}"></a>
+            <a href="#" class="mr-3"><img style="height: 32px;" src="{{asset('social/facebook.png')}}"></a>
+            <a href="#" class="mr-3"><img style="height: 32px;" src="{{asset('social/instagram.png')}}"></a>
+            <a href="#" class="mr-3"><img style="height: 32px;" src="{{asset('social/linkedin.png')}}"></a>
           </div>
-
         </div>
 
         <div class="col-lg-7 col-md-8 p-0">

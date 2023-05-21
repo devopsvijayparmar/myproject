@@ -24,7 +24,7 @@
                 <div class="col-md-3 pd-10">
 					<a class="preview" href="{{$retrieved_data->image_path}}" rel="prettyPhoto">
 						<div class="portfolio-item-inner vp-hover">
-							<img class="img-responsive shoot_img" src="{{$retrieved_data->image_path}}" alt="">
+							<img class="img-thumbnail" src="{{$retrieved_data->image_path}}" alt="">
 						</div>
 					</a>
                 </div><!--/.portfolio-item-->

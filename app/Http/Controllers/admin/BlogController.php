@@ -55,7 +55,7 @@ class BlogController extends Controller
 			
 			->editColumn('image', function ($row)
 			{
-			   return '<img class="rp-img" src="'.$row['image'].'">';
+			   return '<img class="rp-img" src="'.$row['image_url'].'">';
 			})
 			->editColumn('action', function ($row)
 			{

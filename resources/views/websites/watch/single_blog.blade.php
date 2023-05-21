@@ -27,8 +27,8 @@
       <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 pull-right blog-border">
         <div class="full">
           <div class="blog_section margin_bottom_0">
-            <div class="blog_feature_img"> <img class="img-responsive" src="{{$blog->image}}" alt="#"> </div>
-            <div class="blog_feature_cantant">
+            <div class="blog_feature_img pb-2"> <img class="img-thumbnail" src="{{$blog->image_url}}" alt="#"> </div>
+            <div class="">
               <p class="blog_head">{{$blog->title}}</p>
               <div class="post_info">
                 <ul>

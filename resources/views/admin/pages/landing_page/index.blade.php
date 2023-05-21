@@ -47,12 +47,7 @@
           <div class="col-md-12">
             <!-- general form elements -->
             <div class="card card-primary">
-              <div class="card-header">
-                <h3 class="card-title">Landing Page</h3>
-              </div>
-			 
-              <!-- /.card-header -->
-              <!-- form start -->
+              
                 <div class="card-body table-responsive">
 				 <a type="button" class="btn btn-primary float-right ml-2" href="{{route('landing-page.create')}}">Create Landing Page</a>
                  @include('admin.include.table')
@@ -72,7 +67,7 @@
         <div class="modal-dialog modal-lg bd-example-modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Share Landing Page with People</h4>
+              <h4 class="modal-title"><strong>Share Landing Page with People</strong></h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -83,7 +78,7 @@
 			<input type="hidden" name="landing_page_id" id="landing_page_id">
             <div class="modal-body">
 				<div class="form-group">
-					 <label for="exampleInputEmail1">Send With <span class="error">*</span></label>
+					 <label for="exampleInputEmail1">Share With <span class="error">*</span></label>
 					   <input type="radio" name="for" value="1" checked onclick="changeuser(this.value);"> Group
 					  <input type="radio"  name="for" value="2" onclick="changeuser(this.value);"> Contacts
 					 <span class="error" id='for_error'>{{$errors->first('for') }}</span>
@@ -124,15 +119,15 @@
 				</div>
 				<div class="btn-group btn-group-toggle mb-1" data-toggle="buttons">
 					<label style="text-align: left;" class="btn btn-default">
-					<p class="m-0"><em><strong>Note</strong>: The values of these parameters will be replaced.</em></p>
+					<p class="m-0"><strong>Note</strong>: The values of these parameters will be replaced.</p>
 				</div>
 				<div class="form-group">
-					 <p style="font-size: 14px;">User Name: <?php echo "{{USER_NAME}}";?></p>
-				     <p style="font-size: 14px;">Landing Page Link here to share with your contacts: <?php echo "{{LANDING_PAGE_LINK}}";?></p>
+					 <p style="font-size: 13px;">User Name: <?php echo "{{USER_NAME}}";?></p>
+				     <p style="font-size: 13px;">Landing Page Link here to share with your contacts: <?php echo "{{LANDING_PAGE_LINK}}";?></p>
 				</div>
 				<div class="btn-group btn-group-toggle" data-toggle="buttons">
 					<label style="text-align: left;" class="btn btn-default">
-					<p class="m-0"><em><strong>Important Note</strong>: {{ __('messages.email_note') }}.</em></p>
+					<p class="m-0"><strong>Important Note</strong>: {{ __('messages.email_note') }}.</p>
 				</div>
             </div>
             <div class="modal-footer justify-content-between">
