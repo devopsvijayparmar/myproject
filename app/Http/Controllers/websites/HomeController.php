@@ -32,6 +32,7 @@ use App\Models\Plan;
 use App\Models\MobileOrders;
 use App\Models\PageBuilder;
 use App\Models\Event;
+use JsValidator;
 use Auth;
 use Hash;
 use Crypt;
@@ -50,6 +51,25 @@ class HomeController extends Controller
 		$this->middleware('CheckTitle');
 		$this->data['title'] = 'Home';
     }
+	
+	protected $contactUsValidationRules = [
+        'name' => 'required|string|regex:/^[A-Za-z0-9\-\s]+$/|min:2|max:255',
+		'email' => 'required|unique:users|email|regex:/(.+)@(.+)\.(.+)/i|string|max:255',
+		'mobile' => 'required|max:12',
+		'message' => 'required|max:5000',
+    ];
+
+    protected $addressesValidationRules = [
+        'name' => 'required|string|regex:/^[A-Za-z0-9\-\s]+$/|min:2|max:255',
+		'mobile' => 'required|max:12',
+		'email' => 'required|unique:users|email|regex:/(.+)@(.+)\.(.+)/i|string|max:255',
+		'pincode' => 'required|max:255',
+		'company' => 'required|max:255',
+		'area' => 'required|min:5|max:255',
+		'landmark' => 'required|min:5|max:255',
+		'city' => 'required|min:5|max:255',
+		'state' => 'required|max:255'
+    ]; 	
 	
 	public function index(Request $request, $title)
     {    
@@ -170,7 +190,7 @@ class HomeController extends Controller
 	public function single_product(Request $request, $title,$id)
     {     
 	    $id = Crypt::decrypt($id);
-	     $this->data['user'] = $user = User::getRecordByTitle($title);
+	    $this->data['user'] = $user = User::getRecordByTitle($title);
 	    $this->data['title'] = $title;
 	    $this->data['site_setting'] = Sitesettings::getRecordByUserIdForWebsite($user->id);
 		$this->data['page_builder'] = PageBuilder::getPageBuilderListForWebsite($user->id);
@@ -224,6 +244,7 @@ class HomeController extends Controller
 	public function contact_us(Request $request, $title)
     {  
 	    $this->data['user'] = $user = User::getRecordByTitle($title);
+		$this->data['validator'] = JsValidator::make($this->contactUsValidationRules);
 	    $this->data['title'] = $title;
 	    $this->data['site_setting'] = Sitesettings::getRecordByUserIdForWebsite($user->id);
 		$this->data['page_builder'] = PageBuilder::getPageBuilderListForWebsite($user->id);
@@ -233,18 +254,12 @@ class HomeController extends Controller
 	
 	public function contact_us_store(Request $request,$title)
     {
-    	$validator = Validator::make($request->all(), [
-			'name' => 'required|string|regex:/^[A-Za-z0-9\-\s]+$/|min:2|max:255',
-			'email' => 'required|unique:users|email|regex:/(.+)@(.+)\.(.+)/i|string|max:255',
-			'mobile' => 'required|max:12',
-			'message' => 'required|max:5000',
-        ]);
+    	$input = $request->all();
+        $validator = Validator::make($input, $this->contactUsValidationRules);
 
-        if ($validator->fails()) {
-            return redirect()->back()
-                            ->withErrors($validator, 'contact_us_error')
-                            ->withInput();
-        } 
+        if($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }  
 			
         $input = $request->all();
 		$user = User::getRecordByTitle($title);
@@ -312,6 +327,7 @@ class HomeController extends Controller
 	public function addresses(Request $request, $title)
     {    
 	    $this->data['user'] = $user = User::getRecordByTitle($title);
+		$this->data['validator'] = JsValidator::make($this->addressesValidationRules);
 	    $this->data['title'] = $title;
 	    $this->data['quantity'] = $request->quantity;
 	    $this->data['product_id'] = $request->product_id;
@@ -323,23 +339,12 @@ class HomeController extends Controller
 	
 	public function order(Request $request,$title)
     {
-    	$validator = Validator::make($request->all(), [
-			'name' => 'required|string|regex:/^[A-Za-z0-9\-\s]+$/|min:2|max:255',
-			'mobile' => 'min:10|numeric',	
-			'email' => 'required|unique:users|email|regex:/(.+)@(.+)\.(.+)/i|string|max:255',
-			'pincode' => 'required|max:255',
-			'company' => 'required|max:255',
-			'area' => 'required|min:5|max:255',
-			'landmark' => 'required|min:5|max:255',
-			'city' => 'required|min:5|max:255',
-			'state' => 'required|max:255'
-        ]);
+    	$input = $request->all();
+        $validator = Validator::make($input, $this->addressesValidationRules);
 
-        if ($validator->fails()) {
-            return redirect($request->product_id.'/'.$request->url)
-                            ->withErrors($validator, 'addresses')
-                            ->withInput();
-        } 
+        if($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }  
 			
 		$user = User::getRecordByTitle($title);
 		$site_setting = Sitesettings::getRecordByUserIdForWebsite($user->id);
@@ -362,13 +367,23 @@ class HomeController extends Controller
 		{
 			$products = Products::getRecordById($product_id);
 			$input['product_image'] = $products->image_1;
+			$input['product_name'] = $products->name;
 			$input['product_description'] = $products->description;
 			$input['product_category'] = $products->category->name;
 			$input['price'] = $products->price;
 			
-		}else{
+		}elseif($request->product_type == 'mobile'){
 			$products = Mobile::getRecordById($product_id);
 			$input['mobile_image'] = $products->image_1;
+			$input['product_name'] = $products->name;
+			$input['product_description'] = $products->description;
+			$input['product_category'] = $products->category->name;
+			$input['product_brand'] = $products->brand->name;
+			$input['price'] = $products->price;
+		}else{
+			$products = Electric::getRecordById($product_id);
+			$input['electric_image'] = $products->image_1;
+			$input['product_name'] = $products->name;
 			$input['product_description'] = $products->description;
 			$input['product_category'] = $products->category->name;
 			$input['product_brand'] = $products->brand->name;

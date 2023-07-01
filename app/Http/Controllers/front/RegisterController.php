@@ -15,6 +15,9 @@ use App\Models\front\Sites;
 use App\Models\User;
 use App\Events\UserRegistered;
 use App\Events\WelcomeEmail;
+use App\Models\front\Pricing;
+use App\Models\PurchasePlan;
+use App\Models\PurchasePlanHistory;
 use JsValidator;
 use Hash;
 use Crypt;
@@ -122,6 +125,42 @@ class RegisterController extends Controller
 		if($user->email_verified != 1){
 			$user->update(array('email_verified'=>1));
 			event(new WelcomeEmail($user));
+			
+			$pricing = Pricing::find(1);
+			$purchaseplan = PurchasePlan::userPurchasePlan($user->id);
+			
+			$startdate = date('Y-m-d');
+			$expiry_date = date('Y-m-d', strtotime($startdate. ' + '.$pricing->duration_in_days.' days'));
+			
+			
+			$input = array('user_id'=>$auth->id,
+				'plan_id'=>$id,
+				'plan_name'=>$pricing->plan_name,
+				'plan_type'=>$pricing->plan_type,
+				'price'=>$pricing->price,
+				'price_text'=>$pricing->price_text,
+				'description'=>$pricing->description,
+				'start_date'=>$startdate,
+				'expiry_date'=>$expiry_date,
+				'duration'=>$pricing->duration,
+				'duration_in_days'=>$pricing->duration_in_days,
+				'page_builder'=>$pricing->page_builder,
+				'no_of_emails'=>$pricing->emails,
+				'no_of_page_builder'=>$pricing->no_of_page_builder,
+				'no_of_landing_page'=>$pricing->no_of_landing_page,
+				'no_of_address_book'=>$pricing->no_of_address_book,
+				
+			);
+			
+			$input['created_at'] = date('Y-m-d H:i:s');
+			$input['created_by'] = $auth->id;
+			
+			PurchasePlan::create($input);
+			
+			/*Purchase Order History*/ 
+			$purchase_plan = PurchasePlanHistory::create($input);
+			/*Purchase Order History*/ 
+			
 			return redirect('login')->with('success','Your account has been successfully verified. Please check your email for website details. Thank you.');
 		}else{
 			return redirect('login')->with('error','your account has been already verified !');

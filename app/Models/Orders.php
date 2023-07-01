@@ -15,7 +15,7 @@ class Orders extends Authenticatable
     use Notifiable;
 	use SoftDeletes;
     protected $table = 'orders';
-    protected $fillable = ['user_id','product_id','quantity','name','mobile','email','pincode','company','area','landmark','city','state','created_by','created_at','updated_by','updated_at','deleted_by','deleted_at','product_name','product_image','price','currency_symbol','currency_code','product_description','product_category','product_brand','product_type','mobile_image','order_id'];
+    protected $fillable = ['user_id','product_id','quantity','name','mobile','email','pincode','company','area','landmark','city','state','created_by','created_at','updated_by','updated_at','deleted_by','deleted_at','product_name','product_image','price','currency_symbol','currency_code','product_description','product_category','product_brand','product_type','mobile_image','order_id','status','electric_image'];
 	
 	public static function getOrderslist(){
 		$query = Orders::where('user_id',Auth::user()->id);
@@ -53,14 +53,17 @@ class Orders extends Authenticatable
 	}
 	
 	public static function getRecordById($id){
-		return Orders::where('user_id',Auth::user()->id)->first();
+		return Orders::where('id',$id)->first();
 	}
 	
-	function getProductImageAttribute($image){
-		return $image == null ? asset('/images/image_not_found.jpg') : asset('/uploads/products/'.$image);
+	function getProductImageAttribute($product_image){
+		return $product_image == null ? asset('/images/image_not_found.jpg') : asset('/uploads/products/'.$product_image);
 	}
-	function getMobileImageAttribute($image){
-		return $image == null ? asset('/images/image_not_found.jpg') : asset('/uploads/mobile/'.$image);
+	function getMobileImageAttribute($mobile_image){
+		return $mobile_image == null ? asset('/images/image_not_found.jpg') : asset('/uploads/mobile/'.$mobile_image);
+	}
+	function getElectricImageAttribute($electric_image){
+		return $electric_image == null ? asset('/images/image_not_found.jpg') : asset('/uploads/electric/'.$electric_image);
 	}
 	
 	public function getChangeStatusAttribute(){

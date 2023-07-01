@@ -153,12 +153,51 @@
 			  <p>{{$pricingdata->duration}}</p>
 				  {!! $pricingdata->description !!}
               <div class="table_btn">
-                <a href="{{url('/purchase-plan/'.App\Helpers\CryptHelper::encryptstring($pricingdata->id))}}" class="btn"><i class="fa fa-shopping-cart"></i> {{$pricingdata->button_name}}</a>
+			  @if($pricingdata->button_name != 'Upcomming...')
+                <a href="{{url('register')}}" class="btn btn-pricing"><i class="fa fa-shopping-cart"></i> {{$pricingdata->button_name}}</a>
+			  @else
+				   <a href="javascript:void(0)" class="btn btn-pricing"> {{$pricingdata->button_name}}</a>
+			  @endif
               </div>
             </div>
           </div>
         </div>
 		@endforeach
+      </div>
+    </div>
+  </section>
+  
+  <section id="blog" class="padd-section wow fadeInUp">
+
+    <div class="container">
+      <div class="section-title text-center">
+
+        <h2>Latest Web Templates</h2>
+        <p class="separator">Build your brand's online presence and expand your business with a professional website.Leverage the internet's potential to reach a wider audience, increase visibility, and boost sales.</p>
+
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+
+        <div class="col-md-6 col-lg-4 mb-5">
+          <div class="block-blog text-left">
+            <a href="#"><img src="{{asset('front/img/blog/blog-image-1.jpg')}}" alt="img"></a>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 mb-5">
+          <div class="block-blog text-left">
+            <a href="#"><img src="{{asset('front/img/blog/blog-image-2.jpg')}}" class="img-responsive" alt="img"></a>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 mb-5">
+          <div class="block-blog text-left">
+            <a href="#"><img src="{{asset('front/img/blog/blog-image-3.jpg')}}" class="img-responsive" alt="img"></a>
+          </div>
+        </div>
 		
 		
       </div>

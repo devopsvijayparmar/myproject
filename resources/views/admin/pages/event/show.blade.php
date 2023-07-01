@@ -39,7 +39,7 @@
 					<div class="row">
 						<div class="col-12 col-sm-4">
 							<div class="col-12">
-								<img src="{{$data->image}}" class="product-image" alt="Event Image">
+								<img src="{{$data->image_url}}" class="product-image" alt="Event Image">
 							</div>
 						</div>
 						<div class="col-12 col-sm-8">

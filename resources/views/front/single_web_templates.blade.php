@@ -26,12 +26,12 @@
     </div>
   </section>
   
-    <section id="blog" class="padd-section wow fadeInUp">
+<section id="blog" class="padd-section wow fadeInUp">
 
     <div class="container">
       <div class="section-title text-center">
 
-        <h2>Latest Webtemplates</h2>
+        <h2>Latest Web Templates</h2>
         <p class="separator">Build your brand's online presence and expand your business with a professional website.Leverage the internet's potential to reach a wider audience, increase visibility, and boost sales.</p>
 
       </div>

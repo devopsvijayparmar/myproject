@@ -41,7 +41,10 @@ class OrdersController extends Controller
 			$data = Orders::getOrderslist();
 			return DataTables::of($data)
 			->addIndexColumn()
-			
+			->editColumn('order_id', function ($row)
+			{
+				return '<a title="Details" class="mr-2" href="'.route('orders.show', Crypt::encrypt($row['id'])).'" data-popup="tooltip">'.$row->order_id.'</a>';
+			})
 			->editColumn('image', function ($row)
 			{
 				if($row->product_type == 'product'){
@@ -70,7 +73,7 @@ class OrdersController extends Controller
 			  
 			   return $btn;
 			})
-			->rawColumns(['status','image','action'])
+			->rawColumns(['order_id','status','image','action'])
 			->make(true);
 
 		} else {
@@ -79,6 +82,7 @@ class OrdersController extends Controller
 			$columns = [
 				['data' => 'DT_RowIndex', 'name' => 'id', 'title' => "Id"],
 				['data' => 'image','name' => 'image', 'title' => __("Image"),'searchable'=>false,'orderable' => false],
+				['data' => 'order_id','name' => 'order_id', 'title' => __("Order Id"),'searchable'=>true,'orderable' => true],
 				['data' => 'product_name','name' => 'product_name', 'title' => __("Product Name"),'searchable'=>true,'orderable' => true],
 				['data' => 'quantity','name' => 'quantity', 'title' => __("Quantity"),'searchable'=>true,'orderable' => true],
 				['data' => 'name','name' => 'name', 'title' => __("Customer Name"),'searchable'=>true,'orderable' => true],
@@ -109,8 +113,12 @@ class OrdersController extends Controller
     {
 		$id = Crypt::decrypt($id);
 		$auth = Auth::user(); 	
-	    $delete = Orders::where('created_by', $auth->id)->where('id', $id)->delete();
-		return $delete;
+		if(isset($request->status)){
+			$update = Orders::where('id',$id)->update(['status'=>$request->status]);
+		}else{
+			 $update = Orders::where('id', $id)->delete();
+		}
+		return $update;
     }
 
 

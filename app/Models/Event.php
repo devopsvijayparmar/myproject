@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Auth;
+use Crypt;
 
 class Event extends Authenticatable
 {
@@ -20,8 +21,8 @@ class Event extends Authenticatable
 	    return $query;
 	}
 	
-	function getImageAttribute($image){
-		return $image == null ? url('/images/image_not_found.jpg') : asset('/uploads/event/'.$image);
+	function getImageUrlAttribute(){
+		return $this->image == null ? asset('/images/image_not_found.jpg') : asset('/uploads/event/'.$this->image);
 	}
 	
 	public static function takeRecordForWebsite($id,$node){

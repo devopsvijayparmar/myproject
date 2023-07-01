@@ -146,6 +146,12 @@ class LandingPageController extends Controller
 	
 	public function store(Request $request)
     {
+		
+		$landing_page_count = LandingPage::getLangingPageCount(); 
+		if($landing_page_count >= $this->userPurchasePlan()->no_of_landing_page){
+			return redirect()->route('landing-page.index')->with('error', Lang::get('messages.limit'));
+		}
+		
     	$auth = Auth::user(); 
 		$input = $request->all();
     	$validator = Validator::make($input, $this->validationRules);
@@ -158,7 +164,7 @@ class LandingPageController extends Controller
 		
         if($exitdata)	
 		{
-			 return redirect()->back()->with('error', __('messages.url_name_already_been_taken'));
+			return redirect()->back()->with('error', __('messages.url_name_already_been_taken'));
 		}
 
 		$input['created_at'] = date('Y-m-d H:i:s');
@@ -166,6 +172,9 @@ class LandingPageController extends Controller
 		$input['url'] = 'http://'.$auth->title.'.'.config('enum.website').'/landing-page/'.$request->url_name;
 	   
 		$landingpage = LandingPage::create($input);
+		
+		$count = LandingPage::getLangingPageCount();
+		$this->updatePurchasePlan('used_landing_page',$count);
 		
 		if($landingpage){
 			return redirect()->route('landing-page.index')->with('success', Lang::get('messages.created'));
@@ -308,7 +317,7 @@ class LandingPageController extends Controller
 		}
 		
 		
-		if(count($addressdata) > $this->userPurchasePlan()->no_of_emails){
+		if(count($addressdata) > $this->userPurchasePlan()->remaining_emails){
 			return redirect()->route('landing-page.index')->with('error', Lang::get('messages.email_limit'));
 		}
 		
@@ -338,8 +347,12 @@ class LandingPageController extends Controller
 			}
 			
 			if ($insertData) {
+				$remaining_emails = $this->userPurchasePlan()->remaining_emails;
+				$count = $remaining_emails - count($addressdata);
+				$this->updatePurchasePlan('remaining_emails',$count);
+				
 				Session::flash('success', __('messages.landingpage_sent'));
-				 return redirect()->back();
+				return redirect()->back();
 			} else {
 				Session::flash('error', __('messages.error'));
 				 return redirect()->back();

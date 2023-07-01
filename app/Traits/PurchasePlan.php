@@ -12,4 +12,11 @@ trait PurchasePlan{
 		
     }
 	
+	 public function updatePurchasePlan($field,$count){
+        $user = Auth::user();
+		$update = PurchasePlanModel::where('user_id',$user->id)->update([$field=>$count]);
+	    return $update;
+		
+    }
+	
 }

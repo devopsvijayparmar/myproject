@@ -18,4 +18,11 @@ class CommonHelper {
 		return date('d-m-Y',strtotime($date));
 	}
 	
+	public static function findPercentage($value1,$value2){
+		
+		$mul = (int)$value1 * 100;
+		return $mul / (int)$value2;
+		
+	}
+	
 }

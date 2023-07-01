@@ -12,6 +12,7 @@ use DataTables;
 use DB;
 use Validator;
 use App\Models\PageBuilder;
+use App\Traits\PurchasePlan;
 use App\Models\User;
 use Auth;
 use Hash;
@@ -20,6 +21,7 @@ use Crypt;
 
 class PageBuilderController extends Controller
 {
+	use PurchasePlan;
 	
 	protected $validationRules = [
 		'title' => 'required|string|max:255',
@@ -53,6 +55,11 @@ class PageBuilderController extends Controller
 	
 	public function store(Request $request)
     {
+		
+		$page_builder_count = PageBuilder::getPageBuilderCount(); 
+		if($page_builder_count >= $this->userPurchasePlan()->no_of_page_builder){
+			return redirect()->route('page-builder.index')->with('error', Lang::get('messages.limit'));
+		}
 		$auth = Auth::user(); 
 		$input = $request->all();
     	$validator = Validator::make($input, $this->validationRules);
@@ -73,6 +80,9 @@ class PageBuilderController extends Controller
 		$input['url'] = 'http://'.$auth->title.'.'.config('enum.website').'/page/'.$request->url_name;
 		
 		$page_builder = PageBuilder::create($input);
+		
+		$count = PageBuilder::getPageBuilderCount();
+		$this->updatePurchasePlan('used_page_builder',$count);
 		
 		if($page_builder){
 			return redirect()->route('page-builder.index')->with('success', Lang::get('messages.created'));

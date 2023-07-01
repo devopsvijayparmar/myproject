@@ -106,6 +106,9 @@ class AddressBookController extends Controller
 		
 		$addressbook = AddressBook::create($input);
 		
+		$count = AddressBook::getAddressBookCount();
+		$this->updatePurchasePlan('used_address_book',$count);
+		
 		if($addressbook){
 			return redirect()->route('address-book.index')->with('success', Lang::get('messages.created'));
 		}else{
@@ -169,6 +172,12 @@ class AddressBookController extends Controller
 	
 	public function import (Request $request)
     {
+		
+		$addressbook_count = AddressBook::getAddressBookCount(); 
+		if($addressbook_count >= $this->userPurchasePlan()->no_of_address_book){
+			return redirect()->route('address-book.index')->with('error', Lang::get('messages.limit'));
+		}
+		
 		$validator = Validator::make($request->all(), [
 			'file'=>'required|mimes:csv'
         ]);

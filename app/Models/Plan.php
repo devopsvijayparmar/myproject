@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Auth;
+use Crypt;
 
 class Plan extends Authenticatable
 {
@@ -25,7 +26,7 @@ class Plan extends Authenticatable
 	function getImageUrl2Attribute(){
 		return $this->image_2 == null ? asset('/images/image_not_found.jpg') : asset('/uploads/plan/'.$this->image_2);
 	}
-	function getImage3UrlAttribute(){
+	function getImageUrl3Attribute(){
 		return $this->image_3 == null ? asset('/images/image_not_found.jpg') : asset('/uploads/plan/'.$this->image_3);
 	}
 	public static function takeRecordForWebsite($id,$node){
@@ -38,6 +39,10 @@ class Plan extends Authenticatable
 	}
 	function getDetailPageLink(){
 		return url('/'.Crypt::encrypt($this->id).'/single-plan');
+	}
+	
+	function getPlanPageLink(){
+		return url('plan');
 	}
 	
 	

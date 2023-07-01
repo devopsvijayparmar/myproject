@@ -21,6 +21,11 @@ class LandingPage extends Authenticatable
 		return $query;
 	}
 	
+	public static function getLangingPageCount(){
+		$query = LandingPage::where('created_by',Auth::user()->id)->count();
+		return $query;
+	}
+	
 	public static function checkExitTitle($url_name){
 		$query = LandingPage::where('created_by',Auth::user()->id)->where('url_name',$url_name)->first();
 		return $query;

@@ -18,7 +18,7 @@ class Type extends Authenticatable
     protected $fillable = ['category_id','name','created_by','created_at','updated_by','updated_at','deleted_by','deleted_at'];
 	
 	public static function getRecordByCategoryId($id){
-		$query = Type::where('category_fk',$id)->orderBy('name','asc')->where('created_by',Auth::user()->id)->get();
+		$query = Type::where('category_id',$id)->orderBy('name','asc')->where('created_by',Auth::user()->id)->get();
 		return $query;
 	}
 	

@@ -25,7 +25,7 @@ Route::get("/testpage", function(){
 
 /*supar admin*/
 Route::group(['prefix' => 'super-admin', 'namespace' => 'super_admin','middleware' => ['preventBackHistory']], function () {
-	Route::get('/super-admin/home', 'HomeController@index');
+	Route::get('home', 'HomeController@index');
 	Route::resource('web-templates', 'WebTemplatesController');
 	Route::resource('pricing', 'PricingController');
 	Route::get('/cms/{type}', 'CMSController@index');
@@ -45,6 +45,7 @@ Route::group(['prefix' => 'super-admin', 'namespace' => 'super_admin','middlewar
 /*admin Routes*/
 Route::group(['middleware' => ['preventBackHistory']], function () {
 Auth::routes();
+Route::get('/register', 'front\RegisterController@index');
 Route::post('custom-login', 'Auth\LoginController@customLogin')->name('custom-login');
 });
 
@@ -119,6 +120,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'admin','middleware' => ['prev
 /*supar admin front*/
 Route::domain('www.websphare.com')->group(function () {
 	Route::group(['namespace' => 'front','middleware' => ['preventBackHistory']], function () {
+		Route::get('/register', 'RegisterController@index');
 		Route::get('/signup', 'RegisterController@index');
 		Route::post('/signup', 'RegisterController@register');
 		Route::post('/check-site-name', 'RegisterController@checkSiteName');

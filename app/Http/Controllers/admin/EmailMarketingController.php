@@ -14,6 +14,7 @@ use App\Models\EmailsBroadCast;
 use App\Models\Group;
 use App\Models\AddressBook;
 use App\Models\GroupData;
+use App\Traits\PurchasePlan;
 use Auth;
 use Hash;
 use Crypt;
@@ -27,6 +28,8 @@ class EmailMarketingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+	use PurchasePlan;  
+	 
 	protected $validationRules = [
 		'for' => 'required',
 		'group' => 'required',
@@ -160,7 +163,6 @@ class EmailMarketingController extends Controller
 	
 	    if($request->for == 1)
 		{
-
 			$group_data = GroupData::getRecordByGroupId($request->group);
 			$address_data = AddressBook::getRecordForLandingPage($group_data);
 		}
@@ -171,6 +173,10 @@ class EmailMarketingController extends Controller
 			}else{
 				return redirect()->back()->with('error', Lang::get('messages.error'));
 			}
+		}
+		
+		if(count($address_data) > $this->userPurchasePlan()->remaining_emails){
+			return redirect()->route('email_marketing.index')->with('error', Lang::get('messages.email_limit'));
 		}
 		
 		//$array = array('users'=>$address_data);
@@ -199,6 +205,9 @@ class EmailMarketingController extends Controller
 			}
 			
 			if ($insertData) {
+				$remaining_emails = $this->userPurchasePlan()->remaining_emails;
+				$count = $remaining_emails - count($address_data);
+				$this->updatePurchasePlan('remaining_emails',$count);
 				Session::flash('success', __('messages.email_sent'));
 				 return redirect()->back();
 			} else {

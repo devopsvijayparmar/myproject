@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Category;
 use App\Models\Type;
+use Crypt;
 
 class Electric extends Authenticatable
 {

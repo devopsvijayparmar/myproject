@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Category;
 use App\Models\Brand;
+use Crypt;
 
 class Mobile extends Authenticatable
 {

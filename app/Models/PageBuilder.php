@@ -20,6 +20,10 @@ class PageBuilder extends Authenticatable
 		$query = PageBuilder::where('created_by',Auth::user()->id)->orderBy('reposition','asc')->get();
 		return $query;
 	}
+	public static function getPageBuilderCount(){
+		$query = PageBuilder::where('created_by',Auth::user()->id)->count();
+		return $query;
+	}
 	public static function getRecordByUser($id,$url_name){
 		$query = PageBuilder::where('created_by',$id)->where('url_name',$url_name)->first();
 		return $query;

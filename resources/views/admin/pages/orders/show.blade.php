@@ -28,22 +28,28 @@
           <div class="col-md-12">
             <!-- general form elements -->
             <div class="card card-primary">
-              <div class="card-header">
-                <h3 class="card-title">Order Details</h3>
-              </div>
+             
 				<!-- /.card-header -->
                 <div class="card-body">
-					<div class="col-md-10">
+					<div class="col-md-12">
 						<p class="lead">Product Details</p>
 						<table class="table table-responsive">
 							<tbody>
+							    <tr>
+									<th style="width:50%">Order Id</th>
+									<td><strong style="color:#337ab7!important">{{$order->order_id}}</strong></td>
+								</tr>
 								<tr>
 									<th style="width:50%">Product Image</th>
-									<td><img class="rp-img" src="@if($order->product_type == 'product') {{$order->product_image}} @else {{$order->mobile_image}} @endif"></td>
+									<td><img class="rp-img" src="@if($order->product_type == 'product'){{$order->product_image}}@elseif($order->product_type == 'mobile'){{$order->mobile_image}} @else {{$order->electric_image}} @endif"></td>
 								</tr>
 								<tr>
 									<th>Product</th>
 									<td>{{$order->product_name}}</td>
+								</tr>
+								<tr>
+									<th style="color:#337ab7!important">Quantity</th>
+									<td><strong>{{$order->quantity}}</strong></td>
 								</tr>
 								@if($order->product_category)
 								<tr>
@@ -65,10 +71,7 @@
 									<th>Description</th>
 									<td>{!!$order->product_description!!}</td>
 								</tr>
-								<tr>
-									<th>Quantity</th>
-									<td>{{$order->quantity}}</td>
-								</tr>
+								
 							</tbody>
 						</table>
 						

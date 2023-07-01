@@ -48,11 +48,12 @@
 				  <p>{{$pricingdata->duration}}</p>
 					  {!! $pricingdata->description !!}
 				  <div class="table_btn">
-					@auth
-					   <a href="#" class="btn"><i class="fa fa-shopping-cart"></i> {{$pricingdata->button_name}}</a>
-					@else
-						<a href="javascript:void(0)" onclick="loginPopup('pricing');" class="btn"><i class="fa fa-shopping-cart"></i> {{$pricingdata->button_name}}</a>
-					@endauth
+				  
+					 @if($pricingdata->button_name != 'Upcomming...')
+						<a href="{{url('register')}}" class="btn btn-pricing"><i class="fa fa-shopping-cart"></i> {{$pricingdata->button_name}}</a>
+					  @else
+						   <a href="javascript:void(0)" class="btn btn-pricing"> {{$pricingdata->button_name}}</a>
+					  @endif
 					
 				  </div>
 				</div>
