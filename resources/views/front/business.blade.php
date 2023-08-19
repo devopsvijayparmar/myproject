@@ -28,7 +28,7 @@ a:hover {
         <div class="col-md-6">
           <div class="about-content">
 
-            <h2><span>websphare</span>Your Ultimate Business Startup Solution </h2>
+            <h2><span>{{config('enum.site_title')}}</span>Your Ultimate Business Startup Solution </h2>
             <p>Welcome to our digital agency, where we pride ourselves on delivering tailored industry solutions that are perfectly aligned with your unique business needs. With our wealth of expertise and cutting-edge technology, we are your trusted partner in harnessing the power of the digital world to drive your success..
             </p>
 			
@@ -175,7 +175,7 @@ a:hover {
 
          <div class="col-lg-4 col-md-4 p-0">
             <div class="">
-              <p><img style="height: 34px;" src="{{asset('social/email.png')}}"> support@websphare.com</p>
+              <p><img style="height: 34px;" src="{{asset('social/email.png')}}"> {{config('enum.support_email')}}</p>
             </div>
           <div class="">
             <a href="#" class="mr-3"><img style="height: 32px;" src="{{asset('social/facebook.png')}}"></a>

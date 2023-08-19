@@ -174,7 +174,7 @@
 						</div>
 						</div>
 
-						<div class="col-md-6">
+						<div class="col-md-6" style="display:none;">
 							<div class="card">
 								<div class="card-body">
 									<div class="d-flex">
@@ -203,7 +203,7 @@
 				</div>
 			</div>
 		</div>
-		@endif
+		
 		
 		<div class="row">
           <!-- left column -->
@@ -226,7 +226,7 @@
 			</div>
           <!--/.col (left) -->
         </div>
-		
+		@endif
 		
         <!-- /.row -->
       </div><!-- /.container-fluid -->

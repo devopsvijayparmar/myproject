@@ -29,6 +29,8 @@ return [
 	'email_sent' => 'Emails will be sent within 10 to 15 minutes.',
 	'email_note' => 'It will take 10 to 15 minutes for emails to be sent',
 	'landingpage_sent' => 'Landing page will be sent within 10 to 15 minutes.',
+	'verify_account' => 'Please verify your account.',
+	'account_deactived' => 'Your account has been deactivated due to unauthorized or suspicious activity.',
    
 
 ];

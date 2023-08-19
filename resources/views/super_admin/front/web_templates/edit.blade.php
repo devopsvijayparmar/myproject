@@ -31,16 +31,28 @@
 				@csrf
 				 <div class="card-body">
 					<div class="row">
-						<div class="form-group  col-md-6">
+						<div class="form-group col-md-4">
+							<label for="exampleInputEmail1">Website Template <span class="error">*</span></label>
+							<select name="site_name" class="form-control" id="site_name"/>
+								<option value="">Select Website</option>
+								@foreach($sites as $site)
+								<option @if($data->site_name == $site->site_name) selected @endif value="{{$site->site_name}}">{{$site->name}}</option>
+								@endforeach
+							<select>
+						</div>
+						
+						<div class="form-group col-md-4">
 							 <label for="exampleInputEmail1">Title <span class="error">*</span></label>
-							  <input type="text" class="form-control" id="title" placeholder="Enter title" name="title" maxlength="255" value="{{ $data->title }}">
+							  <input type="text" class="form-control" id="title" placeholder="Enter Title" name="title" maxlength="255" value="{{$data->title}}">
 							  <span class="error" id='title_error'>{{$errors->WebTemplates->first('title')}}</span>
 						</div>
 						
-						<div class="form-group col-md-6">
-							 <label for="exampleInputEmail1">URL <span class="error">*</span></label>
-							  <input type="text" class="form-control" id="url" placeholder="Enter URL" name="url" maxlength="255" value="{{ $data->url }}">
-							  <span class="error" id='url_error'>{{$errors->WebTemplates->first('url')}}</span>
+						<div class="form-group col-md-4">
+							<label for="exampleInputEmail1">Type<span class="error">*</span></label>
+							<select name="type" class="form-control" id="type"/>
+								<option @if($data->type == 1) selected @endif value="1">Website Template</option>
+								<option @if($data->type == 2) selected @endif  value="2">Latest Web Template</option>
+							<select>
 						</div>
 						
 						<div class="form-group col-md-6">
@@ -49,18 +61,20 @@
 							  <span class="error" id='preview_error'>{{$errors->WebTemplates->first('preview')}}</span>
 						</div>
 						
+						
+						<div class="col-md-6">
+							<label for="exampleInputFile">Image<span class="error">*</span></label>
+							<input type="file" onchange="ValidateSize(this)" class="form-control" name="image" id="image">
+							<img class="mar-top-10 rp-img100" src="<?php echo url('/uploads/front/web_templates/'.$data->image);?>" id="blah"/ ></br>
+							<span class="error" id='image_error'>{{$errors->WebTemplates->first('image')}}</span>
+						</div>
+						
 						<div class="form-group  col-md-12">
 							<label for="exampleInputEmail1">Description<span class="error">*</span></label>
 							<textarea type="text" class="form-control" id="description" name="description" placeholder="Enter Description"><?php echo $data->description;?></textarea>
 							<span class="error" id='description_error'>{{$errors->WebTemplates->first('description')}}</span>
 						</div>
 						
-						<div class="col-md-4">
-							<label for="exampleInputFile">Image<span class="error">*</span></label>
-							<input type="file" onchange="ValidateSize(this)" class="form-control" name="image" id="image">
-							<img class="mar-top-10 rp-img100" src="<?php echo url('/uploads/front/web_templates/'.$data->image);?>" id="blah"/ ></br>
-							<span class="error" id='image_error'>{{$errors->WebTemplates->first('image')}}</span>
-						</div>
 					</div>		
                 </div>
 				<div class="card-footer">
@@ -114,7 +128,6 @@ $("#image").change(function() {
 	   
 	$(':input[type="submit"]').prop('disabled', true);
 	var title = $('#title').val();
-	var url = $('#url').val();
 	var preview = $('#preview').val();
 	var description = CKEDITOR.instances.description.getData();
 	var image = $('#image').val();
@@ -124,7 +137,6 @@ $("#image").change(function() {
 	var f = 0;
 	
 	$('#title_error').html("");
-	$('#url_error').html("");
 	$('#preview_error').html("");
 	$('#description_error').html("");
 	$('#image_error').html("");
@@ -139,15 +151,6 @@ $("#image").change(function() {
 		if(f == 1)
 		{
 			$('#title').focus();
-		}
-	}
-	if (url.trim() == '') {
-		$('#url_error').html("Please enter URL");
-		cnt = 1;
-		f++;
-		if(f == 1)
-		{
-			$('#url').focus();
 		}
 	}
 	if (preview.trim() == '') {
@@ -168,7 +171,6 @@ $("#image").change(function() {
 			$(".note-frame").addClass("autofocous");
 		}
 	}
-
 
 	if (cnt == 1) {
 		$(':input[type="submit"]').prop('disabled', false);

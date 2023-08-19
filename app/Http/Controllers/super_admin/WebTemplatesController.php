@@ -38,14 +38,15 @@ class WebTemplatesController extends Controller
 
 	public function create(Request $request)
     { 	
-	     $this->data['sites'] = Sites::getSites(); 
+	    $this->data['sites'] = Sites::getSites(); 
 		return view('super_admin.front.web_templates.create',$this->data);
     }
 	
 	public function store(Request $request)
     {
     	 $validator = Validator::make($request->all(), [
-			'url' => 'required',
+			'title' => 'required',
+			'site_name' => 'required',
 			'description' => 'required',
 			'image'=>'required'
         ]);
@@ -58,13 +59,9 @@ class WebTemplatesController extends Controller
 			
 		$auth = Auth::user();
         $input = $request->all();
-		
-		$site = Sites::where('site_name',$request->url)->first();
-		
 		$input['created_at'] = date('Y-m-d H:i:s');
 		$input['slug'] = SlugHelper::slug($request->title,'front_web_templates');
-		$input['title'] = $site->name;
-	
+		
 		if ($request->hasfile('image')) {
 			$file = $request->file('image');
 			$name_1 = $file->getClientOriginalName();
@@ -88,9 +85,10 @@ class WebTemplatesController extends Controller
 	
 	public function edit($id)
     { 		
-	     $id = Crypt::decrypt($id);
-		 $this->data['data'] = WebTemplates::find($id);
-		 return view('super_admin.front.web_templates.edit',$this->data);
+	    $id = Crypt::decrypt($id);
+		$this->data['data'] = WebTemplates::find($id);
+		$this->data['sites'] = Sites::getSites(); 
+		return view('super_admin.front.web_templates.edit',$this->data);
         
     }
 	
@@ -100,15 +98,14 @@ class WebTemplatesController extends Controller
 		 $id = Crypt::decrypt($id);
     	 $validator = Validator::make($request->all(), [
 			'title' => 'required',
-			'description' => 'required',
+			'site_name' => 'required',
         ]);
-
 
         if ($validator->fails()) {
              return redirect()->back()
                             ->withErrors($validator, 'WebTemplates')
                             ->withInput();
-        } else {
+        } 
 			
 		$auth = Auth::user();
 		$input = $request->all();
@@ -133,7 +130,7 @@ class WebTemplatesController extends Controller
 			 Session::flash('error', "we're sorry,but something went wrong.Please try again");
 			 return redirect()->back();
 		}
-		}
+		
     }
 	
 	public function show($id)

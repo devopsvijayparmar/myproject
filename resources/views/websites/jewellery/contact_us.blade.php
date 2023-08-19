@@ -1,5 +1,5 @@
 <!-- header-->
-@include('websites.watch.include.header')
+@include('websites.jewellery.include.header')
 <!-- end header-->
 
 <!-- common pages-->
@@ -7,5 +7,5 @@
 <!-- common pages-->
 
 <!-- footer-->
-@include('websites.watch.include.footer')
+@include('websites.jewellery.include.footer')
 <!-- end footer-->

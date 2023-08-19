@@ -1,5 +1,5 @@
 <footer class="main-footer">
-    <strong>Copyright &copy; {{date('Y')}} <a href="http://www.websphare.com" target="_blank">websphare.com</a>.</strong>
+    <strong>Copyright &copy; {{date('Y')}} <a href="{{url('/')}}" target="_blank">{{config('enum.site_name')}}</a>.</strong>
     All rights reserved.
   </footer>
 

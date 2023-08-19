@@ -52,6 +52,15 @@ class LoginController extends Controller
  
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
+			$auth = Auth::user();
+			if($auth->email_verified == 0){
+				Auth::logout();
+				return redirect()->back()->with('error',__('messages.verify_account'));
+			}
+			if($auth->deactive_account == 'deactive'){
+				Auth::logout();
+				return redirect()->back()->with('error',__('messages.account_deactived'));
+			}
 			if(isset($request->url)){
 				return redirect($request->url);
 			}

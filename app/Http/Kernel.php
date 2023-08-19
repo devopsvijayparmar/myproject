@@ -70,5 +70,6 @@ class Kernel extends HttpKernel
 		'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,
 		'purchaseplan' => \App\Http\Middleware\PurchasePlan::class,
 		'preventBackHistory' => \App\Http\Middleware\PreventBackHistory::class,
+		'auth_superadmin' => \App\Http\Middleware\AuthenticateSuperadmin::class,
     ];
 }

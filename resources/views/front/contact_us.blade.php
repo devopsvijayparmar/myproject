@@ -1,11 +1,6 @@
  @include('front.include.header')
 
- 
-  <!--==========================
-    Contact Section
-  ============================-->
-  <section id="contact" class="padd-section padd-top wow fadeInUp">
-
+<section id="contact" class="padd-section padd-top wow fadeInUp">
     <div class="container">
       <div class="section-title padd-bottom text-center">
         <h2>Contact Support</h2>
@@ -16,15 +11,14 @@
     <div class="container">
 	 @include('front.include.success_message')
       <div class="row justify-content-center">
-
         <div class="col-lg-4 col-md-4 p-0">
             <div class="">
-              <p><img style="height: 34px;" src="{{asset('social/email.png')}}"> support@websphare.com</p>
+              <p><img style="height: 34px;" src="{{asset('social/email.png')}}"> {{config('enum.support_email')}}</p>
             </div>
           <div class="">
-            <a href="#" class="mr-3"><img style="height: 32px;" src="{{asset('social/facebook.png')}}"></a>
-            <a href="#" class="mr-3"><img style="height: 32px;" src="{{asset('social/instagram.png')}}"></a>
-            <a href="#" class="mr-3"><img style="height: 32px;" src="{{asset('social/linkedin.png')}}"></a>
+            <a href="{{$contactus->facebook}}" target="_blank" class="mr-3"><img style="height: 32px;" src="{{asset('social/facebook.png')}}"></a>
+            <a href="{{$contactus->instagram}}" target="_blank" class="mr-3"><img style="height: 32px;" src="{{asset('social/instagram.png')}}"></a>
+            <a href="{{$contactus->linkedin}}" target="_blank" class="mr-3"><img style="height: 32px;" src="{{asset('social/linkedin.png')}}"></a>
           </div>
         </div>
 
@@ -61,11 +55,7 @@
         </div>
       </div>
     </div>
-  </section><!-- #contact -->
-
-  <!--==========================
-    Footer
-  ============================-->
+  </section>
  @include('front.include.footer')
   <script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
  {!! $validator->selector('#contact_us_id') !!}

@@ -31,14 +31,29 @@
 				@csrf
 				<div class="card-body">
 					<div class="row">
-						
-						
-						<div class="form-group col-md-6">
-							<select name="url" class="form-control" id="url"/>
+					
+					
+						<div class="form-group col-md-4">
+							<label for="exampleInputEmail1">Website Template <span class="error">*</span></label>
+							<select name="site_name" class="form-control" id="site_name"/>
 								<option value="">Select Website</option>
 								@foreach($sites as $site)
-								<option @if(old('url') == $site->site_name) selected @endif value="{{$site->site_name}}">{{$site->name}}</option>
+								<option @if(old('site_name') == $site->site_name) selected @endif value="{{$site->site_name}}">{{$site->name}}</option>
 								@endforeach
+							<select>
+						</div>
+						
+						<div class="form-group col-md-4">
+							 <label for="exampleInputEmail1">Title <span class="error">*</span></label>
+							  <input type="text" class="form-control" id="title" placeholder="Enter Title" name="title" maxlength="255" value="{{ old('title') }}">
+							  <span class="error" id='title_error'>{{$errors->WebTemplates->first('title')}}</span>
+						</div>
+						
+						<div class="form-group col-md-4">
+							<label for="exampleInputEmail1">Type<span class="error">*</span></label>
+							<select name="type" class="form-control" id="type"/>
+								<option value="1">Website Template</option>
+								<option value="2">Latest Web Template</option>
 							<select>
 						</div>
 						
@@ -48,17 +63,19 @@
 							  <span class="error" id='preview_error'>{{$errors->WebTemplates->first('preview')}}</span>
 						</div>
 						
-						<div class="form-group col-md-12">
-							<label for="exampleInputEmail1">Description<span class="error">*</span></label>
-							<textarea type="text" class="form-control" id="description" name="description" placeholder="Enter Description">	{{ old('description') }}</textarea>
-							<span class="error" id='description_error'>{{$errors->WebTemplates->first('description')}}</span>
-						</div>
 						<div class="form-group col-md-6">
 							<label for="exampleInputFile">Image<span class="error">*</span></label>
 							<input type="file" onchange="ValidateSize(this)" class="form-control" name="image" id="image">
 							<img class="mar-top-10 rp-img100" id="blah"/ ></br>
 							<span class="error" id='image_error'>{{$errors->WebTemplates->first('image')}}</span>
 						</div>
+						
+						<div class="form-group col-md-12">
+							<label for="exampleInputEmail1">Description<span class="error">*</span></label>
+							<textarea type="text" class="form-control" id="description" name="description" placeholder="Enter Description">	{{ old('description') }}</textarea>
+							<span class="error" id='description_error'>{{$errors->WebTemplates->first('description')}}</span>
+						</div>
+						
 					</div>
 				</div>
 				<div class="card-footer">
@@ -112,7 +129,6 @@ $("#image").change(function() {
 	   
 	$(':input[type="submit"]').prop('disabled', true);
 	var title = $('#title').val();
-	var url = $('#url').val();
 	var preview = $('#preview').val();
 	var description = CKEDITOR.instances.description.getData();
 	var image = $('#image').val();
@@ -122,7 +138,6 @@ $("#image").change(function() {
 	var f = 0;
 	
 	$('#title_error').html("");
-	$('#url_error').html("");
 	$('#preview_error').html("");
 	$('#description_error').html("");
 	$('#image_error').html("");
@@ -137,15 +152,6 @@ $("#image").change(function() {
 		if(f == 1)
 		{
 			$('#title').focus();
-		}
-	}
-	if (url.trim() == '') {
-		$('#url_error').html("Please enter URL");
-		cnt = 1;
-		f++;
-		if(f == 1)
-		{
-			$('#url').focus();
 		}
 	}
 	if (preview.trim() == '') {

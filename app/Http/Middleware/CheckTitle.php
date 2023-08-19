@@ -26,6 +26,9 @@ class CheckTitle
 		{
 			abort(404);
 		}
+		elseif($user->block_website == 1 || $user->deactive_account == 'deactive'){
+			return response()->view('front.block_website');
+		}
 		else
 		{
 			return $next($request);

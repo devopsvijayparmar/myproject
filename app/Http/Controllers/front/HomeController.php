@@ -59,22 +59,32 @@ class HomeController extends Controller
 		$this->data['amazingfeatures'] = AmazingFeatures::all(); 
 		$this->data['pricing'] = Pricing::all(); 
 		$this->data['system'] = System::all(); 
-		$this->data['slider'] = Slider::all(); 
-		$this->data['webtemplates'] = WebTemplates::all(); 
+		$this->data['webtemplates'] = WebTemplates::getWebTemplates(1); 
+		$this->data['latest_webtemplates'] = WebTemplates::getWebTemplates(2); 
 		return view('front.index',$this->data);
     }
 	
 	public function webTemplate(Request $request)
     {  
 	    $this->data['title'] = 'Web Templates';
-	    $this->data['webtemplates'] = WebTemplates::all(); 
+	    $this->data['webtemplates'] = WebTemplates::getWebTemplates(1); 
 		return view('front.web_templates',$this->data);
+    }
+	
+	public function amazingFeatures(Request $request)
+    {  
+	    $this->data['title'] = 'Features';
+		$this->data['amazingfeatures'] = AmazingFeatures::all(); 
+		$this->data['system'] = System::all(); 
+		$this->data['webtemplates'] = WebTemplates::getWebTemplates(1); 
+		return view('front.amazing_features',$this->data);
     }
 	
 	public function singleWebTemplate(Request $request,$slug)
     {  
 	    $this->data['title'] = 'Web Templates';
 	    $this->data['webtemplates'] = WebTemplates::getRecordBySlug($slug); 
+		$this->data['latest_webtemplates'] = WebTemplates::getWebTemplates(2); 
 		return view('front.single_web_templates',$this->data);
     }
 	

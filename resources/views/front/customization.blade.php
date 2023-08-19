@@ -9,7 +9,7 @@
     <div class="container">
       <div class="section-title text-center" style="margin-bottom: 40px;">
         <h2>Customization  Support</h2>
-        <p class="separator">We value your feedback and would greatly appreciate it if you could take a moment to share your thoughts on how we can improve websphare to better meet your needs and expectations</p>
+        <p class="separator">We value your feedback and would greatly appreciate it if you could take a moment to share your thoughts on how we can improve {{config('enum.site_title')}} to better meet your needs and expectations</p>
       </div>
     </div>
 

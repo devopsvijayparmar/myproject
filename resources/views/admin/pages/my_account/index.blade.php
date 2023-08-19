@@ -44,7 +44,7 @@
 							<b><a target="_blank" style="color:#303e67!important;" href="{{url('/pricing')}}"><i class="fas fa-tags"></i> Pricing</a></b>
 							</li>
 							<li class="list-group-item">
-							<b><a target="_blank" style="color:#303e67!important;" href="{{url('/')}}"><i class="fas fa-globe"></i> www.websphare.com</a></b>
+							<b><a target="_blank" style="color:#303e67!important;" href="{{url('/')}}"><i class="fas fa-globe"></i> {{config('enum.site_name')}}</a></b>
 							</li>
 							</ul>
 							

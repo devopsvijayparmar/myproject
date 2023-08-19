@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>@if(isset($title)) {{$title}} | @endif Websphare</title>
+  <title>@if(isset($title)) {{$title}} | @endif {{config('enum.site_title')}}</title>
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta content="" name="keywords">
   <meta content="" name="description">
@@ -30,6 +30,7 @@
         <ul class="nav-menu">
 			<li id="hometab"><a href="{{ url('/') }}">Home</a></li>
 			<li id="templatetab"><a href="{{ url('/web-templates') }}">Website Builders</a></li>
+			<li id="amazingtab"><a href="{{ url('/amazing-features') }}">Features</a></li>
 		    <li id="pricingtab"><a href="{{ url('/pricing') }}">Pricing</a></li>
 			<li id="abouttab"><a href="{{ url('/page/about-us') }}">About Us</a></li>
 			<li id="businesstab"><a href="{{ url('/business') }}">Business</a></li>

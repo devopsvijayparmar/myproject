@@ -126,7 +126,7 @@
           </div>
 		  @endforeach
 			<div class="center">
-			   {{ $products->appends(request()->except('page'))->links("pagination::bootstrap-4") }}
+			   {{ $mobiles->appends(request()->except('page'))->links("pagination::bootstrap-4") }}
 			</div>
         </div>
       </div>

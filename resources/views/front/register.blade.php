@@ -55,7 +55,7 @@
 				 <span class="validation-error" id="confirm_password_error">{{$errors->register->first('confirm_password')}}</span>
                </div>
 			   
-			   <p style="margin:0;" class="form__checkboxText"><input id="terms_of_use_privacy_policy" name="terms_of_use_privacy_policy" type="checkbox" value="yes"> <strong>I agree to websphare's <a class="form__checkboxLink" href="{{url('/page/terms-of-use')}}" target="_blank" rel="noopener noreferrer">Terms &amp; Conditions</a> and <a class="form__checkboxLink" href="{{url('/page/privacy-policy')}}" target="_blank" rel="noopener noreferrer">Privacy Policy</a></strong> <span class="validation-error" id="terms_of_use_privacy_policy_error">{{$errors->register->first('terms_of_use_privacy_policy_error')}}</span></p>
+			   <p style="margin:0;" class="form__checkboxText"><input id="terms_of_use_privacy_policy" name="terms_of_use_privacy_policy" type="checkbox" value="yes"> <strong>I agree to {{config('enum.site_title')}}'s <a class="form__checkboxLink" href="{{url('/page/terms-of-use')}}" target="_blank" rel="noopener noreferrer">Terms &amp; Conditions</a> and <a class="form__checkboxLink" href="{{url('/page/privacy-policy')}}" target="_blank" rel="noopener noreferrer">Privacy Policy</a></strong> <span class="validation-error" id="terms_of_use_privacy_policy_error">{{$errors->register->first('terms_of_use_privacy_policy_error')}}</span></p>
 			   
               
               <div class="text-center"><button class="btn" type="submit" style="width: 100%;">Register</button></div>

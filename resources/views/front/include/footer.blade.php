@@ -5,7 +5,7 @@
         <div class="col-md-12 col-lg-4">
           <div class="footer-logo">
 
-			<a href="{{ url('/') }}"  class="navbar-brand logo-bg"><h4>WEBSPHARE</h4></a></br>
+			<a href="{{ url('/') }}"  class="navbar-brand logo-bg"><h4>{{config('enum.site_title')}}</h4></a></br>
             <p>Sign up now for our free website builder, select the type of website you want to create, publish your website, and go live to start building your professional online presence today.</p>
 
           </div>
@@ -80,7 +80,7 @@
 
     <div class="copyrights">
       <div class="container">
-        <p>&copy; Copyrights {{date('Y')}} websphare. All rights reserved.</p>
+        <p>&copy; Copyrights {{date('Y')}} {{config('enum.site_title')}}. All rights reserved.</p>
        
       </div>
     </div>

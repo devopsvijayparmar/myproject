@@ -1,8 +1,5 @@
  @include('front.include.header')
 
-  <!--==========================
-    Price Section
-  ============================-->
    <section id="pricing" class="padd-section padd-top text-center wow fadeInUp">
 
     <div class="container">
@@ -16,9 +13,7 @@
 	{!! $cms->description !!}
     </div>
   </section>
-  <!--==========================
-    Footer
-  ============================-->
+
  @include('front.include.footer')
  
 @if($cms->type == 'about-us')

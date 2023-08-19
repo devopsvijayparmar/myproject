@@ -13,11 +13,20 @@ class WebTemplates extends Authenticatable
     use Notifiable;
 	use SoftDeletes;
     protected $table = 'front_web_templates';
-    protected $fillable = ['title','description','image','url','preview','created_by','created_at','updated_by','updated_at','deleted_by','deleted_at','slug'];
+    protected $fillable = ['title','description','image','site_name','preview','created_by','created_at','updated_by','updated_at','deleted_by','deleted_at','slug','type'];
 	
 	public static function getlist(){
 		$query = WebTemplates::get();
 	    return $query;
+	}
+	
+	public static function getWebTemplates($type){
+		$query = WebTemplates::where('type',$type)->get();
+	    return $query;
+	}
+	
+	function getImageUrlAttribute(){
+		return $this->image == null ? asset('/images/image_not_found.jpg') : asset('/uploads/front/web_templates/'.$this->image);
 	}
 	
 	public static function getRecordBySlug($slug){

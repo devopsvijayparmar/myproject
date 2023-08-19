@@ -24,8 +24,12 @@ Route::get("/testpage", function(){
 });
 
 /*supar admin*/
-Route::group(['prefix' => 'super-admin', 'namespace' => 'super_admin','middleware' => ['preventBackHistory']], function () {
-	Route::get('home', 'HomeController@index');
+Route::get('super-admin/login', 'Auth\SuperadminLoginController@index')->name('super-admin.login');
+Route::post('super-admin/login', 'Auth\SuperadminLoginController@login')->name('super-admin.login-post');
+Route::get('super-admin/logout', 'Auth\SuperadminLoginController@logout')->name('super-admin.logout');
+
+Route::group(['prefix' => 'super-admin', 'namespace' => 'super_admin','middleware' => ['preventBackHistory','auth_superadmin']], function () {
+	Route::get('dashboard', 'HomeController@index')->name('super-admin.dashboard');
 	Route::resource('web-templates', 'WebTemplatesController');
 	Route::resource('pricing', 'PricingController');
 	Route::get('/cms/{type}', 'CMSController@index');
@@ -118,7 +122,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'admin','middleware' => ['prev
 /*admin Routes End*/
 
 /*supar admin front*/
-Route::domain('www.websphare.com')->group(function () {
+Route::domain(config('enum.domain'))->group(function () {
 	Route::group(['namespace' => 'front','middleware' => ['preventBackHistory']], function () {
 		Route::get('/register', 'RegisterController@index');
 		Route::get('/signup', 'RegisterController@index');
@@ -127,6 +131,7 @@ Route::domain('www.websphare.com')->group(function () {
 		Route::post('/check-email', 'RegisterController@checkEmail');
 		Route::get('verify-account/{token}', 'RegisterController@verifyAccount');
 		Route::get('/', 'HomeController@index');
+		Route::get('/amazing-features', 'HomeController@amazingFeatures');
 		Route::get('/web-templates', 'HomeController@webTemplate');
 		Route::get('/web-templates/{id}', 'HomeController@singleWebTemplate');
 		Route::get('/pricing', 'HomeController@pricing');
@@ -146,7 +151,7 @@ Route::domain('www.websphare.com')->group(function () {
 /*supar admin front*/
 
 /*Front*/
-Route::domain('{subdomain}.websphare.com')->group(function () {
+Route::domain('{subdomain}.'.config('enum.subdomain'))->group(function () {
 	Route::get('landing-page/{url_name}', 'admin\CommanController@preview');
 	
 	Route::get('page/{url_name}', 'websites\HomeController@page');

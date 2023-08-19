@@ -37,7 +37,7 @@ class CommomEmailNotificationListener
        
 		Mail::send('emails.users.common_email', $data, function($message) use ($data)
         {
-            $message->to($data['email'], 'websphare')->subject($data['subject']);
+            $message->to($data['email'], config('enum.site_title'))->subject($data['subject']);
         });
 
     }

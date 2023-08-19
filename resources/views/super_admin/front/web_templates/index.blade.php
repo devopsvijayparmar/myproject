@@ -33,6 +33,7 @@
 				  <th>No.</th>
 				  <th>Image</th>
 				  <th>Title</th>
+				  <th>Type</th>
 				  <th>Action</th>
 				</tr>
 				</thead>
@@ -45,8 +46,9 @@
 						?>
 						<tr id="{{$i}}">
 						  <td>{{$i}}</td>
-						  <td><img class="rp-img" src="<?php echo url('/uploads/front/web_templates//'.$retrieved_data->image);?>"></td>
+						  <td><img class="rp-img" src="{{$retrieved_data->image_url}}"></td>
 						  <td>{{$retrieved_data->title}}</td>
+						  <td>@if($retrieved_data->type == 1) Website Templates @else Latest Webtemplates @endif</td>
 						  <td>
 						  <a title="View" class="mr-2" href="<?php echo URL::to('/'); ?>/super-admin/web-templates/{{App\Helpers\CryptHelper::encryptstring($retrieved_data->id)}}"><i class="fas fa-eye text-info font-16"></i></a>
 						  

@@ -9,7 +9,7 @@
 				<td align="center">
 					<a href="{{url('/')}}" target="_blank" style="color: #596167; float:left; width:100%;padding: 25px 0px;text-align:center; font-size: 13px;">
 					<font size="3" color="#596167">
-					<img src="{{$site_logo}}" style="height: 55px;width: 221px;" alt="Websphare" border="0"/></font></a>
+					<img src="{{$site_logo}}" style="height: 55px;width: 221px;" alt="{{ucfirst(config('enum.site_title'))}}" border="0"/></font></a>
 				</td>
 			</tr>
 			<tr>
@@ -18,7 +18,7 @@
 					<table width="90%" border="0" cellspacing="0" cellpadding="0">
 						<tr>
 							<td>
-								Welcome to Websphare Web Services!</strong><br/><br/>
+								Welcome to {{config('enum.site_title')}} Web Services!</strong><br/><br/>
 								<strong>Account Management & Credentials.<strong><br/><br/>
 							</td>
 						</tr>
@@ -34,9 +34,9 @@
 						</tr>
 						<tr>
 							<td>
-							    Thank you for your participation in the Websphare Web Services community.<br/><br/>
+							    Thank you for your participation in the {{ucfirst(config('enum.site_title'))}} Web Services community.<br/><br/>
 								Sincerely,<br/>
-								The Websphare Team
+								The {{ucfirst(config('enum.site_title'))}} Team
 								<div style="height: 60px; line-height: 60px; font-size: 10px;"></div>
 							</td>
 						</tr>
@@ -50,7 +50,7 @@
 						<tr>
 						<td align="center" style="padding:20px;flaot:left;width:100%; text-align:center;">
 							<font size="3" color="#96a5b5" style="font-size: 13px;">
-								<span style="font-size: 13px; color: #96a5b5;">{{date('Y')}} © Websphare. ALL Rights Reserved.</span>
+								<span style="font-size: 13px; color: #96a5b5;">{{date('Y')}} © {{ucfirst(config('enum.site_title'))}}. ALL Rights Reserved.</span>
 							</font>				
 						</td>
 						</tr>			

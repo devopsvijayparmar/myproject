@@ -14,6 +14,12 @@ return [
     */
 
     'website' =>'websphare.com',
+    'domain' =>'www.websphare.com',
+    'subdomain' =>'websphare.com',
+    'site_title' =>'websphare',
+    'site_name' =>'websphare.com',
+    'support_email' =>'support@websphare.com',
+    'ssh' =>'http://',
 
   
 ];

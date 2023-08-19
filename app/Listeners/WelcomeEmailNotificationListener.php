@@ -39,15 +39,14 @@ class WelcomeEmailNotificationListener
 		if(isset($site_setting->site_logo)){
 			$site_logo = $site_setting->site_logo;
 		}
-		
 	    $adminlink = url('/admin/dashboard');
-	    $websitelink = 'http://'.$user->user['title'].'.'.config('enum.website');
+	    $websitelink = config('enum.ssh').$user->user['title'].'.'.config('enum.website');
 		
         $data = array( 'email' => $user->user['email'], 'name' => $user->user['name'], 'adminlink'=>$adminlink,'websitelink'=>$websitelink,'site_logo'=>$site_logo);
        
 		Mail::send('emails.users.welcome_email', $data, function($message) use ($data)
         {
-            $message->to($data['email'], 'Websphare')->subject('Your Websphare Account is Ready - Get Started Now');
+            $message->to($data['email'], config('enum.site_title'))->subject('Your '.config('enum.site_title').' Account is Ready - Get Started Now');
         });
 
     }
