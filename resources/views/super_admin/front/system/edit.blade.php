@@ -68,48 +68,4 @@
 $('#frontendetab').addClass('active');
 
 CKEDITOR.replace( 'description' );
-
-   $('#main_id').submit(function (e) {
-	   
-	$(':input[type="submit"]').prop('disabled', true);
-	var title = $('#title').val();
-	var image = $('#image').val();
-	var description = CKEDITOR.instances.description.getData();
-	
-	var cnt = 0;
-	var f = 0;
-	
-	$('#title_error').html("");
-	$('#image_error').html("");
-	$('#description_error').html("");
-	$('.note-frame').removeClass("autofocous");
-	
-	if (title.trim() == '') {
-		$('#title_error').html("Please enter Title");
-		cnt = 1;
-		f++;
-		if(f == 1)
-		{
-			$('#title').focus();
-		}
-	}
-	
-	if (description.trim() == '') {
-		$('#description_error').html("Please enter Description");
-		cnt = 1;
-		f++;
-		if(f == 1)
-		{
-			$(".note-frame").addClass("autofocous");
-		}
-	}
-	
-    
-	if (cnt == 1) {
-		$(':input[type="submit"]').prop('disabled', false);
-		return false;
-	} else {
-		return true;
-	}
-});
 </script>

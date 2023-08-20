@@ -73,9 +73,7 @@
  @include('super_admin.include.footer')
 <script>
 $('#frontendetab').addClass('active');
-
-
-   /*Image 1 read url*/
+/*Image 1 read url*/
 function readURL(input) {
 	if (input.files && input.files[0]) {
 	var reader = new FileReader();
@@ -96,46 +94,4 @@ $("#image").change(function() {
   readURL(this);
 });
 /*Image 1 read url*/
-
-   $('#main_id').submit(function (e) {
-	   
-	$(':input[type="submit"]').prop('disabled', true);
-
-	var image = $('#image').val();
-	
-	var cnt = 0;
-	var f = 0;
-	
-	$('#image_error').html("");
-	
-	regex = new RegExp("(.*?)\.(jpg|png|jpeg|PNG)$");
-	if (image) {
-		if (!(regex.test(image_1))) {
-		   
-		  $('#image_error').html("Only JPG, PNG and JPEG image are allowed");
-			cnt = 1;
-			f++;
-			if(f == 1)
-			{
-				$("#image").addClass("autofocous");
-			}
-		}
-	}
-	
-	if (image) {
-		var file_size = $('#image')[0].files[0].size;
-		if(file_size>2097152) {
-			$("#image_error").html("File size exceeds 2 MB");
-			$("#image").addClass("autofocous");
-			cnt = 1;
-		} 
-	}
-	
-	if (cnt == 1) {
-		$(':input[type="submit"]').prop('disabled', false);
-		return false;
-	} else {
-		return true;
-	}
-});
 </script>

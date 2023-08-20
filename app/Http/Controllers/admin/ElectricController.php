@@ -34,9 +34,9 @@ class ElectricController extends Controller
 		'name' => 'required|string|max:255',
 		'price' => 'regex:/^\d+(\.\d{1,2})?$/',
 		'description' => 'required|max:500',
-		'image_1'=>'required|mimes:jpeg,jpg,png|max:20480',
-		'image_2'=>'mimes:jpeg,jpg,png|max:20480',
-		'image_3'=>'mimes:jpeg,jpg,png|max:20480',
+		'image_1'=>'required|mimes:jpeg,jpg,svg,png,PNG|max:20480',
+		'image_2'=>'mimes:jpeg,jpg,svg,png,PNG|max:20480',
+		'image_3'=>'mimes:jpeg,jpg,svg,png,PNG|max:20480',
     ]; 
 	
 	protected $validationRulesEdit = [
@@ -45,9 +45,9 @@ class ElectricController extends Controller
 		'name' => 'required|string|max:255',
 		'price' => 'regex:/^\d+(\.\d{1,2})?$/',
 		'description' => 'required|max:500',
-		'image_1'=>'mimes:jpeg,jpg,png|max:20480',
-		'image_2'=>'mimes:jpeg,jpg,png|max:20480',
-		'image_3'=>'mimes:jpeg,jpg,png|max:20480',
+		'image_1'=>'mimes:jpeg,jpg,svg,png,PNG|max:20480',
+		'image_2'=>'mimes:jpeg,jpg,svg,png,PNG|max:20480',
+		'image_3'=>'mimes:jpeg,jpg,svg,png,PNG|max:20480',
     ];  
 	 
 	function __construct()

@@ -28,9 +28,9 @@ class BooksController extends Controller
 		'author' => 'required|max:255',
 		'date_released' => 'required',
 		'description' => 'required|max:2000',
-		'image_1'=>'required|mimes:jpeg,jpg,png|max:20480',
-		'image_2'=>'mimes:jpeg,jpg,png|max:20480',
-		'image_3'=>'mimes:jpeg,jpg,png|max:20480',
+		'image_1'=>'required|mimes:jpeg,jpg,svg,png|max:20480',
+		'image_2'=>'mimes:jpeg,jpg,svg,png|max:20480',
+		'image_3'=>'mimes:jpeg,jpg,svg,png|max:20480',
     ]; 
 	
 	protected $validationRulesEdit = [
@@ -39,9 +39,9 @@ class BooksController extends Controller
 		'author' => 'required|max:255',
 		'date_released' => 'required',
 		'description' => 'required|max:2000',
-		'image_1'=>'mimes:jpeg,jpg,png|max:20480',
-		'image_2'=>'mimes:jpeg,jpg,png|max:20480',
-		'image_3'=>'mimes:jpeg,jpg,png|max:20480',
+		'image_1'=>'mimes:jpeg,jpg,svg,png|max:20480',
+		'image_2'=>'mimes:jpeg,jpg,svg,png|max:20480',
+		'image_3'=>'mimes:jpeg,jpg,svg,png|max:20480',
     ]; 
     /**
      * Display a listing of the resource.

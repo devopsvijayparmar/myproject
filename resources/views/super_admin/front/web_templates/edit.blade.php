@@ -64,9 +64,16 @@
 						
 						<div class="col-md-6">
 							<label for="exampleInputFile">Image<span class="error">*</span></label>
-							<input type="file" onchange="ValidateSize(this)" class="form-control" name="image" id="image">
+							<input type="file" class="form-control" name="image" id="image">
 							<img class="mar-top-10 rp-img100" src="<?php echo url('/uploads/front/web_templates/'.$data->image);?>" id="blah"/ ></br>
 							<span class="error" id='image_error'>{{$errors->WebTemplates->first('image')}}</span>
+						</div>
+						
+						<div class="col-md-6">
+							<label for="exampleInputFile">Image 1<span class="error">*</span></label>
+							<input type="file" class="form-control" name="image_1" id="image_1">
+							<img class="mar-top-10 rp-img100" src="<?php echo url('/uploads/front/web_templates/'.$data->image_1);?>" id="blah_1"/ ></br>
+							<span class="error" id='image_error'>{{$errors->WebTemplates->first('image_1')}}</span>
 						</div>
 						
 						<div class="form-group  col-md-12">
@@ -112,71 +119,26 @@ function readURL(input) {
 $("#image").change(function() {
   readURL(this);
 });
-/*Image 1 read url*/
 
-  function ValidateSize(file) {
-        var FileSize = file.files[0].size / 1024 / 1024; // in MB
+function readURL1(input) {
+	if (input.files && input.files[0]) {
+	var reader = new FileReader();
 
-        if (FileSize > 2) {
-            alert('File size exceeds 2 MB');
-        } else {
-
-        }
-    }
-  
-   $('#main_id').submit(function (e) {
-	   
-	$(':input[type="submit"]').prop('disabled', true);
-	var title = $('#title').val();
-	var preview = $('#preview').val();
-	var description = CKEDITOR.instances.description.getData();
-	var image = $('#image').val();
-	
-	
-	var cnt = 0;
-	var f = 0;
-	
-	$('#title_error').html("");
-	$('#preview_error').html("");
-	$('#description_error').html("");
-	$('#image_error').html("");
-	$('.note-frame').removeClass("autofocous");
-	$('#image').removeClass("autofocous");
-
-   
-	if (title.trim() == '') {
-		$('#title_error').html("Please enter Title");
-		cnt = 1;
-		f++;
-		if(f == 1)
-		{
-			$('#title').focus();
-		}
+	reader.onload = function(e) {
+		$('#blah_1').css({
+			height: '100px',
+			width: '100px'
+		});
+		$('#blah_1').attr('src', e.target.result);
+		
 	}
-	if (preview.trim() == '') {
-		$('#preview_error').html("Please enter Preview");
-		cnt = 1;
-		f++;
-		if(f == 1)
-		{
-			$('#preview').focus();
-		}
+	reader.readAsDataURL(input.files[0]);
 	}
-	if (description.trim() == '') {
-		$('#description_error').html("Please enter Description");
-		cnt = 1;
-		f++;
-		if(f == 1)
-		{
-			$(".note-frame").addClass("autofocous");
-		}
-	}
+}
 
-	if (cnt == 1) {
-		$(':input[type="submit"]').prop('disabled', false);
-		return false;
-	} else {
-		return true;
-	}
+$("#image_1").change(function() {
+  readURL1(this);
 });
+
+
 </script>

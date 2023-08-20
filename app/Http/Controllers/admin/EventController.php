@@ -31,7 +31,7 @@ class EventController extends Controller
 		'start_date' => 'required|date',
 		'end_date' => 'required|date',
 		'description' => 'required|max:5000',
-		'image'=>'required|mimes:jpeg,jpg,png|max:20480'
+		'image'=>'required|mimes:jpeg,jpg,svg,png,PNG,|max:20480'
     ]; 
 	
 	protected $validationRulesEdit = [
@@ -40,7 +40,7 @@ class EventController extends Controller
 		'start_date' => 'required|date',
 		'end_date' => 'required|date',
 		'description' => 'required|max:5000',
-		'image'=>'mimes:jpeg,jpg,png|max:20480'
+		'image'=>'mimes:jpeg,jpg,svg,png,PNG|max:20480'
     ];  
 	 
 	function __construct()

@@ -49,6 +49,7 @@ class WebTemplatesController extends Controller
 			'site_name' => 'required',
 			'description' => 'required',
 			'image'=>'required'
+			'image_1'=>'required'
         ]);
 
         if ($validator->fails()) {
@@ -68,6 +69,14 @@ class WebTemplatesController extends Controller
 			$name_1 = str_replace(" ", "", date("Ymdhis")+1 . $name_1);
 			$file->move(public_path() . '/uploads/front/web_templates/', $name_1);
 			$input['image'] = $name_1;
+		}
+		
+		if ($request->hasfile('image_1')) {
+			$file_1 = $request->file('image_1');
+			$name_2 = $file_1->getClientOriginalName();
+			$name_2 = str_replace(" ", "", date("Ymdhis")+1 . $name_2);
+			$file_1->move(public_path() . '/uploads/front/web_templates/', $name_2);
+			$input['image_1'] = $name_2;
 		}
 		
 		$web_templates = WebTemplates::create($input);
@@ -99,6 +108,9 @@ class WebTemplatesController extends Controller
     	 $validator = Validator::make($request->all(), [
 			'title' => 'required',
 			'site_name' => 'required',
+			'description' => 'required',
+			'image'=>'required'
+			'image_1'=>'required'
         ]);
 
         if ($validator->fails()) {
@@ -119,6 +131,15 @@ class WebTemplatesController extends Controller
 			$input['image'] = $name_1;
 		}
         
+		if ($request->hasfile('image_1')) {
+			$file_1 = $request->file('image_1');
+			$name_2 = $file_1->getClientOriginalName();
+			$name_2 = str_replace(" ", "", date("Ymdhis")+1 . $name_2);
+			$file_1->move(public_path() . '/uploads/front/web_templates/', $name_2);
+			$input['image_1'] = $name_2;
+		}
+		
+		
 		$web_templates = WebTemplates::find($id);
 		$web_templates->update($input);
 		

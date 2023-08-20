@@ -26,13 +26,13 @@ class BlogController extends Controller
 	protected $validationRules = [
 		'title' => 'required|string|max:255',
 		'description' => 'required|max:5000',
-		'image'=>'required|mimes:jpeg,jpg,png|max:20480'
+		'image'=>'required|mimes:jpeg,jpg,svg,png,PNG|max:20480'
     ]; 
 	
 	protected $validationRulesEdit = [
 		'title' => 'required|string|max:255',
 		'description' => 'required|max:5000',
-		'image'=>'mimes:jpeg,jpg,png|max:20480'
+		'image'=>'mimes:jpeg,jpg,svg,png,PNG|max:20480'
     ]; 
     /**
      * Display a listing of the resource.

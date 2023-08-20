@@ -33,9 +33,9 @@ class ProductsController extends Controller
 		'name' => 'required|string|max:255',
 		'price' => 'max:9|regex:/^\d+(\.\d{1,2})?$/',
 		'description' => 'required|max:5000',
-		'image_1'=>'required|mimes:jpeg,jpg,png|max:20480',
-		'image_2'=>'mimes:jpeg,jpg,png|max:20480',
-		'image_3'=>'mimes:jpeg,jpg,png|max:20480',
+		'image_1'=>'required|mimes:jpeg,jpg,png,PNG,svg|max:20480',
+		'image_2'=>'mimes:jpeg,jpg,png,PNG,svg|max:20480',
+		'image_3'=>'mimes:jpeg,jpg,png,PNG,svg|max:20480',
     ]; 
 	
 	protected $validationRulesEdit = [
@@ -43,9 +43,9 @@ class ProductsController extends Controller
 		'name' => 'required|string|max:255',
 		'price' => 'max:9|regex:/^\d+(\.\d{1,2})?$/',
 		'description' => 'required|max:5000',
-		'image_1'=>'mimes:jpeg,jpg,png|max:20480',
-		'image_2'=>'mimes:jpeg,jpg,png|max:20480',
-		'image_3'=>'mimes:jpeg,jpg,png|max:20480',
+		'image_1'=>'mimes:jpeg,jpg,png,PNG,svg|max:20480',
+		'image_2'=>'mimes:jpeg,jpg,png,PNG,svg|max:20480',
+		'image_3'=>'mimes:jpeg,jpg,png,PNG,svg|max:20480',
     ];   
 	 
 	 

@@ -32,18 +32,18 @@ class ProjectsController extends Controller
 		'project_type_id' => 'required|max:11',
 		'name' => 'required|string|max:255',
 		'description' => 'required|max:50000',
-		'image_1'=>'required|mimes:jpeg,jpg,png|max:20480',
-		'image_2'=>'mimes:jpeg,jpg,png|max:20480',
-		'image_3'=>'mimes:jpeg,jpg,png|max:20480',
+		'image_1'=>'required|mimes:jpeg,jpg,png,PNG,svg|max:20480',
+		'image_2'=>'mimes:jpeg,jpg,png,PNG,svg|max:20480',
+		'image_3'=>'mimes:jpeg,jpg,png,PNG,svg|max:20480',
     ]; 
 	
 	protected $validationRulesEdit = [
 		'project_type_id' => 'required|max:11',
 		'name' => 'required|string|max:255',
 		'description' => 'required|max:50000',
-		'image_1'=>'mimes:jpeg,jpg,png|max:20480',
-		'image_2'=>'mimes:jpeg,jpg,png|max:20480',
-		'image_3'=>'mimes:jpeg,jpg,png|max:20480',
+		'image_1'=>'mimes:jpeg,jpg,png,PNG,svg|max:20480',
+		'image_2'=>'mimes:jpeg,jpg,png,PNG,svg|max:20480',
+		'image_3'=>'mimes:jpeg,jpg,png,PNG,svg|max:20480',
     ];    
 	 
 	 
