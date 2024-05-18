@@ -19,7 +19,7 @@
 			</div>
 			@endforeach
 			@else
-				<h4 class="text-center">No Record Available</h4>
+				<div class="col-md-12"><h4 class="text-center">No Record Available</h4></div>
 			@endif
 		</div>
 		

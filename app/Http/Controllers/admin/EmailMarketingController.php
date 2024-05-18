@@ -114,9 +114,9 @@ class EmailMarketingController extends Controller
 		$input['updated_by'] = $auth->id;
 		
 		$email = EmailMarketing::where('created_by', Auth::user()->id)->where('id',$id)->first();
-		$email->update($input);
 		
 		if($email){
+			$email->update($input);
 			return redirect()->route('email-marketing.index')->with('success', Lang::get('messages.updated'));
 		}else{
 			return redirect()->back()->with('error', Lang::get('messages.error'));

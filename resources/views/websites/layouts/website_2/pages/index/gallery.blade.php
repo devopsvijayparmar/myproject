@@ -22,8 +22,13 @@
 			</div><!--/.col-sm-6-->
 			@endforeach
 			@else
-				<h4 style="margin: 40px;" class="text-center">No Record Available</h4> 
+				<div class="col-md-12"><h4 class="text-center">No Record Available</h4></div>
 			@endif
 		</div>
+		@if(count($gallery) > 0)
+		<div class="text_align_center">
+			<a class="btn btn-primary" href="{{$gallery[0]->gallery_page_link}}">See More...</a>
+		</div>
+		@endif
 	</div>
 </section>

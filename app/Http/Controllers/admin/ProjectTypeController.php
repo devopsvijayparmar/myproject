@@ -122,9 +122,9 @@ class ProjectTypeController extends Controller
 		$input['updated_by'] = $auth->id;
         
 		$project_type = ProjectType::where('created_by',$auth->id)->where('id',$id)->first();
-		$project_type->update($input);
 		
 		if($project_type){
+			$project_type->update($input);
 			return redirect()->route('project-type.index')->with('success', Lang::get('messages.updated'));
 		}else{
 			return redirect()->back()->with('error', Lang::get('messages.error'));

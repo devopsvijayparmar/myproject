@@ -40,7 +40,7 @@
          <a href="{{$blogdata->getDetailPageLink()}}"> <div class="blog_feature_img"> <img class="card-img-top" src="{{$blogdata->image_url}}" alt="#" /> </div></a>
 		 <div class="p-3">
           <div class="post_time">
-            <p><i class="fa fa-clock-o"></i>{{$blogdata->created_at}}</p>
+            <p><i class="fa fa-clock-o"></i> {{date('D, M d, Y',strtotime($blogdata->created_at))}}</p>
           </div>
           <div class="blog_feature_head">
             <h4>{{$blogdata->title}}</h4>

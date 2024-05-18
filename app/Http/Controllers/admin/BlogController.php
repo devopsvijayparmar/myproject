@@ -156,9 +156,9 @@ class BlogController extends Controller
 		}
         
 		$blog = Blog::where('created_by', $auth->id)->where('id',$id)->first();
-		$blog->update($input);
 		
 		if($blog){
+			$blog->update($input);
 			return redirect()->route('blog.index')->with('success', Lang::get('messages.updated'));
 		}else{
 			return redirect()->back()->with('error', Lang::get('messages.error'));

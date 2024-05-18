@@ -37,9 +37,9 @@ class PlanController extends Controller
 	protected $validationRulesEdit = [
 		'name' => 'required|string|max:255',
 		'description' => 'required|max:2000',
-		'image_1'=>'mimes:jpeg,jpg,png|max:20480',
-		'image_2'=>'mimes:jpeg,jpg,png|max:20480',
-		'image_3'=>'mimes:jpeg,jpg,png|max:20480',
+		'image_1'=>'mimes:jpeg,jpg,png,PNG,svg|max:20480',
+		'image_2'=>'mimes:jpeg,jpg,png,PNG,svg|max:20480',
+		'image_3'=>'mimes:jpeg,jpg,png,PNG,svg|max:20480',
     ];  
 	 
 	 
@@ -180,9 +180,9 @@ class PlanController extends Controller
 		}
 		
 		$plan = Plan::where('created_by', Auth::user()->id)->where('id',$id)->first();
-		$plan->update($input);
 	
 		if($plan){
+			$plan->update($input);
 			return redirect()->route('plan.index')->with('success', Lang::get('messages.updated'));
 		}else{
 			return redirect()->back()->with('error', Lang::get('messages.error'));

@@ -25,8 +25,8 @@
 					
 					<div class="col-md-6">
 					  <h3> {{ $event->title }}</h3>
-					  <small>{{date('D, M d, Y',strtotime($event->start_date))}}</small>
-					  <small>{{date('D, M d, Y',strtotime($event->end_date))}}</small>
+					  <small>{{date('F j, Y, g:i a',strtotime($event->start_date))}}</small>
+					  <small>{{date('F j, Y, g:i a',strtotime($event->end_date))}}</small>
 					  {!! $event->description !!}
 					</div>
 					</div>

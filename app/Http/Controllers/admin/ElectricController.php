@@ -195,9 +195,9 @@ class ElectricController extends Controller
 		}
 		
 		$electric = Electric::where('created_by', Auth::user()->id)->where('id',$id)->first();
-		$electric->update($input);
 		
 		if($electric){
+			$electric->update($input);
 			return redirect()->route('electric.index')->with('success', Lang::get('messages.updated'));
 		}else{
 			return redirect()->back()->with('error', Lang::get('messages.error'));

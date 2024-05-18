@@ -163,9 +163,9 @@ class PhotoShootsController extends Controller
 		}
 		
 		$photoshoots = PhotoShoots::where('created_by', Auth::user()->id)->where('id',$id)->first();
-		$photoshoots->update($input);
 		
 		if($photoshoots){
+			$photoshoots->update($input);
 			return redirect()->route('photo-shoots.index')->with('success', Lang::get('messages.updated'));
 		}else{
 			return redirect()->back()->with('error', Lang::get('messages.error'));

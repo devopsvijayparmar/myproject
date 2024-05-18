@@ -4,6 +4,7 @@ namespace App\Http\Controllers\super_admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class HomeController extends Controller
 {
@@ -24,6 +25,8 @@ class HomeController extends Controller
      */
     public function index()
     {
+		$register = User::find(12);
+			$register->assignRole(array('digital-startup'));
         return view('super_admin.home');
     }
 }

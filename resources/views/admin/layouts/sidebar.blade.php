@@ -20,14 +20,7 @@
 				</a>
 			</li>
 			
-			@can('event')
-			<li class="nav-item">
-				<a href="{{route('event.index')}}" class="nav-link" id="eventtab">
-				<i class="nav-icon fab fa-bandcamp"></i>
-				<p> Event</p>
-				</a>
-			</li>
-			@endcan
+		
 			
 			@can('category')
 			<li class="nav-item">
@@ -47,11 +40,38 @@
 			</li>
 			@endcan
 			
-			@can('blog')
+			 @can('products')
 			<li class="nav-item">
-				<a href="{{route('blog.index')}}" class="nav-link" id="blogtab">
-				<i class="nav-icon fas fa-th-large"></i>
-				<p>Blog</p>
+				<a href="{{route('products.index')}}" class="nav-link" id="producttab">
+				<i class="nav-icon fab fa-product-hunt"></i>
+				<p>Products</p>
+				</a>
+			</li>
+			@endcan
+			
+			@can('books')
+			<li class="nav-item">
+				<a href="{{route('books.index')}}" class="nav-link" id="bookstab">
+				<i class="nav-icon fas fa-book-open"></i>
+				<p>Books</p>
+				</a>
+			</li>
+			@endcan
+			
+			@can('orders')
+		    <li class="nav-item">
+				<a href="{{route('orders.index')}}" class="nav-link" id="orderstab">
+				<i class="nav-icon fas fa-archive"></i>
+				<p>Orders </p>
+				</a>
+			</li>
+			@endcan
+			
+			@can('project_type')
+		    <li class="nav-item">
+				<a href="{{route('project-type.index')}}" class="nav-link" id="projecttypetab">
+				<i class="nav-icon fas fa-align-justify"></i>
+				<p>Project Type</p>
 				</a>
 			</li>
 			@endcan
@@ -64,26 +84,8 @@
 				</a>
 			</li>
 			@endcan
-		    
-			@can('project_type')
-		    <li class="nav-item">
-				<a href="{{route('project-type.index')}}" class="nav-link" id="projecttypetab">
-				<i class="nav-icon fas fa-align-justify"></i>
-				<p>Project Type</p>
-				</a>
-			</li>
-			@endcan
-		  
-		    @can('products')
-			<li class="nav-item">
-				<a href="{{route('products.index')}}" class="nav-link" id="producttab">
-				<i class="nav-icon fab fa-product-hunt"></i>
-				<p>Products</p>
-				</a>
-			</li>
-			@endcan
-		  
-		    @can('projects')
+			
+			@can('projects')
 		    <li class="nav-item">
 				<a href="{{route('projects.index')}}" class="nav-link" id="projecttab">
 				<i class="nav-icon fab fa-product-hunt"></i>
@@ -91,15 +93,25 @@
 				</a>
 			</li>
 			@endcan
-		  
-		    @can('orders')
-		    <li class="nav-item">
-				<a href="{{route('orders.index')}}" class="nav-link" id="orderstab">
-				<i class="nav-icon fas fa-archive"></i>
-				<p>Orders </p>
+			
+			@can('blog')
+			<li class="nav-item">
+				<a href="{{route('blog.index')}}" class="nav-link" id="blogtab">
+				<i class="nav-icon fas fa-th-large"></i>
+				<p>Blog</p>
 				</a>
 			</li>
 			@endcan
+			
+		    @can('event')
+			<li class="nav-item">
+				<a href="{{route('event.index')}}" class="nav-link" id="eventtab">
+				<i class="nav-icon fab fa-bandcamp"></i>
+				<p> Event</p>
+				</a>
+			</li>
+			@endcan
+		  
 		  
 		    @can('plan')
 		    <li class="nav-item">
@@ -146,11 +158,20 @@
 			</li>
 			@endcan
 			
-			@can('books')
+			@can('service')
 			<li class="nav-item">
-				<a href="{{route('books.index')}}" class="nav-link" id="bookstab">
-				<i class="nav-icon fas fa-book-open"></i>
-				<p>Books</p>
+				<a href="{{route('service.index')}}" class="nav-link" id="servicetab">
+				<i class="nav-icon fas fa-sign-language"></i>
+				<p>Service</p>
+				</a>
+			</li>
+			@endcan
+			
+			@can('gallery')
+			<li class="nav-item">
+				<a href="{{route('gallery.index')}}" class="nav-link" id="gallery-tab">
+				<i class="nav-icon fas fa-photo-video"></i>
+				<p> Gallery</p>
 				</a>
 			</li>
 			@endcan
@@ -173,24 +194,6 @@
 			</li>
 			@endcan
 			
-		    @can('service')
-			<li class="nav-item">
-				<a href="{{route('service.index')}}" class="nav-link" id="servicetab">
-				<i class="nav-icon fas fa-sign-language"></i>
-				<p>Service</p>
-				</a>
-			</li>
-			@endcan
-			
-			@can('gallery')
-			<li class="nav-item">
-				<a href="{{route('gallery.index')}}" class="nav-link" id="gallery-tab">
-				<i class="nav-icon fas fa-photo-video"></i>
-				<p> Gallery</p>
-				</a>
-			</li>
-			@endcan
-		  
 		    @can('philosophy')
 			<li class="nav-item">
 				<a href="{{route('philosophy.index')}}" class="nav-link" id="philosophy-tab">

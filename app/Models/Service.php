@@ -13,12 +13,17 @@ class Service extends Authenticatable
     use Notifiable;
 	use SoftDeletes;
     protected $table = 'service';
-    protected $fillable = ['name','description','created_by','created_at','updated_by','updated_at','deleted_by','deleted_at'];
+    protected $fillable = ['id','name','description','created_by','created_at','updated_by','updated_at','deleted_by','deleted_at'];
 	
 	public static function getServiceList(){
 		$query = Service::where('created_by',Auth::user()->id);
 	    return $query;
 	}
+	
+	public static function getRecordById($id){
+		$query = Service::where('id',$id)->first();
+		return $query;
+	}	
 	
 	public static function takeRecordForWebsite($id,$node){
 		$query = Service::where('created_by',$id)->orderBy('id','desc')->take($node)->get();

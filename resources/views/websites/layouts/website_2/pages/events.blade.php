@@ -28,8 +28,8 @@
 								<a href="{{$events_data->getDetailPageLink()}}"><img class="card-img-top" src="{{$events_data->image_url}}" alt=""></a>
 								<a class="preview" href="{{$events_data->image_url}}" rel="prettyPhoto"><span class="post-format post-format-video"><i class="fa fa-film"></i></span></a>
 							</div>
-							<div class="entry-date">Start Date: {{ $events_data->start_date}}</div>
-							<div class="entry-date">End Date: {{ $events_data->end_date}}</div>
+							<div class="entry-date">Start Date: {{ $events_data->start_date}}{{date('F j, Y, g:i a',strtotime($events_data->start_date))}}</div>
+							<div class="entry-date">End Date: {{date('F j, Y, g:i a',strtotime($events_data->end_date))}}</div>
 							<h2 class="entry-title"><a href="{{$events_data->getDetailPageLink()}}">{{ $events_data->title}}</a></h2>
 						</header>
 						<div class="entry-content">
@@ -40,7 +40,7 @@
 			</div>
 			@endforeach
 			@else
-			<h4 class="text-center">No Record Available</h4> 
+			<div class="col-md-12"><h4 class="text-center">No Record Available</h4></div>
 			@endif
 		</div>
 		<div class="center">

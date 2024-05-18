@@ -133,9 +133,9 @@ class TypeController extends Controller
 		$input['updated_by'] = $auth->id;
         
 		$type = Type::where('created_by',$auth->id)->where('id',$id)->first();
-		$type->update($input);
 		
 		if($type){
+			$type->update($input);
 			return redirect()->route('type.index')->with('success', Lang::get('messages.updated'));
 		}else{
 			return redirect()->back()->with('error', Lang::get('messages.error'));

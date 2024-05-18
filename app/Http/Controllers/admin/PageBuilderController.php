@@ -118,9 +118,9 @@ class PageBuilderController extends Controller
 		$input['url'] = 'http://'.$auth->title.'.'.config('enum.website').'/page/'.$request->url_name;
 		
 		$page_builder = PageBuilder::where('created_by', $auth->id)->where('id',$id)->first();
-		$page_builder->update($input);
 		
 		if($page_builder){
+			$page_builder->update($input);
 			return redirect()->route('page-builder.index')->with('success', Lang::get('messages.updated'));
 		}else{
 			return redirect()->back()->with('error', Lang::get('messages.error'));

@@ -29,7 +29,7 @@
 					
 					<div class="col-md-6">
 					  <h3> {{ $blog->title }}</h3>
-					  <small>{{date('D, M d, Y',strtotime($blog->created_at))}}</small>
+					  <small> {{date('D, M d, Y',strtotime($blog->created_at))}}</small>
 					  {!! $blog->description !!}
 					</div>
 					</div>

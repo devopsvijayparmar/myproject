@@ -140,9 +140,9 @@ class AddressBookController extends Controller
 		$input['updated_by'] = $auth->id;
      
 	    $address_book = AddressBook::where('created_by', $auth->id)->where('id',$id)->first();
-		$address_book->update($input);
 		
 		if($address_book){
+			$address_book->update($input);
 			return redirect()->route('address-book.index')->with('success', Lang::get('messages.updated'));
 		}else{
 			return redirect()->back()->with('error', Lang::get('messages.error'));

@@ -158,9 +158,9 @@ class EventController extends Controller
 		}
         
 		$event = Event::where('created_by', Auth::user()->id)->where('id',$id)->first();
-		$event->update($input);
 		
 		if($event){
+			$event->update($input);
 			return redirect()->route('event.index')->with('success', Lang::get('messages.updated'));
 		}else{
 			return redirect()->back()->with('error', Lang::get('messages.error'));

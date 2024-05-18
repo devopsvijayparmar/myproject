@@ -189,9 +189,9 @@ class BooksController extends Controller
 		}
 		
 		$books = Books::where('created_by', $auth->id)->where('id',$id)->first();
-		$books->update($input);
 		
 		if($books){
+			$books->update($input);
 			return redirect()->route('books.index')->with('success', Lang::get('messages.updated'));
 		}else{
 			return redirect()->back()->with('error', Lang::get('messages.error'));

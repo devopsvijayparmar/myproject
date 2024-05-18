@@ -44,4 +44,8 @@ class Gallery extends Authenticatable
 		return $query;
 	}
 	
+	function getGalleryPageLinkAttribute(){
+		return url('gallery');
+	}
+	
 }

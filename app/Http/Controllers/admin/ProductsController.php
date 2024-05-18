@@ -194,9 +194,9 @@ class ProductsController extends Controller
 		}
 		
 		$products = Products::where('created_by', Auth::user()->id)->where('id',$id)->first();
-		$products->update($input);
 		
 		if($products){
+			$products->update($input);
 			return redirect()->route('products.index')->with('success', Lang::get('messages.updated'));
 		}else{
 			return redirect()->back()->with('error', Lang::get('messages.error'));

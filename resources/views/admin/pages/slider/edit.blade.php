@@ -10,6 +10,10 @@
 			<img class="mar-top-10 rp-img100" src="{{$data->image}}" id="blah1"/ ></br>
 			<span class="error" id='image1_error'>{{$errors->first('image')}}</span>
 		</div>
+		<div class="btn-group btn-group-toggle mb-1" data-toggle="buttons">
+			<label style="text-align: left;" class="btn btn-default">
+			<p class="m-0"><em><strong>Note</strong>: height: 550 px width: 1600 px.</em></p>
+		</div>
 	</div>
 	 <div class="modal-footer justify-content-between">
 	  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

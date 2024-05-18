@@ -21,7 +21,7 @@ class PhilosophyController extends Controller
      */
 	 
 	protected $validationRules = [
-		'description' => 'required|max:20000',
+		'description' => 'required|max:200000',
     ];  
 	 
 	 

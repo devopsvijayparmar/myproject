@@ -155,9 +155,9 @@ class OurTeamController extends Controller
 		}
 
 		$ourteam = OurTeam::where('created_by', Auth::user()->id)->where('id',$id)->first();
-		$ourteam->update($input);
 		
 		if($ourteam){
+			$ourteam->update($input);
 			return redirect()->route('our-team.index')->with('success', Lang::get('messages.updated'));
 		}else{
 			return redirect()->back()->with('error', Lang::get('messages.error'));

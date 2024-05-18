@@ -48,7 +48,7 @@
 		<li><a href="{{route('home')}}">Dashboard</a></li>
 		@else
 		<li id="logintab"><a href="{{url('/login')}}">Sign In</a></li>
-		<li id="signuptab"><a href="{{url('/signup')}}">Sign up</a></li>
+		<li id="signuptab"><a href="{{url('/register')}}">Sign up</a></li>
 		 @endauth
         </ul>
       </nav><!-- #nav-menu-container -->

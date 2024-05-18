@@ -169,7 +169,7 @@ class LandingPageController extends Controller
 
 		$input['created_at'] = date('Y-m-d H:i:s');
 		$input['created_by'] = $auth->id;
-		$input['url'] = 'http://'.$auth->title.'.'.config('enum.website').'/landing-page/'.$request->url_name;
+		$input['url'] = config('enum.ssh').$auth->title.'.'.config('enum.website').'/landing-page/'.$request->url_name;
 	   
 		$landingpage = LandingPage::create($input);
 		
@@ -215,12 +215,12 @@ class LandingPageController extends Controller
 			
 		$input['updated_at'] = date('Y-m-d H:i:s');
 		$input['updated_by'] = $auth->id;
-		$input['url'] = 'http://'.$auth->title.'.'.config('enum.website').'/landing-page/'.$request->url_name;
+		$input['url'] = config('enum.ssh').$auth->title.'.'.config('enum.website').'/landing-page/'.$request->url_name;
 		
 		$landingpage = LandingPage::where('created_by', Auth::user()->id)->where('id',$id)->first();
-		$landingpage->update($input);
 		
 		if($landingpage){
+			$landingpage->update($input);
 			return redirect()->route('landing-page.index')->with('success', Lang::get('messages.updated'));
 		}else{
 			return redirect()->back()->with('error', Lang::get('messages.error'));

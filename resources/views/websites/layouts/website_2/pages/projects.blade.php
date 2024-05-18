@@ -29,7 +29,7 @@
 			
 			<div class="col-md-6">
 			  <h3> {{ $projectsdata->name }}</h3>
-			  <p>{{ mb_strimwidth($projectsdata->project_type->name, 0, 50, "...")}}: 3</p>
+			  <p>{{ mb_strimwidth($projectsdata->project_type->name, 0, 50, "...")}}</p>
 			 {!! mb_strimwidth($projectsdata->description, 0, 700, "...")!!}
 			</div>
 			</div>

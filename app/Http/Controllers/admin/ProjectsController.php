@@ -189,9 +189,9 @@ class ProjectsController extends Controller
 		}
 		
 		$projects = Projects::where('created_by', Auth::user()->id)->where('id',$id)->first();
-		$projects->update($input);
 		
 		if($projects){
+			$projects->update($input);
 			return redirect()->route('projects.index')->with('success', Lang::get('messages.updated'));
 		}else{
 			return redirect()->back()->with('error', Lang::get('messages.error'));

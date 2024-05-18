@@ -197,9 +197,9 @@ class MobileController extends Controller
 		}
 		
 		$mobile = Mobile::where('created_by', Auth::user()->id)->where('id',$id)->first();
-		$mobile->update($input);
 		
 		if($mobile){
+			$mobile->update($input);
 			return redirect()->route('mobile.index')->with('success', Lang::get('messages.updated'));
 		}else{
 			return redirect()->back()->with('error', Lang::get('messages.error'));

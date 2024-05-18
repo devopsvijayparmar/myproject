@@ -31,7 +31,7 @@
               <p class="blog_head">{{$blog->title}}</p>
               <div class="post_info">
                 <ul>
-                  <li><i class="fa fa-calendar" aria-hidden="true"></i> {{$blog->created_at}}</li>
+                  <li><i class="fa fa-calendar" aria-hidden="true"></i> {{date('D, M d, Y',strtotime($blog->created_at))}}</li>
                 </ul>
               </div>
               {!! $blog->description !!}
@@ -49,8 +49,8 @@
 			  
 			    @foreach($bloglast3 as $retrieved_data)
                 <li>
-				<p class="post_head"><a href="{{$retrieved_data->getDetailPageLink()}}">{{$retrieved_data->title}}</a></p>
-                  <p class="post_date"><i class="fa fa-calendar" aria-hidden="true"></i> {{$retrieved_data->created_at}}</p>
+				<p class="post_head"><a href="{{$retrieved_data->getDetailPageLink()}}"> {{$retrieved_data->title}}</a></p>
+                  <p class="post_date"><i class="fa fa-calendar" aria-hidden="true"></i> {{date('D, M d, Y',strtotime($retrieved_data->created_at))}}</p>
                 </li>
                 @endforeach
               </ul>

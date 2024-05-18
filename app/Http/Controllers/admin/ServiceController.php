@@ -135,9 +135,9 @@ class ServiceController extends Controller
 		$input['updated_by'] = $auth->id;
 		
 		$service = Service::where('created_by', Auth::user()->id)->where('id',$id)->first();
-		$service->update($input);
 		
 		if($service){
+			$service->update($input);
 			return redirect()->route('service.index')->with('success', Lang::get('messages.updated'));
 		}else{
 			return redirect()->back()->with('error', Lang::get('messages.error'));
