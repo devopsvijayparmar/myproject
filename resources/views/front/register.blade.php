@@ -1,5 +1,30 @@
  @include('front.include.header')
- 
+ <style>
+ .select2-container--default .select2-selection--single {
+    border: 1px solid #ced4da!important;
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: #6c757d!important;
+}
+.select2-container .select2-selection--single {
+    height: 40px!important;
+   
+}
+.select2-container .select2-selection--single .select2-selection__rendered {
+    padding-top: 5px!important;
+    font-size: 14px!important;
+}
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 38px!important;
+}
+#terms_of_use_privacy_policy{
+	height: 19px!important;
+    width: 17px!important;
+	    cursor: pointer;
+}
+ </style>
+ <link href="{{ asset('/front/lib/select2/css/select2.css') }}" rel="stylesheet">
 <section id="contact" class="padd-section wow padd-top fadeInUp">
 
     <div class="container">
@@ -19,7 +44,7 @@
 			@method('POST')
 			@csrf
 			 <div class="form-group">
-                <select name="site_name" class="form-control" id="site_name"/>
+                <select name="site_name" class="form-control select2" id="site_name"/>
 				    <option value="">Select Website</option>
 					@foreach($sites as $site)
 					<option @if(old('site_name') == $site->site_name) selected @endif @if($user_site == $site->site_name) selected @endif value="{{$site->site_name}}">{{$site->name}}</option>
@@ -74,10 +99,13 @@
   <!--==========================
     Footer
   ============================-->
+
  @include('front.include.footer')
+   <script src="{{ asset('/front/lib/select2/js/select2.js') }}"></script>
  <script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
  {!! $validator->selector('#signup_id') !!}
  <script>
+ $('.select2').select2({});
 $('#signuptab').addClass('menu-active');
 
 $('#title').keypress(function (e) {

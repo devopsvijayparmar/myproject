@@ -32,6 +32,7 @@
 				<tr>
 				  <th>No.</th>
 				  <th>Image</th>
+				  <th>Title</th>
 				  <th>Action</th>
 				</tr>
 				</thead>
@@ -44,7 +45,8 @@
 						?>
 						<tr id="{{$i}}">
 						  <td>{{$i}}</td>
-						  <td><img class="rp-img" src="<?php echo url('/uploads/slider/'.$retrieved_data->image);?>"></td>
+						  <td><img class="rp-img" src="{{$retrieved_data->image}}"></td>
+						   <td>{{$retrieved_data->title}}</td>
 						  <td>
 						
 						  <a title="Edit" class="mr-2" href="<?php echo URL::to('/'); ?>/super-admin/admin-slider/{{App\Helpers\CryptHelper::encryptstring($retrieved_data->id)}}/edit"><i class="fas fa-edit text-info font-16"></i></a>

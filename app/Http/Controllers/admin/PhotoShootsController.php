@@ -31,13 +31,13 @@ class PhotoShootsController extends Controller
 	protected $validationRules = [
 		'category_id' => 'required|max:11',
 		'name' => 'required|string|max:255',
-		'image'=>'required|mimes:jpeg,jpg,png,PNG,svg|max:20480'
+		'image'=>'required|mimes:jpeg,jpg,png,PNG,svg|max:2048'
     ]; 
 	
 	protected $validationRulesEdit = [
 		'category_id' => 'required|max:11',
 		'name' => 'required|string|max:255',
-		'image'=>'mimes:jpeg,jpg,png,PNG,svg|max:20480'
+		'image'=>'mimes:jpeg,jpg,png,PNG,svg|max:2048'
     ];  
 	 
 	 

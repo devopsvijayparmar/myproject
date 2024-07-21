@@ -25,8 +25,8 @@ class PageBuilderController extends Controller
 	
 	protected $validationRules = [
 		'title' => 'required|string|max:255',
-		'url_name' => 'required|alpha_num|min:4|max:255',
-		'description' => 'required|min:1000|max:500000',
+		'url_name' => 'required|regex:/^[a-zA-Z-_]+$/|min:4|max:255',
+		'description' => 'required|max:500000',
     ]; 
 	
     /**

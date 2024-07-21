@@ -46,7 +46,7 @@
             <h4>{{$blogdata->title}}</h4>
           </div>
           <div class="blog_feature_cont">
-            <p>{!! mb_strimwidth($blogdata->description, 0, 100, "...") !!}</p>
+            <p>{!! mb_strimwidth($blogdata->description, 0, 400, "...") !!}</p>
           </div>
           </div>
         </div>

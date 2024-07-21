@@ -38,7 +38,7 @@
                       </tr>
 					   <tr>
                         <th>Image:</th>
-                        <td><img class="rp-img" src="<?php echo url('/uploads/front/amazing_features//'.$data->image);?>"</td>
+                        <td><img class="rp-img" src="{{$data->image_url}}"></td>
 						</tr>
 					  <tr>
                         <th>Description:</th>

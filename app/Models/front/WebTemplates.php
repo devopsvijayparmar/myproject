@@ -13,7 +13,7 @@ class WebTemplates extends Authenticatable
     use Notifiable;
 	use SoftDeletes;
     protected $table = 'front_web_templates';
-    protected $fillable = ['title','description','image','site_name','preview','created_by','created_at','updated_by','updated_at','deleted_by','deleted_at','slug','type'];
+    protected $fillable = ['title','description','image','image_1','site_name','preview','created_by','created_at','updated_by','updated_at','deleted_by','deleted_at','slug','type'];
 	
 	public static function getlist(){
 		$query = WebTemplates::get();
@@ -27,6 +27,10 @@ class WebTemplates extends Authenticatable
 	
 	function getImageUrlAttribute(){
 		return $this->image == null ? asset('/images/image_not_found.jpg') : asset('/uploads/front/web_templates/'.$this->image);
+	}
+	
+	function getImageUrl1Attribute(){
+		return $this->image == null ? asset('/images/image_not_found.jpg') : asset('/uploads/front/web_templates/'.$this->image_1);
 	}
 	
 	public static function getRecordBySlug($slug){

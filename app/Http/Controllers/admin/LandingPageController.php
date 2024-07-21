@@ -35,7 +35,7 @@ class LandingPageController extends Controller
 	 
 	protected $validationRules = [
 		'title' => 'required|string|max:255',
-		'url_name' => 'required|string|max:255',
+		'url_name' => 'required|regex:/^[a-zA-Z-_]+$/|max:255',
 		'description' => 'required|max:1000000',
     ];  
 	

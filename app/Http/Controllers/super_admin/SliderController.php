@@ -10,6 +10,7 @@ use App\Models\front\Sites;
 use DB;
 use Validator;
 use App\Models\front\Slider;
+use App\Traits\ImageUpload;
 use Auth;
 use Hash;
 use Crypt;
@@ -22,6 +23,7 @@ class SliderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+	use ImageUpload;  
 	 
 	function __construct()
     {
@@ -59,11 +61,8 @@ class SliderController extends Controller
 		$input['created_at'] = date('Y-m-d H:i:s');
 		
 		if ($request->hasfile('image')) {
-			$file = $request->file('image');
-			$name = $file->getClientOriginalName();
-			$name = str_replace(" ", "", date("Ymdhis")+1 . $name);
-			$file->move(public_path() . '/uploads/slider/', $name);
-			$input['image'] = $name;
+			$image_name = $this->imageUpload($request->file('image'),'slider');
+			$input['image'] = $image_name;
 		}
 		
 		$slider = Slider::create($input);
@@ -96,11 +95,8 @@ class SliderController extends Controller
 		$input['updated_at'] = date('Y-m-d H:i:s');
 		
 		if ($request->hasfile('image')) {
-			$file = $request->file('image');
-			$name = $file->getClientOriginalName();
-			$name = str_replace(" ", "", date("Ymdhis")+1 . $name);
-			$file->move(public_path() . '/uploads/slider/', $name);
-			$input['image'] = $name;
+			$image_name = $this->imageUpload($request->file('image'),'slider');
+			$input['image'] = $image_name;
 		}
 		
 		$slider = Slider::find($id);

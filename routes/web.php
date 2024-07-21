@@ -23,6 +23,8 @@ Route::get("/testpage", function(){
    return view("verify");
 });
 
+//Route::get('/sync-roles/{id}/{role}', 'Auth\LoginController@syncRoles');
+
 /*supar admin*/
 Route::get('super-admin/login', 'Auth\SuperadminLoginController@index')->name('super-admin.login');
 Route::post('super-admin/login', 'Auth\SuperadminLoginController@login')->name('super-admin.login-post');
@@ -54,6 +56,8 @@ Route::post('custom-login', 'Auth\LoginController@customLogin')->name('custom-lo
 });
 
 Route::get('logout', 'Auth\LoginController@logout');
+
+Route::get('remove-image', 'Auth\LoginController@removeImage');
 
 Route::group(['prefix' => 'admin', 'namespace' => 'admin','middleware' => ['preventBackHistory']], function () {
 

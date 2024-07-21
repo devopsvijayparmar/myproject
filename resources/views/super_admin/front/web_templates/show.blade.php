@@ -34,11 +34,7 @@
 					  
 					  <tr>
                         <th style="width:50%">Image:</th>
-                        <td><img class="rp-img" src="<?php echo url('/uploads/front/web_templates/'.$data->image);?>"></td>
-                      </tr>
-					    <tr>
-                        <th style="width:50%">Image 1:</th>
-                        <td><img class="rp-img" src="<?php echo url('/uploads/front/web_templates/'.$data->image_1);?>"></td>
+                        <td><img class="rp-img" src="{{$data->image_url}}"></td>
                       </tr>
 					   <tr>
                         <th>Title:</th>

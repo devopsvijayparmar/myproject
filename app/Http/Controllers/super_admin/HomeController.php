@@ -26,7 +26,7 @@ class HomeController extends Controller
     public function index()
     {
 		$register = User::find(12);
-			$register->assignRole(array('digital-startup'));
+		$register->assignRole(array('digital-startup'));
         return view('super_admin.home');
     }
 }

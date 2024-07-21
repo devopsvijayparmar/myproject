@@ -22,10 +22,12 @@
   <section id="about-us" class="about-us padd-section wow fadeInUp" style="padding-bottom:0px!important;padding-top: 50px!important;">
 	<div class="owl-carousel owl-theme home-carousel">
 	   @foreach($slider as $sliderdata)
+	    <a href="{{$sliderdata->site_url}}">
 		<div class="item">
-			<img class="home-img" src="{{ url('/uploads/slider') }}/{{$sliderdata->image}}">
-			 <a href="{{$sliderdata->url}}"><div class="centered"><h1>{{$sliderdata->title}}</h1></br><p>{!!$sliderdata->description!!}</p></div>	</a>
+			<img class="home-img" src="{{$sliderdata->image}}">
+			 <!--<a href="{{$sliderdata->url}}"><div class="centered"><h1>{{$sliderdata->title}}</h1></br><p>{!!$sliderdata->description!!}</p></div>	</a>-->
 		</div>
+		</a>
 		@endforeach
 	</div>
   </section>
@@ -64,7 +66,7 @@
         @foreach($system as $systemdata)
         <div class="col-md-6 col-lg-4">
           <div class="feature-block">
-            <img src="{{ url('/uploads/front/system') }}/{{$systemdata->image}}" alt="img" class="img-fluid">
+            <img src="{{$systemdata->image_url}}" alt="img" class="img-fluid">
             <h4>{{$systemdata->title}}</h4>
             <p>{!!$systemdata->description!!}</p>
           </div>
@@ -73,25 +75,6 @@
       </div>
     </div>
   </section>
-
-  <section id="screenshots" class="padd-section text-center wow fadeInUp" style="padding-bottom:0px!important">
-    <div class="container">
-      <div class="section-title text-center">
-        <h2>Web Template Categories</h2>
-        <p class="separator">Build your brand's online presence and expand your business with a professional website.Leverage the internet's potential to reach a wider audience, increase visibility, and boost sales.</p>
-      </div>
-    </div>
-
-    <div class="container">
-      <div class="owl-carousel owl-theme">
-	    @foreach($latest_webtemplates as $latest_webtemplates_data)
-        <a href="{{url('/web-templates')}}/{{$latest_webtemplates_data->slug}}"><div><h4 class="pull-left card_product_h4">{{$latest_webtemplates_data->title}}</h4><img src="{{$latest_webtemplates_data->image_url}}" alt="img" class="img-responsive" style="height:250px!important;"></div></a>
-		@endforeach
-      </div>
-    </div>
-	<a href="{{ url('/web-templates') }}" target="_blank" class="csm-btn-1 btn">See more...</a>
-  </section>
-
 
 <section id="features" class="padd-section text-center wow fadeInUp" style="padding-bottom:0px!important">
     <div class="container">
@@ -105,7 +88,7 @@
 		@foreach($amazingfeatures as $amazingfeaturesdata)
         <div class="col-md-6 col-lg-3">
           <div class="feature-block">
-            <img src="{{ url('/uploads/front/amazing_features') }}/{{$amazingfeaturesdata->image}}" alt="img" class="img-fluid">
+            <img src="{{$amazingfeaturesdata->image_url}}" alt="img" class="img-fluid">
             <h4>{{$amazingfeaturesdata->title}}</h4>
             <p>{{$amazingfeaturesdata->description}}</p>
           </div>

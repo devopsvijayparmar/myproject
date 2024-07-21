@@ -30,14 +30,14 @@ class OurTeamController extends Controller
 		'name' => 'required|string|max:255',
 		'email' => 'required|max:255|email',
 		'mobile' => 'required|digits:10',
-		'image'=>'required|mimes:jpeg,jpg,png,PNG,svg|max:20480'
+		'image'=>'required|mimes:jpeg,jpg,png,PNG,svg|max:2048'
     ];  
 	
 	protected $validationRulesEdit = [
 		'name' => 'required|string|max:255',
 		'email' => 'required|max:255|email',
 		'mobile' => 'required|digits:10',
-		'image'=>'mimes:jpeg,jpg,png,PNG,svg|max:20480'
+		'image'=>'mimes:jpeg,jpg,png,PNG,svg|max:2048'
     ]; 
 	 
 	function __construct()

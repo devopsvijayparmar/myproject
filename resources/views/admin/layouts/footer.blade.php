@@ -1,6 +1,6 @@
 <footer class="main-footer">
-    <strong>Copyright &copy; {{date('Y')}} <a href="{{url('/')}}" target="_blank">{{config('enum.site_name')}}</a>.</strong>
-    All rights reserved.
+    <strong class="copyright">Copyright &copy; {{date('Y')}} <a href="{{url('/')}}" target="_blank">{{config('enum.site_name')}}</a>.</strong>
+    <span style="font-size:12px;">All rights reserved.</span>
   </footer>
 
   <!-- Control Sidebar -->

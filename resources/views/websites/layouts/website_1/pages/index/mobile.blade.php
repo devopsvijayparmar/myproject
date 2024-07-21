@@ -4,7 +4,8 @@
       <div class="col-md-12">
         <div class="full">
           <div class="main_heading text_align_center">
-            <h2>Our Mobiles</h2>
+            <h2>Mobiles</h2>
+			<p class="text-center wow fadeInDown animated" style="visibility: visible; animation-name: fadeInDown;">Experience the perfect blend of style and functionality with our premium product, meticulously crafted to exceed your expectations</p>
           </div>
         </div>
       </div>

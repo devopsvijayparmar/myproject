@@ -20,8 +20,8 @@
         </div>
       </div>
     </form>-->
-	<a target="_blank" href="{{ Auth::user()->my_website_link }}" ><h5 style="font-size: 17px;">
-		<i class="nav-icon fas fa-globe"></i> {{ Auth::user()->my_website }}
+	<a target="_blank" title="{{ Auth::user()->my_website_link }}" href="{{ Auth::user()->my_website_link }}" ><h5 style="font-size: 17px;margin-top: 4px;">
+		<i class="nav-icon fas fa-globe"></i> 
 	</h5></a>
 
     <!-- Right navbar links -->

@@ -69,7 +69,7 @@
 				</div>
 				
 				<div class="form-group col-md-6" style="padding-left: 0;">
-				 <label for="exampleInputEmail1">About Your Website</label>
+				 <label for="exampleInputEmail1">About Your Website  (In two line)</label>
 				  <textarea class="form-control form-control-sm" id="footer_about_us" placeholder="Enter about us" name="footer_about_us" maxlength="500">@if(isset($data->footer_about_us)) {{ $data->footer_about_us }}@endif</textarea>
 				  <span class="error" id="title_error"></span>
 				</div>
@@ -108,10 +108,10 @@
 				  </ul>
 				  <div class="form-group col-md-6" style="padding-left: 0;">
 						 <label for="exampleInputEmail1">Preferred Currency <span class="error">*</span></label>
-						  <select class="form-control" id="currency_id" name="currency_id">
+						  <select class="select2-search__field form-control" id="currency_id" name="currency_id">
 							<option value="">Select Currency</option>
 							@foreach($currency as $retrieved_data)
-							<option @if(isset($data->currency_id)) @if($data->currency_id == $retrieved_data->id) selected @endif @endif value="{{$retrieved_data->id}}">{{$retrieved_data->name}}({{$retrieved_data->code}})</option>
+							<option @if(isset($data->currency_id)) @if($data->currency_id == $retrieved_data->id) selected @endif @endif value="{{$retrieved_data->id}}">{{$retrieved_data->code}} ({{$retrieved_data->name}})</option>
 							@endforeach
 						  </select>
 						  <span class="error" id='category_id_error'>{{$errors->Products->first('name')}}</span>

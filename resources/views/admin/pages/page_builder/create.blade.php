@@ -45,7 +45,7 @@
 					</div>
 					<div class="form-group">
 						 <label for="exampleInputEmail1">Page Url Name <span class="error">*</span></label>
-						  <input type="text" onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false" class="form-control" style='text-transform:lowercase' onkeypress="return onlyAlphabets(event, this);" onkeyup="geturlname(this.value);" id="url_name" placeholder="Enter Page URL Name" name="url_name" maxlength="255" value="{{old('url_name')}}">
+						  <input type="text" onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false" class="url_name form-control" style='text-transform:lowercase' onkeyup="geturlname(this.value);" id="url_name" placeholder="Enter Page URL Name" name="url_name" maxlength="255" value="{{old('url_name')}}">
 						 <span class="error" id='url_name_error'>{{$errors->first('name')}}</span>
 					</div>
 					<div class="form-group">
@@ -95,16 +95,7 @@ function geturlname(urlname)
 	var url = '{{$auth->title}}.{{config('enum.website')}}/page/';
 	$('#url').val(url+urlname);
 }
-$('#url_name').keypress(function (e) {
-    var regex = new RegExp("^[a-zA-Z0-9]+$");
-    var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
-    if (regex.test(str)) {
-        return true;
-    }
 
-    e.preventDefault();
-    return false;
-});
 
 
 function uploadImage(image) {

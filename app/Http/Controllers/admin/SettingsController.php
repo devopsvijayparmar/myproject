@@ -26,7 +26,7 @@ class SettingsController extends Controller
      * @return \Illuminate\Http\Response
      */
 	protected $validationRulesSlider = [
-		'image'=>'required|mimes:jpeg,jpg,png,PNG,svg|max:20480'
+		'image'=>'required|mimes:jpeg,jpg,png,PNG,svg|max:409600'
     ];  
 	 
 	protected $validationRules = [

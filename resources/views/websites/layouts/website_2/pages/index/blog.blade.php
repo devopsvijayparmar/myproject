@@ -20,7 +20,7 @@
 							<h2 class="entry-title"><a href="{{$blogdata->getDetailPageLink()}}">{{$blogdata->title}}</a></h2>
 						</header>
 						<div class="entry-content">
-						{!! mb_strimwidth($blogdata->description, 0, 200, "...") !!}
+						{!! mb_strimwidth($blogdata->description, 0, 400, "...") !!}
 						</div>
 					</article>
 				</div>

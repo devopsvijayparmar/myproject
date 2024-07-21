@@ -29,10 +29,10 @@ class SitesettingsController extends Controller
 	
 	protected $validationRules = [
 		'footer_about_us' => 'required|string|max:500',
-		'title' => 'required|string|max:255',
+		'title' => 'max:255',
 		'currency_id' => 'required|max:11',
-		'site_logo'=>'mimes:jpeg,jpg,png,svg|max:20480',
-		'fav_icon'=>'mimes:jpeg,jpg,png,svg|max:20480'
+		'site_logo'=>'mimes:jpeg,jpg,png,svg|max:2048',
+		'fav_icon'=>'mimes:jpeg,jpg,png,svg|max:2048'
 		
     ]; 
 	

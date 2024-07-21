@@ -22,7 +22,9 @@
 			<div class="col-md-4 col-sm-6 mb-2">
 				<div class="product-grid" style="padding:0!important">
 					<div class="product-image card-product">
+					<a class="preview" href="{{$photoshootsdata->image_url}}" rel="prettyPhoto">
 						<img class="img-thumbnail p-0" src="{{$photoshootsdata->image_url}}">
+					</a>
 						<ul class="card-product__imgOverlay">
 						<li>{{$photoshootsdata->name}}</li>
 						</ul>

@@ -8,6 +8,7 @@ use App\Models\PurchasePlan;
 use App\Models\Orders;
 use App\Models\Products;
 use App\Models\Projects;
+use App\Models\Blog;
 use App\Models\Mobile;
 use App\Models\PurchasePlanHistory;
 use App\Models\front\TopUp;
@@ -90,6 +91,7 @@ class HomeController extends Controller
 			$data['products_count'] = Products::ProductCount();
 			$data['projects_count'] = Projects::ProjectCount();
 			$data['mobiles_count'] = Mobile::mobileCount();
+			$data['blogs_count'] = Blog::getBlogList()->count();
 			$data['topup'] = TopUp::find(1);
 			return view('admin.pages.home',$data);
 		

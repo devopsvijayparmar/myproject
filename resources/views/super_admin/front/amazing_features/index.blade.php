@@ -46,7 +46,7 @@
 						?>
 						<tr id="{{$i}}">
 						  <td>{{$i}}</td>
-						  <td><img class="rp-img" src="<?php echo url('/uploads/front/amazing_features//'.$retrieved_data->image);?>"></td>
+						<td><img class="rp-img" src="{{$retrieved_data->image_url}}"></td>
 						  <td>{{$retrieved_data->title}}</td>
 						  <td>{!!$retrieved_data->description!!}</td>
 						  <td>

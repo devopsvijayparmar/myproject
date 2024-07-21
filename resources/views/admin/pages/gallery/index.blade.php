@@ -8,6 +8,9 @@
     width: 131px!important;
     height: 123px!important;
 	}
+.dz-remove {
+    display: none!important;
+}
  </style>
  @endsection
   <!-- Content Wrapper. Contains page content -->

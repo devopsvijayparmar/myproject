@@ -26,7 +26,7 @@ class GalleryController extends Controller
 	use ImageUpload; 
 	 
 	protected $validationRules = [
-		'file'=>'required|mimes:jpeg,jpg,png,svg,PNG|max:20480'
+		'file'=>'required|mimes:jpeg,jpg,png,svg,PNG|max:2048'
     ];  
 	 
 	 

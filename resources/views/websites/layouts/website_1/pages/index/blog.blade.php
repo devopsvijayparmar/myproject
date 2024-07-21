@@ -5,6 +5,7 @@
 		<div class="full">
 		  <div class="main_heading text_align_center">
 			<h2>Blogs</h2>
+			<p class="text-center wow fadeInDown animated" style="visibility: visible; animation-name: fadeInDown;">In our latest blog post, we delve into the secrets of effective time management,<br> offering practical tips to boost productivity and achieve work-life balance</p>
 		  </div>
 		</div>
 	  </div>
@@ -24,7 +25,7 @@
 				<h4>{{ mb_strimwidth($blogdata->title, 0, 40, "...") }}</h4>
 			  </div>
 			  <div class="blog_feature_cont">
-				<p>{!! mb_strimwidth($blogdata->description, 0, 100, "...") !!}</p>
+				<p>{!! mb_strimwidth($blogdata->description, 0, 400, "...") !!}</p>
 			  </div>
 		  </div>
 		</div>

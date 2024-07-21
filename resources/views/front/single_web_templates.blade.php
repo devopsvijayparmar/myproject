@@ -5,14 +5,14 @@
       <div class="row">
         <div class="col-md-6 col-lg-6">
           <div class="block-blog text-left">
-            <img src="{{$webtemplates->image_url}}" alt="img">
+            <img src="{{$webtemplates->image_url_1}}" alt="img">
           </div>
         </div>
 		 <div class="col-md-6 col-lg-6">
           <div class="block-blog text-left">
-		    <h4 class="card_product_h4">Agency</h4>
+		    <h4 class="card_product_h4">{{$webtemplates->title}}</h4>
 			<div class="table_btn">
-               <a href="{{$webtemplates->preview}}" target="_blank"  style="background:#009cff!important;border-radius: 0px!important;" class="csm-btn-3 btn"><i class="fa fa-search"></i>  Live Preview</a>
+               <a href="https://{{$webtemplates->preview}}" target="_blank"  style="background:#009cff!important;border-radius: 0px!important;" class="csm-btn-3 btn"><i class="fa fa-search"></i>  Live Preview</a>
                 <a style="border-radius: 0px!important;" href="{{url('/signup')}}/?site={{$webtemplates->site_name}}" class="csm-btn-4 btn"><i class="fa fa-wrench"></i> Build Your Website</a>
             </div>
             {!! $webtemplates->description !!}
@@ -23,7 +23,7 @@
     </div>
   </section>
   
-<section id="blog" class="padd-section wow fadeInUp">
+<section id="blog" class="padd-section wow fadeInUp" style="display:none;">
     <div class="container">
       <div class="section-title text-center">
         <h2>Latest Web Templates</h2>

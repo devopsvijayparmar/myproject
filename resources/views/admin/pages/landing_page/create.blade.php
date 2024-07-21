@@ -48,7 +48,7 @@
 					
 					<div class="form-group">
 						 <label for="exampleInputEmail1">URL Name<span class="error">*</span></label>
-						  <input type="text" class="form-control" onkeyup="geturlname(this.value);" id="url_name" placeholder="Enter URL Name" name="url_name" maxlength="50" value="{{ old('url_name') }}">
+						  <input type="text" class="url_name form-control" onkeyup="geturlname(this.value);" id="url_name" placeholder="Enter URL Name" name="url_name" maxlength="50" value="{{ old('url_name') }}">
 						  <span class="error" id="url_name_error">{{$errors->first('url_name')}}</span>
 					</div>
 					

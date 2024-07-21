@@ -13,9 +13,9 @@
 			<img height="100" src="{{asset('front/img/404-error.png')}}">
 			</div>
 			 <h3 class="card-title text-center">PAGE NOT FOUND</h3>
-            <p class="card-text">
+           <!-- <p class="card-text">
              We apologize for the inconvenience, but this website has been blocked due to uncertain and potentially harmful usage.
-            </p>
+            </p>-->
           </div>
         </div>
       </div>

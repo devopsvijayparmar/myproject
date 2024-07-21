@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Session;
 use DB;
 use Validator;
 use App\Models\front\AmazingFeatures;
+use App\Traits\ImageUpload;
 use Auth;
 use Hash;
 use Crypt;
@@ -21,6 +22,7 @@ class AmazingFeaturesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+	use ImageUpload;  
 	 
 	function __construct()
     {
@@ -57,13 +59,9 @@ class AmazingFeaturesController extends Controller
 		
 		$input['created_at'] = date('Y-m-d H:i:s');
 		
-		
 		if ($request->hasfile('image')) {
-			$file = $request->file('image');
-			$name_1 = $file->getClientOriginalName();
-			$name_1 = str_replace(" ", "", date("Ymdhis")+1 . $name_1);
-			$file->move(public_path() . '/uploads/front/amazing_features/', $name_1);
-			$input['image'] = $name_1;
+			$image_name = $this->imageUpload($request->file('image'),'front/amazing_features');
+			$input['image'] = $image_name;
 		}
 		
 		$amazing_features = AmazingFeatures::create($input);
@@ -107,13 +105,9 @@ class AmazingFeaturesController extends Controller
 		$input = $request->all();
 		$input['updated_at'] = date('Y-m-d H:i:s');
 		
-		
 		if ($request->hasfile('image')) {
-			$file = $request->file('image');
-			$name_1 = $file->getClientOriginalName();
-			$name_1 = str_replace(" ", "", date("Ymdhis")+1 . $name_1);
-			$file->move(public_path() . '/uploads/front/amazing_features/', $name_1);
-			$input['image'] = $name_1;
+			$image_name = $this->imageUpload($request->file('image'),'front/amazing_features');
+			$input['image'] = $image_name;
 		}
 		
 		$amazing_features = AmazingFeatures::find($id);

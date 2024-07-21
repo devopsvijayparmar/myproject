@@ -74,7 +74,7 @@
 							<label for="exampleInputFile">Image 1<span class="error">*</span></label>
 							<input type="file" class="form-control" name="image_1" id="image_1">
 							<img class="mar-top-10 rp-img100" id="blah_1"/ ></br>
-							<span class="error" id='image_error'>{{$errors->WebTemplates->first('image_1')}}</span>
+							<span class="error" id='image_1_error'>{{$errors->WebTemplates->first('image_1')}}</span>
 						</div>
 						
 						<div class="form-group col-md-12">
@@ -119,6 +119,26 @@ function readURL(input) {
 
 $("#image").change(function() {
   readURL(this);
+});
+
+function readURL1(input) {
+	if (input.files && input.files[0]) {
+	var reader = new FileReader();
+
+	reader.onload = function(e) {
+		$('#blah_1').css({
+			height: '100px',
+			width: '100px'
+		});
+		$('#blah_1').attr('src', e.target.result);
+		
+	}
+	reader.readAsDataURL(input.files[0]);
+	}
+}
+
+$("#image_1").change(function() {
+  readURL1(this);
 });
 
 

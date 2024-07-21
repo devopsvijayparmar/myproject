@@ -60,7 +60,6 @@ class HomeController extends Controller
 		$this->data['pricing'] = Pricing::all(); 
 		$this->data['system'] = System::all(); 
 		$this->data['webtemplates'] = WebTemplates::getWebTemplates(1); 
-		$this->data['latest_webtemplates'] = WebTemplates::getWebTemplates(2); 
 		return view('front.index',$this->data);
     }
 	

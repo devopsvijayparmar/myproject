@@ -32,10 +32,10 @@ class MobileController extends Controller
 		'brand_id' => 'required|max:11',
 		'name' => 'required|string|max:255',
 		'price' => 'regex:/^\d+(\.\d{1,2})?$/',
-		'description' => 'required|max:500',
-		'image_1'=>'required|mimes:jpeg,jpg,png,PNG,svg|max:20480',
-		'image_2'=>'mimes:jpeg,jpg,png,PNG,svg|max:20480',
-		'image_3'=>'mimes:jpeg,jpg,png,PNG,svg|max:20480',
+		'description' => 'required|max:50000',
+		'image_1'=>'required|mimes:jpeg,jpg,png,PNG,svg|max:2048',
+		'image_2'=>'mimes:jpeg,jpg,png,PNG,svg|max:2048',
+		'image_3'=>'mimes:jpeg,jpg,png,PNG,svg|max:2048',
     ];  
 	
 	protected $validationRulesEdit = [
@@ -43,10 +43,10 @@ class MobileController extends Controller
 		'brand_id' => 'required|max:11',
 		'name' => 'required|string|max:255',
 		'price' => 'regex:/^\d+(\.\d{1,2})?$/',
-		'description' => 'required|max:500',
-		'image_1'=>'mimes:jpeg,jpg,png,PNG,svg|max:20480',
-		'image_2'=>'mimes:jpeg,jpg,png,PNG,svg|max:20480',
-		'image_3'=>'mimes:jpeg,jpg,png,PNG,svg|max:20480',
+		'description' => 'required|max:50000',
+		'image_1'=>'mimes:jpeg,jpg,png,PNG,svg|max:2048',
+		'image_2'=>'mimes:jpeg,jpg,png,PNG,svg|max:2048',
+		'image_3'=>'mimes:jpeg,jpg,png,PNG,svg|max:2048',
     ];  
 	 
 	 

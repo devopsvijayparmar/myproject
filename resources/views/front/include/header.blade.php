@@ -45,7 +45,7 @@
 			
 		@auth	
 		<li><a href="{{url('/logout')}}">Logout</a></li>
-		<li><a href="{{route('home')}}">Dashboard</a></li>
+		<li><a href="{{route('home')}}" style="background: rgba(72, 171, 247, .1); color: #48abf7 !important; border-color: transparent;">Manage</a></li>
 		@else
 		<li id="logintab"><a href="{{url('/login')}}">Sign In</a></li>
 		<li id="signuptab"><a href="{{url('/register')}}">Sign up</a></li>

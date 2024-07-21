@@ -11,6 +11,7 @@ use Validator;
 use App\Models\front\WebTemplates;
 use App\Helpers\SlugHelper;
 use App\Models\front\Sites;
+use App\Traits\ImageUpload;
 use Auth;
 use Hash;
 use Crypt;
@@ -23,6 +24,8 @@ class WebTemplatesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+	 
+	use ImageUpload; 
 	 
 	function __construct()
     {
@@ -48,8 +51,7 @@ class WebTemplatesController extends Controller
 			'title' => 'required',
 			'site_name' => 'required',
 			'description' => 'required',
-			'image'=>'required'
-			'image_1'=>'required'
+			'image'=>'required',
         ]);
 
         if ($validator->fails()) {
@@ -64,19 +66,12 @@ class WebTemplatesController extends Controller
 		$input['slug'] = SlugHelper::slug($request->title,'front_web_templates');
 		
 		if ($request->hasfile('image')) {
-			$file = $request->file('image');
-			$name_1 = $file->getClientOriginalName();
-			$name_1 = str_replace(" ", "", date("Ymdhis")+1 . $name_1);
-			$file->move(public_path() . '/uploads/front/web_templates/', $name_1);
-			$input['image'] = $name_1;
+			$image_name = $this->imageUpload($request->file('image'),'front/web_templates');
+			$input['image'] = $image_name;
 		}
-		
 		if ($request->hasfile('image_1')) {
-			$file_1 = $request->file('image_1');
-			$name_2 = $file_1->getClientOriginalName();
-			$name_2 = str_replace(" ", "", date("Ymdhis")+1 . $name_2);
-			$file_1->move(public_path() . '/uploads/front/web_templates/', $name_2);
-			$input['image_1'] = $name_2;
+			$image_name = $this->imageUpload($request->file('image_1'),'front/web_templates');
+			$input['image_1'] = $image_name;
 		}
 		
 		$web_templates = WebTemplates::create($input);
@@ -109,8 +104,6 @@ class WebTemplatesController extends Controller
 			'title' => 'required',
 			'site_name' => 'required',
 			'description' => 'required',
-			'image'=>'required'
-			'image_1'=>'required'
         ]);
 
         if ($validator->fails()) {
@@ -124,22 +117,14 @@ class WebTemplatesController extends Controller
 		$input['updated_at'] = date('Y-m-d H:i:s');
 		
 		if ($request->hasfile('image')) {
-			$file = $request->file('image');
-			$name_1 = $file->getClientOriginalName();
-			$name_1 = str_replace(" ", "", date("Ymdhis")+1 . $name_1);
-			$file->move(public_path() . '/uploads/front/web_templates/', $name_1);
-			$input['image'] = $name_1;
+			$image_name = $this->imageUpload($request->file('image'),'front/web_templates');
+			$input['image'] = $image_name;
+		}
+		if ($request->hasfile('image_1')) {
+			$image_name = $this->imageUpload($request->file('image_1'),'front/web_templates');
+			$input['image_1'] = $image_name;
 		}
         
-		if ($request->hasfile('image_1')) {
-			$file_1 = $request->file('image_1');
-			$name_2 = $file_1->getClientOriginalName();
-			$name_2 = str_replace(" ", "", date("Ymdhis")+1 . $name_2);
-			$file_1->move(public_path() . '/uploads/front/web_templates/', $name_2);
-			$input['image_1'] = $name_2;
-		}
-		
-		
 		$web_templates = WebTemplates::find($id);
 		$web_templates->update($input);
 		

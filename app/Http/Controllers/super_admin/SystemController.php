@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Session;
 use DB;
 use Validator;
 use App\Models\front\System;
+use App\Traits\ImageUpload;
 use Auth;
 use Hash;
 use Crypt;
@@ -21,6 +22,7 @@ class SystemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+	use ImageUpload;  
 	 
 	function __construct()
     {
@@ -58,11 +60,8 @@ class SystemController extends Controller
 		$input['created_at'] = date('Y-m-d H:i:s');
 		
 		if ($request->hasfile('image')) {
-			$file = $request->file('image');
-			$name_1 = $file->getClientOriginalName();
-			$name_1 = str_replace(" ", "", date("Ymdhis")+1 . $name_1);
-			$file->move(public_path() . '/uploads/front/system/', $name_1);
-			$input['image'] = $name_1;
+			$image_name = $this->imageUpload($request->file('image'),'front/system');
+			$input['image'] = $image_name;
 		}
 		
 		$system = System::create($input);
@@ -107,11 +106,8 @@ class SystemController extends Controller
 		$input['updated_at'] = date('Y-m-d H:i:s');
 	
 		if ($request->hasfile('image')) {
-			$file = $request->file('image');
-			$name_1 = $file->getClientOriginalName();
-			$name_1 = str_replace(" ", "", date("Ymdhis")+1 . $name_1);
-			$file->move(public_path() . '/uploads/front/system/', $name_1);
-			$input['image'] = $name_1;
+			$image_name = $this->imageUpload($request->file('image'),'front/system');
+			$input['image'] = $image_name;
 		}
 		
 		$system = System::find($id);

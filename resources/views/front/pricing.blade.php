@@ -24,8 +24,8 @@
         <div class="col-md-6 col-lg-4">
           <div class="block-pricing">
              <div class="table">
-              <h3>{{$pricingdata->plan_name}}</h3>
-              <h2 style="margin:0px!important;">{{$pricingdata->price_text}}</h2>
+              <h3 class="pr-ttl">{{$pricingdata->plan_name}}</h3>
+              <h2 style="margin:0px!important;" class="pr-ttl">{{$pricingdata->price_text}}</h2>
 			  <p>{{$pricingdata->duration}}</p>
 				  {!! $pricingdata->description !!}
               <div class="table_btn">
@@ -43,8 +43,8 @@
 			 <div class="col-md-6 col-lg-4">
 			  <div class="block-pricing">
 				 <div class="table">
-				  <h3>{{$pricingdata->plan_name}}</h3>
-				  <h2 style="margin:0px!important;">{{$pricingdata->price_text}}</h2>
+				  <h3 class="pr-ttl">{{$pricingdata->plan_name}}</h3>
+				  <h2 class="pr-ttl" style="margin:0px!important;">{{$pricingdata->price_text}}</h2>
 				  <p>{{$pricingdata->duration}}</p>
 					  {!! $pricingdata->description !!}
 				  <div class="table_btn">

@@ -19,6 +19,10 @@ class Pricing extends Authenticatable
 		$query = Pricing::get();
 	    return $query;
 	}
+	public static function getPlanByName($plan_name){
+		$query = Pricing::where('plan_name',$plan_name)->first();
+	    return $query;
+	}
 	
 
 }

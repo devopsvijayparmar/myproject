@@ -11,6 +11,7 @@
 	<li class="nav-item"><a class="nav-link" id="servicetab" href="{{url('service')}}">Services</a></li>
 	<li class="nav-item"><a class="nav-link" id="gallerytab" href="{{url('gallery')}}">Gallery</a></li>
 	<li class="nav-item"><a class="nav-link" id="promotiontab" href="{{url('promotion')}}">Promotions</a></li>
+	<li class="nav-item"><a class="nav-link" id="contact-us-tab" href="{{url('contact-us')}}">Contact Us</a></li>
 	<li class="nav-item"><a class="nav-link" id="about_us_tab" href="{{url('about-us')}}">About Us</a></li>
 @endsection
 

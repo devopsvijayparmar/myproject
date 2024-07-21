@@ -140,16 +140,16 @@
 
   <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
 
-  <script src="{{ url('/front/lib/jquery/jquery.min.js') }}"></script>
-  <script src="{{ url('/front/lib/jquery/jquery-migrate.min.js') }}"></script>
-  <script src="{{ url('/front/lib/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-  <script src="{{ url('/front/lib/superfish/hoverIntent.js') }}"></script>
-  <script src="{{ url('/front/lib/superfish/superfish.min.js') }}"></script>
-  <script src="{{ url('/front/lib/modal-video/js/modal-video.js') }}"></script>
-  <script src="{{ url('/front/lib/owlcarousel/owl.carousel.min.js') }}"></script>
-  <script src="{{ url('/front/lib/wow/wow.min.js') }}"></script>
-  <script src="{{ url('/front/js/main.js') }}"></script>
-  <script src="{{ url('/admin/plugins/toastr/toastr.min.js') }}"></script>
+  <script src="{{ asset('/front/lib/jquery/jquery.min.js') }}"></script>
+  <script src="{{ asset('/front/lib/jquery/jquery-migrate.min.js') }}"></script>
+  <script src="{{ asset('/front/lib/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ asset('/front/lib/superfish/hoverIntent.js') }}"></script>
+  <script src="{{ asset('/front/lib/superfish/superfish.min.js') }}"></script>
+  <script src="{{ asset('/front/lib/modal-video/js/modal-video.js') }}"></script>
+  <script src="{{ asset('/front/lib/owlcarousel/owl.carousel.min.js') }}"></script>
+  <script src="{{ asset('/front/lib/wow/wow.min.js') }}"></script>
+  <script src="{{ asset('/front/js/main.js') }}"></script>
+  <script src="{{ asset('/admin/plugins/toastr/toastr.min.js') }}"></script>
 
 </body>
 </html>

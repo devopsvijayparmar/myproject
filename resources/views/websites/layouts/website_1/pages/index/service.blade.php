@@ -5,6 +5,7 @@
         <div class="full">
           <div class="main_heading text_align_center">
             <h2>Our Service</h2>
+			<p class="text-center wow fadeInDown animated" style="visibility: visible; animation-name: fadeInDown;">Discover a world of convenience and peace of mind as our reliable service solutions</br> seamlessly streamline and simplify every aspect of your life</p>
           </div>
         </div>
       </div>

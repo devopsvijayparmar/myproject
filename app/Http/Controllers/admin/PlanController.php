@@ -29,17 +29,17 @@ class PlanController extends Controller
 	protected $validationRules = [
 		'name' => 'required|string|max:255',
 		'description' => 'required|max:2000',
-		'image_1'=>'required|mimes:jpeg,jpg,png,PNG,svg|max:20480',
-		'image_2'=>'mimes:jpeg,jpg,png,PNG,svg|max:20480',
-		'image_3'=>'mimes:jpeg,jpg,png,PNG,svg|max:20480',
+		'image_1'=>'required|mimes:jpeg,jpg,png,PNG,svg|max:2048',
+		'image_2'=>'mimes:jpeg,jpg,png,PNG,svg|max:2048',
+		'image_3'=>'mimes:jpeg,jpg,png,PNG,svg|max:2048',
     ]; 
 	
 	protected $validationRulesEdit = [
 		'name' => 'required|string|max:255',
 		'description' => 'required|max:2000',
-		'image_1'=>'mimes:jpeg,jpg,png,PNG,svg|max:20480',
-		'image_2'=>'mimes:jpeg,jpg,png,PNG,svg|max:20480',
-		'image_3'=>'mimes:jpeg,jpg,png,PNG,svg|max:20480',
+		'image_1'=>'mimes:jpeg,jpg,png,PNG,svg|max:2048',
+		'image_2'=>'mimes:jpeg,jpg,png,PNG,svg|max:2048',
+		'image_3'=>'mimes:jpeg,jpg,png,PNG,svg|max:2048',
     ];  
 	 
 	 

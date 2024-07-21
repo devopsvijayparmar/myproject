@@ -70,7 +70,8 @@ a:hover {
 
           </div>
         </div>
-                <div class="col-md-6 col-lg-4">
+		
+        <div class="col-md-6 col-lg-4">
           <div class="feature-block">
 
             <img src="{{asset('uploads/front/business/ui.png')}}" alt="img" class="img-fluid">
@@ -80,6 +81,40 @@ a:hover {
 
           </div>
         </div>
+		
+		 <div class="col-md-6 col-lg-4">
+          <div class="feature-block">
+
+            <img src="{{asset('uploads/front/business/server.png')}}" alt="img" class="img-fluid">
+            <h4>Cloud Computing Services</h4>
+            <p>Provision of cloud-based solutions such as Infrastructure as a Service (IaaS), Platform as a Service (PaaS), and Software as a Service (SaaS) to enable scalable and flexible computing resources.</p>
+            <!--<a href="#">read more</a>-->
+
+          </div>
+        </div>
+		
+		 <div class="col-md-6 col-lg-4">
+          <div class="feature-block">
+
+            <img src="{{asset('uploads/front/business/crm.png')}}" alt="img" class="img-fluid">
+            <h4>Customer Relationship Management (CRM) Solutions</h4>
+            <p>Developing and managing CRM systems to help businesses manage interactions with current and potential customers, improving customer service, sales, and relationship management</p>
+            <!--<a href="#">read more</a>-->
+
+          </div>
+        </div>
+		
+		 <div class="col-md-6 col-lg-4">
+          <div class="feature-block">
+
+            <img src="{{asset('uploads/front/business/seo.png')}}" alt="img" class="img-fluid">
+            <h4>Search Engine Optimization (SEO)</h4>
+            <p>Improving a website's visibility and ranking on search engines like Google through keyword optimization, content creation, and technical enhancements.</p>
+            <!--<a href="#">read more</a>-->
+
+          </div>
+        </div>
+		
         </div>
         
     </div>

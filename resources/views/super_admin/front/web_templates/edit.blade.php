@@ -65,16 +65,17 @@
 						<div class="col-md-6">
 							<label for="exampleInputFile">Image<span class="error">*</span></label>
 							<input type="file" class="form-control" name="image" id="image">
-							<img class="mar-top-10 rp-img100" src="<?php echo url('/uploads/front/web_templates/'.$data->image);?>" id="blah"/ ></br>
+							<img class="mar-top-10 rp-img100" src="{{$data->image_url}}" id="blah"/ ></br>
 							<span class="error" id='image_error'>{{$errors->WebTemplates->first('image')}}</span>
 						</div>
 						
 						<div class="col-md-6">
 							<label for="exampleInputFile">Image 1<span class="error">*</span></label>
 							<input type="file" class="form-control" name="image_1" id="image_1">
-							<img class="mar-top-10 rp-img100" src="<?php echo url('/uploads/front/web_templates/'.$data->image_1);?>" id="blah_1"/ ></br>
-							<span class="error" id='image_error'>{{$errors->WebTemplates->first('image_1')}}</span>
+							<img class="mar-top-10 rp-img100" src="{{$data->image_url_1}}" id="blah_1"/ ></br>
+							<span class="error" id='image_1_error'>{{$errors->WebTemplates->first('image_1')}}</span>
 						</div>
+						
 						
 						<div class="form-group  col-md-12">
 							<label for="exampleInputEmail1">Description<span class="error">*</span></label>

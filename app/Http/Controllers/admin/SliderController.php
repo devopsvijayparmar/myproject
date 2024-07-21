@@ -27,11 +27,11 @@ class SliderController extends Controller
 	use ImageUpload;
 	
 	protected $validationRules = [
-		'image'=>'required|mimes:jpeg,jpg,png,PNG,svg|max:30480'
+		'image'=>'required|mimes:jpeg,jpg,png,PNG,svg|max:409600'
     ]; 
 	
 	protected $validationRulesEdit = [
-		'image'=>'mimes:jpeg,jpg,png,PNG,svg|max:30480'
+		'image'=>'mimes:jpeg,jpg,png,PNG,svg|max:409600'
     ]; 
 	 
 	 

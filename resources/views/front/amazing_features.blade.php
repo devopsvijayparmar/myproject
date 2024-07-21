@@ -32,7 +32,7 @@
         @foreach($system as $systemdata)
         <div class="col-md-6 col-lg-4">
           <div class="feature-block">
-            <img src="{{ url('/uploads/front/system') }}/{{$systemdata->image}}" alt="img" class="img-fluid">
+            <img src="{{ $systemdata->image_url }}" alt="img" class="img-fluid">
             <h4>{{$systemdata->title}}</h4>
             <p>{!!$systemdata->description!!}</p>
           </div>
@@ -54,7 +54,7 @@
 		@foreach($amazingfeatures as $amazingfeaturesdata)
         <div class="col-md-6 col-lg-3">
           <div class="feature-block">
-            <img src="{{ url('/uploads/front/amazing_features') }}/{{$amazingfeaturesdata->image}}" alt="img" class="img-fluid">
+            <img src="{{ $amazingfeaturesdata->image_url }}" alt="img" class="img-fluid">
             <h4>{{$amazingfeaturesdata->title}}</h4>
             <p>{{$amazingfeaturesdata->description}}</p>
           </div>

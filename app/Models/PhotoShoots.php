@@ -34,7 +34,7 @@ class PhotoShoots extends Authenticatable
 	}
 	
 	function getPhotoShootCategoryLink(){
-		return url('products/category');
+		return url('photo-shoots/category');
 	}
 	
 	public static function getRecordForWebsiteByCategory($user_id,$cat,$node){

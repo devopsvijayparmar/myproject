@@ -33,10 +33,12 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
+	  @php $i=0 @endphp
         <!-- Info boxes -->
         <div class="row">
-		    @can('products')
-          <div class="col-12 col-sm-6 col-md-3">
+		  @can('products')
+		  @php $i++ @endphp
+          <div class="col-12 col-sm-6 col-md-4">
             <div class="info-box">
               <span class="info-box-icon dashboard-info elevation-1"><a target="_blank" href="{{route('products.index')}}"><img style="max-width: 70%;" src="{{asset('admin/dashboard-icon/product.png')}}"></a></span>
 
@@ -53,7 +55,8 @@
 		  @endcan
           <!-- /.col -->
 		  @can('mobile')
-          <div class="col-12 col-sm-6 col-md-3">
+		  @php $i++ @endphp
+          <div class="col-12 col-sm-6 col-md-4">
             <div class="info-box mb-3">
               <span class="info-box-icon dashboard-info elevation-1"><a target="_blank" href="{{route('mobile.index')}}"><img style="max-width: 70%;" src="{{asset('admin/dashboard-icon/mobile.png')}}"></a></span>
               <div class="info-box-content">
@@ -69,8 +72,9 @@
 
           <!-- fix for small devices only -->
           <div class="clearfix hidden-md-up"></div>
-            @can('orders')
-          <div class="col-12 col-sm-6 col-md-3">
+           @can('orders')
+			@php $i++ @endphp
+          <div class="col-12 col-sm-6 col-md-4">
             <div class="info-box mb-3">
               <span class="info-box-icon dashboard-info elevation-1">  <a target="_blank" href="{{route('orders.index')}}"><img style="max-width: 70%;" src="{{asset('admin/dashboard-icon/order.png')}}"> </a></span>
               <div class="info-box-content">
@@ -84,8 +88,9 @@
           </div>
 		   @endcan
           <!-- /.col -->
-		    @can('projects')
-          <div class="col-12 col-sm-6 col-md-3">
+		   @can('projects')
+		   @php $i++ @endphp
+           <div class="col-12 col-sm-6 col-md-4">
             <div class="info-box mb-3">
               <span class="info-box-icon dashboard-info elevation-1"><a target="_blank" href="{{route('projects.index')}}"><img style="max-width: 70%;" src="{{asset('admin/dashboard-icon/project.png')}}"></a></span>
 
@@ -98,6 +103,21 @@
             <!-- /.info-box -->
           </div>
 		  @endcan
+		  
+		  @if($i < 3)
+		   <div class="col-12 col-sm-6 col-md-4">
+            <div class="info-box mb-3">
+              <span class="info-box-icon dashboard-info elevation-1"><a target="_blank" href="{{route('blog.index')}}"><img style="max-width: 70%;" src="{{asset('admin/dashboard-icon/blog.png')}}"></a></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Blogs</span>
+                <span class="info-box-number">{{$blogs_count}}</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+		  @endif
           <!-- /.col -->
         </div>
         <!-- /.row -->
@@ -155,7 +175,7 @@
 		 @if($purchaseplan)
 		<div class="row">
 			 <div class="col-sm-4 ribbon-font">
-				<div class="position-relative p-3 bg-info" style="height: 180px">
+				<div class="position-relative p-3 purchase-plan-card" style="height: 180px">
 				<div class="ribbon-wrapper ribbon-lg">
 				<div class="ribbon bg-danger">
 				   Active
@@ -168,15 +188,17 @@
 				<span class="info-box-number">Expiry Date : {{ App\Helpers\CommonHelper::dateFormate($purchaseplan->expiry_date) }}</span></br>
 				</div>
 			</div>
+			<div class="col-sm-8 ribbon-font">
 		    <div class="row">
-			    <!--
 				<div class="col-md-6 col-sm-12 col-12" title="Click to upgrade button for Emails">
 					<div class="info-box">
 						<span class="info-box-icon dashboard-info"><img style="max-width: 70%;" src="{{asset('admin/dashboard-icon/email.png')}}"></span>
 						<div class="info-box-content">
-						<a href="{{url('/admin/upgrade-plan/emails')}}" class="badge badge-danger navbar-badge d-none">${{$topup->no_of_emails_price}} Upgrade</a>
-						<span class="info-box-text">Emails</span>
-						<span class="info-box-number">{{$topup->no_of_emails}}</span>
+						<span class="info-box-text">Email Sent</span>
+						@php
+							$remaining_landing_page = (int)$purchaseplan->no_of_emails - (int)$purchaseplan->remaining_emails;
+						@endphp
+						<span class="info-box-number">{{$remaining_landing_page}}</span>
 						</div>
 					</div>
 				</div>
@@ -184,9 +206,8 @@
 					<div class="info-box">
 						<span class="info-box-icon dashboard-info"><img style="max-width: 70%;" src="{{asset('admin/dashboard-icon/landing_page.png')}}"></span>
 						<div class="info-box-content">
-						<a href="{{route('upgrade-plan','landingpage')}}" class="badge badge-danger navbar-badge d-none">${{$topup->no_of_landing_page_price}} Upgrade</a>
-						<span class="info-box-text">Landing Page</span>
-						 <span class="info-box-number">{{$topup->no_of_landing_page}}</span>
+						<span class="info-box-text">Created Landing Page</span>
+						 <span class="info-box-number">{{$purchaseplan->used_landing_page}}</span>
 						</div>
 					</div>
 				</div>
@@ -194,9 +215,8 @@
 					<div class="info-box">
 						<span class="info-box-icon dashboard-info"><img style="max-width: 70%;" src="{{asset('admin/dashboard-icon/page_builder.png')}}"></span>
 						<div class="info-box-content">
-						<a href="{{route('upgrade-plan','pagebuilder')}}" class="badge badge-danger navbar-badge d-none">${{$topup->no_of_page_builder_price}} Upgrade</a>
-						<span class="info-box-text">Page Builder</span>
-						 <span class="info-box-number">{{$topup->no_of_page_builder}}</span>
+						<span class="info-box-text">Created Page</span>
+						 <span class="info-box-number">{{$purchaseplan->used_page_builder}}</span>
 						</div>
 					</div>
 				</div>
@@ -204,237 +224,118 @@
 					<div class="info-box">
 						<span class="info-box-icon dashboard-info"><img style="max-width: 70%;" src="{{asset('admin/dashboard-icon/address_book.png')}}"></span>
 						<div class="info-box-content">
-						<a href="{{route('upgrade-plan','addressbook')}}" class="badge badge-danger navbar-badge d-none">${{$topup->no_of_address_book_price}} Upgrade</a>
-						<span class="info-box-text">Addressbook</span>
-						 <span class="info-box-number">{{$topup->no_of_address_book}}</span>
-						 
-						</div>
-					</div>
-				</div>-->
-				<div class="col-md-6 col-sm-12 col-12" title="Click to upgrade button for Emails">
-					<div class="info-box">
-						<span class="info-box-icon dashboard-info"><img style="max-width: 70%;" src="{{asset('admin/dashboard-icon/email.png')}}"></span>
-						<div class="info-box-content">
-						<span class="info-box-text">Emails</span>
-						<span class="info-box-number">{{$purchaseplan->no_of_emails}}</span>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 col-sm-12 col-12" title="Click to upgrade button for Landing Page">
-					<div class="info-box">
-						<span class="info-box-icon dashboard-info"><img style="max-width: 70%;" src="{{asset('admin/dashboard-icon/landing_page.png')}}"></span>
-						<div class="info-box-content">
-						<span class="info-box-text">Landing Page</span>
-						 <span class="info-box-number">{{$purchaseplan->no_of_landing_page}}</span>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 col-sm-12 col-12" title="Click to upgrade button for Page Builder">
-					<div class="info-box">
-						<span class="info-box-icon dashboard-info"><img style="max-width: 70%;" src="{{asset('admin/dashboard-icon/page_builder.png')}}"></span>
-						<div class="info-box-content">
-						<span class="info-box-text">Page Builder</span>
-						 <span class="info-box-number">{{$purchaseplan->no_of_page_builder}}</span>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 col-sm-12 col-12" title="Click to upgrade button for Addressbook">
-					<div class="info-box">
-						<span class="info-box-icon dashboard-info"><img style="max-width: 70%;" src="{{asset('admin/dashboard-icon/address_book.png')}}"></span>
-						<div class="info-box-content">
-						<span class="info-box-text">Addressbook</span>
-						 <span class="info-box-number">{{$purchaseplan->no_of_address_book}}</span>
+						<span class="info-box-text">Address Book List</span>
+						 <span class="info-box-number">{{$purchaseplan->used_address_book}}</span>
 						 
 						</div>
 					</div>
 				</div>
+			</div>
 			</div>
 		</div>
 		
 		
 		<div class="row">
-			<div class="col-md-12">
+		
+			<div class="col-md-6">
 				<div class="card">
 				<div class="card-body">
 					<div class="row">
 						<div class="col-md-12">
-						<div class="card">
 						<div class="card-body">
 						<p class="text-center">
 							<span>Remaining Service</span>
 							</p>
-							<div class="progress-group">
-							Emails
-							@php $width = App\Helpers\CommonHelper::findPercentage($purchaseplan->remaining_emails,$purchaseplan->no_of_emails) @endphp
-							<span class="float-right"><b>{{$purchaseplan->remaining_emails}}</b>/{{$purchaseplan->no_of_emails}}</span>
-							<div class="progress progress-sm">
-							<div class="progress-bar bg-primary" style="width: {{$width}}%;background:#007bff!important;"></div>
-							</div>
-							</div>
-
-							<div class="progress-group">
-							Landing Page
-							@php
-								$remaining_landing_page = (int)$purchaseplan->no_of_landing_page - (int)$purchaseplan->used_landing_page;
-								$width = App\Helpers\CommonHelper::findPercentage($remaining_landing_page,$purchaseplan->no_of_landing_page) 
-							@endphp
-							<span class="float-right"><b>{{$remaining_landing_page}}</b>/{{$purchaseplan->no_of_landing_page}}</span>
-							<div class="progress progress-sm">
-							<div class="progress-bar bg-danger" style="width: {{$width}}%;background:#ffc107!important;"></div>
-							</div>
-							</div>
-
-							<div class="progress-group">
-							@php
-								$remaining_page_builder = (int)$purchaseplan->no_of_page_builder - (int)$purchaseplan->used_page_builder;
-								$width = App\Helpers\CommonHelper::findPercentage($remaining_page_builder,$purchaseplan->no_of_page_builder) 
-							@endphp
-							
-							@php $width = App\Helpers\CommonHelper::findPercentage($purchaseplan->used_page_builder,$purchaseplan->no_of_page_builder) @endphp
-							<span class="progress-text">Page Builder</span>
-							<span class="float-right"><b>{{$remaining_page_builder}}</b>/{{$purchaseplan->no_of_page_builder}}</span>
-							<div class="progress progress-sm">
-							<div class="progress-bar bg-success" style="width: {{$width}}%;background:#FF81A6!important;"></div>
-							</div>
-							</div>
-
-							<div class="progress-group">
-							Address Book
-							@php 
-							$remaining_address_book = (int)$purchaseplan->no_of_address_book - (int)$purchaseplan->used_address_book;
-							$width = App\Helpers\CommonHelper::findPercentage($remaining_address_book,$purchaseplan->no_of_address_book)
-
-							@endphp
-							<span class="float-right"><b>{{$remaining_address_book}}</b>/{{$purchaseplan->no_of_address_book}}</span>
-							<div class="progress progress-sm">
-							<div class="progress-bar bg-danger" style="width: {{$width}}%;background:#CF82F1!important;"></div>
-							</div>
-							</div>
-						</div>
-						<table class="table mb-0">
-							<tbody>
-								<tr>
-									<td><i class="fas fa-circle text-primary fa-fw"></i> Remaining Emails</td>
-									<td class="text-end">{{$purchaseplan->remaining_emails}}</td>
-								</tr>
-								<tr>
-									<td><i class="fas fa-circle text-warning fa-fw"></i> Remaining Landing Page</td>
-									<td class="text-end">{{$remaining_landing_page}}</td>
-								</tr>
-								<tr>
-									<td><i class="fas fa-circle text-danger fa-fw" style="color:#FF81A6!important"></i> Remaining Page Builder</td>
-									<td class="text-end">{{$remaining_page_builder}}</td>
-								</tr>
-								<tr>
-									<td><i class="fas fa-circle text-dark fa-fw" style="color:#CF82F1!important"></i> Remaining Address Book</td>
-									<td class="text-end">{{$remaining_address_book}}</td>
-								</tr>
-							</tbody>
-						</table>
-						</div>
-						</div>
-
-						<div class="col-md-6" style="display:none;">
-							<div class="card">
-								<div class="card-body">
-									<div class="d-flex">
-										<p class="d-flex flex-column">
-										<span class="text-bold text-lg">820</span>
-										<span>Visitors Over Time</span>
-										</p>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="progress-group">
+										<span class="fnt">Emails</span>
+										@php $width = App\Helpers\CommonHelper::findPercentage($purchaseplan->remaining_emails,$purchaseplan->no_of_emails) @endphp
+										<span class="float-right">{{$purchaseplan->remaining_emails}} <b>/ {{$purchaseplan->no_of_emails}}</b></span>
+										<div class="progress progress-sm" style="height: 10px;">
+										<div class="progress-bar bg-primary" style="width: {{$width}}%;background:#45e0e0!important;"></div>
+										</div>
 									</div>
 
-									<div class="position-relative mb-4"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-									<canvas id="visitors-chart" height="250" width="715" style="display: block; height: 200px; width: 572px;" class="chartjs-render-monitor"></canvas>
+									<div class="progress-group">
+										<span class="fnt">Landing Page</span>
+										@php
+											$remaining_landing_page = (int)$purchaseplan->no_of_landing_page - (int)$purchaseplan->used_landing_page;
+											$width = App\Helpers\CommonHelper::findPercentage($remaining_landing_page,$purchaseplan->no_of_landing_page) 
+										@endphp
+										<span class="float-right">{{$remaining_landing_page}} / <b>{{$purchaseplan->no_of_landing_page}}</b></span>
+										<div class="progress progress-sm" style="height: 10px;">
+										<div class="progress-bar bg-danger" style="width: {{$width}}%;background:#b79fe2!important;"></div>
+										</div>
 									</div>
-									<div class="d-flex flex-row justify-content-end">
-									<span class="mr-2">
-									<i class="fas fa-square text-primary"></i> This Week
-									</span>
-									<span>
-									<i class="fas fa-square text-gray"></i> Last Week
-									</span>
+								</div>
+								<div class="col-md-6">
+									<div class="progress-group">
+										<span class="fnt">Page Builder</span>
+										@php
+											$remaining_page_builder = (int)$purchaseplan->no_of_page_builder - (int)$purchaseplan->used_page_builder;
+											$width = App\Helpers\CommonHelper::findPercentage($remaining_page_builder,$purchaseplan->no_of_landing_page) 
+										@endphp
+										<span class="float-right">{{$remaining_page_builder}} / <b>{{$purchaseplan->no_of_landing_page}}</b></span>
+										<div class="progress progress-sm" style="height: 10px;">
+										<div class="progress-bar bg-danger" style="width: {{$width}}%;background:#f8988b!important;"></div>
+										</div>
+									</div>
+
+									<div class="progress-group">
+										<span class="fnt">Address Book</span>
+										@php 
+										$remaining_address_book = (int)$purchaseplan->no_of_address_book - (int)$purchaseplan->used_address_book;
+										$width = App\Helpers\CommonHelper::findPercentage($remaining_address_book,$purchaseplan->no_of_address_book)
+
+										@endphp
+										<span class="float-right">{{$remaining_address_book}} /<b> {{$purchaseplan->no_of_address_book}}</b></span>
+										<div class="progress progress-sm" style="height: 10px;">
+										<div class="progress-bar bg-danger" style="width: {{$width}}%;background:#ffe382!important;"></div>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<table class="table mb-0">
+									<tbody>
+										<tr>
+											<td><i class="fas fa-circle fa-fw" style="color:#45e0e0!important;"></i> Remaining Emails</td>
+											<td class="text-end">{{$purchaseplan->remaining_emails}}</td>
+										</tr>
+										<tr>
+											<td><i class="fas fa-circle fa-fw"  style="color:#b79fe2!important;"></i> Remaining Landing Page</td>
+											<td class="text-end">{{$remaining_landing_page}}</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="col-md-6">
+								<table class="table mb-0">
+									<tbody>
+										<tr>
+											<td><i class="fas fa-circle text-danger fa-fw" style="color:#f8988b!important"></i> Remaining Page Builder</td>
+											<td class="text-end">{{$remaining_page_builder}}</td>
+										</tr>
+										<tr>
+											<td><i class="fas fa-circle text-dark fa-fw" style="color:#ffe382!important"></i> Remaining Address Book</td>
+											<td class="text-end">{{$remaining_address_book}}</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>	
+						</div>	
+						</div>
+						
 					</div>
 				</div>
 				</div>
 			</div>
+		
+			
 		</div>
-		
-        <!--<div class="row">
-         
-			<div class="col-md-12">
-           
-            <div class="card card-primary">
-              <div class="card-header">
-                <h3 class="card-title">Remaining Service</h3>
-              </div>
-			  
-				<div class="card-footer">
-					<div class="row">
-					  <div class="col-sm-3 col-6">
-						<div class="description-block border-right">
-						    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-								<label class="btn btn-default text-center">
-								<input type="radio" name="color_option" id="color_option_b1" autocomplete="off">
-								<span style="font-size: 23px!important;" class="text-xl">{{$purchaseplan->no_of_emails}}</span>
-								<br>
-								Remaining Emails
-							</div>
-						</div>
-						
-					  </div>
-					 
-					  <div class="col-sm-3 col-6">
-						<div class="description-block border-right">
-						   <div class="btn-group btn-group-toggle" data-toggle="buttons">
-								<label class="btn btn-default text-center">
-								<input type="radio" name="color_option" id="color_option_b1" autocomplete="off">
-								<span style="font-size: 23px!important;" class="text-xl">{{$purchaseplan->no_of_landing_page}}</span>
-								<br>
-								Remaining Landingpage
-							</div>
-						</div>
-						
-					  </div>
-					 
-					  <div class="col-sm-3 col-6">
-						<div class="description-block border-right">
-						   <div class="btn-group btn-group-toggle" data-toggle="buttons">
-								<label class="btn btn-default text-center">
-								<input type="radio" name="color_option" id="color_option_b1" autocomplete="off">
-								<span style="font-size: 23px!important;" class="text-xl">{{$purchaseplan->no_of_page_builder}}</span>
-								<br>
-								Remaining Page builder
-							</div>
-						</div>
-						
-					  </div>
-					 
-					  <div class="col-sm-3 col-6">
-						<div class="description-block">
-						   <div class="btn-group btn-group-toggle" data-toggle="buttons">
-								<label class="btn btn-default text-center">
-								<input type="radio" name="color_option" id="color_option_b1" autocomplete="off">
-								<span style="font-size: 23px!important;" class="text-xl">{{$purchaseplan->no_of_address_book}}</span>
-								<br>
-								Remaining Addressbook
-							</div>
-						</div>
-						
-					  </div>
-					</div>
-					
-				</div>
-            </div>
-           
-			</div>
-         
-        </div>-->
-		
 		
 		<div class="row">
           <!-- left column -->
@@ -442,7 +343,7 @@
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Purchase Plans</h3>
+                <h3 class="card-title">Purchase Plans History</h3>
               </div>
 				<div class="card-body table-responsive">
 				@include('admin.include.table')

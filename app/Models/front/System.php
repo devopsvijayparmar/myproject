@@ -15,4 +15,8 @@ class System extends Authenticatable
     protected $table = 'front_system';
     protected $fillable = ['title','image','description','created_by','created_at','updated_by','updated_at','deleted_by','deleted_at'];
 	
+	function getImageUrlAttribute(){
+		return $this->image == null ? asset('/images/image_not_found.jpg') : asset('/uploads/front/system/'.$this->image);
+	}
+	
 }

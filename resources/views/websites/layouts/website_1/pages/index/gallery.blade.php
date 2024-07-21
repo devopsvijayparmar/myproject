@@ -5,6 +5,7 @@
         <div class="full">
           <div class="main_heading text_align_center">
             <h2>Gallery</h2>
+			<p class="text-center wow fadeInDown animated" style="visibility: visible; animation-name: fadeInDown;">Immerse yourself in a visual journey through our diverse image gallery,<br> where every picture tells a unique story and sparks inspiration</p>
           </div>
         </div>
       </div>
