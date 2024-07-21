@@ -30,7 +30,8 @@ class WebTemplates extends Authenticatable
 	}
 	
 	function getImageUrl1Attribute(){
-		return $this->image == null ? asset('/images/image_not_found.jpg') : asset('/uploads/front/web_templates/'.$this->image_1);
+		$image_name = $this->site_name.'.png';
+		return $this->image == null ? asset('/images/image_not_found.jpg') : asset('/uploads/front/default_web_templates/'.$image_name);
 	}
 	
 	public static function getRecordBySlug($slug){
